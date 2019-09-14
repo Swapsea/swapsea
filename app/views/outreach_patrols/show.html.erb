@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @outreach_patrol.location %>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @outreach_patrol.start %>
+</p>
+
+<p>
+  <strong>Finish:</strong>
+  <%= @outreach_patrol.finish %>
+</p>
+
+<%= link_to 'Edit', edit_outreach_patrol_path(@outreach_patrol) %> |
+<%= link_to 'Back', outreach_patrols_path %>

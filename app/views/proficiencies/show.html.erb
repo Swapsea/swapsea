@@ -1,0 +1,35 @@
+<div class="box-info">
+
+<h2>Proficiency <%= @proficiency.id %></h2>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @proficiency.name %>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @proficiency.start %>
+</p>
+
+<p>
+  <strong>Finish:</strong>
+  <%= @proficiency.finish %>
+</p>
+
+<p>
+  <strong>Max signup:</strong>
+  <%= @proficiency.max_signup %>
+</p>
+
+<p>
+  <strong>Max online signup:</strong>
+  <%= @proficiency.max_online_signup %>
+</p>
+
+<%= link_to 'Edit', edit_proficiency_path(@proficiency) %> |
+<%= link_to 'Back', admin_proficiencies_path %>
+
+</div>

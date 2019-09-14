@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Confirm</h2>
+	</div>
+	<div class="panel-body">
+
+		<p>Are you sure you want to <strong>accept</strong> this offer?</p>
+
+		<% if @after_swap_request_patrol[:result] && @after_swap_offer_patrol[:result]%>
+			<h3>AWESOME!</h3>
+		<% else %>
+			<h3>ACHTUNG!</h3>
+		<% end %>
+
+		<% if @after_swap_request_patrol[:result] %>
+
+			<div class="alert alert-success">
+				<p><strong><%= @offer.request.roster.patrol_name %> - <%= @offer.request.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
+			</div><!--/.alert -->
+			<div class="table-success">
+				<%= render 'request_requirements_table' %>
+			</div>
+			
+		<% else %>
+
+			<div class="alert alert-danger">
+				<p><strong><%= @offer.request.roster.patrol_name %> - <%= @offer.request.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements</strong></p>
+			</div><!--/.alert -->
+			<div class="table-danger">
+				<%= render 'request_requirements_table' %>	
+			</div>
+		<% end %>
+
+		<% if @after_swap_offer_patrol[:result] %>
+				
+			<div class="alert alert-success">
+				<p><strong><%= @offer.roster.patrol_name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
+			</div><!--/.alert -->
+			<div class="table-success">
+				<%= render 'offer_requirements_table' %>
+			</div>
+
+		<% else %>
+				
+			<div class="alert alert-danger">
+				<p><strong><%= @offer.roster.patrol_name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements.</strong></p>
+			</div><!--/.alert -->
+			<div class="table-danger">
+				<%= render 'offer_requirements_table' %>
+			</div>
+
+		<% end %>
+
+
+		<div class="buttons">
+			<%= link_to @offer.request do %>
+				<button class="btn btn-danger"><span class="fa fa-times"></span><br/>Go back</button>
+			<% end %>
+			<%= link_to accept_offer_path(@offer) do %>
+				<button id="btn-accept" class="btn btn-success pull-right"><span id="btn-accept-icon" class="fa fa-check"></span><br/>Accept Offer</button>
+			<% end %>
+		</div>
+
+
+	</div><!--/.panel-body -->
+</div><!--/.panel -->

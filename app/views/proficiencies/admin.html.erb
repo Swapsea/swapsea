@@ -1,0 +1,41 @@
+<div class="box-info">
+<h2>Skills Maintenance</h2>
+
+<%= link_to 'New Time Slot', new_proficiency_path %>
+
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-striped datatable">
+  <thead>
+    <tr>
+      <th>Club</th>
+      <th>Name</th>
+      <th>Date</td>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Max signup</th>
+      <th>Max online signup</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proficiencies.each do |proficiency| %>
+      <tr>
+        <td><%= proficiency.organisation %></td>
+        <td><%= proficiency.name %></td>
+        <td><%= proficiency.start.strftime('%a %d %b %y') %></td>
+        <td><%= proficiency.start.strftime('%H:%M') %></td>
+        <td><%= proficiency.finish.strftime('%H:%M') %></td>
+        <td><%= proficiency.max_signup %></td>
+        <td><%= proficiency.max_online_signup %></td>
+        <td><%= link_to 'Edit', edit_proficiency_path(proficiency) %></td>
+        <td><%= link_to 'Delete', proficiency, method: :delete, data: { confirm: 'Really delete this?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>

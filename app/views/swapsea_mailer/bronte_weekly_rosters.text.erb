@@ -1,0 +1,31 @@
+Swapsea - Upcoming Patrol
+=========================
+
+G'day <%= @user.first_name %>,
+
+You have a patrol coming up this week.
+
+Your upcoming patrol:
+<%= @next_roster.patrol_name %>
+<%= @next_roster.start.strftime("%A %d %B %Y") %>
+<%= @next_roster.start.strftime("%H:%M") %> - <%= @next_roster.finish.strftime("%H:%M") %>
+
+<% if @following_roster != nil %>
+Your following patrol:
+<%= @following_roster.patrol_name %>
+<%= @following_roster.start.strftime("%A %d %B %Y") %>
+<%= @following_roster.start.strftime("%H:%M") %> - <%= @following_roster.finish.strftime("%H:%M") %>
+<% end %>
+
+If you can't make either of these patrols, swap it!
+You can login to Swapsea at www.swapsea.com.au
+
+Also check the weather conditions before your patrol.
+http://www.seabreeze.com.au/weather/nsw/sydney
+http://swell.willyweather.com.au/nsw/sydney/bronte-beach.html
+
+Have a great weekend!
+
+
+Much Love,
+Swapsea

@@ -1,0 +1,12 @@
+<%= simple_form_for(@outreach_patrol_sign_up) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.association :outreach_patrol %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

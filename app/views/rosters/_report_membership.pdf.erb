@@ -1,0 +1,31 @@
+<div class="member-list">
+	<% 
+		order = ["Patrol Captain", "Patrol Vice Captain", "Vice Captain", "IRB Driver", "IRB Crew", "ART Operator", "ART Member", "First Aid Officer", "First Aid Member", "Bronze Member", "Member", "SRC Member", "SRC"]
+		users = ru.sort_by { |n| n.date_joined_organisation } 
+		users.sort_by! { |n| order.index n.default_position }
+	%>
+	<% users.each do |u| %>
+		<% awards = u.awards.map { |n| n.award_name } %>
+		<% if awards.include?("Bronze Medallion") %>
+			<%= render partial: 'report_member', locals: {r: r, u: u} %>
+		<% end %>
+	<% end %>
+	<% users.each do |u| %>
+		<% awards = u.awards.map { |n| n.award_name } %>
+		<% if ((awards.exclude?("Bronze Medallion")) && (awards.include?("Surf Rescue Certificate (CPR Endorsed)"))) %>
+			<%= render partial: 'report_member', locals: {r: r, u: u} %>
+		<% end %>		
+	<% end %>
+	<% users.each do |u| %>
+		<% awards = u.awards.map { |n| n.award_name } %>
+		<% if ((awards.exclude?("Bronze Medallion")) && (awards.include?("Surf Rescue Certificate"))) %>
+			<%= render partial: 'report_member', locals: {r: r, u: u} %>
+		<% end %>		
+	<% end %>
+	<% users.each do |u| %>
+		<% awards = u.awards.map { |n| n.award_name } %>
+		<% if ((awards.exclude?("Bronze Medallion")) && (awards.exclude?("Surf Rescue Certificate")) && (awards.exclude?("Surf Rescue Certificate (CPR Endorsed)"))) %>
+			<%= render partial: 'report_member', locals: {r: r, u: u} %>
+		<% end %>		
+	<% end %>
+</div>

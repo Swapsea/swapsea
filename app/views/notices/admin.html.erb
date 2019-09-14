@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>New Notice</h2>
+  </div>
+  <div class="panel-body">
+    <%= link_to 'New Notice', new_notice_path, :class => 'btn btn-success' %>
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Notices</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped datatable">
+      <thead>
+        <tr>
+          <th>Club</th>
+          <th>System Wide</th>
+          <th>Title</th>
+          <th>Desc</th>
+          <th>Visible from</th>
+          <th>Visible to</th>
+          <th>Visible</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notices.each do |notice| %>
+          <tr>
+            <td><%= notice.organisation %></td>
+            <td><%= notice.system_wide %></td>
+            <td><%= notice.title %></td>
+            <td><%= notice.desc %></td>
+            <td><%= notice.visible_from %></td>
+            <td><%= notice.visible_to %></td>
+            <td><%= notice.visible %></td>
+            <td><%= link_to 'Edit', edit_notice_path(notice) %></td>
+            <td><%= link_to 'Delete', notice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="noticeboard">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>Notice Board (Preview)</h2>
+    </div>
+    <div class="panel-body">
+      <% @notices_preview.each do |notice_preview| %>
+      <div class="notice"> 
+        <h3><%= notice_preview.title %></h3>
+        <p>
+          <%= notice_preview.desc.html_safe %>
+        </p>
+        <p>
+          <%= link_to notice_preview.link_desc, notice_preview.link %>
+        </p>
+      </div><!--/.notice -->
+      <% end %>
+      <% if @notices_preview.empty? %>
+        <div class="notice"> 
+          <h3>(Empty)</h3>
+          <p>
+            Nothing to preview.
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div><!--/.noticeboard -->

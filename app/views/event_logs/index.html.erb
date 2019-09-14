@@ -1,0 +1,30 @@
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+  <h2>Event Logs</h2>
+</div>
+<div class="panel-body">
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Subject</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_logs.each do |event_log| %>
+      <tr>
+        <td><%= event_log.created_at.strftime('%d %b %Y - %H:%M:%S') %></td>
+        <td><%= event_log.subject %></td>
+        <td><%= event_log.desc %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+</div>

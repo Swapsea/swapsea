@@ -1,0 +1,19 @@
+<%= simple_form_for(@award) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id %>
+    <%= f.input :award_name %>
+    <%= f.input :award_number %>
+    <%= f.input :award_date %>
+    <%= f.input :proficiency_date %>
+    <%= f.input :expiry_date %>
+    <%= f.input :award_allocation_date %>
+    <%= f.input :proficiency_allocation_date %>
+    <%= f.input :originating_organisation %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

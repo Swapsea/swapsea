@@ -1,0 +1,15 @@
+<div class="patrol-contact-details">
+	<table class="table">
+		<tr>
+			<th>First Name</th><th>Last Name</th><th>Email</th><th>Mobile</th>
+		</tr>
+		<% users.sort!{ |a,b| a.last_name.downcase <=> b.last_name.downcase }.each do |member| %>
+		<tr>
+			<td><%= member.first_name %></td>
+			<td><%= member.last_name %></td>
+			<td><%= member.email %></td>
+			<td><%= member.mobile_phone %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>

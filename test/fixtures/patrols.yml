@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  key: MyString
+  special_event: false
+  need_bbm: 1
+  need_irbd: 1
+  need_irbc: 1
+  need_artc: 1
+  need_firstaid: 1
+  need_bronze: 1
+
+two:
+  name: MyString
+  key: MyString
+  special_event: false
+  need_bbm: 1
+  need_irbd: 1
+  need_irbc: 1
+  need_artc: 1
+  need_firstaid: 1
+  need_bronze: 1

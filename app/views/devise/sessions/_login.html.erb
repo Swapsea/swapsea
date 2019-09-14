@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+        	   <h2>Login<h2/>
+            </div>
+            <div class="panel-body"><p>
+                <strong>First time this season?</strong> <%= link_to 'Click here to activate your account first', activate_path %>.</p>
+                <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                    <%= f.error_notification %>
+    			    <div class="form-group login-input">
+                    	<%= f.input :email, :required => true, :placeholder =>  'Email', label: false, input_html: { class: 'form-control text-input' } %>
+                    </div>
+                    <div class="form-group login-input">
+                        <%= f.input :password, :required => true, :placeholder =>  'Password', label: false, input_html: { class: 'form-control text-input' } %>
+                    </div>
+                    <p>By logging in, you agree to the <%= link_to "Terms of Use", terms_of_use_path %></p>
+                    <div class="buttons">
+                        <%= f.button :submit, 'Login', :class => 'btn btn-success btn-block' %>
+                    </div>
+    			<% end %>
+                <p><strong>Can't login?</strong> <%= link_to 'Reset your password', new_user_password_path %>.<br/>
+                    <strong>Still having trouble?</strong> Contact your Patrol Captain, or email <%=mail_to "help@swapsea.com.au"%>.
+                </p>
+            </div>  
+        </div>
+    </div>      
+</div>

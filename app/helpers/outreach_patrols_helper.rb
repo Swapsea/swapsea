@@ -1,0 +1,2 @@
+module OutreachPatrolsHelper
+end

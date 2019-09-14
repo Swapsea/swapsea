@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  organisation: MyString
+  patrol: MyString
+  key: MyString
+  start: 2014-05-27 12:50:02
+  finish: 2014-05-27 12:50:02
+
+two:
+  organisation: MyString
+  patrol: MyString
+  key: MyString
+  start: 2014-05-27 12:50:02
+  finish: 2014-05-27 12:50:02

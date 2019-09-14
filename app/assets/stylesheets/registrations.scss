@@ -1,0 +1,48 @@
+@import 'colours';
+.devise-form {
+    table {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+    .form-group {
+        margin: 0;
+    }
+    .control-label {}
+    abbr {}
+    .checkbox {
+        input {
+            width: auto;
+            height: auto;
+        }
+        text-align: left;
+        font-weight: 400;
+    }
+    .boolean {
+        margin: 0;
+    }
+    .align-left {
+        text-align: left;
+    }
+    padding: 40px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    input {
+        height: 3em;
+        padding: 10px;
+        width: 100%;
+    }
+    .terms {
+        font-size: 0.9em;
+    }
+    th {
+        font-size: 2em;
+        padding: 40px;
+        text-align: center;
+    }
+    td {
+        padding: 10px;
+    }
+}

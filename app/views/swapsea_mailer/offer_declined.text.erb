@@ -1,0 +1,29 @@
+Swapsea - Offer Declined
+========================
+
+G'day <%= @user.first_name %>,
+
+Your offer has been politely declined.
+
+Below are the details of the offer for your reference.
+
+Your offer
+----------
+<%= @offer.roster.patrol_name %>
+<%= @offer.roster.start.strftime("%A %d %B %Y") %>
+<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
+Status: <%= @offer.status.capitalize %>
+
+For swap request
+----------------
+<%= @request.roster.patrol_name %>
+<%= @request.roster.start.strftime("%A %d %B %Y") %>
+<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
+
+
+You can login to Swapsea at www.swapsea.com.au
+
+Have a great weekend!
+
+Much Love,
+Swapsea

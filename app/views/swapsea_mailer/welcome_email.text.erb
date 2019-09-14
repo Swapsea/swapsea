@@ -1,0 +1,33 @@
+G'day <%= @user.first_name %>,
+
+Welcome to Swapsea!
+
+You are receiving this email because you are a patrolling member of <%= @user.club.name %>. 
+
+Activate your Swapsea account now:
+<%= activate_url %>
+
+What is Swapsea?
+------------------
+Swapsea is an online swap system for Surf Life Saving Clubs that allows you to swap your patrols with other club members. Swapsea will also remind you of upcoming patrols so you don't forget. Simply login and view your roster on the dashboard.
+
+
+How does it Work?
+-----------------------------
+You swap your patrols in two ways: Swap Requests and Offers.
+Simply login to Swapsea and create a Swap Request and wait for other members to make you an Offer. The fastest way however is to make offers to other requests. You can only create one request per patrol, but as many offers as you like.
+
+What Next?
+----------------------------
+Click to activate your Swapsea account: <%= activate_url %>, then you can login and get started. If you need to update your email or details, go to the SLSA Members Area: https://members.sls.com.au/.
+
+
+
+Have a great weekend!
+
+Cheers,
+Swapsea
+
+This email was sent to <%= @user.email %> as a patrolling member of <%= @user.club.name %>. If you received this message in error, please contact your club, or help@swapsea.com.au.
+
+Copyright 2019 Swapsea

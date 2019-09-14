@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  roster_id: MyString
+  user_id: MyString
+  on_off_patrol: false
+
+two:
+  roster_id: MyString
+  user_id: MyString
+  on_off_patrol: false

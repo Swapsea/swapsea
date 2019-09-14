@@ -1,0 +1,33 @@
+<div class="box-info"> 
+  <h2>Extra Patrols</h2>
+
+  <%= link_to 'New Extra Patrol', new_outreach_patrol_path %><br/>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Club</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Start</th>
+        <th>Finish</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @outreach_patrols.each do |outreach_patrol| %>
+        <tr>
+          <td><%= outreach_patrol.organisation %></td>
+          <td><%= outreach_patrol.location %></td>
+          <td><%= outreach_patrol.start.strftime('%a %d %b %y') %></td>
+          <td><%= outreach_patrol.start.strftime('%H:%M') %></td>
+          <td><%= outreach_patrol.finish.strftime('%H:%M') %></td>
+          <td><%= link_to 'Edit', edit_outreach_patrol_path(outreach_patrol) %></td>
+          <td><%= link_to 'Delete', outreach_patrol, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,30 @@
+<!-- Footer -->
+<div class="footer"> 
+  <div class="row">
+    <div class="col-xs-12">
+    	<p class="copyright">&copy; 2019 <a href="https://github.com/Swapsea/swapsea/">Swapsea</a> |
+        <%= link_to "Terms of Use", terms_of_use_path %> |
+        <%= link_to "help@swapsea.com.au", URI.encode("mailto:help@swapsea.com.au?subject=[#{selected_user.organisation}] Help please") %>
+        </p>
+    </div>
+  </div>
+</div> <!-- End footer -->
+<!-- Doorbell -->
+<script type="text/javascript">
+    window.doorbellOptions = {
+        hideEmail: true,
+        email: '<%= current_user.email %>',
+        name: '<%= current_user.name %>',
+        properties: {
+                Club: '<%= current_user.organisation %>'
+            },
+        appKey: 'cpSbxvvAop5jnGKRAU4gG4sfRZQbi6fyT7oBNGlGQQy52UoGceageh0KAfi09isX'
+    };
+    (function(w, d, t) {
+        var hasLoaded = false;
+        function l() { if (hasLoaded) { return; } hasLoaded = true; window.doorbellOptions.windowLoaded = true; var g = d.createElement(t);g.id = 'doorbellScript';g.type = 'text/javascript';g.async = true;g.src = 'https://embed.doorbell.io/button/6873?t='+(new Date().getTime());(d.getElementsByTagName('head')[0]||d.getElementsByTagName('body')[0]).appendChild(g); }
+        if (w.attachEvent) { w.attachEvent('onload', l); } else if (w.addEventListener) { w.addEventListener('load', l, false); } else { l(); }
+        if (d.readyState == 'complete') { l(); }
+    }(window, document, 'script'));
+</script>
+<!-- End Doorbell -->

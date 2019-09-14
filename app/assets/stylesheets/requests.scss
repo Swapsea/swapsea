@@ -1,0 +1,239 @@
+@import 'colours';
+.btn-right {
+    float: right;
+}
+
+.buttons {
+    margin: 15px 0;
+}
+
+.btn-success {
+    background-color: #03b4f1;
+    border: #03a2d9;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #03a2d9;
+}
+
+.btn-danger {
+    background-color: #025571;
+    border: #004258;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background-color: #004258;
+}
+
+.btn-primary {
+    background-color: #0295c7;
+    border: #026f94;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #026f94;
+}
+
+.requests {
+    h2 {
+        padding: 10px 20px;
+        background-color: #FEFEFE;
+        color: #333;
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: 800;
+    }
+    margin-bottom: 20px;
+    .request {
+        padding: 0;
+    }
+}
+
+.request-details {
+    .row {
+        margin-bottom: 20px;
+    }
+}
+
+.swap-request,
+.swap-offer {
+    .label {
+        color: #333333;
+        font-size: 1.2em;
+        display: inline-block;
+    }
+    .value {
+        font-size: 1.2em;
+        display: inline-block;
+    }
+}
+
+.requests {
+    .details,
+    .swap-request,
+    .swap-offer {
+        .full-width {
+            width: 100%;
+            max-width: 100%;
+        }
+        .btn-cancel {
+            float: right;
+        }
+        .row {
+            margin: 5px 0;
+            padding: 10px 5px;
+            border-bottom: 1px solid #F1F1F1;
+        }
+        .row:last-child {
+            border-bottom: none;
+        }
+    }
+    .box-info.full {
+        background-color: transparent;
+    }
+    .box-info h2 {
+        padding-top: 0;
+        margin-bottom: 10px;
+        font-weight: 800;
+    }
+    .box-info.full h2 {
+        padding-top: 10px;
+        margin-bottom: 10px;
+        background-color: #FFFFFF;
+        font-weight: 800;
+    }
+    select.make-offer {
+        width: 80%;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    button.make-offer {
+        display: inline-block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.offers {
+    list-style: none;
+    padding: 0;
+    .offer {
+        border-bottom: 1px solid #eee;
+        .details {
+            background-color: #FFFFFF;
+            padding: 10px;
+            font-size: 1.1em;
+            text-align: left;
+        }
+        .buttons {
+            padding: 10px;
+        }
+        .btn {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .offer:last-child {
+            border-bottom: none;
+        }
+        .accept {
+            padding: 10px;
+            background-color: #03b4f1;
+            color: #fefefe;
+            .fa {
+                font-size: 1.4em;
+            }
+        }
+        .accept:hover {
+            background-color: #025571;
+        }
+        .decline {
+            background-color: #026f94;
+            color: #fefefe;
+            .fa {
+                font-size: 1.4em;
+            }
+        }
+        .decline:hover {
+            background-color: #004258;
+        }
+        .cancel {
+            background-color: #026f94;
+            color: #fefefe;
+            .fa {
+                font-size: 1.4em;
+            }
+        }
+        .cancel:hover {
+            background-color: #025571;
+        }
+    }
+    .offer:last-child {
+        border-bottom: none;
+    }
+}
+
+@media(max-width:992px) {
+    .requests {
+        .offers {
+            .offer {
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
+
+
+/* ------------------------ */
+
+.panel {
+    h1,
+    h2,
+    h3 {
+        font-family: 'Open Sans';
+    }
+    h2 {
+        font-size: 1.4em;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    h3 {
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+    .panel-heading {
+        margin-bottom: 5px;
+    }
+}
+
+label {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    margin-bottom: 5px;
+}
+
+.textbox {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.doesnt-meet-requirements {
+    font-size: 0.9em;
+    color: #cc0000;
+    font-style: italic;
+    font-weight: 200;
+}
+
+.meets-requirements {
+    font-size: 0.9em;
+    color: #00cc00;
+    font-style: italic;
+    font-weight: 200;
+}

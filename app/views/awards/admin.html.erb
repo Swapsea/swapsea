@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Import Awards from Surfguard</h2>
+	</div>
+	<div class="panel-body">
+		<%= form_tag import_awards_path, multipart: true do %>
+			<p>
+				<%= file_field_tag :file, accept: 'text/csv' %>
+			</p>
+			<p>
+				<%= submit_tag "Import CSV", :class => "btn btn-success" %>
+			</p>
+		<% end %>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Awards</strong>
+	</div>
+	<div class="panel-body">
+		<strong>Total Awards:</strong> <%= @awards.count %><br/>
+		<strong>Awards added in the last 2 minutes:</strong> <%= @awards.where('created_at >= ?', DateTime.now - 2.minutes).count %><br/>
+		<strong>Awards updated in the last 2 minutes:</strong> <%= @awards.where('updated_at >= ?', DateTime.now - 2.minutes).count %>
+	</div>
+<div>

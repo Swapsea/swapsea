@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  award_name: MyString
+  award_number: MyString
+  award_date: MyString
+  proficiency_date: 2014-05-01
+  expiry_date: 2014-05-01
+  award_allocation_date: 2014-05-01
+  proficiency_allocation_date: 2014-05-01
+  originating_organisation: MyString
+
+two:
+  user_id: 1
+  award_name: MyString
+  award_number: MyString
+  award_date: MyString
+  proficiency_date: 2014-05-01
+  expiry_date: 2014-05-01
+  award_allocation_date: 2014-05-01
+  proficiency_allocation_date: 2014-05-01
+  originating_organisation: MyString

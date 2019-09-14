@@ -1,0 +1,29 @@
+<h1>Listing notice_acknowledgements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Notice</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notice_acknowledgements.each do |notice_acknowledgement| %>
+      <tr>
+        <td><%= notice_acknowledgement.user_id %></td>
+        <td><%= notice_acknowledgement.notice_id %></td>
+        <td><%= link_to 'Show', notice_acknowledgement %></td>
+        <td><%= link_to 'Edit', edit_notice_acknowledgement_path(notice_acknowledgement) %></td>
+        <td><%= link_to 'Destroy', notice_acknowledgement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notice acknowledgement', new_notice_acknowledgement_path %>

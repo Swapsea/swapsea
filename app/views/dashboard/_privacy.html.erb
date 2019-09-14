@@ -1,0 +1,7 @@
+<% if (selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) %>
+  <div class="alert alert-info">
+    <b>Privacy Notice</b>
+    <br/>
+    <p>As a Patrol Captain/Vice Captain, you have special access on Swapsea to your patroller's personal details. Please respect the privacy of their information.</p>
+  </div>
+<% end %>

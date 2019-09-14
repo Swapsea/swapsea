@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  patrol_id: 1
+  patrol_key: MyString
+  default_position: MyString
+
+two:
+  user_id: 1
+  patrol_id: 1
+  patrol_key: MyString
+  default_position: MyString

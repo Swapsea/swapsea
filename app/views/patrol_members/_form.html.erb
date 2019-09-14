@@ -1,0 +1,14 @@
+<%= simple_form_for(@patrol_member) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id %>
+    <%= f.input :patrol_id %>
+    <%= f.input :patrol_key %>
+    <%= f.input :default_position %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

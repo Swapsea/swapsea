@@ -1,0 +1,157 @@
+@import 'colours';
+.proficiencies {
+    .btn-signup {
+        padding: 10px;
+        border: 0;
+        color: #fefefe;
+        background-color: #22C926;
+        width: auto;
+    }
+    .brick {
+        display: inline-block;
+        margin-bottom: 20px;
+        .datetime {
+            background-color: #22262E;
+            color: #fefefe;
+            text-align: center;
+            .day {
+                font-size: 2.1em;
+                text-transform: uppercase;
+                line-height: 0.4;
+                padding-top: 0.8em;
+            }
+            .date {
+                font-size: 2.8em;
+                text-transform: uppercase;
+            }
+            .month {
+                font-size: 2.2em;
+                text-transform: uppercase;
+                line-height: 0.3;
+                padding-bottom: 1em;
+            }
+            .year {
+                font-size: 1.4em;
+                text-transform: uppercase;
+            }
+        }
+        .events {
+            padding: 0;
+            margin-left: 5px;
+            margin-bottom: 20px;
+            .event {
+                display: inline-block;
+                width: 100%;
+                margin-top: 2px;
+            }
+            .event:first-child {
+                margin-top: 0;
+            }
+            .name {
+                background-color: #848A8F;
+                color: #FEFEFE;
+                padding: 10px;
+                font-size: 1.1em;
+            }
+            small {
+                display: inline-block;
+                font-weight: 200;
+                font-size: 0.8em;
+                font-style: italic;
+                color: #0099CC;
+            }
+            .artc {
+                background-color: #216BA0 !important;
+            }
+            .bronze {
+                background-color: #33AAFF !important;
+            }
+            .src {
+                background-color: #037FD6 !important;
+            }
+            .default {
+                background-color: #013E69 !important;
+            }
+            .details {
+                padding: 0;
+                .info {
+                    background-color: #FEFEFE;
+                    display: inline-block;
+                    padding: 10px;
+                    margin: 0;
+                    width: 100%;
+                    .time {
+                        font-size: 1.1em;
+                        color: #000;
+                    }
+                    .positions {
+                        font-style: italic;
+                        color: #AAA;
+                        float: right;
+                    }
+                }
+                .members {
+                    padding: 0;
+                    .member {
+                        background-color: #FEFEFE;
+                        display: inline-block;
+                        font-size: 0.9em;
+                        padding: 5px 25px;
+                        margin-top: 2px;
+                        width: 100%;
+                        .user {
+                            text-align: left;
+                            display: inline;
+                        }
+                        .cancel {
+                            text-align: right;
+                            float: right;
+                            position: relative;
+                        }
+                    }
+                }
+            }
+            .signup {
+                padding: 0;
+                margin: 0;
+                input.btn-signup {
+                    background-color: #5AC251;
+                    color: #FFFFFF;
+                    padding: 10px;
+                    text-align: center;
+                    width: 100%;
+                    font-size: 1.1em;
+                }
+                .signup-full {
+                    background-color: #D43C1F;
+                    color: #FFFFFF;
+                    padding: 10px 20px;
+                    text-align: center;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        @media(max-width:768px) {
+            .events {
+                margin-left: 0;
+                .event {
+                    margin-bottom: 20px;
+                    .info {
+                        .positions {
+                            float: left;
+                        }
+                        small {
+                            float: right;
+                        }
+                    }
+                }
+                .event:first-child {
+                    margin-top: 10px;
+                }
+            }
+            .member:last-child {
+                margin-bottom: 2px;
+            }
+        }
+    }
+}

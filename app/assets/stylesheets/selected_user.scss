@@ -1,0 +1,22 @@
+@import 'colours';
+.table-responsive {
+    background-color: $white;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.position-relative {
+    position: relative;
+    height: 30px;
+    display: block;
+    input {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 200px;
+    }
+}
+
+table {
+    vertical-align: middle;
+}

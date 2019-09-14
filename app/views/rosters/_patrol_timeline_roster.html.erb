@@ -1,0 +1,30 @@
+<div class="patrol row">
+  <div class="col-sm-9">
+    <% if ((selected_user.has_role? :admin) && (selected_user.has_role? :admin)) %>
+      <strong><%= p.organisation %></strong><br />
+    <% end %>
+    <strong>
+      <% if p.patrol.present? %>
+        <%= p.patrol.name %>
+      <% end %>
+    </strong>
+    <br />
+    <%= p.start.strftime("%H:%M") %> - <%= p.finish.strftime("%H:%M") %><br/>
+  </div>
+  <div class="col-sm-3">
+    <%= link_to 'View', patrol_roster_path(p), :class => "btn btn-success pull-right" %>
+  </div>
+</div><!--/.patrol -->
+
+<div class="members">
+  <% p.removed.sort_by(&:last_name).each do |u| %>
+    <div class="member row out">
+      <div class="name col-xs-10"><%= u.first_name %> <%= u.last_name %></div><div class="status col-xs-2">Out</div>
+    </div>
+  <% end %>
+  <% p.added.sort_by(&:last_name).each do |u| %>
+    <div class="member row in">
+      <div class="name col-xs-10"><%= u.first_name %> <%= u.last_name %></div><div class="status col-xs-2">In</div>
+    </div>
+  <% end %>
+</div>

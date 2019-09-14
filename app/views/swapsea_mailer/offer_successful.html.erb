@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>Swapsea - Swap Confirmed</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        background-color: #F2EEEC;
+        margin: 0;
+      }
+
+      a,
+      a:visited {
+        color: #CC0000;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:focus {
+        color: #990000;
+        text-decoration: none;
+      }
+
+      .container {
+        width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+        -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.175);
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.175); 
+      }
+
+      .title {
+        background-color: #F13E0B;
+        color: #FEFEFE;
+        width: auto;
+      }
+
+      .title img {
+        padding: 20px;
+      }
+
+      .title h2 {
+        float: right;
+        padding: 20px;
+        margin: 0;
+      }
+
+      .content {
+        background-color: #FEFEFE;
+        width: auto;
+        padding: 40px 60px 60px 60px;
+      }
+
+      .footer {
+        text-align: center;
+        width: auto;
+        font-size: 0.8em;
+        color: #AAA;
+        margin-top: 20px;
+        margin-bottom: 40px;
+      }
+
+      @media only screen and (max-width: 640px) {
+        body {
+          background-color: #FEFEFE;
+        }
+        .title {
+          text-align: center !important;
+          width: auto;
+        }
+        .title h2 {
+          padding-top: 0;
+          float: none;
+        }
+        .container {
+          width: 100% !important;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+        }
+        .content {
+          padding: 20px;
+        }
+      }
+
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        <%= image_tag('main-logo.png', size: "150", alt: "Swapsea", class: "logo") %>
+        <h2>Swap Confirmed</h2>
+      </div>
+      <div class="content">
+        <p>
+          G'day <%= @user.first_name %>,
+        </p>
+        <p>
+          Congratulations, your offer was accepted.
+        </p>
+        <p>
+          <strong>Your new patrol</strong><br/>
+          <%= @request.roster.patrol_name %><br/>
+          <%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
+          <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
+          <em>You are now a sub for <%= @request.user.first_name %> <%= @request.user.last_name %></em>
+        </p>
+        <p>
+          <strong>Your old patrol</strong><br/>
+          <%= @offer.roster.patrol_name %><br/>
+          <%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
+          <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
+          <em><%= @request.user.first_name %> <%= @request.user.last_name %> is now a sub for you.</em>
+        </p>
+        
+        <% if @request.email.present? || @request.mobile.present? %>
+        <p>
+          <strong>Need to get in contact?</strong><br/>
+          You can contact <%= @request.user.first_name %> <%= @request.user.last_name %> via the details below.<br/>
+          <%= @request.email %><br/>
+          <%= @request.mobile %>
+        </p>
+        <% end %>
+        <p>
+          <strong>Can't make your new patrol?</strong><br/>
+          You cannot cancel a swap once it has been confirmed. You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it with someone like you would any normal patrol.
+        </p> 
+        <br/>
+        <p>
+          <a href="https://www.swapsea.com.au/users/sign_in">Click here</a> to login to Swapsea.
+        </p>
+        <p>
+          Have a great weekend!
+        </p>
+        <p>
+          Much Love,<br/>
+          Swapsea
+        </p>
+      </div>
+    </div>
+    <div class="footer">
+      Copyright 2019 Swapsea <br/>
+    </div>
+  </body>
+</html>

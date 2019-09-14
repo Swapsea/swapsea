@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Roster:</strong>
+  <%= Roster.find_by(:id=>@swap.roster_id).patrol.name %> (<%=@swap.roster_id%>)
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= User.find_by(:id=>@swap.user_id).name %> (<%=@swap.user_id%>)
+</p>
+
+<p>
+  <strong>On off patrol:</strong>
+  <%= @swap.on_off_patrol %>
+</p>
+
+<%= link_to 'Edit', edit_swap_path(@swap) %> |
+<%= link_to 'Back', swaps_path %>

@@ -1,0 +1,2 @@
+module NoticeAcknowledgementsHelper
+end

@@ -1,0 +1,26 @@
+<%= simple_form_for(@proficiency) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-group">
+      <% if selected_user.has_role?(:admin)  %>
+				<%= f.association :club, label_method: :name, value_method: :name, include_blank: false %>
+			<% else %>
+      <%= f.hidden :club, selected_user.club  %>
+      <% end %>
+    <%= f.input :name %>
+    <br/>
+    <%= f.input :start %>
+    <br/>
+    <%= f.input :finish %>
+    <br/>
+    <%= f.input :max_signup %>
+    <br/>
+    <%= f.input :max_online_signup %>
+    <br/>
+  </div>
+  <br/>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-default' %>
+  </div>
+  <br/>
+<% end %>

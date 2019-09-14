@@ -1,0 +1,82 @@
+#report {
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.details {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: 800;
+    .patrol {
+        font-weight: 800;
+    }
+    .time {}
+    .date {}
+    .created-at {
+        font-size: 0.6em;
+        font-weight: 200;
+    }
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+th.center {
+    text-align: center;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-weight: 800;
+        padding: 2px 4px;
+        text-align: left;
+        background-color: black;
+        color: white;
+    }
+    td {
+        border: 1px solid black;
+        padding: 2px 4px;
+    }
+    .patroller {
+        width: 18%;
+    }
+    .patroller {
+        width: 20%;
+    }
+    .sub {
+        width: 20%;
+    }
+    .awards {}
+    .start {
+        width: 12%;
+    }
+    .finish {
+        width: 12%;
+    }
+    .total {
+        width: 10%;
+    }
+    .sign {
+        width: 10%;
+    }
+}

@@ -1,0 +1,10 @@
+ <% if activity.trackable %>
+ <p>
+ 	<%= activity.trackable.request.user.first_name %> confirmed a swap for
+ 	<%= link_to activity.trackable.request.roster.start.strftime("%a %d %b") + ", " + activity.trackable.request.roster.start.strftime("%H:%M") + " - " + activity.trackable.request.roster.finish.strftime("%H:%M") + " (" + activity.trackable.request.roster.patrol.short_name + ")", request_path(activity.trackable) %> <%= time_ago_in_words(activity.created_at) %> ago.
+ </p>
+ <% else %>
+ <p>
+ 	<%= activity.trackable.request.user.first_name %> confirmed an offer that has since been removed.
+ </p>
+ <% end %>

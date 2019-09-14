@@ -1,0 +1,24 @@
+<%= simple_form_for(@notice) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-group">
+    <% if selected_user.has_role?(:admin)  %>
+      <%= f.association :club, label_method: :name, value_method: :name, include_blank: true %>
+      <%= f.input :system_wide %>
+    <% end %>
+    <%= f.input :title %>
+    <%= f.input :desc %>
+    <%= f.input :link %>
+    <%= f.input :link_desc %>
+    <%= f.input :image %>
+    <%= f.input :video %>
+    <%= f.input :user_id %>
+    <%= f.input :visible_from %>
+    <%= f.input :visible_to %>
+    <%= f.input :visible %>
+  </div>
+
+  <div class="form-group">
+    <%= f.button :submit, :class => 'btn btn-success' %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<% if activity.trackable %>
+ <p>
+ 	<%= activity.owner.first_name if activity.owner %>
+ 	updated swap request 
+ 	<%= link_to activity.trackable.roster.start.strftime("%a %d %b") + ", " + activity.trackable.roster.start.strftime("%H:%M") + " - " + activity.trackable.roster.finish.strftime("%H:%M") + " (" + activity.trackable.roster.patrol.short_name + ")", request_path(activity.trackable) %> <%= time_ago_in_words(activity.created_at) %> ago.
+ </p>
+ <% else %>
+ <p>
+ 	<%= activity.owner.first_name if activity.owner %> 
+ 	updated a swap request that has since been removed.
+ </p>
+ <% end %>

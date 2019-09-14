@@ -1,0 +1,62 @@
+<div class="swap-feed">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>Swap Feed</h2>
+    </div>
+    <div class="panel-body">
+      <% @confirmed_offers.each do |offer| %>
+        <div class="swap">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="created-at">
+                <%= time_ago_in_words(offer.updated_at) %>
+                ago
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="request col-xs-5">
+              <s class="name">
+                <%= offer.request.user.name %>
+              </s>
+              <strong class="name">
+                <%= offer.user.name %>
+              </strong>
+              <br/>
+              <%= offer.request.roster.start.strftime("%a, %d %b %y") %>
+              <br/>
+              <%= offer.request.roster.start.strftime("%H:%M") %>
+              \- #{offer.request.roster.finish.strftime("%H:%M")}
+            </div>
+            <div class="col-xs-2">
+              <div class="arrows">
+                <i class="fa fa-arrows-h fa-2x"></i>
+              </div>
+            </div>
+            <div class="col-xs-5">
+              <s class="name">
+                <%= offer.user.name %>
+              </s>
+              <strong class="name">
+                <%= offer.request.user.name %>
+              </strong>
+              <br/>
+              <%= offer.roster.start.strftime("%a, %d %b %y") %>
+              <br/>
+              <%= offer.roster.start.strftime("%H:%M") %>
+              \- #{offer.roster.finish.strftime("%H:%M")}
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% if @confirmed_offers.empty? %>
+      <div class="panel-info">
+        <h3>No Swaps yet!</h3>
+        <p>
+          Be the first to confirm a swap and see your name up in the big lights right here.
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="box-info">
+  <h2><strong>Awards</strong></h2>
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Member ID</th>
+          <th>Member First Name</th>
+          <th>Member Last Name</th>
+          <th>Award Name</th>
+          <th>Award Number</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @awards.each do |award| %>
+
+          <tr>
+            <td><%= award.user_id %></td>
+            <td><%= User.find(award.user_id).first_name %></td>
+            <td><%= User.find(award.user_id).last_name %></td>
+            <td><%= award.award_name %></td>
+            <td><%= award.award_number %></td>
+          </tr>
+
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+<div>

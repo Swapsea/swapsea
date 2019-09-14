@@ -1,0 +1,112 @@
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Weekly Rosters</h2>
+	</div>
+	<div class="panel-body">
+		<%= form_tag(send_weekly_patrol_rosters_emails_path) do %>
+			<p>	
+				Send weekly patrol rosters by selecting the club from the dropdown box and clicking 'Send'. It's that simple and so much easier than using the command line.
+			</p>
+			<p>
+				<%= select_tag :organisation, options_for_select(Club.where(:show_rosters => true).map { |c| [c.name] }) %>
+			</p>
+			<p>
+			  	<%= submit_tag 'Send Weekly Patrol Rosters', :class => 'btn btn-sm btn-success' %>
+			</p>
+		<% end %>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Weekly Skills Maintenance</h2>
+	</div>
+	<div class="panel-body">
+		<%= form_tag send_weekly_skills_maintenance_emails_path do %>
+			<p>	
+				Send weekly skills maintenance.
+			</p>
+			<p>
+				<%= select_tag :organisation, options_for_select(Club.where(:show_skills_maintenance => true).map { |c| [c.name] }) %>
+			</p>
+			<p>
+			  	<%= submit_tag 'Send Weekly Skills Maintenance', :class => 'btn btn-sm btn-success' %>
+			</p>
+		<% end %>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Welcome Email Test</h2>
+	</div>
+	<div class="panel-body">
+		<%= form_tag send_welcome_email_test_emails_path do %>
+			<p>	
+				Send welcome email to a test user.
+			</p>
+			<p>
+				<%= email_field_tag :email %>
+			</p>
+			<p>
+			  	<%= submit_tag 'Send Welcome Email Test', :class => 'btn btn-sm btn-success' %>
+			</p>
+		<% end %>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Welcome Email</h2>
+	</div>
+	<div class="panel-body">
+		<%= form_tag send_welcome_email_emails_path do %>
+			<p>	
+				Send welcome email to all patrollers. <b>Do this just once!!</b>
+			</p>
+			<p>
+				<%= select_tag :organisation, options_for_select(Club.where(:show_patrols => true).map { |c| [c.name] }) %>
+			</p>
+			<p>
+			  	<%= submit_tag 'Send Welcome Email', :class => 'btn btn-sm btn-success' %>
+			</p>
+		<% end %>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Email Log</h2>
+	</div>
+	<div class="panel-body">
+		<table class="table">
+			<tr><td>0 - 5 mins</td><td><%= @emails.where('created_at >= ?', DateTime.now - 5.minutes).count %></td></tr>
+			<tr><td>5 - 10 mins</td><td><%= @emails.where('created_at >= ? AND created_at < ?', DateTime.now - 10.minutes, DateTime.now - 5.minutes).count %></td></tr>
+			<tr><td>10 - 20 mins</td><td><%= @emails.where('created_at >= ? AND created_at < ?', DateTime.now - 20.minutes, DateTime.now - 10.minutes).count %></td></tr>
+			<tr><td>20 - 60 mins</td><td><%= @emails.where('created_at >= ? AND created_at < ?', DateTime.now - 60.minutes, DateTime.now - 20.minutes).count %></td></tr>
+			<tr><td>60 mins - 24 hrs</td><td><%= @emails.where('created_at >= ? AND created_at < ?', DateTime.now - 24.hours, DateTime.now - 60.minutes).count %></td></tr>
+			<tr><td>24 hrs - 72 hrs</td><td><%= @emails.where('created_at >= ? AND created_at < ?', DateTime.now - 72.hours, DateTime.now - 24.hours).count %></td></tr>
+			<tr><td>> 72 hrs</td><td><%= @emails.where('created_at < ?', DateTime.now - 72.hours).count %></td></tr>
+		</table>
+		<p>First 500 rows shown.</p>
+		<div class="table-responsive">
+			<table id="email-table" class="table table-striped dataTable row-border no-footer nowrap" cellspacing="0" width="100%" data-table="true">
+				<thead>
+					<th>Sent</th>
+					<th>Email</th>
+					<th>Subject</th>
+				</thead>
+				<tbody>
+				<% @emails.order(created_at: :desc).limit(500).each do |email| %>
+						<tr>
+							<td><%= email.created_at.strftime('%d-%m-%y %H:%M:%S') %></td>
+							<td><%= email.to %></td>
+							<td><%= email.subject %></td>
+
+						</tr>
+				<% end %>
+				</tbody>
+			</table>
+		</div><!--/.table-responsive -->
+	</div>
+</div>

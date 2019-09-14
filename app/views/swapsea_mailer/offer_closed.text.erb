@@ -1,0 +1,39 @@
+Swapsea - Offer Closed
+======================
+
+G'day <%= @user.first_name %>,
+
+An offer for your swap request has been secured in a swap by someone else.
+
+Your swap request
+-----------------
+<%= @request.roster.patrol_name %>
+<%= @request.roster.start.strftime("%A %d %B %Y") %>
+<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
+
+Current offers
+--------------
+<% if @request.offers.present? %>
+  <% @request.offers.each do |offer| %>
+    
+    <%= offer.roster.patrol_name %>
+    <%= offer.roster.start.strftime("%A %d %B %Y") %>
+    <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+    Status: <%= offer.status.capitalize %>
+    From: <%= offer.user.first_name %> <%= offer.user.last_name %>
+  <% end %>
+<% else %>
+You currently have no offers.
+<% end %>
+
+A quick swap is a good swap
+---------------------------
+Offers won't wait for you. Most members make the same offer to multiple people at the same time. We'll let you do the math, but we encourage you to accept offers quickly to avoid disappointment.
+ 
+
+You can login to Swapsea at www.swapsea.com.au
+
+Have a great weekend!
+
+Much Love,
+Swapsea

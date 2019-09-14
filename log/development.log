@@ -1,0 +1,114 @@
+Started GET "/" for 127.0.0.1 at 2019-09-14 12:57:41 +1000
+  [1m[36mActiveRecord::SchemaMigration Load (6.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:HomeController> at /Users/mhudson/Development/SwapseaV2/app/controllers/home_controller.rb:2)
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (5.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 15536298], ["LIMIT", 1]]
+  [1m[36mRole Load (8.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (1.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'manager') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'member') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_footer_large.html.erb (3.2ms)
+  Rendered home/index.html.erb within layouts/application (888.7ms)
+Completed 200 OK in 2311ms (Views: 1656.8ms | ActiveRecord: 185.4ms)
+
+
+Started GET "/assets/bootstrap.self-926b0180e5c54b520cdb9e31f08b898468b7525db252944d506079e4d9427816.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/bootstrap-select.self-4edefc0e35d5e9570b7eb32518bfc2353a8e1b0c192736011216c88e15bc7167.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/style.self-68585312915f7bf7ea943d32d9dabf9933743ef668314f0e0de79da2439d186b.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/component.self-c7fd6d211cd6415fda2ecd6737bd9ea9992a5ada1bcf34ef3cf8c69e9f48cd13.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/style-responsive.self-673753b33505ab6fe7f1ececeed587694d5ab610c39ed7bc9044b98087563710.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/animate.self-8ff8682dec340d8caa1ea038dc8c9eba39aa9c6f29ed0f712f2ae3f3208cd102.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/datepicker.self-9d8e79e63a0cb9d68e709c8b7cdf524bee230496913fb4f977b40d7a52816ce4.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/font-awesome.self-b0cfc822668fda14cea20770f8e7927447461000841158a6b1dbf9e4d4f2b091.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/google-fonts.self-44d0aec8955b39f074aae9f761412145012a4836b6aa0abb5a6832ccc524bec2.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/grey.self-fa0d30d99e82499898667bf342b4874ffa5dd9f58c4fbf51be3b53d3a219b009.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/morris.self-ee916b7fb3be77da78d77521ec23492a8ca30f7135de3782f0048e7accb403b8.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/magnific-popup.self-b22aa6d16b42ca00eef43244bbf0215ac5170bc5f87ccf94203561a0cf540292.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/pace-theme-minimal.self-adec5b7dbb5e5bb869a37ee2c1abcf887eedbc0301496a997a52b760303c3eba.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/assets/overrides.self-1a00061bb68bdaf5465097696ed7da14fb50e3d52b47ca5114cc5f7b6e8af97d.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/summernote.self-621e0c880d570d3e3eab6e91de363e085d282f40cf9891098682d4bccdd71c22.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/sortable.self-243fddeb719a3553a1d4d67efeb2c983dfb6aef0bdefa643b980f3d892f61eb5.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/home.self-2a14d6294b022e8124bc2805f85f60afa9ec62f2267c1f2deebe3b1ef9f6e10c.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/universal.self-5a73928539c3f7e71ed9a4744b3650ac3e7348d49113f669c4f9c70bb41c5138.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/application.self-d49de66161ce0add5592fa0bed67e7bb0daba3b67738544417fa04af0a5209c6.css?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/bootstrap.min.self-1b2106e2c41fcb513369ff599bd566501e08088288b914c2af8ef2e5c9acd29d.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/masonry.min.self-e3170772a01f6c068b0bcdfcd115b6a2816b3b7b9f6df9cc7924dba76f4fbd68.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/imagesloaded.min.self-eda0db8b91dbd2cc98360ccb5d7eb8cb4409e13316c8e3241a3f20f6740b682a.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/bootstrap-datepicker.self-de06d457f1771081360bc797522d38ab23d67b50b5e2b7cd1d13be02e68eab87.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/bootstrap-file-input.self-83851ee0855fb500f805651c858003d2798930da4ea19dec5fd3adb60cbc6c5f.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/bootstrap-select.self-860506d0cf75a28b930d7ea0f377d28503fe1c800a335766fcfaf9e371bdd621.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/classie.self-6977e130d2dc21c0fe794d91a94b6a69eaa2d5bc630e4e39e90844c99c4186d0.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/icheck.self-ed46365fcca83639692a70005ef20bffc4a217bd602f833e06fa3028a2afd1cc.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery-knob.self-172b360e24fbe323b74fcbcbc8a3d78981b433681bf39052369155ed4f3414c8.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery-easyWizard.self-7510b4fdc03a60897680dff636c4234861c59d360eafd36bce52b58b1e40bd42.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery-magnific-popup.self-d7430202265d0ad0ced3553d973151c2b8e5515a3f59a9cecdeae71cd493238f.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery-slimscroll.self-e59173ad5c9375d088c46b8ee453ffd0f8c52cc0ac1f986a395d597af317287e.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery-snippet.self-d13d322692c1cdeb90ca8c35353b2cfccaa61e09534c20e82d412977c2200a4a.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery.easypiechart.min.self-86bf5bacf2bd543ac66e6ea2f7055b0ec9a6aae8a90e18ee9c594677226d9f32.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery-easing.self-2bfa442c0cc033395e563a148898a947e4985ff7cbc5f6db5bc509d6c81ae296.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/jquery.mixitup.min.self-78d041c767279827b8177651a0989087e5a810de1a4e255a18326d1a5346cc66.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/main.self-09da8d4394f0c2bc82e4349f82afebba051bd4f73314375dd95480d767b74ca7.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/modalEffects.self-a10adb4d81ee97d35a9a4fe8068b6a671831ec0d3f487debbf8471ed84ecb0af.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/morris.self-6f3c77f3f753c5611cd5c8397653ce35604b34326a80de5cb4bb25f3baf800bc.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/pace.min.self-9ddf077c0c669c6e15c29f1a418c710f8236deea2de12b1fe6521fdccd0d6b1c.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/raphael.self-4ee3d1d1bcfcfa7732022759f38361287c02662ab00bc15f49e1ae8b553bcac2.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/scripts.self-2185bc8797658eb165784b808335603dafd6f8b4c5d783740ad29d393f2af682.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/sortable.self-8091a111d11da938b6dc01816c0be7e7811626178ded9ec083faeeea21157e95.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/respond.self-bb3e192a29a6c897c0964210aeae45c48971c5765771e77f6eb9a64bf0457dec.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/application.self-77fedd9d0c4786e992b8c47cfc04a8415c3132a374b2daa345162808220aa2e5.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:44 +1000
+Started GET "/assets/html5shiv.self-ae67621a14f42db287174a86647f920b5fd1437200c565c22c06a3c3e6e24c65.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/summernote.self-cd235d8b99558c7e9ad7d30e759cce8c5d5301bdc52e6ffbfa93a551e8e05469.js?body=1" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/club_2-4edef8d3afe30a4aaee7e8dfd215564c3ec4c0e903730a10558fa5085031f0bb.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/club_7-696cac9c3d3429c941e8909e06594140a6022753a37e5fc2628016de14e32621.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/club_8-549ffd3fb14f3434f0b390a2a893422e9aaca944285a63678702260bf6e9ebce.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/club_6-e449452d235109c27354c16d094132a7826cb238921eea92996ab8c53b169892.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/club_3-a13c528e215f09d54a38e66afd824a8cc72fd9da12489cf0ce310b6380abe345.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/club_4-2f46d5165b3034b42bd829865ce2abd20a668775c0e6847408dd0e2fc75ea61f.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2?v=4.4.0" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/main-bg-41810e6378f070d885555343405e1ee3c8980da7e34345c49800432929b782a7.jpg" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/swapsea-logo-col-wht-96e5df87047fd9357ae751941abca93a76e13245d69939a792da1e41906fe3a1.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/assets/swapsea-logo-col-blk-fb4f78ca3d4f2004f52fe363e780105e3cffe9d5ef2d05b4fc2cc1e4b5730ff3.png" for 127.0.0.1 at 2019-09-14 12:57:45 +1000
+Started GET "/" for 127.0.0.1 at 2019-09-14 12:59:17 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (42.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 15536298], ["LIMIT", 1]]
+  [1m[36mRole Load (1.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'manager') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'member') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_footer_large.html.erb (4.9ms)
+  Rendered home/index.html.erb within layouts/application (66.1ms)
+Completed 200 OK in 370ms (Views: 299.9ms | ActiveRecord: 45.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-09-14 13:01:48 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (41.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 15536298], ["LIMIT", 1]]
+  [1m[36mRole Load (1.5ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'manager') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'member') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_footer_large.html.erb (3.5ms)
+  Rendered home/index.html.erb within layouts/application (29.3ms)
+Completed 200 OK in 294ms (Views: 229.4ms | ActiveRecord: 44.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-09-14 13:04:57 +1000
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:HomeController> at /Users/mhudson/Development/SwapseaV2/app/controllers/home_controller.rb:2)
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 15536298], ["LIMIT", 1]]
+  [1m[36mRole Load (35.9ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'manager') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = $1 AND (((roles.name = 'member') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m  [["user_id", 15536298]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_footer_large.html.erb (3.6ms)
+  Rendered home/index.html.erb within layouts/application (735.5ms)
+Completed 200 OK in 1832ms (Views: 1430.0ms | ActiveRecord: 53.2ms)
+
+

@@ -1,0 +1,31 @@
+<!-- START OF PAGE -->
+<div class="container">
+    <div class="full-content-center animated fadeIn extra-margin-top">
+        <%= image_tag('alternate-logo.png', :class => "modal-logo") %>
+        <div class="box-info">
+        	<h2>Register<h2/>
+			<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+			<%= f.error_notification %>
+			    <div class="form-group login-input">
+                	<%= f.input :email, :required => true, :placeholder =>  'Email', label: false, input_html: { class: 'form-control text-input' }, :autofocus => true %>
+                </div>
+                <div class="form-group login-input">
+                    <%= f.input :password, :required => true, :placeholder =>  'Password', label: false, input_html: { class: 'form-control text-input' } %>
+                </div>
+                <div class="form-group login-input">
+                    <%= f.input :password_confirmation, :required => true, :placeholder =>  'Confirm Password', label: false, input_html: { class: 'form-control text-input' } %>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <%= f.button :submit, 'Register', :class => 'btn btn-success btn-block' %>
+                    </div>
+                    <div class="col-sm-6">
+                        <%= link_to 'Login', new_session_path(resource_name), :class => 'btn btn-warning btn-block' %>
+                    </div>
+                </div>
+			<% end %>
+		</div>
+		<%= link_to "Back", :back %>
+    </div>      
+</div>
+<!-- END OF PAGE -->

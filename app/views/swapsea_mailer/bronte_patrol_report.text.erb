@@ -1,0 +1,14 @@
+Patrol Report
+--------------
+
+G'day,
+
+<%= (@roster.patrol.short_name.present? ? @roster.patrol.short_name : @roster.patrol.name) + ' - ' + @roster.start.strftime("%a %d %b %y %H:%M") + '-' + @roster.finish.strftime("%H:%M") %>
+
+Use the link below in your internet browser to generate your patrol report in realtime.
+https://www.swapsea.com.au/patrol-report/<%= @roster.secret %> 
+
+Have a great weekend!
+
+Much Love,
+Swapsea

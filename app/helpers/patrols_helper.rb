@@ -1,0 +1,2 @@
+module PatrolsHelper
+end

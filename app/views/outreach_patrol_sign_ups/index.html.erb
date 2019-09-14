@@ -1,0 +1,27 @@
+<h1>Listing Extra Patrol sign ups</h1>
+
+<%= link_to 'New Extra patrol sign up', new_outreach_patrol_sign_up_path %><br/>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Extra patrol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @outreach_patrol_sign_ups.each do |outreach_patrol_sign_up| %>
+      <tr>
+        <td><%= outreach_patrol_sign_up.user %></td>
+        <td><%= outreach_patrol_sign_up.outreach_patrol %></td>
+        <td><%= link_to 'Show', outreach_patrol_sign_up %></td>
+        <td><%= link_to 'Edit', edit_outreach_patrol_sign_up_path(outreach_patrol_sign_up) %></td>
+        <td><%= link_to 'Cancel', outreach_patrol_sign_up, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

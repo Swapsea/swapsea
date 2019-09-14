@@ -1,0 +1,13 @@
+<% if @patrols.empty? %>
+  <div class="box-info">
+    <h1>No Patrols?</h1>
+    <p>There are no patrols listed in the system yet.</p>
+  </div>
+<% elsif @rosters.empty? %>
+  <div class="box-info">
+    <h1>What, no rosters?</h1>
+    <p>There are no rosters listed in the system yet.</p>
+  </div>
+<% else %>
+  <%= render 'patrol_timeline' %>
+<% end %>
