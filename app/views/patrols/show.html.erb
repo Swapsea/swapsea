@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2><%= @club.name %></h2>
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-justified" role="tablist">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Choose Patrol<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <% @club.patrols.map do |patrol| %>
+            <li><%= link_to patrol.short_name, (patrol_path patrol) %></li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </div><!--/.col -->
+  <div class="col-sm-12">
+
+    <div class="tab-content">
+      <h3><%= @patrol.name %></h3>
+      <%= render partial: 'membership', locals: { p: @patrol } %>
+      <% if (selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) %>
+        <h2>Patrol Captain/Vice Captain's List</h2>
+        <p>You have special access to your patrollers details here. Please respect the privacy of their information.</p>
+        <%= render partial: 'patrols/contact_details', locals: { users: @patrol.users.to_ary } %>
+      <% end %>
+    </div><!--/.tab -->
+  </div><!--/.col -->
+</div><!--/.row -->

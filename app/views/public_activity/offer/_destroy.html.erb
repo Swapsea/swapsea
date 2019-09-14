@@ -1,0 +1,12 @@
+<% if activity.trackable %>
+ <p>
+ 	<%= activity.owner.first_name if activity.owner %>
+ 	deleted an offer on 
+ 	<%= activity.trackable.request.roster.start.strftime("%a %d %b") + ", " + activity.trackable.request.roster.start.strftime("%H:%M") + " - " + activity.trackable.request.roster.finish.strftime("%H:%M") + " (" + activity.trackable.request.roster.patrol.short_name + ")" %> <%= time_ago_in_words(activity.created_at) %> ago.
+ </p>
+ <% else %>
+ <p>
+ 	<%= activity.owner.first_name if activity.owner %> 
+ 	deleted an offer.
+ </p>
+ <% end %>

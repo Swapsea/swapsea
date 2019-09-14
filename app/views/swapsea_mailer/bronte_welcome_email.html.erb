@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Swapsea!</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        background-color: #F2EEEC;
+        margin: 0;
+      }
+
+      a,
+      a:visited {
+        color: #CC0000;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:focus {
+        color: #990000;
+        text-decoration: none;
+      }
+
+      .container {
+        width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+        -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.175);
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.175); 
+      }
+
+      .title {
+        background-color: #F13E0B;
+        color: #FEFEFE;
+        width: auto;
+      }
+
+      .title img {
+        padding: 20px;
+      }
+
+      .title h2 {
+        float: right;
+        padding: 20px;
+        margin: 0;
+      }
+
+      .content {
+        background-color: #FEFEFE;
+        width: auto;
+        padding: 40px 60px 60px 60px;
+      }
+
+      .footer {
+        text-align: center;
+        width: auto;
+        font-size: 0.8em;
+        color: #AAA;
+        margin-top: 20px;
+        margin-bottom: 40px;
+      }
+
+      @media only screen and (max-width: 640px) {
+        body {
+          background-color: #FEFEFE;
+        }
+        .title {
+          text-align: center !important;
+          width: auto;
+        }
+        .title h2 {
+          padding-top: 0;
+          float: none;
+        }
+        .container {
+          width: 100% !important;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+        }
+        .content {
+          padding: 20px;
+        }
+      }
+
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        <%= image_tag('main-logo.png', size: "150", alt: "Swapsea", class: "logo") %>
+        <h2>Welcome</h2>
+      </div>
+      <div class="content">
+        <p>
+          G'day <%= @user.first_name %>,
+        </p>
+        <p>
+          <strong>Welcome to Swapsea!</strong>
+        </p>
+        <p>
+          You are receiving this email because you are a patrolling member of Bronte SLSC. 
+        </p>
+        <p>
+          <strong>What is Swapsea?</strong><br/>
+          Swapsea is an online roster management system for Surf Life Saving Clubs and will allow you to swap your patrols with other club members during the season. Swapsea will also remind you of upcoming patrols so you don't forget. If you would like to see your patrol roster at any stage, simply login and view your roster on the dashboard.
+        </p>
+        <p>
+          <strong>How do you swap your patrols?</strong><br/>
+          You can swap your patrols by logging into Swapsea and either creating <em>Requests</em> and waiting for other members to make an <em>Offer</em> for you to choose, or you can find a request by someone else and making them an offer. You can only create one request per patrol, but as many offers as you like.
+        </p>
+        <p>
+          <strong>What do you need to do next?</strong><br/>
+          Before you can login, you will need to activate your account. When you activate your account, you will receive an email that will allow you to set a new password.
+        </p>
+        <p>
+          <em>If you attempt to activate your account multiple times or use the forgot password feature (and receive multiple 'set new password' emails), always make sure you are using the link in the lastest email to set your new password.</em>
+        </p>
+        <p>
+          Have a great weekend!
+        </p>
+        <strong><%= link_to 'Go to Swapsea', activate_url %></strong><br/>
+        <p>
+          Much Love,<br/>
+          Swapsea
+        </p>
+      </div>
+    </div>
+    <div class="footer">
+      Copyright 2019 Swapsea <br/>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+module EventLogsHelper
+end

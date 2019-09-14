@@ -1,0 +1,30 @@
+<div class="noticeboard">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>Notice Board</h2>
+    </div>
+    <div class="panel-body">
+      <% @notices.each do |notice| %>
+        <div class="notice">
+          <h3>
+            <%= notice.title %>
+          </h3>
+          <p>
+            <%= notice.desc.html_safe %>
+          </p>
+          <p>
+            <%= link_to notice.link_desc, notice.link %>
+          </p>
+        </div>
+      <% end %>
+      <% if @notices.empty? %>
+        <div class="notice">
+          <h3>(Empty)</h3>
+          <p>
+            If you need to stand on a soapbox and announce to your fellow clubbies something of great interest. Send us an email and we can make it happen.
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

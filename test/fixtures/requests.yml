@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  roster_id: 1
+  user_id: 1
+  comment: MyString
+  mobile: MyString
+  email: MyString
+  status: MyString
+
+two:
+  roster_id: 1
+  user_id: 1
+  comment: MyString
+  mobile: MyString
+  email: MyString
+  status: MyString

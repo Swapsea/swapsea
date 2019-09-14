@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @event_log.subject %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @event_log.desc %>
+</p>
+
+<%= link_to 'Edit', edit_event_log_path(@event_log) %> |
+<%= link_to 'Back', event_logs_path %>

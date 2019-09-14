@@ -1,0 +1,54 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2><i class="fa fa-user"></i> <%= @user.name %></h2>
+	</div>
+	<div class="panel-body">
+		<p><em>Please note:</em> These details are periodically taken from the SLSA Members Area. To update your details, please <a href="https://members.sls.com.au/" target="_new">log in to Members Area</a>, and any changes should be visible in Swapsea within a week.</p>
+		<table class="table">
+			<% if selected_user.id == @user.id %>
+			 <tr>
+				<th>Email</th>
+				<td><b><%= @user.email %></b> (visible only to you)</td>
+			</tr>
+			 <tr>
+				<th>Mobile</th>
+				<td><b><%= @user.mobile_phone %></b> (visible only to you)</td>
+			</tr>
+			<% end %>
+			<tr>
+				<th>Club</th>
+				<td><%= @user.organisation %></td>
+			</tr>
+			<tr>
+				<th>Status</th>
+				<td><%= @user.status %></td>
+			</tr>
+			<tr>
+				<th>Member Since</th>
+				<td><%= @user.date_joined_organisation %></td>
+			</tr>
+			<tr>
+				<th>Patrol</th>
+				<td><% if @user.patrol.present? %>
+						<%= @user.patrol.name %>
+					<% else %>
+			 			(Not Allocated)
+			 		<% end %>
+			 	</td>
+			 </tr>
+			<tr>
+				<th valign="top">Awards</th>
+				<td>
+				<% if @user.awards.present? %>
+					<% @user.awards.order(:award_name).each do |award| %>
+						<b><%= award.award_name %></b> <i><%= award.originating_organisation %></i><br/>
+					<% end %>
+				<% else %>
+					<p>No awards found.</p>
+				<% end %>
+			</td>
+		</tr>
+		</table>
+
+	</div>
+</div>

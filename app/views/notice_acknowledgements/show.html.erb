@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @notice_acknowledgement.user_id %>
+</p>
+
+<p>
+  <strong>Notice:</strong>
+  <%= @notice_acknowledgement.notice_id %>
+</p>
+
+<%= link_to 'Edit', edit_notice_acknowledgement_path(@notice_acknowledgement) %> |
+<%= link_to 'Back', notice_acknowledgements_path %>

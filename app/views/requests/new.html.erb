@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2> New Swap Request</h2>
+  </div>
+  <div class="panel-body">
+  	<%= simple_form_for(@request) do |f| %>
+      <%= f.error_notification %>
+
+        <div class="swap-request">
+            <%= f.hidden_field :roster_id, :value => @roster.id %>
+            <div class="row">
+              <label class="col-xs-3 col-sm-3">Patrol</label>
+              <div class="col-xs-9 col-sm-7"><%= @roster.patrol.name %></div>
+            </div>
+            <div class="row">
+              <label class="col-xs-3 col-sm-3">Date</label>
+              <div class="col-xs-9 col-sm-7"><%= @roster.start.strftime('%A, %d %B %Y') %></div>
+            </div>
+            <div class="row">
+              <label class="col-xs-3 col-sm-3">Time</label>
+              <div class="col-xs-9 col-sm-7"><%= @roster.start.strftime('%H:%M') %> - <%= @roster.finish.strftime('%H:%M') %></div>
+            </div>
+            <div class="row">
+              <label class="col-xs-3 col-sm-3">Member</label>
+              <div class="col-xs-9 col-sm-7"><%= @user.first_name %> <%= @user.last_name %></div>
+            </div>
+              <%= f.hidden_field :user_id, :value => @user.id %>
+            <div class="row">
+              <label class="col-xs-3 col-sm-3">Email</label>
+              <div class="col-xs-9 col-sm-9"><%= f.text_field :email, :value => @user.email, :class => "form-control" %></div>
+            </div>
+            <div class="row">
+              <label class="col-xs-3 col-sm-3">Mobile</label>
+              <div class="col-xs-9 col-sm-9"><%= f.text_field :mobile, :value => @user.mobile_phone, :class => "form-control" %></div>
+            </div>
+            <div class="row">
+              <label class="col-xs-3 col-sm-3">Comment</label>
+              <div class="col-xs-9 col-sm-9"><%= f.input :comment, :as => :text, :label => false, input_html: { class: 'textbox form-control' } %></div>
+            </div>
+            <div class="buttons">
+              <div class="col-xs-12 col-sm-12">
+                <%= link_to 'Back', :back, :class => "btn btn-primary" %>
+                <%= f.button :submit, 'Create New Request', :class => "btn btn-success btn-right", :disable_with => "Creating Request ..." %>
+              </div>
+            </div>
+        </div><!--/.request -->
+    <% end %>
+  </div>
+</div>

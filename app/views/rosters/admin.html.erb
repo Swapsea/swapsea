@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Import Rosters</h2>
+  </div>
+  <div class="panel-body">
+    <%= form_tag import_rosters_path, multipart: true do %>
+    <% if selected_user.has_role?(:admin) %>
+      <p>
+        <%= select_tag :club, options_for_select(Club.all.map { |c| [c.name] }) %>
+      </p>
+      <% end %>
+      <%= file_field_tag :file %>
+      <br/>
+      <%= submit_tag "Import", :class => "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Rosters</h2>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-striped datatable">
+        <thead>
+          <tr>
+            <th>Club</th>
+            <th>Roster ID</th>
+            <th>Patrol</th>
+            <th>Date</th>
+            <th>Start</th>
+            <th>Finish</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rosters.each do |roster| %>
+            <tr>
+              <td><%= roster.patrol.organisation if roster.patrol.present? %></td>
+              <td><%= roster.id %></td>
+              <td><%= roster.patrol.name if roster.patrol.present? %></td>
+              <td><%= roster.start.strftime('%a %d %b %y') %></td>
+              <td><%= roster.start.strftime('%H:%M') %></td>
+              <td><%= roster.finish.strftime('%H:%M') %></td>
+              <td><%= link_to 'Edit', edit_roster_path(roster) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

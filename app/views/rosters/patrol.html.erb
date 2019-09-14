@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills">
+
+      
+      <li class="col-xs-12"><%= link_to 'Back to Rosters', rosters_path %></li>
+      <% if (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) || (selected_user.has_role? :admin) %>
+      <li class="col-xs-12"><%= link_to 'Patrol Report', report_roster_path(@roster) %></li>
+      <% end %>
+    </ul>
+
+  </div><!--/.col -->
+</div><!--/.row -->
+<div class="row">
+  <div class="col-sm-12">
+
+   
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2><%= @roster.patrol.name %></h2>
+      </div>
+      <div class="panel-body">
+        <%= @roster.start.strftime("%a %d %b %Y") %><br/>
+        <%= @roster.start.strftime("%H:%M") %> - <%= @roster.finish.strftime("%H:%M") %>
+      </div>
+    </div><!--/.panel -->
+
+    <h3>Roster</h3>        
+    <%= render partial: 'membership', locals: {ru: @roster.current } %>
+    
+    <% if @roster.removed.present? %>
+    <h3>Out</h3>
+    <%= render partial: 'membership', locals: {ru: @roster.removed } %>
+    <% end %>
+
+    <% if @roster.added.present? %>
+    <h3>In</h3>
+      <%= render partial: 'membership', locals: {ru: @roster.added } %>
+    <% end %>
+      
+    <% if (selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) %>
+    <h2>Patrol Captain/Vice Captain's List</h2>
+            <p>You have special access to your patrollers details here. Please respect the privacy of their information.</p>
+      <%= render partial: 'patrols/contact_details', locals: {users: @roster.current } %>
+    <% end %>
+
+  </div><!--/.col -->
+</div><!--/.row -->

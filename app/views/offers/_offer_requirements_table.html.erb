@@ -1,0 +1,51 @@
+
+	<table class="offer-accept-table table table-striped dataTable row-border no-footer nowrap" cellspacing="0" width="100%" data-table="true">
+		
+		<thead>
+			<th>Award</th><th>Before</th><th>After</th><th>Required</th>
+		</thead>
+		<tbody>
+			<% if @offer.roster.patrol.need_bbm > 0 %>
+				<tr>
+					<td>Silver (BBM)</td>
+					<td class="center"><%= @before_swap_offer_patrol[:bbm] %></td>
+					<td class="center"><%= @after_swap_offer_patrol[:bbm] %></td>
+					<td class="center"><%= @required_offer_patrol[:bbm] %></td>
+				</tr>
+			<% end %>
+			<% if @offer.roster.patrol.need_irbd > 0 %>
+				<tr>
+					<td>IRB Driver</td>
+					<td class="center"><%= @before_swap_offer_patrol[:irbd] %></td>
+					<td class="center"><%= @after_swap_offer_patrol[:irbd] %></td>
+					<td class="center"><%= @required_offer_patrol[:irbd] %></td>
+				</tr>
+			<% end %>
+			<% if @offer.roster.patrol.need_irbc > 0 %>
+				<tr>
+					<td>IRB Crew</td>
+					<td class="center"><%= @before_swap_offer_patrol[:irbc] %></td>
+					<td class="center"><%= @after_swap_offer_patrol[:irbc] %></td>
+					<td class="center"><%= @required_offer_patrol[:irbc] %></td>
+				</tr>
+			<% end %>
+			<% if @offer.roster.patrol.need_artc > 0 %>
+				<tr>
+					<td>ART</td>
+					<td class="center"><%= @before_swap_offer_patrol[:artc] %></td>
+					<td class="center"><%= @after_swap_offer_patrol[:artc] %></td>
+					<td class="center"><%= @required_offer_patrol[:artc] %></td>
+				</tr>
+			<% end %>
+			<% if @offer.roster.patrol.need_bronze > 0 %>
+				<tr>
+					<td>Bronze</td>
+					<td class="center"><%= @before_swap_offer_patrol[:bronze] %></td>
+					<td class="center"><%= @after_swap_offer_patrol[:bronze] %></td>
+					<td class="center"><%= @required_offer_patrol[:bronze] %></td>
+				</tr>
+			<% end %>
+		</tbody>
+
+	</table>
+	<div class="clear"></div>

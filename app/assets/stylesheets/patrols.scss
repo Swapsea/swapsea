@@ -1,0 +1,234 @@
+@import 'colours';
+.table-responsive {
+    background-color: $white;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.position-relative {
+    position: relative;
+    height: 30px;
+    display: block;
+    input {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 200px;
+    }
+}
+
+.member-list {
+    .member {
+        .name {
+            border-bottom: 10px;
+        }
+        .border {
+            margin-bottom: 10px;
+        }
+        .award {
+            color: $white;
+            text-align: center;
+        }
+        .award.disabled {
+            background-color: transparent !important;
+            color: $grey-dark !important;
+        }
+        .bronze-medallion {
+            background-color: #025571;
+        }
+        .src {
+            background-color: #025571;
+        }
+        .src-cpr {
+            background-color: #025571;
+        }
+        .artc {
+            background-color: #026F94;
+        }
+        .irb-crew {
+            background-color: #0295C7;
+        }
+        .irb-driver {
+            background-color: #03A2D9;
+        }
+        .silver-medallion-bbm {
+            background-color: #03B4F1;
+        }
+    }
+}
+
+.nav-pills {
+    h1,
+    h2,
+    h3 {
+        font-family: 'Open Sans';
+    }
+    h3 {
+        font-size: 1.1em;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    .club:first-child {
+        margin-top: 0;
+    }
+    .club {
+        background-color: $grey-light;
+        color: $black;
+        margin-top: 25px;
+        padding: 10px 20px;
+        margin-bottom: 4px;
+        border-radius: 4px;
+    }
+    li {
+        a,
+        a:visited {
+            background-color: $aqua-bright;
+            color: $white;
+            padding: 10px 20px;
+            margin-bottom: 4px;
+        }
+        a:hover,
+        a:focus {
+            background-color: $aqua-dark;
+            color: $white;
+        }
+    }
+    li.active a,
+    li.active a:visited {
+        background-color: $aqua-medium;
+    }
+    li.active a:focus,
+    li.active a:hover {
+        background-color: $aqua-dark;
+        cursor: default;
+    }
+    li+li {
+        margin: 0;
+    }
+    li:last-child {
+        margin-bottom: 20px;
+    }
+}
+
+.panel {
+    h1,
+    h2,
+    h3 {
+        font-family: 'Open Sans';
+    }
+    h2 {
+        font-size: 1.4em;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    h3 {
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+    .panel-heading {
+        margin-bottom: 5px;
+    }
+}
+
+.club-patrols {
+    .panel {
+        background-color: transparent;
+        border: none;
+    }
+    .panel-body {
+        padding: 0;
+    }
+    .panel-info {
+        background-color: #FFFFFF;
+        padding: 15px 20px;
+    }
+    .patrols:last-child {
+        margin-bottom: 0;
+    }
+    .patrols {
+        div.created-at {
+            padding: 10px 20px 0;
+            font-size: 0.9em;
+            color: $aqua-bright;
+            background-color: $white;
+        }
+        span.created-at {
+            font-size: 0.9em;
+            color: $aqua-bright;
+        }
+    }
+    .patrol {
+        a {
+            color: #FFFFFF;
+        }
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 3px;
+        .arrows {
+            padding: 20px 0;
+        }
+        .datetime {
+            padding: 10px;
+            background-color: #FFFFFF;
+            text-align: center;
+        }
+        .name {
+            display: inline-block;
+        }
+        .details {
+            background-color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            .date {}
+            .time {}
+            .patrol-name {
+                color: #AAA;
+            }
+        }
+        .action {
+            padding: 10px;
+            text-align: center;
+            .fa {
+                font-size: 1.4em;
+            }
+        }
+        .action-view {
+            background-color: $aqua-bright;
+        }
+        .action-view:hover {
+            background-color: $aqua-dark;
+        }
+        .action-view.disabled {
+            background-color: $disabled-light;
+            color: $disabled-dark;
+            cursor: default;
+        }
+        .action-view.disabled:hover {
+            background-color: $disabled-light;
+        }
+        .action-accepted {
+            background-color: $green-light;
+        }
+        .action-accepted:hover {
+            background-color: $green-dark;
+        }
+        .action-not-accepted {
+            background-color: $red-light;
+        }
+        .action-not-accepted:hover {
+            background-color: $red-dark;
+        }
+        /* Disabled */
+        .action-disabled {
+            background-color: $disabled-light;
+            cursor: default;
+        }
+        .action-disabled:hover {
+            background-color: $disabled-dark;
+        }
+    }
+}

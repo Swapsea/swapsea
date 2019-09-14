@@ -1,0 +1,31 @@
+	<h3>Phone List</h3>
+<div class="table-responsive">
+	<table class="patrol-members-contact-details-table table table-striped dataTable row-border" cellspacing="0" width="100%" data-table="true">
+		<thead>
+			<th>Name</th><th>Mobile</th>
+		</thead>
+		<tbody>
+			<% users.sort!{ |a,b| a.last_name.downcase <=> b.last_name.downcase }.each do |member| %>
+				<tr>
+					<td><%= member.name %></td>
+					<td><a href="tel:<%= member.mobile_phone %>"><%= member.mobile_phone %></a></td>
+				</tr>
+			<% end %>
+		</tbody>
+		<tfoot>
+			<th>Name</th><th>Mobile</th>
+		</tfoot>
+	</table>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Email List</h2>
+		<p>Paste this list into your email to easily email all patrollers.</p>
+	</div>
+	<div class="panel-body">
+		<textarea rows="10" cols="70" onclick="this.focus();this.select()" readonly="readonly">
+<% users.sort!{ |a,b| a.last_name.downcase <=> b.last_name.downcase }.each do |member| 
+%><%= member.first_name %> <%= member.last_name %> &lt;<%= member.email %>&gt;&comma;
+<% end %></textarea>
+	</div>
+</div>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @outreach_patrol_sign_up.user %>
+</p>
+
+<p>
+  <strong>Extra patrol:</strong>
+  <%= @outreach_patrol_sign_up.outreach_patrol %>
+</p>
+
+<%= link_to 'Edit', edit_outreach_patrol_sign_up_path(@outreach_patrol_sign_up) %> |
+<%= link_to 'Back', outreach_patrol_sign_ups_path %>

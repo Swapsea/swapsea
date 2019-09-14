@@ -1,0 +1,21 @@
+@import 'colours';
+.panel {
+    h1,
+    h2,
+    h3 {
+        font-family: 'Open Sans';
+    }
+    h2 {
+        font-size: 1.4em;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    h3 {
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+    .panel-heading {
+        margin-bottom: 5px;
+    }
+}

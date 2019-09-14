@@ -1,0 +1,168 @@
+@import 'colours';
+.ics {
+    h2 {
+        display: inline-block;
+    }
+    a {
+        margin-left: 10px;
+        font-style: italic;
+        color: $aqua-bright !important;
+        display: inline;
+    }
+    a:hover {
+        color: $aqua-medium;
+    }
+}
+
+.panel {
+    h1,
+    h2,
+    h3 {
+        font-family: 'Open Sans';
+    }
+    h2 {
+        font-size: 1.4em;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    h3 {
+        font-size: 1.2em;
+        margin: 0;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+    .panel-heading {
+        margin-bottom: 5px;
+    }
+    .panel-info {
+        background-color: #FFFFFF;
+        padding: 15px 20px;
+        font-size: 1.1em;
+    }
+}
+
+.name {
+    display: inline-block;
+}
+
+.noticeboard {
+    .panel {
+        background-color: transparent;
+        border: none;
+    }
+    .panel-body {
+        padding: 0;
+    }
+    .notice:first-child,
+    .notice:last-child {
+        border: none;
+    }
+    .notice {
+        margin-bottom: 5px;
+        background-color: #fff;
+        padding: 15px 20px;
+    }
+    .notice:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.swap-feed {
+    .panel {
+        background-color: transparent;
+        border: none;
+    }
+    .panel-body {
+        padding: 0;
+    }
+    .created-at {
+        font-size: 0.9em;
+        color: $aqua-bright;
+        margin-bottom: 3px;
+    }
+    .swap {
+        margin-bottom: 3px;
+        padding: 15px;
+    }
+    .swap:nth-child(odd) {
+        background-color: #ffffff;
+    }
+    .swap:nth-child(even) {
+        background-color: #fafafa;
+    }
+    .swap:last-child {
+        margin-bottom: 0;
+    }
+    .arrows {
+        padding: 30px 0;
+    }
+}
+
+.my-roster {
+    a {
+        color: #fff;
+    }
+    .panel {
+        background-color: transparent;
+        border: none;
+    }
+    .panel-body {
+        padding: 0;
+    }
+    .info-panel {
+        background-color: #FFFFFF;
+        padding: 15px 20px;
+        font-size: 1.1em;
+    }
+    .roster:last-child {
+        margin-bottom: 0;
+    }
+    .roster {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 3px;
+        .details {
+            background-color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            .date {}
+            .time {}
+            .patrol-name {
+                color: #AAA;
+            }
+        }
+        .action {
+            padding: 20px 10px;
+            text-align: center;
+            .fa {
+                font-size: 1.4em;
+            }
+        }
+        /* Swap Request */
+        .action-request-swap {
+            background-color: #03b4f1;
+            color: #fefefe;
+        }
+        .action-request-swap:hover {
+            background-color: #03a2d9;
+        }
+        /* View Request */
+        .action-view-request {
+            background-color: #2299CC;
+        }
+        .action-view-request:hover {
+            background-color: #0287b4;
+        }
+        /* Disabled */
+        .action-request-swap .disabled {
+            background-color: #026f94;
+            cursor: default;
+        }
+        .action-request-swap .disabled:hover {
+            background-color: #025571;
+        }
+    }
+}

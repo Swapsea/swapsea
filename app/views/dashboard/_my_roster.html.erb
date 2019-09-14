@@ -1,0 +1,43 @@
+<div class="my-roster">
+  <div class="panel panel-default">
+    <div class="panel-heading ics">
+      <h2>My Roster</h2>
+      <%= link_to 'iCal Sync', ics_path(key: selected_user.ics, :format => :ics)  if selected_user.ics.present? && !selected_user.custom_roster.empty? %>
+    </div>
+    <div class="panel-body">
+      <% if !selected_user.has_patrol? %>
+        <div class="info-panel">
+          <h3>No Patrol?</h3>
+          <p>You are not allocated to a patrol currently.</p>
+          <p>If you should be, please contact your Club Administration officer to ensure 'Surfguard' and Swapsea is updated.</p>
+        </div>
+      <% elsif selected_user.custom_roster.empty? %>
+        <div class="info-panel">
+          <h3>No Patrols?</h3>
+          <p>You have no upcoming patrols.</p>
+        </div>
+      <% else %>
+        <div class="rosters">
+          <% selected_user.custom_roster.each do |r| %>
+            <div class="roster">
+              <div class="details col-sm-9 col-xs-9">
+                <%= r.start.strftime("%a %d %b") %>
+                <br/>
+                <%= r.start.strftime("%H:%M") %>
+                \- #{r.finish.strftime("%H:%M")}
+                <br/>
+                <%= r.patrol.name %>
+              </div>
+              <% if r.requests.where('user_id = ? AND status = ?', selected_user.id, 'open').present? %>
+                <%= link_to raw('<div class="vcenter"><i class="fa fa-long-arrow-right"></i><br/>View Request</div>'), request_path(r.requests.where('user_id = ? AND status = ?', selected_user.id, 'open').last), :class => 'col-sm-3 col-xs-3 action action-view-request' %>
+              <% else %>
+                <%= link_to raw('<i class="fa fa-random"></i><br/>Request Swap'), new_request_path(:roster_id => r.id), :class => 'col-sm-3 col-xs-3 action action-request-swap' %>
+              <% end %>
+              <div class="clear"></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

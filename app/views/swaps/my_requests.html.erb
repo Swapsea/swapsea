@@ -1,0 +1,62 @@
+  <div class="row">
+    <div class="col-sm-12">
+      <ul class="nav nav-pills nav-justified" role="tablist">
+        <li class="col-xs-12"><%= link_to 'Open Requests', swaps_path %></li>
+        <li class="col-xs-12"><%= link_to 'Confirmed Swaps', confirmed_swaps_path %></li>
+        <li class="col-xs-12 active"><%= link_to 'My Requests', my_requests_swaps_path %></li>
+        <li class="col-xs-12"><%= link_to 'My Offers', my_offers_swaps_path %></li>
+      </ul>
+    </div>
+    <div class="divider-25"></div>
+  </div>
+
+  <div class="col-sm-12">
+    <div class="requests">
+
+<% if @swaps.present? %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>My Requests</h2>
+  </div>
+  <div class="panel-body">
+    <% @swaps.each do |request| %>
+    <div class="swap-request">
+      <div class="datetime col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <strong>
+          <%= request.roster.start.strftime("%a, %d %b %y") %>
+        </strong>
+      </div><!--/.datetime -->
+      <div class="details col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <%= request.roster.start.strftime("%H:%M") %> - <%= request.roster.finish.strftime("%H:%M") %><br/>
+        <%= request.roster.patrol.short_name.present? ? request.roster.patrol.short_name : request.roster.patrol.name %><br/>
+        <% roster_check = request.roster.roster_awards_without_req(request.user) %>
+        <% if !roster_check[:result] %>
+        <%= raw('<div class="bbm">BBM</div>') if (roster_check[:bbm] < request.roster.patrol.need_bbm) && request.roster.patrol.need_bbm > 0 %>
+        <%= raw('<div class="irbd">IRB-D</div>') if (roster_check[:irbd] < request.roster.patrol.need_irbd) && request.roster.patrol.need_irbd > 0 %>
+        <%= raw('<div class="irbc">IRB-C</div>') if (roster_check[:irbc] < request.roster.patrol.need_irbc) && request.roster.patrol.need_irbc > 0 %>
+        <%= raw('<div class="artc">ART</div>') if (roster_check[:artc] < request.roster.patrol.need_artc) && request.roster.patrol.need_artc > 0 %>
+        <%= raw('<div class="bm">Bronze</div>') if (roster_check[:bronze] < request.roster.patrol.need_bronze) && request.roster.patrol.need_bronze > 0 %>
+        <% end %>
+      </div>
+      <div class="details col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <em><%= pluralize(request.offers.where(:status => 'pending').count, "Offer", "Offers") %></em>
+      </div>
+      <%= link_to request, :class => 'offer offer-view col-xs-2 col-sm-2 col-md-2 col-lg-2' do %>
+      View
+      <% end %>
+    </div><!--/.swap-request -->
+    <% end %>
+  </div><!--/.panel-body -->
+</div><!--/.panel -->
+<% else %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>My Requests</h2>
+  </div>
+  <div class="panel-info">
+    <p>You currently have no requests.</p>
+  </div>
+</div>
+<% end %>
+</div>
+</div>

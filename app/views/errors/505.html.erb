@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="full-content-center animated fadeIn extra-margin-top">
+        <%= image_tag('alternate-logo.png', :class => "modal-logo") %>
+        <div class="box-info exceptions">
+          <h2>HTTP Version Not Supported<h2/>
+          <% if @exception %>
+          	<p><%= @exception.message %></p>
+          <% else %>
+          	<p>The server does not support the HTTP protocal version that was used in the page request.</p>
+          <% end %>
+    </div>
+    <%= link_to "Back", :back %>
+    </div>      
+</div>

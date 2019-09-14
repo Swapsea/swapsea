@@ -1,0 +1,20 @@
+/* This is a compiled file, you should be editing the file in the templates directory */
+.pace .pace-progress {
+  background: #3B9BED;
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  height: 2px;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+  transition: width 1s;
+-webkit-box-shadow: 0px 0px 5px 0px rgba(59,155,237,1);
+-moz-box-shadow: 0px 0px 5px 0px rgba(59,155,237,1);
+box-shadow: 0px 0px 5px 0px rgba(59,155,237,1);
+}
+
+.pace-inactive {
+  display: none;
+}

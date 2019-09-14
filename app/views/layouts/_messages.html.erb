@@ -1,0 +1,15 @@
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <div class="alert alert-<%= name == "notice" ? "success" : "danger" %>">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- Added by me
+<script type="text/javascript">
+window.setTimeout(function() { $(".alert-success").addClass('fade'); }, 3000);
+window.setTimeout(function() { $(".alert-success").alert('close'); }, 5000);
+</script>
+-->

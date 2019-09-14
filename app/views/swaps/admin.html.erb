@@ -1,0 +1,31 @@
+<h1>Listing Patrols Swaps</h1>
+<p>Be careful: These are the raw swap records. Modifying can break Swapsea.</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Roster</th>
+      <th>User</th>
+      <th>On off patrol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @swaps.each do |swap| %>
+      <tr>
+        <td><%= Roster.find_by(:id=>swap.roster_id).patrol.name %> (<%=swap.roster_id%>)</td>
+        <td><%= User.find_by(:id=>swap.user_id).name %> (<%=swap.user_id%>)</td>
+        <td><%= swap.on_off_patrol %></td>
+        <td><%= link_to 'Show', swap %></td>
+        <td><%= link_to 'Edit', edit_swap_path(swap) %></td>
+        <td><%= link_to 'Destroy', swap, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New swap', new_swap_path %>

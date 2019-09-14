@@ -1,0 +1,85 @@
+<div class="outreach_patrols col-sm-12">
+
+  <% if @outreach_patrols.present? %>
+
+  <% @uniq_outreach_patrol_dates.each do |uniq_outreach_patrol_date| %>
+  
+    <% @uniq_outreach_patrol_date_parsed = Date.parse(uniq_outreach_patrol_date) %>
+    <% @outreach_patrols_for_uniq_date = @outreach_patrols.where(:start => @uniq_outreach_patrol_date_parsed.beginning_of_day..@uniq_outreach_patrol_date_parsed.end_of_day) %>
+
+    <div class="brick col-sm-12 col-xs-12">
+      
+        <div class="datetime col-sm-2 col-xs-12">
+          <div class="day"><%= @uniq_outreach_patrol_date_parsed.strftime("%a") %></div>
+          <div class="date"><%= @uniq_outreach_patrol_date_parsed.strftime("%d") %></div>
+          <div class="month"><%= @uniq_outreach_patrol_date_parsed.strftime("%b") %></div>
+        </div>
+        <div class="events col-sm-9 col-xs-12">
+
+          <% @outreach_patrols_for_uniq_date.sort_by(&:start).each do |o| %>
+            
+            <div class="event">
+                
+                <div class="name col-sm-2 col-xs-12 bronze"><%= o.location %></div>
+              
+                <div class="details col-sm-8 col-xs-12">
+                
+                <div class="info col-sm-8 col-xs-12">
+                    <span class="time"><%= o.start.strftime("%H:%M") %> - <%= o.finish.strftime("%H:%M") %></span>
+                    <span class="visible-xs"><%= o.start.strftime("%A %d %B %Y") %></span>
+                </div><!--/.info -->
+                
+                <div class="members col-sm-12 col-xs-12"> 
+                  <% o.outreach_patrol_sign_ups.each do |os| %>
+                    <div class="member">
+      
+                      <div class="user">
+                        <% a = os.user.awards %>
+                        <%= os.user.first_name %> <%= os.user.last_name %>
+                        <%= 'SRC' if a.where(:award_name => 'Surf Rescue Certificate').present? %> 
+                        <%= 'SRC(CPR)' if a.where(:award_name => 'Surf Rescue Certificate (CPR Endorsed)').present? %> 
+                        <%= 'BM' if a.where(:award_name => 'Bronze Medallion').present? %> 
+                        <%= 'ART' if a.where({:award_name => 'Advanced Resuscitation Techniques [AID]'} || {:award_name => 'Advanced Resuscitation Techniques Certificate'}).present? %>
+                        <%= 'IRBC' if a.where(:award_name => 'IRB Crew Certificate').present? %> 
+                        <%= 'IRBD' if a.where(:award_name => 'Silver Medallion IRB Driver').present? %> 
+                        <%= 'BBM' if a.where(:award_name => 'Silver Medallion Beach Management').present? %> 
+                      </div>
+
+                      <% if ((selected_user == os.user) || (selected_user.has_role? :admin) || (selected_user.has_role? :manager)) %>
+                        <div class="cancel"><%= link_to 'Cancel', os, method: :delete %></div>
+                      <% end %>
+                    
+                    </div><!--/.member -->
+                  <% end %>
+                </div><!--/.members -->
+              
+              </div><!--/.details -->
+              
+              <div class="signup col-sm-2 col-xs-12">
+                <%= simple_form_for(@outreach_patrol_sign_up) do |f| %>
+                  <%= f.input :outreach_patrol_id, :as => :hidden, :input_html => { :value => o.id } %>
+                  <%= f.submit :submit, :value => "Sign Up!", :class => "btn-signup" %>
+                <% end %>
+              </div>
+        
+
+            </div><!--/.event -->
+          
+        <% end %>
+
+      </div><!--/.events -->
+    </div><!--/.box -->
+    <% end %>
+
+    <% else %>
+
+      <div class="col-sm-12">
+        <div class="box-info">
+            <h1>No Extra Patrols?</h1>
+            <p>There are currently no extra patrols listed, but check back soon.</p>
+ 
+        </div>
+      </div>
+
+    <% end %>
+</div><!--/.outreach_patrols -->

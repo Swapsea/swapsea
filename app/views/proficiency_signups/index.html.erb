@@ -1,0 +1,29 @@
+<h1>Listing proficiency_signups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Proficiency</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proficiency_signups.each do |proficiency_signup| %>
+      <tr>
+        <td><%= proficiency_signup.user_id %></td>
+        <td><%= proficiency_signup.proficiency_id %></td>
+        <td><%= link_to 'Show', proficiency_signup %></td>
+        <td><%= link_to 'Edit', edit_proficiency_signup_path(proficiency_signup) %></td>
+        <td><%= link_to 'Destroy', proficiency_signup, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proficiency signup', new_proficiency_signup_path %>

@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Import Patrol Team</h2>
+  </div>
+  <div class="panel-body">
+    <%= form_tag import_patrol_members_path, multipart: true do %>
+      <p>
+        <%= file_field_tag :file, accept: 'text/csv' %>
+      </p>
+      <p>
+        <%= submit_tag "Import CSV", :class => "btn btn-success" %>
+      </p>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Patrol Teams</h2>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-striped datatable">
+        <thead>
+          <tr>  
+            <th>Club</th>
+            <th>Patrol Name</th>
+            <th>Member ID</th>
+            <th>Member Name</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @patrol_members.each do |patrol_member| %>
+            <% if patrol_member.user.present? %>
+            <tr>
+              <td><%= patrol_member.organisation if patrol_member.organisation.present? %></td>
+              <td><%= patrol_member.patrol_name if patrol_member.patrol_name.present? %></td>
+              <td><%= patrol_member.user_id %></td>
+              <td><%= patrol_member.user.first_name if patrol_member.user.present? %> <%= patrol_member.user.last_name if patrol_member.user.present? %></td>
+              <td><%= patrol_member.default_position %></td>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div>

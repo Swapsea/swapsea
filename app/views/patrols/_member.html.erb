@@ -1,0 +1,42 @@
+<tr class="member">
+	<td class="name"><%= link_to u.name, u %></td>
+	<td class="position"><%= u.patrol_member.default_position %></td>
+
+		<% awards = u.awards.map { |n| n.award_name } %>
+
+			<% if awards.include?('Bronze Medallion') %>
+				<td class="award bronze-medallion">BM</td>
+			<% elsif awards.include?('Surf Rescue Certificate') %>
+				<td class="award src">SRC</td>
+			<% elsif awards.include?('Surf Rescue Certificate (CPR Endorsed)') %>
+				<td class="award src-cpr">SRC(CPR)</td>
+			<% else %>
+				<td class="award bronze-medallion disabled">BM</td>
+			<% end %>
+
+			<% if awards.include?('Advanced Resuscitation Techniques Certificate') || awards.include?('Advanced Resuscitation Techniques [AID]') %>
+				<td class="award artc">ART</td>
+			<% else %>
+				<td class="award artc disabled">ART</td>
+			<% end %>
+			
+			<% if awards.include?('IRB Crew Certificate') %>
+				<td class="award irb-crew">IRB-C</td>
+			<% else %>
+				<td class="award irb-crew disabled">IRB-C</td>
+			<% end %>
+
+			<% if awards.include?('Silver Medallion IRB Driver') %>
+				<td class="award irb-driver">IRB-D</td>
+			<% else %>
+				<td class="award irb-driver disabled">IRB-D</td>
+			<% end %>
+
+			<% if awards.include?('Silver Medallion Beach Management') %>
+				<td class="award silver-medallion-bbm">BBM</td>
+			<% else %>
+				<td class="award silver-medallion-bbm disabled">BBM</td>
+			<% end %>
+
+
+</tr>

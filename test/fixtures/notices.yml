@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  desc: MyText
+  link: MyString
+  link_desc: MyString
+  image: MyString
+  video: MyString
+  user_id: 1
+  club_id: 1
+  system_wide: false
+  visible_from: 2015-09-12 11:13:30
+  visible_to: 2015-09-12 11:13:30
+  visible: false
+
+two:
+  title: MyString
+  desc: MyText
+  link: MyString
+  link_desc: MyString
+  image: MyString
+  video: MyString
+  user_id: 1
+  club_id: 1
+  system_wide: false
+  visible_from: 2015-09-12 11:13:30
+  visible_to: 2015-09-12 11:13:30
+  visible: false

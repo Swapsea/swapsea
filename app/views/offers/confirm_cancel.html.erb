@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Confirm</h2>
+	</div>
+	<div class="panel-body">
+		<p>Are you sure you want to <strong>withdraw</strong> this offer?</p>
+		<div class="buttons">
+			<%= link_to @offer.request do %>
+				<button class="btn btn-danger"><span class="fa fa-times"></span><br/>Go back</button>
+			<% end %>
+			<%= link_to @offer, method: :delete do %>
+				<button class="btn btn-success pull-right"><span class="fa fa-check"></span><br/>Withdraw Offer</button>
+			<% end %>
+		</div>
+	</div>
+</div>

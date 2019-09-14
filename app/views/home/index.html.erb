@@ -1,0 +1,321 @@
+
+<!-- Navbar -->
+<div class="navbar navbar-default navbar-fixed-top landing">
+  <div class="container page-scroll">
+    <a class="main-logo navbar-left" href="#home"><h1>Swapsea</h1></a>
+    <p class="navbar-text navbar-right">
+      <% if ENV['ALLOW_LOGIN'] == 'true' %>
+        <% if user_signed_in? %>
+          <%= link_to dashboard_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+          <span class="hidden-xs">
+            <%= link_to 'Dashboard', dashboard_path, :class => "btn btn-default" %>
+          </span>
+        <% else %>
+          <%= link_to login_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+            <span class="hidden-xs">
+              <%= link_to 'Login', login_path, :class => "btn btn-default" %>
+            </span>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div> <!-- End navbar -->
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h1>Welcome to Swapsea</h1>
+        <p class="heading">
+          Swapsea is a superior, award-winning patrol swap system for Surf Clubs, evolved over five seasons and 1,000 swaps.
+      </div>
+    </div> <!-- End intro -->
+
+ <!-- Unmissable Login button  -->
+ <% if ENV['ALLOW_LOGIN'] == 'true' %>
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+      <% if user_signed_in? %>
+        <%= link_to 'Dashboard', dashboard_path, :class => "btn btn-primary btn-lg visible-xs" %>
+        <%= link_to 'Dashboard', dashboard_path, :class => "btn btn-primary hidden-xs" %>
+      <% else %>
+        <%= link_to 'Member Login', login_path, :class => "btn btn-primary btn-lg visible-xs" %>
+        <%= link_to 'Member Login', login_path, :class => "btn btn-primary hidden-xs" %>
+      <% end %>
+       </div>
+    </div> <!-- End Unmissable -->
+  <% end %>
+
+    <!-- Assets (How to's) -->
+    <div class="row assets hidden-xs">
+      <div class="col-sm-4">
+        <div class="asset">
+          <span class="fa fa-comment asset-ico-a"></span>
+          <h3>Weekly Reminders</h3>
+          <p>Everyone is busy and sometimes we need a gentle reminder. Swapsea automatically reminds members about their upcoming patrol commitments.</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="asset">
+          <span class="fa fa-exchange asset-ico-b"></span>
+          <h3>Swap Patrols</h3>
+          <p>Can't do your next patrol? We've all been there! No worries, just swap it. Once confirmed, neither side can cancel. </p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="asset">
+          <span class="fa fa-file-text asset-ico-c"></span>
+          <h3>Amazing Reports</h3>
+          <p>Better information means better decisions. Swapsea has a rich set of reports with all the important stuff that patrol captains and surf club officials love.</p>
+        </div>
+      </div>
+    </div> <!-- End assets -->
+  </div>
+</div> <!-- End Jumbotron -->
+
+<!-- Clubs -->
+<div class="clubs section-grey">
+  <div class="container">
+    <div class="row section-header" style="cellpadding:30">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h2>Clubs love Swapsea!</h2>
+        <p class="sub-heading-text">Want Swapsea for your club? <%= link_to 'Request a free trial', 'https://goo.gl/forms/XpcUJyVIGBdns9v23' %>.</p>
+      </div>
+    </div> <!-- End section header -->
+    <div class="row">
+      <div class="col-sm-4" style="padding-bottom: 15px">
+          <%= link_to image_tag("club_2.png", class: "img-responsive center-block", width:"150px", alt: "North Bondi SLSC"), login_path  %>
+      </div>
+      <div class="col-sm-4" style="padding-bottom: 15px">
+          <%= link_to image_tag("club_3.png", class: "img-responsive center-block", width:"150px", alt: "Bronte SLSC"), login_path  %>
+      </div>
+      <div class="col-sm-4" style="padding-bottom: 15px">
+          <%= link_to image_tag("club_8.png", class: "img-responsive center-block", width:"150px", alt: "Wanda SLSC"), login_path  %>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-4" style="padding-bottom: 15px">
+          <%= link_to image_tag("club_6.png", class: "img-responsive center-block", width:"150px", alt: "Whale Beach SLSC"), login_path  %>
+      </div>
+      <div class="col-sm-4" style="padding-bottom: 15px">
+          &nbsp;</div>
+      <div class="col-sm-4" style="padding-bottom: 15px">
+          <%= link_to image_tag("club_4.png", class: "img-responsive center-block", width:"150px", alt: "Northcliffe SLSC"), login_path  %>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+<!-- Features -->
+<div class="features">
+  <div class="container">
+    <!-- Section header -->
+    <div class="row section-header">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h2>Features</h2>
+        <p class="sub-heading-text">Swapsea is built by clubbies, for clubbies.</p>
+      </div>
+    </div> <!-- End section header -->
+
+    <!-- First row of features -->
+    <div class="row">
+      <div class="col-sm-6">
+        <h3><i class="fa fa-exchange"></i>Patrol Swaps</h3>
+        <p>
+          <strong>Make Swap Requests &amp; Offers</strong><br/>
+          Swapsea makes it easier for your club members to manage their patrol commitments, reduce the number of no-shows and ensure that substitutes are accountable. Patrol Captains can manage their people better and with greater confidence by knowing who is going to be on the beach in advance, as well who is qualified to do what.
+        </p>
+        <p> <strong>Patrol Team Minimum Requirements</strong><br/>
+          Swapsea automatically makes sure each Patrol meets the minimum requirements to be on duty. As long as both patrols in the swap would still meet the minimum requirements, anyone is free to swap with anyone else. This means that swaps are not limited to both people having the same qualifications - how about that!</p>
+      </div>
+      <div class="col-sm-6">
+        <h3><i class="fa fa-check-square-o"></i>Skills Maintenance</h3>
+        <p>
+          <strong>Skills Maintenance</strong><br/>
+          Ensuring <em>everyone</em> is current with the latest knowledge and techniques is a critical task yet logisitical challenge. Swapsea makes signing up to Skills Maintenance sessions super simple, ensuring sessions aren't over-crowded for an optimal instructor-to-student ratio and focussed learning environment.
+        </p>
+      </div>
+    </div> <!-- End first row of features -->
+
+    <!-- Second row of features -->
+    <div class="row">
+      <div class="col-sm-6">
+        <h3><i class="fa fa-file-text"></i>Awesome Reports</h3>
+        <p>
+          <strong>Sign-On Sheets</strong><br/>
+          Swapsea helps club members manage their patrol commitments, so it's only natural to help Patrol Captains out too by providing up-to-date patrol sign-on sheets that are dynamically generated and account for all swaps in-and-out. Plus they include up-to-date records of awards and contact details.
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <h3><i class="fa fa-envelope"></i>Reminders</h3>
+        <p>
+          <strong>Weekly Patrol Reminders</strong><br/>
+          We all get distracted from time to time, and forget we have a patrol on the weekend. Not anymore! Swapsea will automatically send a reminder email to all patrollers rostered on for the coming weekend. The reminder time is configurable by Club.
+        </p>
+        <p>
+          <strong>Skills Maintenance Reminders</strong><br/>
+          Motivating and ensuring every patroller attends a Skills Maintenance session can be a daunting task. Swapsea regularly reminds those who haven't signed up yet - to sign up. And Swapsea reminds them again the week they need to attend.
+        </p>
+      </div>
+    </div> <!-- End second row of benefits --> 
+  
+    <!-- Third row of features -->
+    <div class="row">
+      <div class="col-sm-6">
+        <h3><i class="fa fa-calendar"></i>Calendar Sync</h3>
+        <p>
+          <strong>Calendar Sync</strong><br/>
+          Sync all patrol commitments to Outlook, iCal, Google Calendar or any other service that supports <em>.ics</em> files. Your diary is automatically updated when you swap too. It's just another thing Swapsea does to help manage patrol commitments.
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <h3><i class="fa fa-mobile fa-2x"></i>Mobile Ready</h3>
+        <p>
+          <strong>Better for the active you</strong><br/>
+          Swapsea has been designed mobile-first, so you can manage your patrol commitments anywhere at any time, as you'd expect. Swapsea works on your commute to work or when catching up with fellow members. It even works well at the beach - right where you need it.
+        </p>
+      </div>
+    </div> <!-- End third row of benefits --> 
+  </div> <!--/.container -->
+</div> <!--/.features -->
+
+
+<div class="pricing">
+  <div class="container">
+    <div class="row section-header">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h2>Pricing</h2>
+        <p class="sub-heading-text">Register and pay before the season starts and save.</p>
+      </div>
+    </div> <!-- End section header -->
+    <div class="row pricing-charts">
+      <div class="col-md-6">
+        <div class="pricing-chart">
+          <div class="quantity">
+            <span class="dollar">$</span>
+            <span class="price">500</span>
+            <span class="period">/season</span>
+          </div>
+          <div class="plan-name">Season 2019/20</div>
+          <div class="specs">
+            <div class="spec">
+              Patrol Swaps
+            </div>
+            <div class="spec">
+              Skills Maintenance Sign ups
+            </div>
+            <div class="spec">
+              Weekly Reminders
+            </div>
+            <div class="spec">
+              Calendar Sync
+            </div>
+            <div class="condition">
+              *pricing excludes GST
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center">
+        <%= link_to 'Request a Trial', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' %>
+      </div>
+  </div>
+</div>
+</div> <!--/.pricing -->
+
+<div id="referral section-grey">
+  <div class="container">
+    <!-- Section header -->
+    <div class="row section-header">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h2>Refer &amp; Save</h2>
+        <p class="lead">Save $100 for each club you refer to Swapsea.</p>
+      </div>
+    </div> <!-- End section header -->
+    <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+    <p>Share the love! Swapsea offers clubs the chance to save on the already low cost of Swapsea. Earn $100 for your Club with each club you refer to Swapsea (maximum $500 discount). Simply ask them to include your club's name on the registration form (link above).</p>
+    <br/>
+    <p class="small"><strong>Referral Discount Conditions:</strong> Each new club referred will earn referring club $100 discount off their fee. Discount cannot be redeemed as cash. New club must nominate the referring Club on the registration form. New Club must be live by 1st October 2019 and provided everything needed for their patrollers to use www.swapsea.com.au.</p>
+    </div>
+    </div>
+  </div> <!-- container -->
+</div> <!-- End referral area -->
+<hr/> 
+
+<%# <!-- Signup area (main call-to-action) -->
+<div id="signup">
+  <div class="container">
+    <!-- Section header -->
+    <div class="row section-header">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h2>Want Swapsea for your club?</h2>
+        <p class="lead">Great! Please complete our registration form ASAP and we'll get back to you.</p>
+      </div>
+    </div> <!-- End section header -->
+    <!-- Signup panel area -->
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+          <div class="text-center">
+            <%= link_to 'Register for a Free Trial', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' % >
+          </div>
+      </div>
+    </div> <!-- End signup panel area -->
+  </div> <!-- container -->
+</div> <!-- End signup area -->
+<hr/> 
+%>
+<div id="faq">
+  <div class="container">
+    <!-- Section header -->
+    <div class="row section-header">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h2>Frequently Asked Questions</h2>
+      </div>
+    </div> <!-- End section header -->
+    <!-- Signup panel area -->
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+          <div class="asset">
+        <ol>
+          <li><strong>How does it work?</strong>:<br/>
+          It takes two people to make a <i>swap</i> in Swapsea. The requestor advertises the patrol they need a swap for. Someone else makes an <i>offer</i> in exchange for another rostered patrol. If suitable, the requestor then confirms the offer and the deal is on. Each party is notified by email and receives a reminder ahead of their new patrol.</li>
+          <li><strong>Why does it work?</strong>:<br/>
+          Swapsea works because the Club honours a Swapsea swap as a handshake deal. Patrollers cannot go back on their word. Also, by having a reciprocal swap, two people are committed to the change and patrols remain fully manned.</li>
+          <li><strong>Why use Swapsea?</strong>:<br/>
+          Fewer no-shows means adequately resourced patrols, happier members and safer beaches. </li>
+          </li>
+          <li><strong>Where is the data coming from?</strong>:<br/>Each Club is responsible for keeping Swapsea up to date using “Custom reports” from the SLSA Surfguard system. Detailed instructions are provided to Clubs.
+          </li>
+          <li><strong>What about Privacy?</strong>:<br/>Swapsea abides by the same Australian Privacy Principles as SLSA and takes privacy extremely seriously. We are professional developers who have our own personal data on this system too, and take all necessary precautions to keep that data secure and private. See our <%= link_to 'Terms of Use', terms_of_use_path() %>.</li>
+          <li><strong>Do other clubs use Swapsea?</strong>:<br/>Yes. Swapsea launched in 2012/13 and has evolved to support clubs in multiple states with special requirements.
+          </li>
+          <li><strong>How much does it cost?</strong>:<br/>Clubs pay for Swapsea per season to cover hosting and support. To avoid the pre-season rush, there is early bird pricing.
+          </li>
+          <li><strong>Who developed Swapsea?</strong>:<br/>Swapsea launched in 2013 when some guys from North Bondi Surf Club couldn’t believe nobody had done this before. Two years later SLSA built Substitutes into Members Area which we think is an inferior imitation and that Swapsea remains the best - and keeps getting better.
+        </ol>
+          </div>
+      </div>
+        <div class="text-center">
+            <%= link_to 'Request a Trial', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' %>
+          </div>
+    </div> <!-- End signup panel area -->
+  </div> <!-- container -->
+</div> <!-- End signup area -->
+
+<div class="section-grey">
+<%= render 'footer_large' %>
+</div>

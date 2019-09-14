@@ -1,0 +1,20 @@
+<%= simple_form_for(@lead, :class => "form text-center") do |f| %>
+    <%= f.error_notification %>
+  
+    <div class="form-inputs col-sm-12">
+      <div class="form-group">
+        <%= f.input :name, :placeholder => "Name", label: false, input_html: { class: 'form-control input-lg' }, required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.input :organisation, :placeholder => "Organisation", label: false, input_html: { class: 'form-control input-lg' }, required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.input :email, :placeholder => "Email", label: false, input_html: { class: 'form-control input-lg' }, required: true  %>
+        <p class="no-spam">*We will never share, rent, or sell your email address to anyone, ever.</p>
+      </div>
+    </div>
+    <div class="form-actions col-sm-12 text-center">
+      <%= f.button :submit, :class => "btn btn-primary btn-lg", :value => "I'm interested!" %>
+    </div>
+
+<% end %>

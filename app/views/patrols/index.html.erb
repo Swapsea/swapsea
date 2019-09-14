@@ -1,0 +1,15 @@
+<h1>Patrols</h1>
+<div class="row">
+  <div class="col-sm-12">
+    <% @clubs.each do |club| %>
+      <div class="col-sm-12">
+        <h2><%= club.name %></h2>
+          <% club.patrols.map do |patrol| %>
+            <div class="patrol">
+              <%= link_to patrol.short_name, (patrol_path patrol) %>
+            </div>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>

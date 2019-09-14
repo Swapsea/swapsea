@@ -1,0 +1,28 @@
+<div id="report">
+    <%= image_tag('alternate-logo.png', size: "150", alt: "Swapsea", class: "logo") %>
+    <div class="patrol">
+      <h1><%= @roster.organisation %></h1>
+      <h2><%= @roster.patrol.name %></h2>
+      <div class="details">
+        <div class="time"><%= @roster.start.strftime("%H:%M") %> - <%= @roster.finish.strftime("%H:%M") %></div>
+        <div class="date"><%= @roster.start.strftime("%A, %-d %B %Y") %></div>
+        <div class="created-at">Correct at: <%= Time.zone.now %></div>
+      </div>
+    </div>
+    <!--/.patrol -->
+    <div class="members">
+    <div class="patrol-report">
+      <table class="table">
+        <tr>
+          <th class="position">Position</th><th class="patroller">Patroller</th><th class="sub">Sub</th><th class="start center">Start Time</th><th class="finish center">Finish Time</th><th class="total center">Total Time</th><th class="sign center">Sign</th>
+        </tr>
+        <%= render partial: 'report_membership', locals: {r: @roster, ru: @roster.members } %>
+        <% 4.times do %>
+          <tr>
+            <td>Walk-in</td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+</div>

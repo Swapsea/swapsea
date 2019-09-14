@@ -1,0 +1,13 @@
+
+  <%= simple_form_for(@roster) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :start %>
+    <%= f.input :finish %>
+  </div>
+  <br/>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

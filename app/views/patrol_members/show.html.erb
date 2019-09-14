@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @uname%>
+</p>
+
+<p>
+  <strong>Patrol name:</strong>
+  <%= @patrol_member.patrol_name %>
+</p>
+
+<p>
+  <strong>Default position:</strong>
+  <%= @patrol_member.default_position %>
+</p>
+
+<!%= link_to 'Edit', edit_patrol_member_path(@patrol_member) %>
+<%= link_to 'Back', patrol_members_path %>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'Swapsea' %>">
+    <meta name="keywords" content="Swapsea">
+    <meta name="author" content="Mark Hudson and Alex Carroll">
+    <%= stylesheet_link_tag "dashboard-layout", :media => "all" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+    <%= render 'layouts/modals' %>
+
+    <!-- OVERLAY MENU -->
+    <div id="overlay-menu" class="overlay-menu">
+      <a id="overlay-menu-hide" class="navigation-hide"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+      <div class="overlay-menu-inner">
+        <nav class="overlay-menu-nav">
+          <ul id="nav">
+            <% if selected_user != current_user %>
+              <li><span>LOGGED IN AS</span><h3><%= current_user.name %></h3></li>
+              <li><span>ACTING ON BEHALF OF</span><h3><%= selected_user.name %></h3></li>
+            <% else %> 
+              <li><span>LOGGED IN AS</span><h3><%= current_user.name %></h3></li>
+            <% end %>
+            <li><%= link_to raw('<i class="fa fa-file"></i> My Account'), user_path(selected_user) %></li>
+            <% if (current_user.has_role? :admin) || (current_user.has_role? :manager) || (current_user.has_multiple_emails?) %>
+              <li><%= link_to raw('<i class="fa fa-users"></i> Switch Users'), switch_user_path %></li>
+            <% end %>
+            <li><a class="md-trigger" data-modal="logout-modal-alt"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <% if selected_user.has_role? :admin %>
+              <li class="divider"></li>
+              <li><%= link_to raw('<i class="fa fa-cog"></i> Admin'), admin_path %></li>
+            <% end %>
+          </ul>
+        </nav><!--/.overlay-menu-nav -->
+      </div><!--/.overlay-menu-inner -->
+
+    </div>
+    <!--/.OVERLAY MENU -->
+
+    <!-- BEGIN PAGE -->
+    <div class="container">
+
+
+      <!-- START OF SIDEBAR MENU -->
+      <div class="left side-menu">
+        <div class="header sidebar rows">
+          <a href="<%= dashboard_path %>">
+            <div class="navbar-logo"></div>
+          </a>
+        </div>
+        <div class="body rows scroll-y">
+          <div class="sidebar-inner slimscroller">        
+            <!--
+            <div id="search">
+              <form role="form">
+                <input type="text" class="form-control search" placeholder="Search here...">
+                <i class="fa fa-search"></i>
+              </form>
+            </div>
+            -->
+
+            <div id="sidebar-menu">
+              <ul>
+                <li><%= link_to raw('<i class="fa fa-dashboard"></i> Dashboard'), dashboard_path %></li>
+                <% if ((selected_user.organisation.present?) && (selected_user.club.show_swaps)) || (selected_user.has_role? :admin) %>
+                  <li><%= link_to raw(' <i class="fa fa-random"></i> Swaps'), swaps_path %></li>
+                <% end %>
+                <% if ((selected_user.organisation.present?) && (selected_user.club.show_patrols)) || (selected_user.has_role? :admin) %>
+                  <li>
+                    <% if selected_user.patrol.present? %>
+                      <%= link_to raw('<i class="fa fa-flag"></i> Patrols'), (patrol_path selected_user.patrol) %>
+                    <% else %>
+                      <%= link_to raw('<i class="fa fa-flag"></i> Patrols'), patrols_path %>
+                    <% end %>
+                  </li>
+                <% end %>
+                <% if ((selected_user.organisation.present?) && (selected_user.club.show_rosters)) || (selected_user.has_role? :admin) %>
+                  <li><%= link_to raw('<i class="fa fa-list"></i> Rosters'), rosters_path %></li>
+                <% end %>
+                <% if ((selected_user.organisation.present?) && (selected_user.club.show_skills_maintenance)) || (selected_user.has_role? :admin) %>
+                  <li><%= link_to raw('<i class="fa fa-list"></i> Skills Maintenance'), proficiencies_path %></li>
+                <% end %>
+                <% if ((selected_user.organisation.present?) && (selected_user.club.show_outreach)) || (selected_user.has_role? :admin) %>
+                  <li><%= link_to raw('<i class="fa fa-list"></i> Extra Patrols'), outreach_patrols_path %></li>
+                <% end %>
+                <% if (selected_user.has_role? :admin) %>
+                  <li><%= link_to raw('<i class="fa fa-cog"></i> Admin'), admin_path %></li>
+                <% end %>
+              </ul>
+              <div class="clear"></div>
+            </div>
+          </div> <!-- End of class: sidebar-inner -->
+        </div> <!-- End of class: body rows -->
+
+      </div><!--/.left side-menu -->
+      <!-- END OF SIDEBAR MENU -->
+
+
+
+      <!-- START OF RIGHT CONTENT-->
+      <div class="right content-page">
+
+        <div id="navbar-main">
+          <div class="navbar navbar-custom">
+            <div class="container">
+
+              <!-- Button mobile view to collapse sidebar menu -->
+              <button class="button-menu-mobile show-sidebar">
+                <i class="fa fa-bars"></i>
+              </button>
+
+
+              <ul class="nav navbar-nav navbar-right visible-xs">
+                <li>
+                  <a href="#" id="toggle-menu" class="show-overlay">
+                    <i class="fa fa-user"></i>
+                  </a>
+                </li>
+              </ul>
+
+              <% if selected_user.has_patrol? && selected_user.next_roster.present? %>
+                <ul class="nav navbar-nav visible-md visible-lg">
+                  <p class="navbar-text"><strong>Next Patrol:</strong> <%= selected_user.next_roster.start.strftime("%H:%M %A %e %B %Y") %></p>
+                </ul>
+              <% end %>
+
+              <ul class="nav navbar-center visible-sm visible-xs">
+                <div id="swapsea-nav-logo" class="navbar-logo-blk"></div>
+              </ul>
+
+              <ul class="nav extra-navbar navbar-nav navbar-right hidden-xs">
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> 
+                  <% if selected_user != current_user %>
+                    <%= current_user.name %> <i>as</i> <%= selected_user.name %>
+                  <% else %> 
+                    <%= selected_user.name %> 
+                  <% end %>
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to raw('<i class="fa fa-file"></i> My Account'), selected_user %></li>
+                    <% if (current_user.has_role? :admin) || (current_user.has_role? :manager) || (current_user.has_multiple_emails?) %>
+                      <li><%= link_to raw('<i class="fa fa-users"></i> Switch Users'), switch_user_path %></li>
+                    <% end %>
+                    <li><a class="md-trigger" data-modal="logout-modal-alt"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    <% if current_user.has_role? :admin %>
+                      <li class="divider"></li>
+                      <li><%= link_to raw('<i class="fa fa-cog"></i> Admin'), admin_path %></li>
+                    <% end %>
+                  </ul>
+                </li>
+
+              </ul>
+
+
+
+            </div><!--/.container -->
+          </div>
+        </div><!--./navbar-main -->
+
+
+        <div class="body content rows scroll-y">
+
+          <!-- Display selected user msg if another user selected -->
+          <% if selected_user && (selected_user.id != current_user.id) %>
+            <div class="alert alert-warning switch-user-alert"> 
+              <%= form_tag selected_user_path, method: :post do %>
+                You are currently viewing Swapsea as <strong><%= selected_user.first_name %> <%= selected_user.last_name %></strong>.
+                <%= hidden_field_tag 'path', request.path %>
+                <%= hidden_field_tag 'uid', current_user.id %>
+                <%= submit_tag 'Cancel', name: nil, :class => "btn btn-cancel-switch-user" %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <!-- Body content -->
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+
+        </div>
+      </div><!--/.right content-page -->
+      <!-- END OF RIGHT CONTENT -->
+
+      <% render '/home/footer_small' %>
+
+    </div><!--/.container -->
+    <!-- END PAGE -->
+
+    <%= javascript_include_tag "dashboard-layout" %>
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-55037512-1', 'auto');
+ga('send', 'pageview');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<h1>Clubs</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Short name</th>
+      <th>Members</th>
+      <th>Patrols</th>
+      <th>Rosters</th>
+      <th>Requests</th>
+      <th>Patrols?</th>
+      <th>Rosters?</th>
+      <th>Swaps?</th>
+      <th>Extra Patrols?</th>
+      <th>Skills Maintenance?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clubs.each do |club| %>
+      <tr>
+        <td><%= club.name %></td>
+        <td><%= club.short_name %></td>
+        <td><%= club.users.count %></td>
+        <td><%= club.patrols.count %></td>
+        <td><%= club.rosters.count %></td>
+        <td><%= club.requests.count %></td>
+        <td><%= club.show_patrols %></td>
+        <td><%= club.show_rosters %></td>
+        <td><%= club.show_swaps %></td>
+        <td><%= club.show_outreach %></td>
+        <td><%= club.show_skills_maintenance %></td>
+     </tr>
+    <% end %>
+  </tbody>
+</table>

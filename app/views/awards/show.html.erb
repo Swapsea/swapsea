@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @award.user_id %>
+</p>
+
+<p>
+  <strong>Award name:</strong>
+  <%= @award.award_name %>
+</p>
+
+<p>
+  <strong>Award number:</strong>
+  <%= @award.award_number %>
+</p>
+
+<p>
+  <strong>Award date:</strong>
+  <%= @award.award_date %>
+</p>
+
+<p>
+  <strong>Proficiency date:</strong>
+  <%= @award.proficiency_date %>
+</p>
+
+<p>
+  <strong>Expiry date:</strong>
+  <%= @award.expiry_date %>
+</p>
+
+<p>
+  <strong>Award allocation date:</strong>
+  <%= @award.award_allocation_date %>
+</p>
+
+<p>
+  <strong>Proficiency allocation date:</strong>
+  <%= @award.proficiency_allocation_date %>
+</p>
+
+<p>
+  <strong>Originating organisation:</strong>
+  <%= @award.originating_organisation %>
+</p>
+
+<%= link_to 'Edit', edit_award_path(@award) %> |
+<%= link_to 'Back', awards_path %>

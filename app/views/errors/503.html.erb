@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="full-content-center animated fadeIn extra-margin-top">
+        <%= image_tag('alternate-logo.png', :class => "modal-logo") %>
+        <div class="box-info exceptions">
+          <h2>Service Unavailable<h2/>
+          <% if @exception %>
+          	<p><%= @exception.message %></p>
+          <% else %>
+          	<p>The server is currently unavailable due to either temporary overloading or maintenance. Try again shortly.</p>
+          <% end %>
+    </div>
+    <%= link_to "Back", :back %>
+    </div>      
+</div>

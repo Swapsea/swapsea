@@ -1,0 +1,20 @@
+<%= simple_form_for(@club) do |f| %>
+  <%= f.error_notification %>
+
+    <%= f.input :name %>
+    <%= f.input :short_name %>
+    <%= f.label :show_patrols %>
+    <%= f.input_field :show_patrols, as: :boolean, boolean_style: :inline %><br/>
+    <%= f.label :show_rosters %>
+    <%= f.input_field :show_rosters, as: :boolean, boolean_style: :inline %><br/>
+    <%= f.label :show_swaps %>
+    <%= f.input_field :show_swaps, as: :boolean, boolean_style: :inline %><br/>
+    <%= f.label :show_outreach %>
+    <%= f.input_field :show_outreach, as: :boolean, boolean_style: :inline %><br/>
+    <%= f.label :show_skills_maintenance %>
+    <%= f.input_field :show_skills_maintenance, as: :boolean, boolean_style: :inline %><br/>
+    <%= f.input :lat %>
+    <%= f.input :lon %>
+    <%= f.button :submit %>
+
+<% end %>

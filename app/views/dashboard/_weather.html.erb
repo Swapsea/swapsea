@@ -1,0 +1,9 @@
+<% if ((selected_user.organisation.present?) && (lat = selected_user.club.lat) && (lon = selected_user.club.lon)) %>
+  <div class="noticeboard">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <iframe frameborder="0" height="245" id="forecast_embed" src="https://forecast.io/embed/#lat=<%= lat %>&lon=<%= lon %>&name=<%= selected_user.club.short_name.html_safe %>&units=ca&color=#03b4f1" style="margin-bottom:5px;" type="text/html" width="100%"></iframe>
+      </div>
+    </div>
+  </div>
+<% end %>

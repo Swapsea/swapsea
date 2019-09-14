@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  short_name: MyString
+  patrols: false
+  rosters: false
+  swaps: false
+  outreach: false
+  skills_maintenance: false
+  secret: MyString
+
+two:
+  name: MyString
+  short_name: MyString
+  patrols: false
+  rosters: false
+  swaps: false
+  outreach: false
+  skills_maintenance: false
+  secret: MyString

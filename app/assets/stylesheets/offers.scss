@@ -1,0 +1,60 @@
+@import 'colours';
+.panel {
+    h1,
+    h2,
+    h3 {
+        font-family: 'Open Sans';
+    }
+    h2 {
+        font-size: 1.4em;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    h3 {
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+    .panel-heading {
+        margin-bottom: 5px;
+    }
+}
+
+.buttons {
+    margin-top: 25px;
+}
+
+.table-success {
+    color: #3c763d;
+    margin-bottom: 25px;
+}
+
+.table-danger {
+    color: #a94442;
+    margin-bottom: 25px;
+}
+
+.center {
+    text-align: center;
+}
+
+.confirm {
+    .buttons {
+        text-align: center;
+        div.btn {
+            margin: 10px;
+            width: 200px;
+            display: inline-block;
+        }
+        div.btn:first-child {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.offer {
+    .comment {
+        color: #999;
+        font-size: 0.9em;
+    }
+}

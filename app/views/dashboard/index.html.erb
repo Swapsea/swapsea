@@ -1,0 +1,225 @@
+<% if Rails.env == 'staging' %>
+<div class="alert alert-warning">
+  This is the staging environment for Swapsea. It is only for testing purposes. No swaps or proficiency signups will be permanent.
+</div>
+<% elsif Rails.env == 'development' %>
+<div class="alert alert-warning">
+  This is the development environment for Swapsea. It is for development purposes. No swaps or proficiency signups will be permanent.
+</div>
+<% end %>
+
+<h1 class="hidden">Dashboard</h1>
+<div class="row">
+  <div class="col-sm-6 col-xs-12">
+
+
+    <% if (selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) %>
+
+    <div class="alert alert-info">
+      <b>Privacy Notice</b><br/>
+      <p>As a Patrol Captain/Vice Captain, you have special access on Swapsea to your patroller's personal details. Please respect the privacy of their information.</p>
+    </div>
+    <% end %>
+
+    <div class="noticeboard">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>Notice Board</h2>
+        </div>
+        <div class="panel-body">
+          <% @notices.each do |notice| %>
+          <div class="notice"> 
+            <h3><%= notice.title %></h3>
+            <p>
+              <%= notice.desc.html_safe %>
+            </p>
+            <p>
+              <%= link_to notice.link_desc, notice.link %>
+            </p>
+          </div><!--/.notice -->
+          <% end %>
+          <% if @notices.empty? %>
+          <div class="notice"> 
+            <h3>(Empty)</h3>
+            <p>
+              If you need to stand on a soapbox and announce to your fellow clubbies something of great interest. Send us an email and we can make it happen.
+            </p>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div><!--/.noticeboard -->
+
+
+
+    <div class="my-roster">
+      <div class="panel panel-default">
+        <div class="panel-heading ics">
+          <h2>My Roster</h2><%= link_to 'iCal Sync', ics_path(key: selected_user.ics, :format => :ics)  if selected_user.ics.present? && !selected_user.custom_roster.empty? %>
+        </div>
+        <div class="panel-body">
+          <% if !selected_user.has_patrol? %>
+
+          <div class="info-panel">
+            <h3>No Patrol?</h3>
+            <p>You are not allocated to a patrol currently.</p>
+            <p>If you should be, please contact your Club Administration officer to ensure 'Surfguard' and Swapsea is updated.</p>
+          </div>
+
+          <% elsif selected_user.custom_roster.empty? %>
+
+          <div class="info-panel">
+            <h3>No Patrols?</h3>
+            <p>You have no upcoming patrols.</p>
+          </div>
+
+          <% else %>
+
+          <div class="rosters">
+            <% selected_user.custom_roster.each do |r| %>
+            <div class="roster">
+
+              <div class="details col-sm-9 col-xs-9">
+                <%= r.start.strftime("%a %d %b") %><br/>
+                <%= r.start.strftime("%H:%M") %> - <%= r.finish.strftime("%H:%M") %><br/>
+                <%= r.patrol.name %>
+              </div>
+
+
+              <% if r.requests.where('user_id = ? AND status = ?', selected_user.id, 'open').present? %>
+
+              <%= link_to raw('<div class="vcenter"><i class="fa fa-long-arrow-right"></i><br/>View Request</div>'), request_path(r.requests.where('user_id = ? AND status = ?', selected_user.id, 'open').last), :class => 'col-sm-3 col-xs-3 action action-view-request' %>
+
+              <% else %>
+
+              <%= link_to raw('<i class="fa fa-random"></i><br/>Request Swap'), new_request_path(:roster_id => r.id), :class => 'col-sm-3 col-xs-3 action action-request-swap' %>
+
+              <% end %>
+              <div class="clear"></div>
+            </div>
+            <% end %>              
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div><!--/.my-roster -->
+  </div>
+
+  <div class="col-sm-6 col-xs-12">
+
+    <% if ((selected_user.organisation.present?) && (selected_user.club.lat) && (selected_user.club.lon)) %>
+    <div class="weather">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" style="margin-bottom:5px;" width="100%" src="https://forecast.io/embed/#lat=<%= selected_user.club.lat  %>&lon=<%= selected_user.club.lon %>&name=<%= selected_user.club.short_name.html_safe %>&units=ca&color=#03b4f1"></iframe>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div><!--/.noticeboard -->
+    <% end %>
+
+    <div class="swap-feed">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>Swap Feed</h2>
+        </div>
+        <div class="panel-body">
+          <% @confirmed_offers.each do |offer| %>
+          <div class="swap">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="created-at"><%= time_ago_in_words(offer.updated_at) %> ago</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="request col-xs-5">
+                <s class="name"><%= offer.request.user.name %></s> <strong class="name"><%= offer.user.name %></strong><br/>
+                <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
+                <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %>
+              </div>
+              <div class="col-xs-2">
+                <div class="arrows"><i class="fa fa-arrows-h fa-2x"></i></div>
+              </div>
+              <div class="col-xs-5">
+                <s class="name"><%= offer.user.name %></s> <strong class="name"><%= offer.request.user.name %></strong><br/>
+                <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
+                <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+              </div>
+            </div><!--/.row -->
+          </div><!--/.swap -->
+          <% end %>
+        </div><!--/.panel-body -->
+        <% if @confirmed_offers.empty? %>
+        <div class="panel-info">
+          <h3>No Swaps yet!</h3>
+          <p>
+            Be the first to confirm a swap and see your name up in the big lights right here.
+          </p>
+        </div>
+        <% end %>
+      </div><!--/.panel -->
+
+    </div><!--/.swaps -->
+
+
+    <div class="divider-25"></div>
+
+    <div class="statistics">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>Statistics</h2>
+        </div>
+        
+        <div class="panel-body">
+          <div class="stats">
+            <div class="stat">
+              <span class="number confirmed-swaps"><%= Request.joins(:user).where('users.organisation = ? AND requests.status = ?', selected_user.organisation, 'successful').count %></span>
+              <span class="title">Confirmed Swaps</span>
+            </div>
+            <div class="stat">
+              <span class="number offers-pending"><%= Offer.joins(:user).where('users.organisation = ? AND offers.status = ?', selected_user.organisation, 'pending').count %></span>
+              <span class="title">Offers Pending</span>
+            </div>
+            <div class="stat">
+              <span class="number requests-open"><%= Request.joins(:user).where('users.organisation = ? AND requests.status = ?', selected_user.organisation, 'open').count %></span>
+              <span class="title">Requests Open</span>
+            </div>
+            <% if ((selected_user.organisation.present?) && (selected_user.club.show_skills_maintenance)) %>
+            <div class="stat">
+              <span class="number proficiency-signups"><%= ProficiencySignup.all.count %></span>
+              <span class="title">Skills Maintenance Signups</span>
+            </div>
+            <% end %>
+            <div class="stat">
+              <span class="number proficiency-signups"><%= User.where(:organisation => selected_user.organisation).sum(:sign_in_count) %></span>
+              <span class="title">Member Logins</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div><!--/.row -->
+
+<% if selected_user.has_role? :admin %>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      <h2>Admin Panel</h2>
+    </div>
+    <div class="panel-body">
+
+    </div>
+    </div>
+
+  </div>
+
+</div><!--/.row -->
+<% end %>
+
+<%= render 'footer_small' %>

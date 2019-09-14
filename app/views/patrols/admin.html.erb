@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Patrols</h2>
+  </div>
+  <div class="panel-body">
+  <p><%= link_to 'New Patrol', new_patrol_path %></p>
+    <div class="table-responsive">
+      <table class="table table-striped datatable">
+        <thead>
+          <tr>
+            <th>Club</th>
+            <th>Name</th>
+            <th>Need BBM</th>
+            <th>Need IRB Driver</th>
+            <th>Need IRB Crew</th>
+            <th>Need First Aid</th>
+            <th>Need ART</th>
+            <th>Need Bronze</th>
+            <th>Need SRC</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @patrols.each do |patrol| %>
+            <tr>
+              <td><%= patrol.organisation %></td>
+              <td><%= patrol.name %></td>
+              <td><%= patrol.need_bbm %></td>
+              <td><%= patrol.need_irbd %></td>
+              <td><%= patrol.need_irbc %></td>
+              <td><%= patrol.need_firstaid %></td>
+              <td><%= patrol.need_artc %></td>
+              <td><%= patrol.need_bronze %></td>
+              <td><%= patrol.need_src %></td>
+              <td><%= link_to 'Edit', edit_patrol_path(patrol) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div>
+
+

@@ -1,0 +1,9 @@
+<div class="box-info">
+	<h1>Editing roster</h1>
+	<strong>Roster:</strong> <%= @roster.id %><br />
+	<strong>Patrol:</strong> <%= @roster.patrol.name %><br />
+	<%= render 'form' %>
+	<br />
+	<%= link_to 'Show', @roster %> |
+	<%= link_to 'Back', admin_rosters_path %>
+</div>

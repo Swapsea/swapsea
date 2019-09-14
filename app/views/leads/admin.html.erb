@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Leads</h2>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-striped datatable">
+				<thead>
+					<tr>
+				      <th>Name</th>
+				      <th>Email</th>
+				      <th>Phone</th>
+				      <th>Organisation</th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<% @leads.each do |lead| %>
+				      <tr>
+				        <td><%= lead.name %></td>
+				        <td><%= lead.email %></td>
+   				        <td><%= lead.phone %></td>
+				        <td><%= lead.organisation %></td>
+				        <td><%= link_to 'Show', lead %></td>
+				        <td><%= link_to 'Edit', edit_lead_path(lead) %></td>
+				        <td><%= link_to 'Destroy', lead, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				      </tr>
+				    <% end %>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

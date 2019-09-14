@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>
+		Admin | Swapsea
+	</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<%= stylesheet_link_tag 'admin-layout', media: 'all' %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+			<!-- begin container-fluid -->
+			<div class="container-fluid">
+				<!-- begin mobile sidebar expand / collapse button -->
+				<div id="navbar-title" class="navbar-header">
+					<%= link_to root_path, :class => 'navbar-brand' do %>
+							Admin | Swapsea
+					<% end %>
+					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- end mobile sidebar expand / collapse button -->
+				
+				<!-- begin header navigation right -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown navbar-user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span><%= selected_user.first_name %> <%= selected_user.last_name %> (<%= selected_user.email %>)</span> <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<%= link_to root_path do %>
+									<i class="fa fa-home"></i> <span>Homepage</span>
+								<% end %>
+							</li>
+							<li>
+								<%= link_to dashboard_path do %>
+									<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+								<% end %>
+							</li>
+							<div class="divider"></div>
+							<li>
+								<%= link_to destroy_user_session_path, :method => "delete" do %>
+									<i class="fa fa-sign-out"></i> <span>Logout</span>
+								<% end %>
+							</li>
+			
+						</ul>
+					</li>
+				</ul>
+				<!-- end header navigation right -->
+			</div>
+			<!-- end container-fluid -->
+		</div>
+		<!-- end #header -->
+		
+		<!-- begin #sidebar -->
+		<div id="sidebar" class="sidebar">
+			<!-- begin sidebar scrollbar -->
+			<div data-scrollbar="true" data-height="100%">
+				<!-- begin sidebar nav -->
+				<ul class="nav">
+					<li class="nav-header">Navigation</li>
+					<li>
+						<%= link_to admin_path do %>
+							<i class="fa fa-home"></i>
+							<span>Home</span>
+						<% end %>
+					</li>
+					<% if selected_user.has_role? :admin %>
+						<li>
+							<%= link_to admin_leads_path do %>
+								<i class="fa fa-folder"></i>
+								<span>Leads</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_emails_path do %>
+								<i class="fa fa-envelope"></i>
+								<span>Emails</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_clubs_path do %>
+								<i class="fa fa-folder"></i>
+								<span>Clubs</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_awards_path do %>
+								<i class="fa fa-folder"></i>
+								<span>Awards</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_users_path do %>
+								<i class="fa fa-user"></i>
+								<span>Members</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_patrol_members_path do %>
+								<i class="fa fa-users"></i>
+								<span>Patrol Teams</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_patrols_path do %>
+								<i class="fa fa-flag"></i>
+								<span>Patrols</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_rosters_path do %>
+								<i class="fa fa-file"></i>
+								<span>Rosters</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_proficiencies_path do %>
+								<i class="fa fa-file"></i>
+								<span>Skills Maintenance</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_outreach_patrols_path do %>
+								<i class="fa fa-file"></i>
+								<span>Extra Patrols</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to event_logs_path do %>
+								<i class="fa fa-file"></i>
+								<span>Logs</span>
+							<% end %>
+						</li>
+					  <% end %>
+					<% if (selected_user.has_role? :admin) || (selected_user.has_role? :manager) %>
+					  	<li>
+							<%= link_to admin_notices_path do %>
+								<i class="fa fa-file-text"></i>
+								<span>Notices</span>
+							<% end %>
+						</li>
+					<% end %>
+			        <!-- begin sidebar minify button -->
+					<li><a href="#" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+			        <!-- end sidebar minify button -->
+				</ul>
+				<!-- end sidebar nav -->
+			</div>
+			<!-- end sidebar scrollbar -->
+		</div>
+		<div class="sidebar-bg"></div>
+		<!-- end #sidebar -->
+
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<%= render 'layouts/messages' %>
+			<%= yield %>
+		</div>
+		<!-- end #content -->
+
+		<!-- begin scroll to top btn -->
+		<a href="#" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+
+	</div>
+	<%= javascript_include_tag 'admin-layout' %>
+</body>
+</html>

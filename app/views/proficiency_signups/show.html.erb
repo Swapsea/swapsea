@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @proficiency_signup.user_id %>
+</p>
+
+<p>
+  <strong>Proficiency:</strong>
+  <%= @proficiency_signup.proficiency_id %>
+</p>
+
+<%= link_to 'Edit', edit_proficiency_signup_path(@proficiency_signup) %> |
+<%= link_to 'Back', proficiency_signups_path %>

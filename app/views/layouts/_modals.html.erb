@@ -1,0 +1,64 @@
+<!-- MODAL DIALOGUE -->
+  <!-- Modal Logout Primary -->
+  <div class="md-modal md-fall" id="logout-modal">
+    <div class="md-content">
+      <h3><strong>Logout</strong> Confirmation</h3>
+      <div>
+        <p class="text-center">Are you sure want to logout?</p>
+        <p class="text-center">
+        <button class="btn btn-danger md-close">Cancel</button>
+        <%= link_to 'Yes, Logout', destroy_user_session_path, :class => "btn btn-success md-close", :method => "delete" %>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Logout Alternatif -->
+  <div class="md-modal md-just-me" id="logout-modal-alt">
+    <div class="md-content">
+      <h3><strong>Logout</strong> Confirmation</h3>
+      <div>
+        <p class="text-center">Are you sure want to logout?</p>
+        <p class="text-center">
+        <button class="btn btn-danger md-close">Cancel</button>
+        <%= link_to 'Yes, Logout', destroy_user_session_path, :class => "btn btn-success md-close", :method => "delete" %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Login -->
+  <div class="md-modal md-just-me" id="login-modal">
+    <div class="md-content">
+      <div class="container">
+        <div class="full-content-center animated fadeIn">
+          <%= image_tag('alternate-logo.png', :class => "modal-logo") %>
+          <p>By logging in, you agree to the <%= link_to "Terms of Use", terms_of_use_path %></p>
+          <div class="box-info">
+            <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+              <div class="form-group login-input">
+                          <%= f.input :email, :required => true, :placeholder =>  'Email', label: false, input_html: { class: 'form-control text-input' } %>
+                      </div>
+                      <div class="form-group login-input">
+                          <%= f.input :password, :required => true, :placeholder =>  'Password', label: false, input_html: { class: 'form-control text-input' } %>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <%= f.button :submit, 'Login', :class => 'btn btn-success btn-block' %>
+                          </div>
+                          <div class="col-sm-6">
+                              <a href="#" class="btn btn-warning btn-block md-close">Cancel</a>
+                          </div>
+                      </div>
+            <% end %>
+          </div>
+          <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+          <%= link_to "Activate your account", activate_path %><br/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAR MODAL OVERLAY ELEMENT -->
+    <div class="md-overlay"></div>
+  <!-- END MODAL OVERLAY ELEMENT -->

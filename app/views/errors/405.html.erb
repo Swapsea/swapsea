@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="full-content-center animated fadeIn extra-margin-top">
+        <%= image_tag('alternate-logo.png', :class => "modal-logo") %>
+        <div class="box-info exceptions">
+          <h2>Method Not Allowed<h2/>
+          <% if @exception %>
+          	<p><%= @exception.message %></p>
+          <% else %>
+          	<p>Argh... trying to be a h4ck0r? Try again, that method is not allowed.</p>
+          <% end %>
+    </div>
+    <%= link_to "Back", :back %>
+    </div>      
+</div>

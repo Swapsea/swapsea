@@ -1,0 +1,90 @@
+  <% if @proficiencies.empty? %>
+
+    <div class="box-info">
+      <h1>No Skills Maintenance Slots?</h1>
+      <p>There are no timeslots listed yet.</p>
+    </div>
+  <% else %>
+<div class="proficiencies col-sm-12">
+  <% @uniq_proficiency_dates.each do |uniq_proficiency_date| %>
+  
+		<% @uniq_proficiency_date_parsed = Date.parse(uniq_proficiency_date) %>
+		<% @proficiencies_for_uniq_date = @proficiencies.where(:start => @uniq_proficiency_date_parsed.beginning_of_day..@uniq_proficiency_date_parsed.end_of_day) %>
+
+		<div class="brick col-sm-12 col-xs-12">
+		  
+		  	<div class="datetime col-sm-2 col-xs-12">
+				<div class="day"><%= @uniq_proficiency_date_parsed.strftime("%a") %></div>
+				<div class="date"><%= @uniq_proficiency_date_parsed.strftime("%d") %></div>
+				<div class="month"><%= @uniq_proficiency_date_parsed.strftime("%b") %></div>
+		  	</div>
+		  	<div class="events col-sm-9 col-xs-12">
+
+		  		<% @proficiencies_for_uniq_date.sort_by(&:start).each do |p| %>
+		  			
+						<div class="event">
+					  		
+					  		<% if p.name == 'Bronze' %>
+					  			<div class="name col-sm-2 col-xs-12 bronze">Bronze</div>
+					  		<% elsif p.name == 'ART' %>
+					  			<div class="name col-sm-2 col-xs-12 artc">ART</div>
+					  		<% elsif p.name == 'SRC' %>
+					  			<div class="name col-sm-2 col-xs-12 src"><%= p.name %></div>
+					  		<% else %>
+					  			<div class="name col-sm-2 col-xs-12 default"><%= p.name %></div>
+					  		<% end %>
+					  		
+					  		<div class="details col-sm-8 col-xs-12">
+					  		
+								<div class="info col-sm-8 col-xs-12">
+							  		<span class="time">
+						  				<%= p.start.strftime("%H:%M") %> - <%= p.finish.strftime("%H:%M") %>
+							  		</span>
+							  		<span class="visible-xs"><%= p.start.strftime("%A %d %B %Y") %></span>
+							  		<span><%= raw('<small>Includes Bronze</small>') if p.name == 'ART' %></span>
+							  		<span class="positions">
+							  		<% if p.max_online_signup - p.proficiency_signups.count >= 1 %>
+						  				<%= p.max_online_signup - p.proficiency_signups.count %> <% if p.max_online_signup - p.proficiency_signups.count >= 2 %> Places Left <% else %> Place Left <% end %>
+						  			<% end %>
+							  		</span><!--/.positions -->
+								</div><!--/.info -->
+								
+								<div class="members col-sm-12 col-xs-12">	
+									<% p.proficiency_signups.each do |ps| %>
+										<% if ps.user.present? %>
+										<div class="member">
+			
+											<div class="user"><%= ps.user.first_name %> <%= ps.user.last_name %></div>
+											<% if ((selected_user == ps.user) || (selected_user.has_role? :admin) || (selected_user.has_role? :manager)) %>
+												<div class="cancel"><%= link_to 'Cancel', ps, method: :delete %></div>
+											<% end %>
+										
+										</div><!--/.member -->
+										<% end %>
+									<% end %>
+								</div><!--/.members -->
+							
+							</div><!--/.details -->
+							
+							<% if (p.max_online_signup - p.proficiency_signups.count >= 1) || ( (p.max_signup - p.proficiency_signups.count >= 1) && ((selected_user.has_role? :admin) || (selected_user.has_role? :manager)) ) %>
+								<%= simple_form_for(@proficiency_signup) do |f| %>
+								 	<div class="signup col-sm-2 col-xs-12">
+								  		<%= f.input :proficiency_id, :as => :hidden, :input_html => { :value => p.id } %>
+								    	<%= f.submit :submit, :value => "Sign Up!", :class => "btn-signup" %>
+								  	</div>
+								<% end %>
+							<% else %>
+								<div class="signup col-sm-2 col-xs-12">
+								  	<div class="btn-signup signup-full">Full</div>
+								</div>
+							<% end %>
+
+						</div><!--/.event -->
+					
+				<% end %>
+
+			</div><!--/.events -->
+		</div><!--/.box -->
+  	<% end %>
+</div><!--/.proficiencies -->
+<% end %>
