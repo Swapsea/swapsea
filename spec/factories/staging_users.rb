@@ -11,6 +11,5 @@ FactoryBot.define do
     category { "MyString" }
     status { "MyString" }
     season { "MyString" }
-    account { false }
   end
 end

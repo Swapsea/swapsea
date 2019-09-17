@@ -1,5 +1,14 @@
-require 'rails_helper'
+require "rails_helper"
+RSpec.describe EventLog, :type => :model do
 
-RSpec.describe EventLog, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	before(:all) do
+    @event_log = FactoryBot.create(:event_log)
+  end
+
+  context '#Atributes' do
+    it "is valid with valid attributes" do
+      expect(@event_log).to be_valid
+    end
+  end
+
 end
