@@ -33,4 +33,18 @@ Swapsea2::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  config.action_mailer.delivery_method = :file
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.asset_host = "https://www.swapsea.com.au"
+
+  config.action_mailer.smtp_settings = {
+    :address   => 'smtp.sendgrid.net',
+    :port      => 0, # ports 587 and 2525 are also supported with STARTTLS
+    :enable_starttls_auto => true, # detects and uses STARTTLS
+    :user_name  => ENV['SENDGRID_USERNAME'],
+    :password   => ENV['SENDGRID_PASSWORD'],
+    :authentication => :plain,
+    :domain => ENV['SENDGRID_DOMAIN'] || 'localhost', # your domain to identify your server when connecting
+  }
 end
