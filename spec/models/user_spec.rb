@@ -25,21 +25,6 @@ RSpec.describe User, :type => :model do
   it { should have_many(:notice_acknowledgements) }
 	end
 
-  describe '#text_search' do
-
-    it "works when query is passed in" do
-      users = User.text_search("test")
-      expect(users).to be_valid
-      users.should_not be_nil
-    end
-
-    it "still works if nothing is passed in" do
-      users = User.text_search(nil)
-      users.should_not be_nil
-    end
-  end
-
-  
  it "returns a user's full name as a string" do
    user = User.new(
      first_name: "John",
