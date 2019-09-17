@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AwardsController, type: :controller do
   include Devise::Test::ControllerHelpers
+  login_user
   render_views
 
   before do
