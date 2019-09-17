@@ -6,14 +6,9 @@ describe "home", :type => :feature do
     @user = FactoryBot.create(:user)
   end
 
-  before(:all) do
-    @club = FactoryBot.create(:club)
-  end
-
 	it "Home page" do
 	    visit '/'
-	    expect(page).to have_text('Welcome to Swapsea')
-	    
+	    expect(page).to have_text('Welcome to Swapsea')	    
 	end
 
   it "signs users in" do
@@ -21,6 +16,13 @@ describe "home", :type => :feature do
     fill_in "user[email]", :with => @user.email
     fill_in "user[password]", :with => "swapsea"
     click_button "Login"
-    page.should have_content('Login Successful')
+    expect(page).to have_text("Notice Board")  
   end
+
+  it 'user should receive an email and successfully reset password' do    
+    visit '/users/password/new'
+    fill_in "user[email]",  with:  @user.email
+    click_button "Send Password Reset"       
+  end
+
 end

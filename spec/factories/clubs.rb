@@ -1,9 +1,13 @@
 FactoryBot.define do
   factory :club do
-    name { Faker::Name.name }
-    lat { Faker::Address.latitude.lat }
-    lon { Faker::Address.longitude.lon }
-    # short_name { Faker::Name.short_name }
-    # show_patrols { Faker::Boolean.boolean }
+    name { "Swapsea SLSC" }
+    lat { "28.6141793" }
+    lon { "77.2022662" }
+    short_name { 'Swapsea' }
+    show_patrols {true}
+    show_rosters { true }
+    show_swaps { true }
+    show_skills_maintenance { true }
+    show_outreach {false }
   end
 end

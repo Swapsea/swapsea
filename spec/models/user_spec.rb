@@ -1,4 +1,3 @@
-#app/spec/models/user_spec.rb
 require "rails_helper"
 RSpec.describe User, :type => :model do
 
@@ -21,8 +20,6 @@ RSpec.describe User, :type => :model do
   it { should have_many(:rosters).through(:patrol) }
   it { should have_many(:proficiency_signups) }
   it { should have_many(:proficiencies).through(:proficiency_signups) }
-  # it { should have_many(:outreach_patrols_sign_ups) }
-  # it { should have_many(:outreach_patrols).through(:outreach_patrols_sign_ups) }
   it { should have_many(:swaps) }
   it { should have_many(:notices) }
   it { should have_many(:notice_acknowledgements) }
@@ -58,13 +55,5 @@ describe User do
       expect(Club.find_by_name("organisation")).to eq club 
     end
 end
-
-
-
-
-
-
-
-
 
 end
