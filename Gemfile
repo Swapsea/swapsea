@@ -44,6 +44,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'shoulda'
   gem 'shoulda-callback-matchers'
+  gem "capybara"
 end
 
 gem 'will_paginate'
@@ -64,4 +65,3 @@ gem 'activerecord-import'
 gem 'public_activity'
 gem 'jwt'
 gem 'twilio-ruby'
-gem "capybara"
