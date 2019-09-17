@@ -41,6 +41,9 @@ group :development, :test do
   gem 'faker'
   gem 'guard-rspec', require: false
   gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
+  gem 'shoulda'
+  gem 'shoulda-callback-matchers'
 end
 
 gem 'will_paginate'
@@ -61,3 +64,4 @@ gem 'activerecord-import'
 gem 'public_activity'
 gem 'jwt'
 gem 'twilio-ruby'
+gem "capybara"
