@@ -18,6 +18,10 @@ RSpec.describe UsersController, type: :routing do
       expect(:get => "/clubs/1/edit").to route_to("clubs#edit", :id => "1")
     end
 
+    it "routes to #create" do
+      expect(:post => "/clubs").to route_to("clubs#create")
+    end
+
     it "routes to #update via PUT" do
       expect(:put => "/clubs/1").to route_to("clubs#update", :id => "1")
     end

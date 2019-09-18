@@ -10,7 +10,7 @@ RSpec.describe "event_logs/edit", type: :view do
 
     assert_select "form[action=?][method=?]", event_log_path(@event_log), "post" do
 
-      assert_select "input#event_log_type[name=?]", "event_log[subject]"
+      assert_select "input#event_log_subject[name=?]", "event_log[subject]"
 
       assert_select "input#event_log_desc[name=?]", "event_log[desc]"
     end
