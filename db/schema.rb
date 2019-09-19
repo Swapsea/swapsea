@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20181218074840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
@@ -32,14 +31,6 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
   end
 
-  create_table "api_credentials", force: :cascade do |t|
-    t.string   "api_key"
-    t.string   "api_secret"
-    t.string   "application_name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
   create_table "awards", force: :cascade do |t|
     t.string   "award_number",                null: false
     t.string   "award_name"
@@ -53,6 +44,7 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["award_name"], name: "index_awards_on_award_name", using: :btree
+    t.index ["award_number"], name: "index_awards_on_award_number", unique: true, using: :btree
     t.index ["user_id"], name: "index_awards_on_user_id", using: :btree
   end
 
@@ -328,7 +320,7 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "organisation",                             null: false
+    t.string   "organisation"
     t.string   "last_name"
     t.string   "first_name"
     t.string   "preferred_name"

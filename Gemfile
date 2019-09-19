@@ -41,6 +41,10 @@ group :development, :test do
   gem 'faker'
   gem 'guard-rspec', require: false
   gem 'rails-controller-testing'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda-callback-matchers'
+  gem "capybara"
 end
 
 gem 'will_paginate'

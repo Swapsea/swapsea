@@ -1,5 +1,14 @@
-require 'rails_helper'
+require "rails_helper"
+RSpec.describe StagingAward, :type => :model do
 
-RSpec.describe StagingAward, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	before(:all) do
+    @staging_award = FactoryBot.create(:staging_award)
+  end
+
+  context '#Atributes' do
+    it "is valid with valid attributes" do
+      expect(@staging_award).to be_valid
+    end
+  end
+
 end
