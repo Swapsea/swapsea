@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe UsersController, type: :routing do
+RSpec.describe ClubsController, type: :routing do
   describe "routing" do
     it "routes to #index" do
       expect(:get => "/clubs").to route_to("clubs#index")
@@ -32,10 +32,6 @@ RSpec.describe UsersController, type: :routing do
 
     it "routes to #destroy" do
       expect(:delete => "/clubs/1").to route_to("clubs#destroy", :id => "1")
-    end
-
-    it "routes to #admin" do
-      expect(:get => "/clubs/admin").to route_to("clubs#admin")
     end
 
     it "routes to #admin" do
