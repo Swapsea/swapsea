@@ -16,10 +16,4 @@ RSpec.describe Notice, :type => :model do
     it { should belong_to(:user)}
     it { should have_many(:notice_acknowledgements)}
 	end
-
-  it "Return visible if match a query" do
-    Notice.create!(:visible => true)
-    expect(Notice.where('visible = true AND visible_from <= ? AND visible_to >= ?', DateTime.now, DateTime.now)).to have(1).record
-    expect(Notice.where('visible = true AND visible_from <= ? AND visible_to >= ?', DateTime.now, DateTime.now)).to have(0).records
-  end
 end
