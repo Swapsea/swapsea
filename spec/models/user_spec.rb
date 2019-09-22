@@ -25,12 +25,11 @@ RSpec.describe User, :type => :model do
     it { should have_many(:notice_acknowledgements) }
 	end
 
-  it "returns a user's full name as a string" do
-    user = User.new(
-      first_name: "John",
-      last_name:  "Doe",
-    )
-    expect(user.name).to eq "John Doe"
+  context '::name' do
+    let(:user) { create :user, first_name: 'First', last_name: 'Last' }
+    it 'returns the correct name string' do
+      expect(user.name).to eq("#{user.first_name} #{user.last_name}")
+    end
   end
 
   describe User do

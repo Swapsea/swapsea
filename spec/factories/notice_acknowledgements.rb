@@ -1,0 +1,6 @@
+FactoryBot.define do
+  factory :notice_acknowledgement do
+   user_id { 1 }
+   notice_id { 2 }
+  end
+end

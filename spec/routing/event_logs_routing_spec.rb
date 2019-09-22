@@ -18,7 +18,6 @@ RSpec.describe EventLogsController, type: :routing do
       expect(:get => "/event_logs/1/edit").to route_to("event_logs#edit", :id => "1")
     end
 
-
     it "routes to #create" do
       expect(:post => "/event_logs").to route_to("event_logs#create")
     end
