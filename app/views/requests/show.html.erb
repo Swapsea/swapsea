@@ -120,9 +120,9 @@
 									<br/>
 									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user) %>
 									<% if check_offer[:result] == true %>
-										<span class="meets-requirements">Meets Requirments</span><br/>
+										<span class="meets-requirements">Meets Requirements</span><br/>
 									<% else %>
-										<span class="doesnt-meet-requirements">Doesn't Meet Requirments</span><br/>
+										<span class="doesnt-meet-requirements">Doesn't Meet Requirements</span><br/>
 									<% end %>
 									<span class="comment"><%= offer.comment %></span>
 								</div>
