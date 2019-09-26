@@ -5,13 +5,14 @@
 	<div class="panel-body">
 
 		<p>Are you sure you want to <strong>accept</strong> this offer?</p>
-
+		<% if @after_swap_offer_patrol.present? %>
 		<% if @after_swap_request_patrol[:result] && @after_swap_offer_patrol[:result]%>
 			<h3>AWESOME!</h3>
 		<% else %>
 			<h3>ACHTUNG!</h3>
 		<% end %>
-
+		<% end %>
+		<% if @after_swap_request_patrol.present?%>
 		<% if @after_swap_request_patrol[:result] %>
 
 			<div class="alert alert-success">
@@ -30,7 +31,7 @@
 				<%= render 'request_requirements_table' %>	
 			</div>
 		<% end %>
-
+<% if @after_swap_offer_patrol.present?%>
 		<% if @after_swap_offer_patrol[:result] %>
 				
 			<div class="alert alert-success">
@@ -50,8 +51,8 @@
 			</div>
 
 		<% end %>
-
-
+<%end %>
+<%end%>
 		<div class="buttons">
 			<%= link_to @offer.request do %>
 				<button class="btn btn-danger"><span class="fa fa-times"></span><br/>Go back</button>

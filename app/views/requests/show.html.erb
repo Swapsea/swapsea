@@ -100,9 +100,10 @@
 				
 						<li class="offer">
 								<div class="details col-xs-12 col-sm-9">
+									<% if offer.roster.present? %>
 									<strong><%= offer.roster.start.strftime('%a %d %b') %></strong><br/>
 									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
-									<%= offer.roster.patrol.name %><br/>
+									<%= offer.roster.patrol.name %><br/><% end %>
 									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong><br/>
 									
 										<% awards = offer.user.awards.map { |n| n.award_name } %>
@@ -174,6 +175,7 @@
 						<label class="col-xs-4 col-sm-2"><strong>Patrol</strong></label>
 						<div class="col-xs-8 col-sm-7">
 							<select name="roster_id" class="form-control">
+								<option value="" disabled selected>NONE - I’ll just be a sub</option>
 								<% @rosters_available.each do |r| %>
 									<option value="<%= r.id %>"><%= r.patrol_name %>, <%= r.start.strftime("%a %d %b") %> <%= r.start.strftime("%H:%M") %> - <%= r.finish.strftime("%H:%M") %></option>
 								<% end %>
@@ -210,10 +212,12 @@
 			<h2>Accepted Offer</h2>
 		</div>
 		<div class="panel-body">
+			<% if  @request.accepted_offer.roster %>
 			<%= @request.accepted_offer.roster.patrol_name %><br/>
 			<strong><%= @request.accepted_offer.roster.start.strftime("%a %d %b %Y") %></strong><br/>
-			<%= @request.accepted_offer.roster.start.strftime("%H:%M") %> - <%= @request.accepted_offer.roster.finish.strftime("%H:%M") %><br/>
+			<%= @request.accepted_offer.roster.start.strftime("%H:%M") %> - <%= @request.accepted_offer.roster.finish.strftime("%H:%M") %><br/><%end%>
 			<%= @request.accepted_offer.user.name %><br/>
 		</div>
+		
 	</div>
 <% end %>

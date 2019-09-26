@@ -7,9 +7,10 @@ You have a new offer!
 
 New offer
 ---------
+<% if @offer.roster.present? %>
 <%= @offer.roster.patrol_name %>
 <%= @offer.roster.start.strftime("%A %d %B %Y") %>
-<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
+<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><% end %>
 Status: <%= @offer.status.capitalize %>
 From: <%= @offer.user.first_name %> <%= @offer.user.last_name %>
 
@@ -23,9 +24,10 @@ Status: <%= @request.status.capitalize %>
 Current offers
 --------------
 <% @request.offers.where(:status => 'pending').each do |offer| %>
+<% if offer.roster.present? %>
 <%= offer.roster.patrol_name %>
 <%= offer.roster.start.strftime("%A %d %B %Y") %>
-<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><% end %>
 Status: <%= offer.status.capitalize %>
 From: <%= offer.user.first_name %> <%= offer.user.last_name %>
 

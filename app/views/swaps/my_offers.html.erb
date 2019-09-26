@@ -21,13 +21,13 @@
         <div class="panel-body">
           <div class="swap-requests">
             <% @swaps.each do |offer| %>
-
             <div class="swap-request">
               <div class="details col-xs-4">
                 <strong><%= offer.user.name %></strong>
+                <% if offer.roster %>
                 (<%= offer.roster.patrol.short_name.present? ? offer.roster.patrol.short_name : offer.roster.patrol.name %>)<br/>
                 <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
-                <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %><br/>
+                <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %><br/><% end %>
                 <span class="created-at">Updated <%= time_ago_in_words(offer.created_at) %> ago</span>
               </div>
               <div class="details col-xs-2">
@@ -37,7 +37,8 @@
                 <strong><%= offer.request.user.name %></strong>
                 (<%= offer.request.roster.patrol.short_name.present? ? offer.request.roster.patrol.short_name : offer.request.roster.patrol.name %>)<br/>
                 <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
-                <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+                <% if offer.roster %>
+                <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><%end%>
               </div>
               <% if offer.status == 'pending' %>
               <%= link_to offer.request, :class => 'offer offer-view col-xs-2' do %>
