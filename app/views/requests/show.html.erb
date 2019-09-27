@@ -103,7 +103,10 @@
 									<% if offer.roster.present? %>
 									<strong><%= offer.roster.start.strftime('%a %d %b') %></strong><br/>
 									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
-									<%= offer.roster.patrol.name %><br/><% end %>
+									<%= offer.roster.patrol.name %><br/>
+									<% else %>
+									No Patrol Offered<br>
+									<% end %>
 									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong><br/>
 									
 										<% awards = offer.user.awards.map { |n| n.award_name } %>

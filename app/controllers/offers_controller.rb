@@ -53,6 +53,7 @@ class OffersController < ApplicationController
   # GET /offers/1/accept
   # should only by accessable be either requestor or admin
   def accept
+
     @offer = Offer.find(params[:id])
     # if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
        if @offer.request.status == 'open' && @offer.status == 'pending'
@@ -116,7 +117,11 @@ class OffersController < ApplicationController
 
           @offer.status = 'accepted'
           @request.status = 'successful'
-
+          if @offer.roster_id == nil
+            @off = @offer.request.offers
+            @offer_id = @off.where.not(id: @offer.id)
+            @offer_id.update_all(status: "rejected")
+          end
 
           #@request.roster.awards_count
           #@offer.roster.awards_count

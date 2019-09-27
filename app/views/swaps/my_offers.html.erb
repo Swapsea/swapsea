@@ -23,11 +23,14 @@
             <% @swaps.each do |offer| %>
             <div class="swap-request">
               <div class="details col-xs-4">
-                <strong><%= offer.user.name %></strong>
+                <strong><%= offer.user.name %></strong><br>
                 <% if offer.roster %>
                 (<%= offer.roster.patrol.short_name.present? ? offer.roster.patrol.short_name : offer.roster.patrol.name %>)<br/>
                 <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
-                <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %><br/><% end %>
+                <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %><br/>
+                <% else %>
+                No Patrol Offered<br>
+                <% end %>
                 <span class="created-at">Updated <%= time_ago_in_words(offer.created_at) %> ago</span>
               </div>
               <div class="details col-xs-2">
@@ -60,6 +63,9 @@
               <div class='offer offer-not-accepted-no-link col-xs-2'>
                 Request Cancelled
               </div>
+               <% elsif offer.status == 'rejected' %>
+               <%= link_to offer.request, :class => 'offer offer-not-accepted col-xs-2' do %>
+              Rejected <% end %>
               <% else %>
               <div class='offer offer-not-accepted-no-link col-xs-2'>
                 Error
