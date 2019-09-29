@@ -36,14 +36,16 @@ class Ability
         can :read, Patrol do |patrol|
             patrol.organisation == user.organisation
         end
-        can [:read, :swaps, :patrol, :member], Roster do |roster|
+        can [:read, :swaps, :patrol, :member, :patrol_report], Roster do |roster|
             roster.organisation == user.organisation
         end
         can [:index, :my_offers, :my_requests, :confirmed], Swap do |swap|
             swap.user.organisation == user.organisation
         end
         can [:create], Request
-
+        can [:read], Request do |request|
+            request.user.organisation == user.organisation
+        end
         can [:update, :destroy, :confirm_cancel], Request, :user => user
         cannot [:update], Request do |request|
             request.offers.where(:status => 'accepted').present?
@@ -53,7 +55,7 @@ class Ability
         can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
             offer.user.organisation == user.organisation
         end
-        can [:update, :destroy], Offer, :user => user
+        can [:update, :destroy, :confirm_cancel], Offer, :user => user
         can [:accept, :decline], Offer do |offer|
             offer.request.user == user
         end
