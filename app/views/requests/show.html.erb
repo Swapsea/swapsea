@@ -203,7 +203,33 @@
 				
 				<% end %>
 			<% else %>
-				<p> You have no patrols to offer. </p>
+					<%= form_for @offer, url: offers_path do |f| %>  
+					<%= hidden_field_tag(:request_id, @request.id) %>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Patrol</strong></label>
+						<div class="col-xs-8 col-sm-7">
+							<select name="roster_id" class="form-control">
+								<option value="" selected>NONE - I’ll just be a sub</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Email</strong></label>
+						<div class="col-xs-8 col-sm-7"><%= f.text_field :email, :value => selected_user.email, :class => "form-control" %></div>
+					</div>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Mobile</strong></label>
+						<div class="col-xs-8 col-sm-7"><%= f.text_field :mobile, :value => selected_user.mobile_phone, :class => "form-control" %></div>
+					</div>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Comment</strong></label>
+						<div class="col-xs-8 col-sm-7"><%= f.text_area :comment, :class => "textbox form-control" %></div>
+					</div>
+					<div class="form-actions">
+						<%= f.button 'Make Offer', :class => "btn btn-success pull-right", data: { disable_with: "Please wait..." } %>
+					</div>
+				
+				<% end %>
 			<% end %>
 		</div><!--/.panel-body -->
 	</div><!--/.panel -->
