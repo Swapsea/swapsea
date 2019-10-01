@@ -31,11 +31,13 @@ class OffersController < ApplicationController
       @after_swap_request_patrol = @offer.request.roster.swap_meets_requirements(@offer.request.user, @offer.user)
       @before_swap_request_patrol = @offer.request.roster.qualifications
       @required_request_patrol = @offer.request.roster.patrol.requirements
+      # Start of offer's roster
       if @offer.roster
-      @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
-      @before_swap_offer_patrol = @offer.roster.qualifications
-      @required_offer_patrol = @offer.roster.patrol.requirements
-    end
+        @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
+        @before_swap_offer_patrol = @offer.roster.qualifications
+        @required_offer_patrol = @offer.roster.patrol.requirements
+      end
+      # End of statement
     else
       redirect_to swaps_path, alert: 'This request or offer no longer exists.'
     end
@@ -55,8 +57,16 @@ class OffersController < ApplicationController
   def accept
 
     @offer = Offer.find(params[:id])
-    # if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
-       if @offer.request.status == 'open' && @offer.status == 'pending'
+    if @offer.roster.present?
+      if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
+        offer_with_roster = true
+      end
+    else
+      if @offer.request.status == 'open' && @offer.status == 'pending'
+        offer_without_roster = true
+      end
+    end
+    if offer_without_roster || offer_with_roster
         @request = @offer.request
         trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.shuffle[0,16].join).first(10)
 

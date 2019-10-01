@@ -13,14 +13,16 @@ Swapsea - Swap Confirmed
   Status: <%= @offer.status %>
   You are now a sub for <%= @request.user.first_name %> <%= @request.user.last_name %>
 
+ <% if @offer.roster%>
   Your old patrol
   ---------------
-  <% if @offer.roster%>
   <%= @offer.roster.patrol_name %>
   <%= @offer.roster.start.strftime("%A %d %B %Y") %>
   <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
-  <% end %>
   <%= @request.user.first_name %> <%= @request.user.last_name %> is now a sub for you.
+  <% else %>
+  No Patrol offered
+  <% end %>
 
   <% if @request.email.present? || @request.mobile.present? %>
   Need to get in contact?

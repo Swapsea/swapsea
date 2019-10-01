@@ -14,7 +14,7 @@ class SwapsController < ApplicationController
   end
 
   def my_requests
-    @swaps = Request.joins(:roster).where(:user => selected_user, :status => 'open')
+    @swaps = Request.joins(:roster).where(:user => selected_user, :status => 'open').order("rosters.start")
   end
 
   def confirmed

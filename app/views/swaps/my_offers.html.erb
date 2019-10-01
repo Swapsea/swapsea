@@ -41,7 +41,10 @@
                 (<%= offer.request.roster.patrol.short_name.present? ? offer.request.roster.patrol.short_name : offer.request.roster.patrol.name %>)<br/>
                 <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
                 <% if offer.roster %>
-                <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><%end%>
+                  <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+                <% else %>
+                  No Patrol offered
+                <%end%>
               </div>
               <% if offer.status == 'pending' %>
               <%= link_to offer.request, :class => 'offer offer-view col-xs-2' do %>

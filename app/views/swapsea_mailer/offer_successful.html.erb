@@ -117,15 +117,17 @@
           <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
           <em>You are now a sub for <%= @request.user.first_name %> <%= @request.user.last_name %></em>
         </p>
-        <p>
-          <% if @offer.roster%>
-          <strong>Your old patrol</strong><br/>
-          <%= @offer.roster.patrol_name %><br/>
-          <%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
-          <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
-          <%end%>
-          <em><%= @request.user.first_name %> <%= @request.user.last_name %> is now a sub for you.</em>
-        </p>
+        <% if @offer.roster %>
+          <p>
+            <strong>Your old patrol</strong><br/>
+            <%= @offer.roster.patrol_name %><br/>
+            <%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
+            <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
+            <em><%= @request.user.first_name %> <%= @request.user.last_name %> is now a sub for you.</em>
+          </p>
+        <% else %>
+          No Patrol offered
+        <%end%>
         
         <% if @request.email.present? || @request.mobile.present? %>
         <p>

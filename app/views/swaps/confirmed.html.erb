@@ -39,6 +39,8 @@
                   <%= offer.roster.patrol.short_name ? offer.roster.patrol.short_name : offer.roster.patrol.name %><br/>
                   <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
                   <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+                  <% else %>
+                  No Patrol offered
                   <% end %>
                 </div>
 
