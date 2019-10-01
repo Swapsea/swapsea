@@ -8,9 +8,9 @@ class DashboardController < ApplicationController
 		@my_patrol = selected_user.patrol
 
 		@activities = PublicActivity::Activity.order("created_at desc").limit(10)
-
-		@confirmed_offers = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted', selected_user.organisation).order(updated_at: :desc).limit(3)
-
+		confirmed_offer_1way = Offer.where(roster_id: nil).where('status = ? ', 'accepted').order(updated_at: :desc).limit(2)
+		confirmed_offer_reciprocal = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted', selected_user.organisation).order(updated_at: :desc).limit(3)
+		@confirmed_offers = confirmed_offer_1way + confirmed_offer_reciprocal
 		render layout: 'dashboard'
 	end
 

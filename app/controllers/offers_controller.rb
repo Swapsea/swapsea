@@ -31,9 +31,13 @@ class OffersController < ApplicationController
       @after_swap_request_patrol = @offer.request.roster.swap_meets_requirements(@offer.request.user, @offer.user)
       @before_swap_request_patrol = @offer.request.roster.qualifications
       @required_request_patrol = @offer.request.roster.patrol.requirements
-      @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
-      @before_swap_offer_patrol = @offer.roster.qualifications
-      @required_offer_patrol = @offer.roster.patrol.requirements
+      # Start of offer's roster
+      if @offer.roster
+        @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
+        @before_swap_offer_patrol = @offer.roster.qualifications
+        @required_offer_patrol = @offer.roster.patrol.requirements
+      end
+      # End of statement
     else
       redirect_to swaps_path, alert: 'This request or offer no longer exists.'
     end
@@ -51,8 +55,18 @@ class OffersController < ApplicationController
   # GET /offers/1/accept
   # should only by accessable be either requestor or admin
   def accept
+
     @offer = Offer.find(params[:id])
-    if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
+    if @offer.roster.present?
+      if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
+        offer_with_roster = true
+      end
+    else
+      if @offer.request.status == 'open' && @offer.status == 'pending'
+        offer_without_roster = true
+      end
+    end
+    if offer_without_roster || offer_with_roster
         @request = @offer.request
         trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.shuffle[0,16].join).first(10)
 
@@ -74,7 +88,9 @@ class OffersController < ApplicationController
 
           # Remove offerer from old roster
           @swap_offerer_off = Swap.new
+          if @offer.roster
           @offerer_uniq_id = Swap.where(user_id: @offer.user.id, roster_id: @offer.roster.id).first
+        end
           if @offerer_uniq_id.present?
             @offerer_uniq_id = @offerer_uniq_id.uniq_id
           else
@@ -82,7 +98,9 @@ class OffersController < ApplicationController
           end
           @swap_offerer_off.trans_id = trans_id
           @swap_offerer_off.uniq_id = @offerer_uniq_id
+           if @offer.roster
           @swap_offerer_off.roster_id = @offer.roster.id
+          end
           @swap_offerer_off.user_id = @offer.user.id
           @swap_offerer_off.on_off_patrol = false
           #@swap_offerer_off.save
@@ -91,7 +109,9 @@ class OffersController < ApplicationController
           @swap_requestor_on = Swap.new
           @swap_requestor_on.trans_id = trans_id
           @swap_requestor_on.uniq_id = @offerer_uniq_id
-          @swap_requestor_on.roster_id = @offer.roster.id
+          if @offer.roster
+            @swap_requestor_on.roster_id = @offer.roster.id
+          end
           @swap_requestor_on.user_id = @request.user.id
           @swap_requestor_on.on_off_patrol = true
           #@swap_requestor_on.save
@@ -107,7 +127,11 @@ class OffersController < ApplicationController
 
           @offer.status = 'accepted'
           @request.status = 'successful'
-
+          if @offer.roster_id == nil
+            @off = @offer.request.offers
+            @offer_id = @off.where.not(id: @offer.id)
+            @offer_id.update_all(status: "rejected")
+          end
 
           #@request.roster.awards_count
           #@offer.roster.awards_count
@@ -122,12 +146,15 @@ class OffersController < ApplicationController
             @swap_offerer_on.save!
             @offer.save!
             @request.save!
+            if @offer.roster
             @request.roster.awards_count
             @offer.roster.awards_count
+            end
             
             @offer.create_activity :confirm, owner: selected_user
 
             # Close same offer made to other requests.
+            if @offer.roster
             @offer.same_offer_for_other_requests.map do |other_offer|
               other_offer.status = 'withdrawn'
               if other_offer.save
@@ -171,6 +198,7 @@ class OffersController < ApplicationController
                 redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
               end
             end
+          end
 
           end #transaction
         
