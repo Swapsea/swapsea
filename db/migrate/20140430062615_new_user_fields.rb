@@ -1,4 +1,4 @@
-class NewUserFields < ActiveRecord::Migration
+class NewUserFields < ActiveRecord::Migration[4.2]
   def change
   
   	#add_column :users, :state,	:string

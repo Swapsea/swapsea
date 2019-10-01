@@ -1,4 +1,4 @@
-class CreateAwards < ActiveRecord::Migration
+class CreateAwards < ActiveRecord::Migration[4.2]
   def change
     create_table :awards, id: false do |t|
       t.string :award_number

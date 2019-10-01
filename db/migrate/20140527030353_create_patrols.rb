@@ -1,4 +1,4 @@
-class CreatePatrols < ActiveRecord::Migration
+class CreatePatrols < ActiveRecord::Migration[4.2]
   def change
     create_table :patrols do |t|
       t.string :name

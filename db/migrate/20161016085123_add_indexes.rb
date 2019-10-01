@@ -1,4 +1,4 @@
-class AddIndexes < ActiveRecord::Migration
+class AddIndexes < ActiveRecord::Migration[4.2]
   def change
   	add_index :patrols, [:organisation, :name]
   	add_index :patrol_members, [:organisation]

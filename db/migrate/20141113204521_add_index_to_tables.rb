@@ -1,4 +1,4 @@
-class AddIndexToTables < ActiveRecord::Migration
+class AddIndexToTables < ActiveRecord::Migration[4.2]
   def change
   	add_index :awards, :user_id
   	add_index :awards, :award_name

@@ -1,4 +1,4 @@
-class CreateProficiencies < ActiveRecord::Migration
+class CreateProficiencies < ActiveRecord::Migration[4.2]
   def change
     create_table :proficiencies do |t|
       t.string :name

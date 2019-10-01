@@ -1,4 +1,4 @@
-class RemovePatrolIdFromPatrolMembers < ActiveRecord::Migration
+class RemovePatrolIdFromPatrolMembers < ActiveRecord::Migration[4.2]
   def change
 
   	remove_column :patrol_members, :patrol_id, :integer

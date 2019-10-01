@@ -1,4 +1,4 @@
-class CreatePatrolMembers < ActiveRecord::Migration
+class CreatePatrolMembers < ActiveRecord::Migration[4.2]
   def change
     create_table :patrol_members do |t|
       t.integer :user_id

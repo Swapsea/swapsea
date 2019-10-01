@@ -1,4 +1,4 @@
-class CreateSwaps < ActiveRecord::Migration
+class CreateSwaps < ActiveRecord::Migration[4.2]
   def change
     create_table :swaps do |t|
       t.string :roster_id

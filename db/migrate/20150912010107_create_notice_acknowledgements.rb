@@ -1,4 +1,4 @@
-class CreateNoticeAcknowledgements < ActiveRecord::Migration
+class CreateNoticeAcknowledgements < ActiveRecord::Migration[4.2]
   def change
     create_table :notice_acknowledgements do |t|
       t.integer :user_id

@@ -1,4 +1,4 @@
-class CreateOutreachPatrols < ActiveRecord::Migration
+class CreateOutreachPatrols < ActiveRecord::Migration[4.2]
   def change
     create_table :outreach_patrols do |t|
       t.string :location

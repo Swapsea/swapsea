@@ -1,4 +1,4 @@
-class PatrolsNonNull < ActiveRecord::Migration
+class PatrolsNonNull < ActiveRecord::Migration[4.2]
   def change
   	execute "update patrols set need_bbm=0 where need_bbm IS NULL;"
 	execute "update patrols set need_irbd=0 where need_irbd IS NULL;"

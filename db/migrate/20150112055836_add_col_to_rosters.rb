@@ -1,4 +1,4 @@
-class AddColToRosters < ActiveRecord::Migration
+class AddColToRosters < ActiveRecord::Migration[4.2]
   def change
     add_column :rosters, :bbm, :integer
     add_column :rosters, :irbd, :integer

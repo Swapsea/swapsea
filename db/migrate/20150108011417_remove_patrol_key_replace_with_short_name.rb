@@ -1,4 +1,4 @@
-class RemovePatrolKeyReplaceWithShortName < ActiveRecord::Migration
+class RemovePatrolKeyReplaceWithShortName < ActiveRecord::Migration[4.2]
   def change
 
   	remove_column :patrols, :key, :string
