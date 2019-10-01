@@ -22,10 +22,10 @@ class SwapseaSms
         to: recipient_number,
         from: TWILIO_PHONE_NUMBER
     end
+    Rails.logger.info message_body
   end
 
   private
-
 
   def recipient_number
     if TESTING_PHONE_NUMBER
@@ -40,7 +40,7 @@ class SwapseaSms
 
   def message_body
     [
-      "Upcoming patrol #{@user.organisation} \"#{@next_roster.patrol_name}\"",
+      "Upcoming patrol #{@user.organisation.truncate(26, separator: ' ')} \"#{@next_roster.patrol_name.truncate(30, separator: ' ')}\"",
       "on #{@next_roster.start.strftime("%a %d %b %y")},",
       "#{@next_roster.start.strftime("%H:%M")} -",
       "#{@next_roster.finish.strftime("%H:%M")}.",

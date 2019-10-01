@@ -35,9 +35,13 @@
                 </div>
                 <div class=" details col-xs-5">
                   <span class="name"><s><%= offer.user.name %></s></span> <span class="name"><strong><%= offer.request.user.name %></strong></span><br/>
+                  <% if offer.roster %>
                   <%= offer.roster.patrol.short_name ? offer.roster.patrol.short_name : offer.roster.patrol.name %><br/>
                   <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
                   <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+                  <% else %>
+                  No Patrol offered
+                  <% end %>
                 </div>
 
               </div><!--/.swap-request -->
