@@ -134,16 +134,22 @@
             <div class="row">
               <div class="request col-xs-5">
                 <s class="name"><%= offer.request.user.name %></s> <strong class="name"><%= offer.user.name %></strong><br/>
+                <%if offer.request.roster%>
                 <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
                 <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %>
+                <% end%>
               </div>
               <div class="col-xs-2">
                 <div class="arrows"><i class="fa fa-arrows-h fa-2x"></i></div>
               </div>
               <div class="col-xs-5">
                 <s class="name"><%= offer.user.name %></s> <strong class="name"><%= offer.request.user.name %></strong><br/>
+                <% if offer.roster %>
                 <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
                 <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+                <%else%><br>
+                No Patrol Offered
+                <% end %>
               </div>
             </div><!--/.row -->
           </div><!--/.swap -->
