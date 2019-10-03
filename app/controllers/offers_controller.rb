@@ -235,7 +235,7 @@ class OffersController < ApplicationController
   # POST /offers.json
   def create
     request = Request.find(params[:request_id])
-    if request.offers.where(email: params[:offer][:email]).where(roster_id: nil).any? && params[:roster_id] == ""
+    if request.offers.where(email: params[:offer][:email], roster_id: nil, status: "pending").any? && params[:roster_id] == ""
        redirect_to request_path(Offer.last.request), notice: 'You already created this offer.' 
     else
       @offer = Offer.new(offer_params)
