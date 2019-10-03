@@ -234,18 +234,23 @@ class OffersController < ApplicationController
   # POST /offers
   # POST /offers.json
   def create
-    @offer = Offer.new(offer_params)
-    @offer.request_id = params[:request_id]
-    @offer.roster_id = params[:roster_id]
-    @offer.status = 'pending'
-    @offer.user_id = selected_user.id
-      if @offer.save
-        @offer.create_activity :create, owner: selected_user
-        SwapseaMailer.offer_received(@offer).deliver
-        redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.' 
-      else
-        redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.' 
-      end
+    request = Request.find(params[:request_id])
+    if request.offers.where(email: params[:offer][:email]).where(roster_id: nil).any? && params[:roster_id] == ""
+       redirect_to request_path(Offer.last.request), notice: 'You already created this offer.' 
+    else
+      @offer = Offer.new(offer_params)
+      @offer.request_id = params[:request_id]
+      @offer.roster_id = params[:roster_id]
+      @offer.status = 'pending'
+      @offer.user_id = selected_user.id
+        if @offer.save
+          @offer.create_activity :create, owner: selected_user
+          SwapseaMailer.offer_received(@offer).deliver
+          redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.' 
+        else
+          redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.' 
+        end
+    end
   end
 
   # PATCH/PUT /offers/1
