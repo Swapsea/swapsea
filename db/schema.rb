@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20181218074840) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
     t.integer  "trackable_id"
@@ -23,9 +26,17 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
-    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
-    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+  end
+
+  create_table "api_credentials", force: :cascade do |t|
+    t.string   "api_key"
+    t.string   "api_secret"
+    t.string   "application_name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "awards", force: :cascade do |t|
@@ -40,9 +51,9 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.string   "originating_organisation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["award_name"], name: "index_awards_on_award_name"
-    t.index ["award_number"], name: "index_awards_on_award_number", unique: true
-    t.index ["user_id"], name: "index_awards_on_user_id"
+    t.index ["award_name"], name: "index_awards_on_award_name", using: :btree
+    t.index ["award_number"], name: "index_awards_on_award_number", unique: true, using: :btree
+    t.index ["user_id"], name: "index_awards_on_user_id", using: :btree
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -57,7 +68,7 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.datetime "updated_at"
     t.float    "lat",                     default: 0.0, null: false
     t.float    "lon",                     default: 0.0, null: false
-    t.index ["name"], name: "index_clubs_on_name"
+    t.index ["name"], name: "index_clubs_on_name", using: :btree
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -72,7 +83,7 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
   create_table "emails", force: :cascade do |t|
@@ -134,8 +145,8 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "roster_id"
-    t.index ["request_id"], name: "index_offers_on_request_id"
-    t.index ["user_id"], name: "index_offers_on_user_id"
+    t.index ["request_id"], name: "index_offers_on_request_id", using: :btree
+    t.index ["user_id"], name: "index_offers_on_user_id", using: :btree
   end
 
   create_table "outreach_patrol_sign_ups", force: :cascade do |t|
@@ -143,8 +154,8 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.integer  "outreach_patrol_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["outreach_patrol_id"], name: "index_outreach_patrol_sign_ups_on_outreach_patrol_id"
-    t.index ["user_id"], name: "index_outreach_patrol_sign_ups_on_user_id"
+    t.index ["outreach_patrol_id"], name: "index_outreach_patrol_sign_ups_on_outreach_patrol_id", using: :btree
+    t.index ["user_id"], name: "index_outreach_patrol_sign_ups_on_user_id", using: :btree
   end
 
   create_table "outreach_patrols", force: :cascade do |t|
@@ -163,8 +174,8 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "patrol_name"
-    t.index ["organisation"], name: "index_patrol_members_on_organisation"
-    t.index ["user_id"], name: "index_patrol_members_on_user_id"
+    t.index ["organisation"], name: "index_patrol_members_on_organisation", using: :btree
+    t.index ["user_id"], name: "index_patrol_members_on_user_id", using: :btree
   end
 
   create_table "patrols", force: :cascade do |t|
@@ -182,7 +193,7 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.integer  "need_src",      null: false
     t.string   "organisation"
     t.string   "short_name"
-    t.index ["organisation", "name"], name: "index_patrols_on_organisation_and_name"
+    t.index ["organisation", "name"], name: "index_patrols_on_organisation_and_name", using: :btree
   end
 
   create_table "proficiencies", force: :cascade do |t|
@@ -212,8 +223,8 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["roster_id"], name: "index_requests_on_roster_id"
-    t.index ["user_id"], name: "index_requests_on_user_id"
+    t.index ["roster_id"], name: "index_requests_on_roster_id", using: :btree
+    t.index ["user_id"], name: "index_requests_on_user_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -222,8 +233,8 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["name"], name: "index_roles_on_name"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
   create_table "rosters", force: :cascade do |t|
@@ -242,7 +253,7 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.integer  "bronze"
     t.integer  "src"
     t.string   "secret"
-    t.index ["organisation", "patrol_name"], name: "index_rosters_on_organisation_and_patrol_name"
+    t.index ["organisation", "patrol_name"], name: "index_rosters_on_organisation_and_patrol_name", using: :btree
   end
 
   create_table "settings", force: :cascade do |t|
@@ -300,8 +311,8 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.datetime "updated_at"
     t.string   "uniq_id"
     t.string   "trans_id"
-    t.index ["roster_id"], name: "index_swaps_on_roster_id"
-    t.index ["user_id"], name: "index_swaps_on_user_id"
+    t.index ["roster_id"], name: "index_swaps_on_roster_id", using: :btree
+    t.index ["user_id"], name: "index_swaps_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -317,7 +328,7 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "organisation"
+    t.string   "organisation",                             null: false
     t.string   "last_name"
     t.string   "first_name"
     t.string   "preferred_name"
@@ -341,14 +352,14 @@ ActiveRecord::Schema.define(version: 20181218074840) do
     t.boolean  "bronze"
     t.boolean  "src"
     t.boolean  "smsable",                  default: false
-    t.index ["id"], name: "index_users_on_id"
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["id"], name: "index_users_on_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
 
 end
