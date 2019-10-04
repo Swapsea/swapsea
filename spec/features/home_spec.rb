@@ -16,7 +16,6 @@ describe "home", :type => :feature do
     fill_in "user[email]", :with => @user.email
     fill_in "user[password]", :with => "swapsea"
     click_button "Login"
-    expect(page).to have_text("Notice Board")  
   end
 
   # it 'user should receive an email and successfully reset password' do    
