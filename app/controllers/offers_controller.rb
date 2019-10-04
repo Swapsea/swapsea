@@ -55,6 +55,10 @@ class OffersController < ApplicationController
   # GET /offers/1/accept
   # should only by accessable be either requestor or admin
   def accept
+    if @offer.user.patrol
+    else
+      PatrolMember.create(user_id: @offer.user.id, organisation: @offer.user.organisation,patrol_name: Patrol.first.name)
+    end
 
     @offer = Offer.find(params[:id])
     if @offer.roster.present?
