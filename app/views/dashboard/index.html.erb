@@ -76,7 +76,8 @@
           <% else %>
 
           <div class="rosters">
-            <% selected_user.custom_roster.each do |r| %>
+            <% custom_roster_ids =  selected_user.custom_roster.map(&:id) %>
+            <% Roster.where(id: custom_roster_ids).where.not(patrol_name: "Synthetic Patrol").each do |r| %>
             <div class="roster">
 
               <div class="details col-sm-9 col-xs-9">
