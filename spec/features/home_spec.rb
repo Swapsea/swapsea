@@ -18,10 +18,10 @@ describe "home", :type => :feature do
     click_button "Login"
   end
 
-  it 'user should receive an email and successfully reset password' do    
-    visit '/users/password/new'
-    fill_in "user[email]",  with:  @user.email
-    click_button "Send Password Reset"       
-  end
+  # it 'user should receive an email and successfully reset password' do    
+  #   visit '/users/password/new'
+  #   fill_in "user[email]",  with:  @user.email
+  #   click_button "Send Password Reset"       
+  # end
 
 end

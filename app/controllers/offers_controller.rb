@@ -59,6 +59,7 @@ class OffersController < ApplicationController
       PatrolMember.create(user_id: @offer.user.id, organisation: @offer.user.organisation, patrol_name: "Synthetic Patrol")
       Patrol.create(name: "Synthetic Patrol", organisation: @offer.user.organisation, need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_spinal: nil, need_bronze: 3, need_src: 1 )
     end
+
     @offer = Offer.find(params[:id])
     if @offer.roster.present?
       if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
@@ -248,7 +249,10 @@ class OffersController < ApplicationController
       @offer.request_id = params[:request_id]
       @offer.roster_id = params[:roster_id]
       @offer.status = 'pending'
+<<<<<<< HEAD
       @offer.request_patrol_name = params[:request_patrol_name]
+=======
+>>>>>>> 891bce7e79fa9ce90de3b135d562d95837b6fde5
       @offer.user_id = selected_user.id
         if @offer.save
           @offer.create_activity :create, owner: selected_user
