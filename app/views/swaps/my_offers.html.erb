@@ -44,6 +44,7 @@
                   <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
                 <% else %>
                   <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %>
+                  No Patrol offered
                 <%end%>
               </div>
               <% if offer.status == 'pending' %>

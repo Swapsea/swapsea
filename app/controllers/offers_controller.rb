@@ -139,6 +139,9 @@ class OffersController < ApplicationController
           @other_offer = @offer.user.offers.where(request_patrol_name: @offer.request_patrol_name)
            @other_offer.update_all(status: "rejected")
 
+          #@request.roster.awards_count
+          #@offer.roster.awards_count
+
         begin
 
           ActiveRecord::Base.transaction do 
