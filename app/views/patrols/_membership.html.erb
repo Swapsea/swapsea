@@ -2,7 +2,7 @@
 	<table class="patrol-members-table member-list table table-striped dataTable row-border" cellspacing="0" width="100%" data-table="true">
 
 		<% 
-			order = ["Patrol Captain", "Patrol Vice Captain", "Vice Captain", "IRB Driver", "IRB Crew", "ART Operator", "ART Member", "First Aid Officer", "First Aid Member", "Bronze Member", "Member", "SRC Member", "SRC"]
+			order = ["Patrol Captain", "Patrol Vice Captain", "Vice Captain", "Patrol Application Captain", "IRB Driver", "IRB Crew", "ART Operator", "ART Member", "First Aid Officer", "First Aid Member", "Bronze Member", "Member", "SRC Member", "SRC"]
 
 			users = p.users.includes(:awards).sort_by { |n| n.date_joined_organisation || DateTime.now} 
 			users.sort_by! { |n| order.index n.default_position }
