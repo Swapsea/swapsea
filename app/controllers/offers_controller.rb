@@ -59,7 +59,6 @@ class OffersController < ApplicationController
       PatrolMember.create(user_id: @offer.user.id, organisation: @offer.user.organisation, patrol_name: "Synthetic Patrol")
       Patrol.create(name: "Synthetic Patrol", organisation: @offer.user.organisation, need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_spinal: nil, need_bronze: 3, need_src: 1 )
     end
-
     @offer = Offer.find(params[:id])
     if @offer.roster.present?
       if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
@@ -136,9 +135,9 @@ class OffersController < ApplicationController
             @offer_id = @off.where.not(id: @offer.id)
             @offer_id.update_all(status: "rejected")
           end
-
-          #@request.roster.awards_count
-          #@offer.roster.awards_count
+          
+          @other_offer = @offer.user.offers.where(request_patrol_name: @offer.request_patrol_name)
+           @other_offer.update_all(status: "rejected")
 
         begin
 
@@ -246,6 +245,7 @@ class OffersController < ApplicationController
       @offer.request_id = params[:request_id]
       @offer.roster_id = params[:roster_id]
       @offer.status = 'pending'
+      @offer.request_patrol_name = params[:request_patrol_name]
       @offer.user_id = selected_user.id
         if @offer.save
           @offer.create_activity :create, owner: selected_user
@@ -289,6 +289,6 @@ class OffersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:request_id, :roster_id, :user_id, :comment, :mobile, :email, :status)
+      params.require(:offer).permit(:request_id, :roster_id, :user_id, :comment, :mobile, :email, :status, :request_patrol_name)
     end
 end
