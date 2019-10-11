@@ -3,12 +3,7 @@ class UsersController < ApplicationController
 	layout 'basic'
 
 	def index
-	#@users = User.all
-		#if params.has_key?(:s)
-		#	@users = ThinkingSphinx.search.paginate(:page => params[:page], :per_page => 30) Riddle::Query.escape(params[:s]), :classes => [User]
-		#else
-			@users = User.paginate(:page => params[:page], :per_page => 30)
-		#end
+		@users = User.paginate(:page => params[:page], :per_page => 50)
 		render layout: 'admin'
 	end
 
