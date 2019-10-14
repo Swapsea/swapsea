@@ -174,7 +174,6 @@
 			<% if !@rosters_available.empty? %>
 				<%= form_for @offer, url: offers_path do |f| %>  
 					<%= hidden_field_tag(:request_id, @request.id) %>
-					<%= hidden_field_tag(:request_patrol_name, @request.roster.patrol_name) %>
 					<div class="row">
 						<label class="col-xs-4 col-sm-2"><strong>Patrol</strong></label>
 						<div class="col-xs-8 col-sm-7">
