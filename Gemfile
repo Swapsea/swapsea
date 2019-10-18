@@ -23,7 +23,7 @@ end
 
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
-  gem 'sqlite3' 	# Use sqlite3 as the database for Active Record
+  gem 'sqlite3'   # Use sqlite3 as the database for Active Record
   gem 'web-console'  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'listen'
   gem 'spring'
@@ -45,12 +45,10 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 2.0'
   gem 'shoulda-callback-matchers'
   gem "capybara"
-  gem 'selenium-webdriver'
-  gem 'webdrivers', '~> 4.0'
 end
 
 gem 'will_paginate'
-gem 'cancan'
+gem 'cancancan'
 gem 'devise'
 gem 'rolify'
 gem 'simple_form'
