@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="patrols col-sm-9 col-xs-12">
-        <%= render partial: 'patrol_timeline_roster', collection: @patrols_for_uniq_date.order(:start), as: :p %>
+        <%= render partial: 'patrol_timeline_roster', collection: @patrols_for_uniq_date.includes(:patrol).order(:start), as: :p %>
       </div>
     </div>
   <% end %>

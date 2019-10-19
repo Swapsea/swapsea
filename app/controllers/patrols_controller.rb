@@ -5,9 +5,9 @@ class PatrolsController < ApplicationController
 
   def index
     if selected_user.has_role?(:admin)
-      @clubs = Club.show_patrols
+      @clubs = Club.includes(:patrols).show_patrols
     else
-      @clubs = Club.show_patrols.where(name: selected_user.organisation)
+      @clubs = Club.includes(:patrols).show_patrols.where(name: selected_user.organisation)
     end
   end
 

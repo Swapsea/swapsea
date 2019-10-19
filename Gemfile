@@ -65,3 +65,4 @@ gem 'activerecord-import'
 gem 'public_activity'
 gem 'jwt'
 gem 'twilio-ruby'
+gem "bullet"

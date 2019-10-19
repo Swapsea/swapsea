@@ -157,7 +157,7 @@ class Roster < ActiveRecord::Base
 	def awards
 		awards = Array.new
 		current.map do |user|
-			awards << user.awards
+			awards << User.includes(:awards).find(user.id).awards
 		end
 		awards.flatten
 	end

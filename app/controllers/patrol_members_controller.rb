@@ -19,7 +19,7 @@ class PatrolMembersController < ApplicationController
   end
 
   def admin
-    @patrol_members = PatrolMember.all
+    @patrol_members = PatrolMember.all.includes(:user)
     render layout: 'admin'
   end
 

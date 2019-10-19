@@ -10,11 +10,11 @@ class SwapsController < ApplicationController
   end
 
   def my_offers
-    @swaps = Offer.where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted', 'rejected']).where("offers.roster_id is NULL").joins(:request).order('offers.roster_id DESC NULLS FIRST').sort_by{|offer| offer.request.roster.start} + Offer.where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted', 'rejected']).where("offers.roster_id is not NULL").joins(:request).order('offers.roster_id DESC NULLS FIRST').sort_by{|offer| offer.request.roster.start}
+    @swaps = Offer.includes(:roster, :user, request: [:user, :roster]).where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted', 'rejected']).where("offers.roster_id is NULL").order('offers.roster_id DESC NULLS FIRST').sort_by{|offer| offer.request.roster.start} + Offer.includes(:roster, :user, request: [:user, :roster]).where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted', 'rejected']).where("offers.roster_id is not NULL").order('offers.roster_id DESC NULLS FIRST').sort_by{|offer| offer.request.roster.start}
   end
 
   def my_requests
-    @swaps = Request.joins(:roster).where(:user => selected_user, :status => 'open').order("rosters.start")
+   @swaps = Request.includes(:roster, :user, roster: [:patrol]).where(:user => selected_user, :status => 'open').order("rosters.start")
   end
 
   def confirmed

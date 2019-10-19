@@ -7,11 +7,11 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies.json
   def index
     if current_user.has_role?(:admin)
-      @proficiencies = Proficiency.all.where('organisation = ?', selected_user.organisation).order(:start)
+      @proficiencies = Proficiency.all.includes(:proficiency_signups, :users).where('organisation = ?', selected_user.organisation).order(:start)
     elsif current_user.has_role?(:manager)
-      @proficiencies = Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 3.hours, selected_user.organisation)
+      @proficiencies = Proficiency.all.includes(:proficiency_signups, :users).where('start >= ? AND organisation = ?', DateTime.now - 3.hours, selected_user.organisation)
     else
-      @proficiencies = Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 10.minutes, selected_user.organisation)
+      @proficiencies = Proficiency.all.includes(:proficiency_signups, :users).where('start >= ? AND organisation = ?', DateTime.now - 10.minutes, selected_user.organisation)
     end
 
     @proficiencies_sorted = @proficiencies.sort_by(&:start)
