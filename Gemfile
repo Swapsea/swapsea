@@ -50,7 +50,7 @@ group :development, :test do
 end
 
 gem 'will_paginate'
-gem 'cancan'
+gem 'cancancan'
 gem 'devise'
 gem 'rolify'
 gem 'simple_form'
