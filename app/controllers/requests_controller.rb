@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
   def show
     @offer = Offer.new
     @offer_without_roster = @request.offers.where(:status => 'pending', roster_id: nil).sort_by(&:id)
-    @offer_with_roster = @request.offers.where(:status => 'pending').where.not(roster_id: nil).sort_by(&:id)
+    @offer_with_roster = Offer.where(request_id: @request.id, status: 'pending').where.not(roster_id: nil).joins(:roster).order("rosters.start ASC")
     @offers = @offer_without_roster + @offer_with_roster
     @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
     @awards = @request.user.awards.map { |n| n.award_name }

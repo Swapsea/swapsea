@@ -135,9 +135,11 @@
             <% @request.offers.where(:status => 'pending').order(id: :desc).each do |offer| %>
               <div class="offer<%= ' offer-new' if offer.id == @offer.id %>">    
                 <%= raw('<strong>NEW</strong><br/>') if offer.id == @offer.id %>
+                <% if offer.roster %>
                 <div class="roster"><%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
                 </div>
                 <div class="patrol"><%= offer.roster.patrol_name %></div>
+                <% end %>
                 <div class="member"><%= offer.user.first_name %> <%= offer.user.last_name %></div>
               </div>
             <% end %>

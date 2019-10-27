@@ -55,6 +55,10 @@ class OffersController < ApplicationController
   # GET /offers/1/accept
   # should only by accessable be either requestor or admin
   def accept
+    unless @offer.user.patrol
+      PatrolMember.create(user_id: @offer.user.id, organisation: @offer.user.organisation, patrol_name: "Synthetic Patrol")
+      Patrol.create(name: "Synthetic Patrol", organisation: @offer.user.organisation, need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_spinal: nil, need_bronze: 3, need_src: 1 )
+    end
 
     @offer = Offer.find(params[:id])
     if @offer.roster.present?
@@ -90,7 +94,7 @@ class OffersController < ApplicationController
           @swap_offerer_off = Swap.new
           if @offer.roster
           @offerer_uniq_id = Swap.where(user_id: @offer.user.id, roster_id: @offer.roster.id).first
-        end
+          end
           if @offerer_uniq_id.present?
             @offerer_uniq_id = @offerer_uniq_id.uniq_id
           else
@@ -98,8 +102,9 @@ class OffersController < ApplicationController
           end
           @swap_offerer_off.trans_id = trans_id
           @swap_offerer_off.uniq_id = @offerer_uniq_id
-           if @offer.roster
-          @swap_offerer_off.roster_id = @offer.roster.id
+          
+          if @offer.roster
+            @swap_offerer_off.roster_id = @offer.roster.id
           end
           @swap_offerer_off.user_id = @offer.user.id
           @swap_offerer_off.on_off_patrol = false
@@ -127,11 +132,22 @@ class OffersController < ApplicationController
 
           @offer.status = 'accepted'
           @request.status = 'successful'
+          # 1-way swap wins, others unsuccessful
           if @offer.roster_id == nil
             @off = @offer.request.offers
             @offer_id = @off.where.not(id: @offer.id)
-            @offer_id.update_all(status: "rejected")
+            @offer_id.update_all(status: "unsuccessful")
           end
+          
+          # remove other offers to same roster by successful offerer
+          request_ids = @offer.user.offers.map(&:request_id)
+          Request.where(id: request_ids).each do |request|
+            if request.roster_id == Request.find(@offer.request_id).roster_id
+              @other_offer = Offer.where(request_id: request.id)
+              @other_offer.update(status: "removed")
+            end
+          end
+            
 
           #@request.roster.awards_count
           #@offer.roster.awards_count
@@ -147,58 +163,58 @@ class OffersController < ApplicationController
             @offer.save!
             @request.save!
             if @offer.roster
-            @request.roster.awards_count
-            @offer.roster.awards_count
+              @request.roster.awards_count
+              @offer.roster.awards_count
             end
             
             @offer.create_activity :confirm, owner: selected_user
 
-            # Close same offer made to other requests.
+            # Remove same offer made to other requests.
             if @offer.roster
-            @offer.same_offer_for_other_requests.map do |other_offer|
-              other_offer.status = 'withdrawn'
-              if other_offer.save
-                #SwapseaMailer.offer_closed(other_offer).deliver
-              else
-                raise "Error accepting offer. (Code 1)"
-                redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 1)'
+              @offer.same_offer_for_other_requests.map do |other_offer|
+                other_offer.status = 'removed'
+                if other_offer.save
+                  #SwapseaMailer.offer_closed(other_offer).deliver
+                else
+                  raise "Error accepting offer. (Code 1)"
+                  redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 1)'
+                end
+              end
+
+              # unsuccessful offers.
+              @offer.other_offers_for_the_same_request.map do |other_offer|
+                other_offer.status = 'unsuccessful'
+                if other_offer.save
+                  #SwapseaMailer.offer_unsuccessful(other_offer).deliver
+                else
+                  raise "Error accepting offer. (Code 2)"
+                  redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 2)'
+                end
+              end
+
+              # Cancel request matching accepted offer (should be 0|1)
+              @offer.corresponding_requests.map do |corresponding_request|
+                corresponding_request.close #closes off any offers for each request (code 3)
+                corresponding_request.status = 'cancelled'
+                if corresponding_request.save
+
+                else
+                  raise "Error accepting offer. (Code 3-1)"
+                  redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 3-1)'
+                end
+              end
+
+              # Withdraw offers that match successful Request
+              @request.offers_that_match_request.map do |corresponding_offer|
+                corresponding_offer.status = 'withdrawn'
+                if corresponding_offer.save
+                  #SwapseaMailer.offer_closed(corresponding_offer).deliver
+                else
+                  raise "Error accepting offer. (Code 4)"
+                  redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
+                end
               end
             end
-
-            # swap status of unsuccessful offers.
-            @offer.other_offers_for_the_same_request.map do |other_offer|
-              other_offer.status = 'unsuccessful'
-              if other_offer.save
-                #SwapseaMailer.offer_unsuccessful(other_offer).deliver
-              else
-                raise "Error accepting offer. (Code 2)"
-                redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 2)'
-              end
-            end
-
-            # Close requests if they match accepted offer.
-            @offer.corresponding_requests.map do |corresponding_request|
-              corresponding_request.close #closes off any offers for each request (code 3)
-              corresponding_request.status = 'cancelled'
-              if corresponding_request.save
-
-              else
-                raise "Error accepting offer. (Code 3-1)"
-                redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
-              end
-            end
-
-            # Close offers that match successful Request
-            @request.offers_that_match_request.map do |corresponding_offer|
-              corresponding_offer.status = 'withdrawn'
-              if corresponding_offer.save
-                #SwapseaMailer.offer_closed(corresponding_offer).deliver
-              else
-                raise "Error accepting offer. (Code 4)"
-                redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
-              end
-            end
-          end
 
           end #transaction
         
@@ -234,18 +250,25 @@ class OffersController < ApplicationController
   # POST /offers
   # POST /offers.json
   def create
-    @offer = Offer.new(offer_params)
-    @offer.request_id = params[:request_id]
-    @offer.roster_id = params[:roster_id]
-    @offer.status = 'pending'
-    @offer.user_id = selected_user.id
-      if @offer.save
-        @offer.create_activity :create, owner: selected_user
-        SwapseaMailer.offer_received(@offer).deliver
-        redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.' 
-      else
-        redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.' 
-      end
+    request = Request.find(params[:request_id])
+    user_id = User.where(email: params[:offer][:email]).first.id
+    if request.offers.where(user_id: user_id, roster_id: nil, status: "pending").any? && params[:roster_id] == ""
+       redirect_to request_path(Offer.last.request), notice: 'You already created this offer.' 
+    else
+      @offer = Offer.new(offer_params)
+      @offer.request_id = params[:request_id]
+      @offer.roster_id = params[:roster_id]
+      @offer.status = 'pending'
+
+      @offer.user_id = selected_user.id
+        if @offer.save
+          @offer.create_activity :create, owner: selected_user
+          SwapseaMailer.offer_received(@offer).deliver
+          redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.' 
+        else
+          redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.' 
+        end
+    end
   end
 
   # PATCH/PUT /offers/1
@@ -262,11 +285,11 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   # DELETE /offers/1.json
   def destroy
-    @offer.status = 'cancelled'
+    @offer.status = 'deleted'
     if @offer.save
       @offer.create_activity :destroy, owner: selected_user
       #SwapseaMailer.offer_cancelled(@offer).deliver
-      redirect_to @offer.request, notice: 'Offer was successfully cancelled.'
+      redirect_to @offer.request, notice: 'Offer was successfully deleted.'
     else
       redirect_to @offer.request, notice: 'Error whilst cancelling offer.'
     end
