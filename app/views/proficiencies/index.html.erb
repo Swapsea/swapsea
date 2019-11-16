@@ -55,8 +55,10 @@
 										<div class="member">
 			
 											<div class="user"><%= ps.user.first_name %> <%= ps.user.last_name %></div>
-											<% if ((selected_user == ps.user) || (selected_user.has_role? :admin) || (selected_user.has_role? :manager)) %>
+											<% if (selected_user == ps.user)  %>
 												<div class="cancel"><%= link_to 'Cancel', ps, method: :delete %></div>
+											<% elsif ((selected_user.has_role? :admin) || (selected_user.has_role? :manager)) %>
+												<div class="cancel"><%= link_to 'Cancel this sign up', ps, method: :delete %></div>
 											<% end %>
 										
 										</div><!--/.member -->
