@@ -70,7 +70,7 @@ class Ability
         end
         can [:create], ProficiencySignup
         can [:read, :destroy], ProficiencySignup do |prof_signup|
-            prof_signup.organisation == user.organisation
+            prof_signup.user.organisation == user.organisation
         end
         can [:read, :index], OutreachPatrol
         can [:read, :create], OutreachPatrolSignUp
@@ -117,7 +117,7 @@ class Ability
         end
         can [:create], ProficiencySignup
         can [:read], ProficiencySignup do |prof_signup|
-            prof_signup.organisation == user.organisation
+            prof_signup.user.organisation == user.organisation
         end
         can :destroy, ProficiencySignup, :user => user
         can [:read, :index], OutreachPatrol
