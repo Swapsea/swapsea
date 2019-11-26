@@ -56,8 +56,10 @@ class OffersController < ApplicationController
   # should only by accessable be either requestor or admin
   def accept
     unless @offer.user.patrol
-      PatrolMember.create(user_id: @offer.user.id, organisation: @offer.user.organisation, patrol_name: "Synthetic Patrol")
-      Patrol.create(name: "Synthetic Patrol", organisation: @offer.user.organisation, need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_spinal: nil, need_bronze: 3, need_src: 1 )
+      if !PatrolMember.where(user_id: @offer.user.id, patrol_name: "Synthetic Patrol").any?
+        PatrolMember.create(user_id: @offer.user.id, organisation: @offer.user.organisation, patrol_name: "Synthetic Patrol")
+        Patrol.create(name: "Synthetic Patrol", organisation: @offer.user.organisation, need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_spinal: nil, need_bronze: 3, need_src: 1 )
+      end
     end
 
     @offer = Offer.find(params[:id])

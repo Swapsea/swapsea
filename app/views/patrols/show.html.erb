@@ -6,7 +6,7 @@
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Choose Patrol<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <% @club.patrols.sort_by(&:short_name).map do |patrol|  %>
+          <% @club.patrols.where.not(name: "Synthetic Patrol").sort_by(&:short_name).map do |patrol|  %>
             <li><%= link_to patrol.short_name, (patrol_path patrol) %></li>
           <% end %>
         </ul>

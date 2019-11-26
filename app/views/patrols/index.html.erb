@@ -4,7 +4,7 @@
     <% @clubs.each do |club| %>
       <div class="col-sm-12">
         <h2><%= club.name %></h2>
-          <% club.patrols.map do |patrol| %>
+          <% club.patrols.where.not(name: "Synthetic Patrol").map do |patrol| %>
             <div class="patrol">
               <%= link_to patrol.short_name, (patrol_path patrol) %>
             </div>
