@@ -452,7 +452,7 @@
     <selectMembershipsDetails_RegSeason>1</selectMembershipsDetails_RegSeason>
     <sortOrder_RegSeason />
     <columnHeader_RegSeason />
-    <RegSeason>2019</RegSeason>
+    <RegSeason>2020</RegSeason>
     <sortOrder_RegistrationDate />
     <columnHeader_RegistrationDate />
     <RegistrationDate_From />
@@ -1381,7 +1381,7 @@
     <sendEmailAddress>help@swapsea.com.au</sendEmailAddress>
     <recurringTypeID>4</recurringTypeID>
     <recurringInterval>1</recurringInterval>
-    <scheduledRunTime_Date>25/06/2019</scheduledRunTime_Date>
+    <scheduledRunTime_Date>25/06/2020</scheduledRunTime_Date>
     <scheduledRunTime_Times>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>

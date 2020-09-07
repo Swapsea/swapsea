@@ -48,7 +48,7 @@
     <Club_hidden />
     <MembershipType_SelectedValue />
     <ArchivedInAllOrgs_SelectedValue />
-    <Status_SelectedValue>Active</Status_SelectedValue>
+    <Status_SelectedValue />
     <AgeCategory_SelectedValue />
     <Competitor_SelectedValue />
     <HasClubKeys_SelectedValue />
@@ -166,8 +166,7 @@
     <sendEmailAddressUser>help@swapsea.com.au</sendEmailAddressUser>
     <maxEmailRecipients>0</maxEmailRecipients>
     <_qf_default>report:submit</_qf_default>
-    <reportTitle>swapsea_awards</reportTitle>
-    <selectMemberGeneralDetails_MemberID>1</selectMemberGeneralDetails_MemberID>
+    <reportTitle>swapsea_rosters</reportTitle>
     <sortOrder_MemberID />
     <columnHeader_MemberID />
     <MemberID />
@@ -447,12 +446,11 @@
     <sortOrder_Status />
     <columnHeader_Status />
     <Statuss>
-        <Status isMulti="1">A</Status>
+        <Status isMulti="1">-1</Status>
     </Statuss>
-    <selectMembershipsDetails_RegSeason>1</selectMembershipsDetails_RegSeason>
     <sortOrder_RegSeason />
     <columnHeader_RegSeason />
-    <RegSeason>2019</RegSeason>
+    <RegSeason />
     <sortOrder_RegistrationDate />
     <columnHeader_RegistrationDate />
     <RegistrationDate_From />
@@ -728,7 +726,6 @@
     <AwardTypess>
         <AwardTypes isMulti="1">-1</AwardTypes>
     </AwardTypess>
-    <selectAwards_Awards>1</selectAwards_Awards>
     <sortOrder_Awards />
     <columnHeader_Awards />
     <Awardss>
@@ -737,17 +734,14 @@
     <sortOrder_AwardCode />
     <columnHeader_AwardCode />
     <AwardCode />
-    <selectAwards_AwardDate>1</selectAwards_AwardDate>
     <sortOrder_AwardDate />
     <columnHeader_AwardDate />
     <AwardDate_From />
     <AwardDate_To />
-    <selectAwards_ProficiencyDate>1</selectAwards_ProficiencyDate>
     <sortOrder_ProficiencyDate />
     <columnHeader_ProficiencyDate />
     <ProficiencyDate_From />
     <ProficiencyDate_To />
-    <selectAwards_AwardExpiryDate>1</selectAwards_AwardExpiryDate>
     <sortOrder_AwardExpiryDate />
     <columnHeader_AwardExpiryDate />
     <AwardExpiryDate_From />
@@ -760,7 +754,6 @@
     <columnHeader_ProfAllocationDate />
     <ProfAllocationDate_From />
     <ProfAllocationDate_To />
-    <selectAwards_AwardNumber>1</selectAwards_AwardNumber>
     <sortOrder_AwardNumber />
     <columnHeader_AwardNumber />
     <AwardNumber />
@@ -813,7 +806,6 @@
     <ActivityTime_HoursTo />
     <ActivityTime_MinsTo />
     <ActivityTime_SecsTo />
-    <selectAwards_AwardOriginatingOrganisation>1</selectAwards_AwardOriginatingOrganisation>
     <sortOrder_AwardOriginatingOrganisation />
     <columnHeader_AwardOriginatingOrganisation />
     <AwardOriginatingOrganisations>
@@ -988,21 +980,25 @@
     <PatrolTeamPositions>
         <PatrolTeamPosition isMulti="1">-1</PatrolTeamPosition>
     </PatrolTeamPositions>
+    <selectPatrolRosters_RosteredPatrolTeam>1</selectPatrolRosters_RosteredPatrolTeam>
     <sortOrder_RosteredPatrolTeam />
     <columnHeader_RosteredPatrolTeam />
     <RosteredPatrolTeams>
         <RosteredPatrolTeam isMulti="1">-1</RosteredPatrolTeam>
     </RosteredPatrolTeams>
+    <selectPatrolRosters_PatrolRosterDate>1</selectPatrolRosters_PatrolRosterDate>
     <sortOrder_PatrolRosterDate />
     <columnHeader_PatrolRosterDate />
-    <PatrolRosterDate_From />
-    <PatrolRosterDate_To />
+    <PatrolRosterDate_From>01/07/2020</PatrolRosterDate_From>
+    <PatrolRosterDate_To>01/07/2021</PatrolRosterDate_To>
+    <selectPatrolRosters_PatrolRosterStartTime>1</selectPatrolRosters_PatrolRosterStartTime>
     <sortOrder_PatrolRosterStartTime />
     <columnHeader_PatrolRosterStartTime />
     <PatrolRosterStartTime_FromH>-1</PatrolRosterStartTime_FromH>
     <PatrolRosterStartTime_Fromi>-1</PatrolRosterStartTime_Fromi>
     <PatrolRosterStartTime_ToH>-1</PatrolRosterStartTime_ToH>
     <PatrolRosterStartTime_Toi>-1</PatrolRosterStartTime_Toi>
+    <selectPatrolRosters_PatrolRosterFinishTime>1</selectPatrolRosters_PatrolRosterFinishTime>
     <sortOrder_PatrolRosterFinishTime />
     <columnHeader_PatrolRosterFinishTime />
     <PatrolRosterFinishTime_FromH>-1</PatrolRosterFinishTime_FromH>
@@ -1168,6 +1164,7 @@
     <OrganisationTypes>
         <OrganisationType isMulti="1">-1</OrganisationType>
     </OrganisationTypes>
+    <selectOrganisationGeneralDetails_OrganisationDisplayName>1</selectOrganisationGeneralDetails_OrganisationDisplayName>
     <sortOrder_OrganisationDisplayName />
     <columnHeader_OrganisationDisplayName />
     <OrganisationDisplayName_From />
@@ -1381,12 +1378,12 @@
     <NoteDetails />
     <sendEmail>1</sendEmail>
     <sendEmailAddress>help@swapsea.com.au</sendEmailAddress>
-    <recurringTypeID>4</recurringTypeID>
-    <recurringInterval>1</recurringInterval>
-    <scheduledRunTime_Date>25/06/2019</scheduledRunTime_Date>
+    <recurringTypeID>1</recurringTypeID>
+    <recurringInterval />
+    <scheduledRunTime_Date />
     <scheduledRunTime_Times>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
     </scheduledRunTime_Times>
-    <customReportName>swapsea_awards</customReportName>
+    <customReportName>swapsea_rosters</customReportName>
 </report>
