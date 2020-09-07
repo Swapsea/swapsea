@@ -59,7 +59,7 @@ Notes:
 * Rosters are based on club name and roster name, so should not conflict.
 
 ---
-Copyright (C) 2019  Mark Hudson, Alex Carroll, Ariell Friedman and Michael Bamford
+Copyright (C) 2020  Mark Hudson, Alex Carroll, Ariell Friedman and Michael Bamford
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
