@@ -48,7 +48,7 @@ class SwapseaMailer < ActionMailer::Base
          :to      => offer.user.email,
          :from    => "Swapsea <noreply@swapsea.com.au>",
          :reply_to => offer.request.user.email
-  end 
+  end
 
   # Sent to offer user to confirm swap details.
   def offer_unsuccessful(offer)
@@ -60,7 +60,7 @@ class SwapseaMailer < ActionMailer::Base
          :from    => "Swapsea <noreply@swapsea.com.au>"
   end
 
-  # Sent to offer user to notify them that their offer was declined. 
+  # Sent to offer user to notify them that their offer was declined.
   def offer_declined(offer)
     @offer = offer
     @user = offer.user
@@ -133,11 +133,11 @@ class SwapseaMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    mail :subject => "Activate your Swapsea account for 2019/20",
+    mail :subject => "Activate your Swapsea account for 2020/21",
        :to      => user.email,
        :from    => "Swapsea <help@swapsea.com.au>"
 
-    Email.create!(to: user.email, subject: "Activate your Swapsea account for 2019/20")
+    Email.create!(to: user.email, subject: "Activate your Swapsea account for 2020/21")
   end
 
   def activity(subject, message)
@@ -146,7 +146,7 @@ class SwapseaMailer < ActionMailer::Base
     mail :subject => @subject,
        :to      => "Alex <alex@swapsea.com.au>",
        :from    => "Swapsea <help@swapsea.com.au>"
-       
+
     Email.create!(to: "Alex <alex@swapsea.com.au>", subject: @subject)
   end
 
@@ -192,7 +192,7 @@ class SwapseaMailer < ActionMailer::Base
 
     # Send Email
     mail :subject => (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime("%a %d %b %y %H:%M") + '-' + roster.finish.strftime("%H:%M"),
-    :to =>  to.collect(&:email).join(","), 
+    :to =>  to.collect(&:email).join(","),
     #:cc => 'admin@brontesurfclub.com.au, iljko@double8.com.au, alex@swapsea.com.au',
     :from    => "Swapsea <help@swapsea.com.au>"
   end
