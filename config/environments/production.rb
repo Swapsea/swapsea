@@ -116,13 +116,13 @@ Swapsea2::Application.configure do
   config.action_mailer.asset_host = "https://www.swapsea.com.au"
 
   config.action_mailer.smtp_settings = {
-    :address              => 'smtp.sendgrid.net',
-    :port                 => 587,
+    :address              => ENV['SMTP_SERVER'],
+    :port                 => ENV['SMTP_PORT'] || 587,
     :enable_starttls_auto => true,
-    :user_name            => ENV['SENDGRID_USERNAME'],
-    :password             => ENV['SENDGRID_PASSWORD'],
+    :user_name            => ENV['SMTP_USERNAME'],
+    :password             => ENV['SMTP_PASSWORD'],
     :authentication       => :plain,
-    :domain               => ENV['SENDGRID_DOMAIN'] || 'localhost',
+    :domain               => ENV['SMTP_DOMAIN'] || 'localhost',
   }
 
 end
