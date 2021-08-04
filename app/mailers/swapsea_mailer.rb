@@ -133,11 +133,11 @@ class SwapseaMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    mail :subject => "Activate your Swapsea account for 2020/21",
+    mail :subject => "Activate your Swapsea account for 2021/22",
        :to      => user.email,
        :from    => "Swapsea <help@swapsea.com.au>"
 
-    Email.create!(to: user.email, subject: "Activate your Swapsea account for 2020/21")
+    Email.create!(to: user.email, subject: "Activate your Swapsea account for 2021/22")
   end
 
   def activity(subject, message)
