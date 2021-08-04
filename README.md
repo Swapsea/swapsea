@@ -58,6 +58,13 @@ Notes:
 * Users will have a 10 digit ID, instead of 8 digits.
 * Rosters are based on club name and roster name, so should not conflict.
 
+## Run Tests ##
+
+```bash
+rake db:test:load
+bundle exec rspec
+```
+
 ---
 Copyright (C) 2020  Mark Hudson, Alex Carroll, Ariell Friedman and Michael Bamford
 
