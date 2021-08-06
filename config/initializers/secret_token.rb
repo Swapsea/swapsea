@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Swapsea2::Application.config.secret_key_base = '490e4eece84a1aa0e71e09f186505378ee2951caa37fb3e3f67b3bc84b9b4b313aab073e1168372fdcd5c5a150fc46a9b3f3273f045d94d7fde9bedc8619c73f'
+Swapsea2::Application.config.secret_key_base = ENV['COOKIE_SIGNING_TOKEN']
