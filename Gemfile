@@ -45,6 +45,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 2.0'
   gem 'shoulda-callback-matchers'
   gem "capybara"
+  gem 'rubocop'
 end
 
 gem 'will_paginate'
