@@ -1,68 +1,70 @@
 source 'https://rubygems.org'
 ruby '2.4.1'
 
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg'
+gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
-gem 'puma'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-gem 'therubyracer', platforms: :ruby
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder'
-gem 'redis-rails'
 gem 'bcrypt'
+gem 'coffee-rails'
+gem 'jbuilder'
+gem 'jquery-rails'
+gem 'puma'
+gem 'redis-rails'
+gem 'sass-rails'
+gem 'therubyracer', platforms: :ruby
+gem 'turbolinks'
+gem 'uglifier'
 
 group :production do
-  gem 'rails_12factor'
   gem 'newrelic_rpm'
+  gem 'rails_12factor'
   gem 'scout_apm'
 end
 
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
-  gem 'sqlite3' 	# Use sqlite3 as the database for Active Record
-  gem 'web-console'  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'listen'
+  gem 'rb-readline'
+  gem 'rubocop', '~> 1.12', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'spring'
   gem 'spring-watcher-listen'
-  gem 'rb-readline'
+  gem 'sqlite3'	# Use sqlite3 as the database for Active Record
+  gem 'web-console'  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 end
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'dotenv-rails'
-  gem "rspec-rails"
-  gem 'factory_bot_rails'
+  gem 'capybara'
   gem 'database_cleaner'
-  gem 'letter_opener'
+  gem 'dotenv-rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'guard-rspec', require: false
+  gem 'letter_opener'
   gem 'rails-controller-testing'
+  gem 'rspec-rails'
   gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
   gem 'shoulda-callback-matchers'
-  gem "capybara"
-  # gem 'rubocop'
+  gem 'shoulda-matchers', '~> 2.0'
 end
 
-gem 'will_paginate'
-gem 'cancancan'
-gem 'devise'
-gem 'rolify'
-gem 'simple_form'
-gem 'roo', '2.5.1'
-gem 'jquery-ui-rails'
-gem 'rails4-autocomplete'
-gem 'fontcustom'
-gem 'delayed_job_active_record'
-gem 'pg_search'
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
-gem 'exception_notification'
 gem 'activerecord-import'
-gem 'public_activity'
+gem 'cancancan'
+gem 'delayed_job_active_record'
+gem 'devise'
+gem 'exception_notification'
+gem 'fontcustom'
+gem 'jquery-ui-rails'
 gem 'jwt'
+gem 'pg_search'
+gem 'public_activity'
+gem 'rails4-autocomplete'
+gem 'rolify'
+gem 'roo', '2.5.1'
+gem 'simple_form'
 gem 'twilio-ruby'
+gem 'wicked_pdf'
+gem 'will_paginate'
+gem 'wkhtmltopdf-binary'

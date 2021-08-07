@@ -5,7 +5,7 @@ class Roster < ActiveRecord::Base
 	has_many :swaps
 	has_many :offers
 
-	include PgSearch
+	include PgSearch::Model
   	pg_search_scope :search, against: [:patrol_name, :organisation],
   	using: {tsearch: {dictionary: "english"}}
 

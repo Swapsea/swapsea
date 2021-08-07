@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     has_many :notices
     has_many :notice_acknowledgements
 
-    include PgSearch
+    include PgSearch::Model
     pg_search_scope :search, against: [:first_name, :last_name],
     using: {tsearch: {dictionary: "english"}}
 
