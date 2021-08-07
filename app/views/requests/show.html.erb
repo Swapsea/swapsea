@@ -95,16 +95,16 @@
 		<ul class="offers">
 
 			<% if @offers.present? %>
-				
+
 					<% @offers.each do |offer| %>
-				
+
 						<li class="offer">
 								<div class="details col-xs-12 col-sm-9">
 									<strong><%= offer.roster.start.strftime('%a %d %b') %></strong><br/>
 									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
 									<%= offer.roster.patrol.name %><br/>
 									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong><br/>
-									
+
 										<% awards = offer.user.awards.map { |n| n.award_name } %>
 										<%= 'SRC ' if awards.include?('Surf Rescue Certificate') %>
 										<%= 'SRC (CPR) ' if awards.include?('Surf Rescue Certificate (CPR Endorsed)') %>
@@ -116,7 +116,7 @@
 										<%= 'IRB-D ' if awards.include?('Silver Medallion IRB Driver') %>
 										<%= 'BBM ' if awards.include?('Silver Medallion Beach Management') %>
 										<%= 'ATV ' if awards.include?('ATV Operator Certificate') %>
-								
+
 									<br/>
 									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user) %>
 									<% if check_offer[:result] == true %>
@@ -126,10 +126,10 @@
 									<% end %>
 									<span class="comment"><%= offer.comment %></span>
 								</div>
-								
+
 									<% if selected_user == @request.user %>
 									<div class="buttons col-xs-12 col-sm-3">
-										<%= link_to confirm_decline_offer_path(offer), :class => "btn btn-danger" do %>	
+										<%= link_to confirm_decline_offer_path(offer), :class => "btn btn-danger" do %>
 												<i class="fa fa-thumbs-down"></i><br/>
 												Decline
 										<% end %>
@@ -140,9 +140,9 @@
 									</div>
 									<% elsif selected_user == offer.user %>
 									<div class="buttons col-xs-12 col-sm-3">
-										<%= link_to confirm_cancel_offer_path(offer), :class => "btn btn-danger pull-right" do %>				
+										<%= link_to confirm_cancel_offer_path(offer), :class => "btn btn-danger pull-right" do %>
 												<i class="fa fa-times"></i><br/>
-												Cancel		
+												Cancel
 										<% end %>
 									</div>
 									<% end %>
@@ -168,7 +168,7 @@
 		</div>
 		<div class="panel-body">
 			<% if !@rosters_available.empty? %>
-				<%= form_for @offer, url: offers_path do |f| %>  
+				<%= form_for @offer, url: offers_path do |f| %>
 					<%= hidden_field_tag(:request_id, @request.id) %>
 					<div class="row">
 						<label class="col-xs-4 col-sm-2"><strong>Patrol</strong></label>
@@ -195,7 +195,7 @@
 					<div class="form-actions">
 						<%= f.button 'Make Offer', :class => "btn btn-success pull-right", data: { disable_with: "Please wait..." } %>
 					</div>
-				
+
 				<% end %>
 			<% else %>
 				<p> You have no patrols to offer. </p>

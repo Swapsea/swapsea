@@ -15,7 +15,7 @@ Current offers
 --------------
 <% if @request.offers.present? %>
   <% @request.offers.each do |offer| %>
-    
+
     <%= offer.roster.patrol_name %>
     <%= offer.roster.start.strftime("%A %d %B %Y") %>
     <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
@@ -29,7 +29,7 @@ You currently have no offers.
 A quick swap is a good swap
 ---------------------------
 Offers won't wait for you. Most members make the same offer to multiple people at the same time. We'll let you do the math, but we encourage you to accept offers quickly to avoid disappointment.
- 
+
 
 You can login to Swapsea at www.swapsea.com.au
 

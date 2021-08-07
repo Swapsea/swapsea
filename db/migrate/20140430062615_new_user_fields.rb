@@ -1,6 +1,6 @@
 class NewUserFields < ActiveRecord::Migration
   def change
-  
+
   	#add_column :users, :state,	:string
   	#add_column :users, :branch,	:string
   	add_column :users, :organisation,	:string

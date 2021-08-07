@@ -88,8 +88,8 @@ class User < ActiveRecord::Base
   end
 
   def offers_available_for(request)
-    offers = Array.new 
-    
+    offers = Array.new
+
     rosters = custom_roster - request.user.custom_roster
     rosters.each do |roster|
       if !(request.offer_already_exists?(roster, self)) && (DateTime.now <= roster.start) && !request.roster.user_rostered_on(self)
@@ -160,7 +160,7 @@ class User < ActiveRecord::Base
 
       row = Hash[[header, spreadsheet.row(i)].transpose]
       user = find_by_id(row["Member ID"]) || new
-      user.id = row["Member ID"] 
+      user.id = row["Member ID"]
       user.first_name = row["First Name"]
       user.last_name = row["Last Name"]
       user.preferred_name = row["Preferred Name"]

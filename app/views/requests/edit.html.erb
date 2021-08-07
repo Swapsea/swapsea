@@ -75,7 +75,7 @@
             Bronze Medallion or Surf Rescue Certificate
           <% else %>
             Bronze Medallion
-            <%= raw('<br/>Advanced Resuscitation Techniques') if roster_check[:artc] <= @request.roster.patrol.need_artc %>           
+            <%= raw('<br/>Advanced Resuscitation Techniques') if roster_check[:artc] <= @request.roster.patrol.need_artc %>
             <%= raw('<br/>IRB Crew') if roster_check[:irbc] <= @request.roster.patrol.need_irbc %>
             <%= raw('<br/>IRB Driver') if roster_check[:irbd] <= @request.roster.patrol.need_irbd %>
             <%= raw('<br/>Basic Beach Management') if roster_check[:bbm] <= @request.roster.patrol.need_bbm %>

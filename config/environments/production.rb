@@ -33,15 +33,15 @@ Swapsea2::Application.configure do
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
   # Precompile additional assets
-  config.assets.precompile += %w( 
-    .svg .eot .woff .ttf 
-    
+  config.assets.precompile += %w(
+    .svg .eot .woff .ttf
+
     admin-layout.css admin-layout.js
     dashboard-layout.css dashboard-layout.js
     basic-layout.css basic-layout.js
     blank-layout.css basic-layout.js
 
-    admin.css admin.js 
+    admin.css admin.js
     dashboard.css dashboard.js
     home.css home.js
     rosters.css rosters.js
@@ -52,7 +52,7 @@ Swapsea2::Application.configure do
     proficiencies.css proficiencies.js
     registrations.css registrations.js
     selected_user.css selected_user.js
-    users.css users.js 
+    users.css users.js
     reports.css
   )
 

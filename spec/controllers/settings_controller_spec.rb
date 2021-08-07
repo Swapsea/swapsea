@@ -65,7 +65,7 @@ RSpec.describe SettingsController, type: :controller do
         expect(response).to redirect_to(Setting.last)
       end
     end
-  end 
+  end
 
   describe "DELETE #destroy" do
     it "destroys the requested setting" do

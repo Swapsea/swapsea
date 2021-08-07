@@ -65,7 +65,7 @@ RSpec.describe ProficiencySignupsController, type: :controller do
   #       expect(response).to redirect_to(proficiencies_path)
   #     end
   #   end
-  # end 
+  # end
 
   describe "DELETE #destroy" do
     it "destroys the requested proficiency_signup" do

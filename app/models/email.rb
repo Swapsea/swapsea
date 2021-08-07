@@ -93,12 +93,12 @@ class Email < ActiveRecord::Base
 			subject = "Activity"
 			message = "North Bondi - Reports Sent: " + reports_sent.to_s
 			SwapseaMailer.activity(subject, message).deliver
-			
+
 		else
 			subject = "No Activity"
 			message = "North Bondi - No reports to send."
 			SwapseaMailer.activity(subject, message).deliver
-		end		
+		end
 	end
 	def self.bronte_patrol_reports
 		reports_sent = 0;

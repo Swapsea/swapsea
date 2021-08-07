@@ -31,7 +31,7 @@ class StagingUser < ApplicationRecord
 		end
 
 		StagingUser.import columns, values, :validate => true
-		
+
 	end
 
 	def self.transfer
@@ -41,7 +41,7 @@ class StagingUser < ApplicationRecord
 		staged_users.each do |staged_user|
 
 			user = User.find_or_initialize_by(id: staged_user.user_id)
-			
+
 			user.id = staged_user.user_id
 			user.first_name = staged_user.first_name
 			user.last_name = staged_user.last_name

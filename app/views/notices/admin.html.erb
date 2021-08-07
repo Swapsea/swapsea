@@ -53,7 +53,7 @@
     </div>
     <div class="panel-body">
       <% @notices_preview.each do |notice_preview| %>
-      <div class="notice"> 
+      <div class="notice">
         <h3><%= notice_preview.title %></h3>
         <p>
           <%= notice_preview.desc.html_safe %>
@@ -64,7 +64,7 @@
       </div><!--/.notice -->
       <% end %>
       <% if @notices_preview.empty? %>
-        <div class="notice"> 
+        <div class="notice">
           <h3>(Empty)</h3>
           <p>
             Nothing to preview.

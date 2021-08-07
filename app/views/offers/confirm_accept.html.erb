@@ -20,19 +20,19 @@
 			<div class="table-success">
 				<%= render 'request_requirements_table' %>
 			</div>
-			
+
 		<% else %>
 
 			<div class="alert alert-danger">
 				<p><strong><%= @offer.request.roster.patrol_name %> - <%= @offer.request.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements</strong></p>
 			</div><!--/.alert -->
 			<div class="table-danger">
-				<%= render 'request_requirements_table' %>	
+				<%= render 'request_requirements_table' %>
 			</div>
 		<% end %>
 
 		<% if @after_swap_offer_patrol[:result] %>
-				
+
 			<div class="alert alert-success">
 				<p><strong><%= @offer.roster.patrol_name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
 			</div><!--/.alert -->
@@ -41,7 +41,7 @@
 			</div>
 
 		<% else %>
-				
+
 			<div class="alert alert-danger">
 				<p><strong><%= @offer.roster.patrol_name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements.</strong></p>
 			</div><!--/.alert -->

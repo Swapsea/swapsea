@@ -38,7 +38,7 @@
                                 break
                         }
                         while (n)
-                        } else 
+                        } else
                             p[n.zIndex] = n;
                     else {
                         q.push(n.apply(b, e));
@@ -88,7 +88,7 @@
                 i = [m, 1], g = o[m].n;
                 if (f[k] != e)
                     g[f[k]] && i.push(g[f[k]]);
-                else 
+                else
                     for (h in g)
                         g[c](h) && i.push(g[h]);
                         o.splice.apply(o, i)
@@ -150,7 +150,7 @@
                     x.percent != e ? (cy.splice(y, 1), l = 1) : k = x, d.attr(x.totalOrigin);
                     break
                 }
-            } else 
+            } else
                 f =+ v;
         for (var y = 0, z = b.percents.length; y < z; y++) {
             if (b.percents[y] == e || b.percents[y] > f * b.top) {
@@ -231,7 +231,7 @@
                         P = function(a) {
                             return cC(a, + R[1], + R[2], + R[3], + R[4], t)
                         }
-                    } else 
+                    } else
                         P = bf
                 }
                 q = j.start || b.start||+(new Date), x = {
@@ -261,7 +261,7 @@
                         return cA()
                     }
                 l && (x.start = new Date - x.ms * f), cy.length == 1 && cz(cA)
-            } else 
+            } else
                 k.initstatus = f, k.start = new Date - k.ms * f;
             eve("raphael.anim.start." + d.id, d, b)
         }
@@ -890,7 +890,7 @@
             }), g == "m" && f.length > 2 && (e.push([b][n](f.splice(0, 2))), g = "l", b = b == "m" ? "l" : "L");
             if (g == "r")
                 e.push([b][n](f));
-            else 
+            else
                 while (f.length >= d[g]) {
                     e.push([b][n](f.splice(0, d[g])));
                     if (!d[g])
@@ -1101,7 +1101,7 @@
                     }
             } else if (l[0] == "R")
                 p = [e, f][n](l.slice(1)), d.pop(), d = d[n](by(p, j)), k = ["R"][n](l.slice(-2));
-            else 
+            else
                 for (var s = 0, t = l.length; s < t; s++)
                     k[s] = l[s];
             switch (k[0]) {
@@ -1141,7 +1141,7 @@
             v > 1 && (v = w.sqrt(v), c = v * c, d = v * d);
             var x = c * c, y = d * d, A = (f == g?-1 : 1) * w.sqrt(z((x * y - x * u * u - y * t * t) / (x * u * u + y * t * t))), C = A * c * u / d + (a + h) / 2, D = A*-d * t / c + (b + i) / 2, E = w.asin(((b - D) / d).toFixed(9)), F = w.asin(((i - D) / d).toFixed(9));
             E = a < C ? B - E : E, F = h < C ? B - F : F, E < 0 && (E = B * 2 + E), F < 0 && (F = B * 2 + F), g && E > F && (E = E - B * 2), !g && F > E && (F = F - B * 2)
-        } else 
+        } else
             E = j[0], F = j[1], C = j[2], D = j[3];
         var G = F - E;
         if (z(G) > k) {
@@ -1491,7 +1491,7 @@
                         break
                     }
                 }
-            } else 
+            } else
                 a.preventDefault();
             var k = f.el.node, l, m = k.nextSibling, n = k.parentNode, p = k.style.display;
             h.win.opera && n.removeChild(k), k.style.display = "none", l = f.el.paper.getElementByPoint(b, c), k.style.display = p, h.win.opera && (m ? n.insertBefore(k, m) : n.appendChild(k)), l && eve("raphael.drag.over." + f.el.id, f.el, l), b += e, c += d, eve("raphael.drag.move." + f.el.id, f.move_scope || f.el, b - f.el._drag.x, c - f.el._drag.y, b, c, a)
@@ -2000,7 +2000,7 @@
         if (b && a.is(b, E) && a.is(b[0], "object"))
             for (var d = 0, e = b.length; d < e; d++)
                 this.items[d].attr(b[d]);
-        else 
+        else
             for (var f = 0, g = this.items.length; f < g; f++)
                 this.items[f].attr(b, c);
         return this
@@ -2211,7 +2211,7 @@
             typeof d == "string" && (d = q(d));
             for (var f in e)
                 e[b](f) && (f.substring(0, 6) == "xlink:" ? d.setAttributeNS(n, f.substring(6), c(e[f])) : d.setAttribute(f, c(e[f])))
-        } else 
+        } else
             d = a._g.doc.createElementNS("http://www.w3.org/2000/svg", d), d.style && (d.style.webkitTapHighlightColor = "rgba(0,0,0,0)");
         return d
     }, r = function(b, e) {
@@ -2322,7 +2322,7 @@
                 if (t || s)
                     w.d = Raphael.getSubpath(k.path, s, t);
                 q(j, w), d._.arrows[i + "Path"] = A, d._.arrows[i + "Marker"] = B, d._.arrows[i + "dx"] = F, d._.arrows[i + "Type"] = r, d._.arrows[i + "String"] = e
-            } else 
+            } else
                 f ? (s = d._.arrows.startdx * m || 0, t = a.getTotalLength(k.path) - s) : (s = 0, t = a.getTotalLength(k.path) - (d._.arrows.enddx * m || 0)), d._.arrows[i + "Path"] && q(j, {
                 d: Raphael.getSubpath(k.path, s, t)
             }), delete d._.arrows[i + "Path"], delete d._.arrows[i + "Marker"], delete d._.arrows[i + "dx"], delete d._.arrows[i + "Type"], delete d._.arrows[i + "String"];
@@ -2428,7 +2428,7 @@
                         i.setAttribute(o, p), d._.dirty = 1;
                         if (k.fx)
                             o = "x", p = k.x;
-                        else 
+                        else
                             break;
                         case"x":
                             k.fx && (p =- k.x - (k.width || 0));
@@ -2442,7 +2442,7 @@
                                 i.setAttribute(o, p), d._.dirty = 1;
                                 if (k.fy)
                                     o = "y", p = k.y;
-                                else 
+                                else
                                     break;
                                 case"y":
                                     k.fy && (p =- k.y - (k.height || 0));
@@ -2700,7 +2700,7 @@
         if (d != null) {
             var m = {};
             m[c] = d
-        } else 
+        } else
             c != null && a.is(c, "object") && (m = c);
         for (var n in m)
             k("raphael.attr." + n + "." + this.id, this, m[n]);
@@ -2748,7 +2748,7 @@
             }), d.appendChild(e), c.paper.defs.appendChild(d), c._blur = d, q(c.node, {
                 filter: "url(#" + d.id + ")"
             })
-        } else 
+        } else
             c._blur && (c._blur.parentNode.removeChild(c._blur), delete c._blur, delete c.attrs.blur), c.node.removeAttribute("filter")
     }, a._engine.circle = function(a, b, c, d) {
         var e = q("circle");
@@ -3010,7 +3010,7 @@
                     L.position = O.x + n + O.y, e._.fillpos = [O.x, O.y], a._preload(N[1], function() {
                         e._.fillsize = [this.offsetWidth, this.offsetHeight]
                     })
-                } else 
+                } else
                     L.color = a.getRGB(i.fill).hex, L.src = o, L.type = "solid", a.getRGB(i.fill).error && (t.type in{
                     circle: 1,
                     ellipse: 1
@@ -3122,9 +3122,9 @@
                 i.style.filter = g.toFilter();
                 var m = this.getBBox(), p = this.getBBox(1), q = m.x - p.x, r = m.y - p.y;
                 i.coordorigin = q*-u + n + r*-u, z(this, 1, 1, q, r, 0)
-            } else 
+            } else
                 i.style.filter = o, z(this, j.scalex, j.scaley, j.dx, j.dy, j.rotate)
-        } else 
+        } else
             i.style.filter = o, h.matrix = c(g), h.offset = g.offset();
         f && (this._.transform = f);
         return this

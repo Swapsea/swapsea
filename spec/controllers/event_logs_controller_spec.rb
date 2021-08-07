@@ -98,7 +98,7 @@ RSpec.describe EventLogsController, type: :controller do
         expect(response).to redirect_to(EventLog.last)
       end
     end
-  end 
+  end
 
   describe "DELETE #destroy" do
     it "destroys the requested event_log" do

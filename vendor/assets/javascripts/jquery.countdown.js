@@ -359,7 +359,7 @@ function(module) {
 
 	/**
 	 * Formats the entries as English labels
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts
 	 * @return {Array}
@@ -368,7 +368,7 @@ function(module) {
 
 	/**
 	 * Timespan representation of a duration of time
-	 * 
+	 *
 	 * @private
 	 * @this {Timespan}
 	 * @constructor
@@ -377,7 +377,7 @@ function(module) {
 
 	/**
 	 * Formats the Timespan as a sentance
-	 * 
+	 *
 	 * @private
 	 * @return {string}
 	 */
@@ -396,7 +396,7 @@ function(module) {
 
 	/**
 	 * Formats the Timespan as HTML
-	 * 
+	 *
 	 * @private
 	 * @param {string} tag HTML tag name to wrap each value
 	 * @return {string}
@@ -421,7 +421,7 @@ function(module) {
 
 	/**
 	 * Formats the entries as English labels
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts
 	 * @return {Array}
@@ -489,7 +489,7 @@ function(module) {
 
 	/**
 	 * Borrow any underflow units, carry any overflow units
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts
 	 * @param {string} toUnit
@@ -581,7 +581,7 @@ function(module) {
 
 	/**
 	 * Ripple up partial units one place
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts timespan
 	 * @param {number} frac accumulated fractional value
@@ -615,7 +615,7 @@ function(module) {
 
 	/**
 	 * Ripple up partial units to next existing
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts
 	 * @param {number} digits max number of decimal digits to output
@@ -656,7 +656,7 @@ function(module) {
 
 	/**
 	 * Borrow any underflow units, carry any overflow units
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts
 	 */
@@ -763,7 +763,7 @@ function(module) {
 
 	/**
 	 * Remove any units not requested
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts
 	 * @param {number} units the units to populate
@@ -881,7 +881,7 @@ function(module) {
 
 	/**
 	 * Populates the Timespan object
-	 * 
+	 *
 	 * @private
 	 * @param {Timespan} ts
 	 * @param {?Date} start the starting date
@@ -933,7 +933,7 @@ function(module) {
 
 	/**
 	 * Determine an appropriate refresh rate based upon units
-	 * 
+	 *
 	 * @private
 	 * @param {number} units the units to populate
 	 * @return {number} milliseconds to delay
@@ -958,7 +958,7 @@ function(module) {
 			// refresh hourly
 			return MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
 		}
-		
+
 		if (units & DAYS) {
 			// refresh daily
 			return MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * MINUTES_PER_HOUR * HOURS_PER_DAY;
@@ -970,7 +970,7 @@ function(module) {
 
 	/**
 	 * API entry point
-	 * 
+	 *
 	 * @public
 	 * @param {Date|number|null|function(Timespan,number)} start the starting date
 	 * @param {Date|number|null|function(Timespan,number)} end the ending date

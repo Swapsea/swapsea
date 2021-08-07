@@ -47,11 +47,11 @@ class RostersController < ApplicationController
     @roster = Roster.find(params[:id])
   end
 
-  def report    
+  def report
     @roster = Roster.find(params[:id])
     respond_to do |format|
       format.pdf do
-        render  :pdf => "#{@roster.patrol.name}", 
+        render  :pdf => "#{@roster.patrol.name}",
                 :layout => 'pdf.html.erb',
                  show_as_html: params[:debug].present?
 
@@ -64,7 +64,7 @@ class RostersController < ApplicationController
     if @roster.present?
       respond_to do |format|
         format.pdf do
-          render :pdf => "#{@roster.patrol.name}", 
+          render :pdf => "#{@roster.patrol.name}",
                   :layout => 'pdf.html.erb',
                    show_as_html: params[:debug].present?
 

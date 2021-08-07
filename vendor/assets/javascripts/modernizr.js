@@ -399,7 +399,7 @@ window.Modernizr = function(a, b, c) {
                             a && a.apply(this, b), l()
                         }
                     }(k[n])), g(a[n], j, b, n, h))
-                } else 
+                } else
                     !c && l()
             }
             var h=!!a.test, i = a.load || a.both, j = a.callback || f, k = j, l = a.complete || f, m, n;
@@ -411,7 +411,7 @@ window.Modernizr = function(a, b, c) {
         else if (w(a))
             for (i = 0; i < a.length; i++)
                 j = a[i], e(j) ? g(j, 0, l, 0) : w(j) ? B(j) : Object(j) === j && h(j, l);
-        else 
+        else
             Object(a) === a && h(a, l)
     }, B.addPrefix = function(a, b) {
         z[a] = b

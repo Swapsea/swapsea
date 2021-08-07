@@ -8,7 +8,7 @@
 
 begin
 
-	ActiveRecord::Base.transaction do 
+	ActiveRecord::Base.transaction do
 
 		Role.create(name: 'member')
 		Role.create(name: 'manager')
@@ -27,7 +27,7 @@ begin
 		User.create(first_name: 'Two', last_name: 'Member2', email: 'member2@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
 		User.create(first_name: 'Three', last_name: 'Member3', email: 'member3@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
 		User.create(first_name: 'Four', last_name: 'Member4', email: 'member4@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
-		
+
 		User.find_by(:email => 'alex.admin@swapsea.com.au').add_role(:admin)
 		User.find_by(:email => 'mark.manager@swapsea.com.au').add_role(:manager)
 		User.find_by(:email => 'member1@swapsea.com.au').add_role(:member)
@@ -38,5 +38,5 @@ begin
     end #transaction
 
 rescue ActiveRecord::RecordNotSaved
-	
+
 end

@@ -40,7 +40,7 @@
                     t.index = r;
                     break
                 }
-            } else 
+            } else
                 t.items = e.isArray(n.items) ? n.items : [n.items], t.index = n.index || 0;
             if (t.isOpen)
                 return t.updateItemHTML(), void 0;
@@ -103,7 +103,7 @@
             if (t.isIOS) {
                 var n = document.documentElement.clientWidth / window.innerWidth, i = window.innerHeight * n;
                 t.wrap.css("height", i), t.wH = i
-            } else 
+            } else
                 t.wH = e || I.height();
             t.fixedContentPos || t.wrap.css("height", t.wH), T("Resize")
         },
@@ -212,7 +212,7 @@
                         var r = o[1];
                         "replaceWith" === r ? i[0] !== n[0] && i.replaceWith(n) : "img" === r ? i.is("img") ? i.attr("src", n) : i.replaceWith('<img src="' + n + '" class="' + i.attr("class") + '" />') : i.attr(o[1], n)
                     }
-                } else 
+                } else
                     t.find(h + "-" + e).html(n)
             })
         },
@@ -268,9 +268,9 @@
                 r.items ? o = r.items[a] : (o = i, r.delegate && (o = o.find(r.delegate)), o = o.eq(a)), t._openClick({
                     mfpEl: o
                 }, i, r)
-            } else 
+            } else
                 t.isOpen && t[n].apply(t, Array.prototype.slice.call(arguments, 1));
-        else 
+        else
             n = e.extend(!0, {}, n), b ? i.data("magnificPopup", n) : i[0].magnificPopup = n, t.addGroup(i, n);
         return i
     };
@@ -295,7 +295,7 @@
                     if (r.length) {
                         var a = r[0].parentNode;
                         a && a.tagName && (O || (P = o.hiddenClass, O = k(P), P = "mfp-" + P), z = r.after(O).detach().removeClass(P)), t.updateStatus("ready")
-                    } else 
+                    } else
                         t.updateStatus("error", o.tNotFound), r = e("<div>");
                     return n.inlineElement = r, r
                 }

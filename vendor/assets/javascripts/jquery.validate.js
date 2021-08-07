@@ -553,7 +553,7 @@
                 for (var method in rules ) {
                     var rule = {
                         method: method,
-                        parameters: rules[method] 
+                        parameters: rules[method]
                     };
                     try {
 

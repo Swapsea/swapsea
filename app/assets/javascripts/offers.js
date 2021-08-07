@@ -11,8 +11,8 @@ offers = function() {
     });
 
     $('.dataTables_filter').addClass('position-relative');
-    $('.dataTables_filter input').addClass('form-control'); 
-    $('.dataTables_filter input').attr("placeholder", "Search"); 
+    $('.dataTables_filter input').addClass('form-control');
+    $('.dataTables_filter input').attr("placeholder", "Search");
 
 
     $('#btn-accept').click(function(event){

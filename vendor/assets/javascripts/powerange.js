@@ -326,7 +326,7 @@ module.exports = function (element, selector, checkYoSelf, root) {
     // the selector matches the root
     // (when the root is not the document)
     if (element === root)
-      return  
+      return
   }
 }
 });
@@ -937,7 +937,7 @@ module.exports = function(el, obj){
 
 /**
  * initialize new `Mouse`.
- * 
+ *
  * @param {Element} el
  * @param {Object} obj
  */
@@ -955,7 +955,7 @@ emitter(Mouse.prototype);
 
 /**
  * bind mouse.
- * 
+ *
  * @return {Mouse}
  */
 
@@ -993,7 +993,7 @@ Mouse.prototype.bind = function(){
 
 /**
  * unbind mouse.
- * 
+ *
  * @return {Mouse}
  */
 

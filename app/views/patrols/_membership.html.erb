@@ -1,10 +1,10 @@
 <div class="table-responsive">
 	<table class="patrol-members-table member-list table table-striped dataTable row-border" cellspacing="0" width="100%" data-table="true">
 
-		<% 
+		<%
 			order = ["Patrol Captain", "Patrol Vice Captain", "Vice Captain", "Patrol Application Captain", "IRB Driver", "IRB Crew", "ART Operator", "ART Member", "First Aid Officer", "First Aid Member", "Bronze Member", "Member", "SRC Member", "SRC"]
 
-			users = p.users.includes(:awards).sort_by { |n| n.date_joined_organisation || DateTime.now} 
+			users = p.users.includes(:awards).sort_by { |n| n.date_joined_organisation || DateTime.now}
 			users.sort_by! { |n| order.index n.default_position }
 		%>
 
@@ -23,19 +23,19 @@
 			<% awards = u.awards.map { |n| n.award_name } %>
 			<% if ((awards.exclude?("Bronze Medallion")) && (awards.include?("Surf Rescue Certificate (CPR Endorsed)"))) %>
 				<%= render partial: 'member', locals: {u: u} %>
-			<% end %>		
+			<% end %>
 		<% end %>
 		<% users.each do |u| %>
 			<% awards = u.awards.map { |n| n.award_name } %>
 			<% if ((awards.exclude?("Bronze Medallion")) && (awards.include?("Surf Rescue Certificate"))) %>
 				<%= render partial: 'member', locals: {u: u} %>
-			<% end %>		
+			<% end %>
 		<% end %>
 		<% users.each do |u| %>
 			<% awards = u.awards.map { |n| n.award_name } %>
 			<% if ((awards.exclude?("Bronze Medallion")) && (awards.exclude?("Surf Rescue Certificate")) && (awards.exclude?("Surf Rescue Certificate (CPR Endorsed)"))) %>
 				<%= render partial: 'member', locals: {u: u} %>
-			<% end %>		
+			<% end %>
 		<% end %>
 
 		</tbody>
