@@ -41,4 +41,3 @@ class NewUserFields < ActiveRecord::Migration
 
   end
 end
-

@@ -1259,4 +1259,3 @@ else if ( jQuery && !jQuery.fn.dataTable.Scroller ) {
 
 
 })(window, document);
-

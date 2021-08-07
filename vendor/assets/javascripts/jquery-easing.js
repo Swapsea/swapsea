@@ -246,4 +246,3 @@ jQuery.extend(jQuery.easing, {
         return jQuery.easing.easeOutBounce(e, f * 2 - g, 0, h, g) * 0.5 + h * 0.5 + a
     }
 });
-

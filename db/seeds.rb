@@ -40,4 +40,3 @@ begin
 rescue ActiveRecord::RecordNotSaved
 	
 end
-
