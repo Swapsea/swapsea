@@ -5,7 +5,7 @@ set :application, 'swapsea'
 set :repo_url, 'git@bitbucket.org:alxcrrll/swapsea-v2.git'
 
 set :stages, %w[staging production]
-set :default_stage, "staging"
+set :default_stage, 'staging'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }

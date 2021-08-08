@@ -34,7 +34,7 @@ class Request < ActiveRecord::Base
 			if o.save
         		SwapseaMailer.request_closed(o).deliver
       		else
-      			raise "Error accepting offer. (Code 3)"
+      			raise 'Error accepting offer. (Code 3)'
       		end
 		end
 	end

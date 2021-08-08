@@ -133,7 +133,7 @@ class OffersController < ApplicationController
               if other_offer.save
                 #SwapseaMailer.offer_closed(other_offer).deliver
               else
-                raise "Error accepting offer. (Code 1)"
+                raise 'Error accepting offer. (Code 1)'
                 redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 1)'
               end
             end
@@ -144,7 +144,7 @@ class OffersController < ApplicationController
               if other_offer.save
                 #SwapseaMailer.offer_unsuccessful(other_offer).deliver
               else
-                raise "Error accepting offer. (Code 2)"
+                raise 'Error accepting offer. (Code 2)'
                 redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 2)'
               end
             end
@@ -156,7 +156,7 @@ class OffersController < ApplicationController
               if corresponding_request.save
 
               else
-                raise "Error accepting offer. (Code 3-1)"
+                raise 'Error accepting offer. (Code 3-1)'
                 redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
               end
             end
@@ -167,7 +167,7 @@ class OffersController < ApplicationController
               if corresponding_offer.save
                 #SwapseaMailer.offer_closed(corresponding_offer).deliver
               else
-                raise "Error accepting offer. (Code 4)"
+                raise 'Error accepting offer. (Code 4)'
                 redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
               end
             end

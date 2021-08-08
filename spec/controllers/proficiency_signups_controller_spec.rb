@@ -10,24 +10,24 @@ RSpec.describe ProficiencySignupsController, type: :controller do
   end
 
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    skip('Add a hash of attributes valid for your model')
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    skip('Add a hash of attributes invalid for your model')
   }
 
   let(:valid_session) { FactoryBot.create(:user)  }
 
-  describe "GET #index" do
-    it "returns a success response" do
+  describe 'GET #index' do
+    it 'returns a success response' do
       get :index
       expect(response).to be_successful
     end
   end
 
-  describe "GET #show" do
-    it "returns a success response" do
+  describe 'GET #show' do
+    it 'returns a success response' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
       proficiency_signup = create :proficiency_signup
       get :show, params: {id: proficiency_signup.to_param}
@@ -35,15 +35,15 @@ RSpec.describe ProficiencySignupsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "returns a success response" do
+  describe 'GET #new' do
+    it 'returns a success response' do
       get :new
       expect(response).to be_successful
     end
   end
 
-  describe "GET #edit" do
-    it "returns a success response" do
+  describe 'GET #edit' do
+    it 'returns a success response' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
       get :edit, params: {id: proficiency_signup.to_param}
       expect(response).to be_successful
@@ -67,15 +67,15 @@ RSpec.describe ProficiencySignupsController, type: :controller do
   #   end
   # end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested proficiency_signup" do
+  describe 'DELETE #destroy' do
+    it 'destroys the requested proficiency_signup' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
       expect {
         delete :destroy, params: {id: proficiency_signup.to_param}
       }.to change(ProficiencySignup, :count).by(-1)
     end
 
-    it "redirects to the proficiency_signups list" do
+    it 'redirects to the proficiency_signups list' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
       delete :destroy, params: {id: proficiency_signup.to_param}
       expect(response).to redirect_to(proficiencies_path)

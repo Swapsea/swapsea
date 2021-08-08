@@ -29,7 +29,7 @@ class Email < ActiveRecord::Base
         end
 			end
 		end
-		"Sent " + emails_sent.to_s + " weekly patrol emails for " + organisation.to_s
+		'Sent ' + emails_sent.to_s + ' weekly patrol emails for ' + organisation.to_s
 	end
 
 
@@ -47,7 +47,7 @@ class Email < ActiveRecord::Base
         end
 			end
 		end
-    "Sent " + emails_sent.to_s + " weekly skills maintenance emails for " + organisation.to_s
+    'Sent ' + emails_sent.to_s + ' weekly skills maintenance emails for ' + organisation.to_s
 	end
 
 
@@ -67,7 +67,7 @@ class Email < ActiveRecord::Base
 				emails_sent = emails_sent + 1
 			end
 		end
-		"Sent " + emails_sent.to_s + " welcome emails for " + organisation
+		'Sent ' + emails_sent.to_s + ' welcome emails for ' + organisation
 	end
 
 
@@ -87,13 +87,13 @@ class Email < ActiveRecord::Base
 			reports_sent = reports_sent + 1
 		end
 		if reports_sent >= 1
-			subject = "Activity"
-			message = "North Bondi - Reports Sent: " + reports_sent.to_s
+			subject = 'Activity'
+			message = 'North Bondi - Reports Sent: ' + reports_sent.to_s
 			SwapseaMailer.activity(subject, message).deliver
 
 		else
-			subject = "No Activity"
-			message = "North Bondi - No reports to send."
+			subject = 'No Activity'
+			message = 'North Bondi - No reports to send.'
 			SwapseaMailer.activity(subject, message).deliver
 		end
 	end
@@ -105,12 +105,12 @@ class Email < ActiveRecord::Base
 			reports_sent = reports_sent + 1
 		end
 		if reports_sent >= 1
-			subject = "Activity"
-			message = "Bronte - Reports Sent: " + reports_sent.to_s
+			subject = 'Activity'
+			message = 'Bronte - Reports Sent: ' + reports_sent.to_s
 			SwapseaMailer.activity(subject, message).deliver
 		else
-			subject = "No Activity"
-			message = "Bronte - No reports to send."
+			subject = 'No Activity'
+			message = 'Bronte - No reports to send.'
 			SwapseaMailer.activity(subject, message).deliver
 		end
 	end

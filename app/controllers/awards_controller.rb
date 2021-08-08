@@ -10,7 +10,7 @@ class AwardsController < ApplicationController
         #@club = params[:club]
       #begin
         Award.upload(params[:file])
-        redirect_to admin_awards_path, notice: "Awards imported."
+        redirect_to admin_awards_path, notice: 'Awards imported.'
       #rescue
         #redirect_to root_url, notice: "Invalid CSV file format."
       #end

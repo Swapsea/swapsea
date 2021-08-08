@@ -6,15 +6,15 @@ class SwapsController < ApplicationController
 
   # GET /swaps
   def index
-    @swaps = Request.includes(:roster, :user, :offers, roster: [:patrol]).where('rosters.start > ? AND requests.status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation).references(:roster).order("rosters.start")
+    @swaps = Request.includes(:roster, :user, :offers, roster: [:patrol]).where('rosters.start > ? AND requests.status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation).references(:roster).order('rosters.start')
   end
 
   def my_offers
-    @swaps = Offer.where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted']).joins(:roster).order("rosters.start desc")
+    @swaps = Offer.where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted']).joins(:roster).order('rosters.start desc')
   end
 
   def my_requests
-    @swaps = Request.joins(:roster).where(:user => selected_user, :status => 'open').order("rosters.start")
+    @swaps = Request.joins(:roster).where(:user => selected_user, :status => 'open').order('rosters.start')
   end
 
   def confirmed

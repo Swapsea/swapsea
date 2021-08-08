@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
     include PgSearch::Model
     pg_search_scope :search, against: [:first_name, :last_name],
-    using: {tsearch: {dictionary: "english"}}
+    using: {tsearch: {dictionary: 'english'}}
 
     def self.text_search(query)
       if query.present?
@@ -159,21 +159,21 @@ class User < ActiveRecord::Base
     (6..spreadsheet.last_row).each do |i|
 
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      user = find_by_id(row["Member ID"]) || new
-      user.id = row["Member ID"]
-      user.first_name = row["First Name"]
-      user.last_name = row["Last Name"]
-      user.preferred_name = row["Preferred Name"]
-      user.gender = row["Gender"]
-      user.dob = row["Date of Birth"]
-      user.mobile_phone = row["Mobile Phone"].split('\'')[1] if row["Mobile Phone"].present?
+      user = find_by_id(row['Member ID']) || new
+      user.id = row['Member ID']
+      user.first_name = row['First Name']
+      user.last_name = row['Last Name']
+      user.preferred_name = row['Preferred Name']
+      user.gender = row['Gender']
+      user.dob = row['Date of Birth']
+      user.mobile_phone = row['Mobile Phone'].split('\'')[1] if row['Mobile Phone'].present?
         #user.home_phone = row["Home Phone"].split('\'')[1] if row["Home Phone"].present?
-        user.email = row["Email Address 1"]
-        user.category = row["Membership Category"]
-        user.date_joined_organisation = row["Date Joined"] || DateTime.iso8601('1900-01-01')
-        user.status = row["Status"]
-        user.season = row["Season"]
-        user.organisation = row["Organisation Display Name"]
+        user.email = row['Email Address 1']
+        user.category = row['Membership Category']
+        user.date_joined_organisation = row['Date Joined'] || DateTime.iso8601('1900-01-01')
+        user.status = row['Status']
+        user.season = row['Season']
+        user.organisation = row['Organisation Display Name']
         if !user.ics.present?
           user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.shuffle[0,64].join)
         end
@@ -184,9 +184,9 @@ class User < ActiveRecord::Base
 
     def self.open_spreadsheet(file)
       case File.extname(file.original_filename)
-      when ".csv" then Roo::CSV.new(file.path)
-      when ".xls" then Roo::Excel.new(file.path)
-      when ".xlsx" then Roo::Excelx.new(file.path)
+      when '.csv' then Roo::CSV.new(file.path)
+      when '.xls' then Roo::Excel.new(file.path)
+      when '.xlsx' then Roo::Excelx.new(file.path)
       else raise "Unknown file type: #{file.original_filename}"
       end
     end

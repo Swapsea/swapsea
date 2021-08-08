@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :patrol_member do
     user_id { 1 }
-    default_position { "MyString" }
-    organisation { "MyString" }
-    patrol_name { "MyString" }
+    default_position { 'MyString' }
+    organisation { 'MyString' }
+    patrol_name { 'MyString' }
   end
 end

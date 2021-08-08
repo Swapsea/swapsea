@@ -36,11 +36,11 @@ RSpec.describe EventLogsController, type: :controller do
   # EventLog. As you add validations to EventLog, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    skip('Add a hash of attributes valid for your model')
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    skip('Add a hash of attributes invalid for your model')
   }
 
   # This should return the minimal set of values that should be in the session
@@ -52,15 +52,15 @@ RSpec.describe EventLogsController, type: :controller do
     sign_in create :administrator
   end
 
-  describe "GET #index" do
-    it "returns a success response" do
+  describe 'GET #index' do
+    it 'returns a success response' do
       get :index
       expect(response).to be_successful
     end
   end
 
-  describe "GET #show" do
-    it "returns a success response" do
+  describe 'GET #show' do
+    it 'returns a success response' do
       event_log = FactoryBot.create(:event_log)
       event_log = create :event_log
       get :show, params: {id: event_log.to_param}
@@ -68,31 +68,31 @@ RSpec.describe EventLogsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "returns a success response" do
+  describe 'GET #new' do
+    it 'returns a success response' do
       get :new
       expect(response).to be_successful
     end
   end
 
-  describe "GET #edit" do
-    it "returns a success response" do
+  describe 'GET #edit' do
+    it 'returns a success response' do
       event_log = FactoryBot.create(:event_log)
       get :edit, params: {id: event_log.to_param}
       expect(response).to be_successful
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new EventLog" do
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new EventLog' do
         event_log_attrs = attributes_for :event_log
         expect {
           post :create, params: {event_log: event_log_attrs}
         }.to change(EventLog, :count).by(1)
       end
 
-      it "redirects to the created event_log" do
+      it 'redirects to the created event_log' do
         event_log_attrs = attributes_for :event_log
         post :create, params: {event_log: event_log_attrs}
         expect(response).to redirect_to(EventLog.last)
@@ -100,15 +100,15 @@ RSpec.describe EventLogsController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested event_log" do
+  describe 'DELETE #destroy' do
+    it 'destroys the requested event_log' do
       event_log = FactoryBot.create(:event_log)
       expect {
         delete :destroy, params: {id: event_log.to_param}
       }.to change(EventLog, :count).by(-1)
     end
 
-    it "redirects to the event_logs list" do
+    it 'redirects to the event_logs list' do
       event_log = FactoryBot.create(:event_log)
       delete :destroy, params: {id: event_log.to_param}
       expect(response).to redirect_to(event_logs_url)

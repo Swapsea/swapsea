@@ -1,5 +1,5 @@
 namespace :demo_club do
-	desc "Create demo club and populate"
+	desc 'Create demo club and populate'
 	task :populate, [:club_name] => :environment do |task, args|
 
 		club_name = args[:club_name]
@@ -17,8 +17,8 @@ namespace :demo_club do
 		patrols = Patrol.where(organisation: club.name)
 
 		today = Date.today
-		this_year = today.strftime("%Y")
-		next_yr = (today + 1.year).strftime("%y")
+		this_year = today.strftime('%Y')
+		next_yr = (today + 1.year).strftime('%y')
 
 		date1 = today.to_time - 50.years
 		date2 = today.to_time - 18.years
@@ -93,8 +93,8 @@ namespace :demo_club do
 	  				email: Faker::Internet.email,
 	  				password: 'password',
 	  				mobile_phone: '0401222333',
-	  				dob: Time.at((date2.to_f - date1.to_f)*rand + date1.to_f).strftime("%y-%m-%d"),
-	  				date_joined_organisation: today.strftime("%y-%m-%d"),
+	  				dob: Time.at((date2.to_f - date1.to_f)*rand + date1.to_f).strftime('%y-%m-%d'),
+	  				date_joined_organisation: today.strftime('%y-%m-%d'),
 	  				category: 'Active (18yrs and over)',
 	  				status: 'Active',
 	  				season: "#{this_year}/#{next_yr}",
@@ -114,7 +114,7 @@ namespace :demo_club do
 
 	  			user = User.find(user_id)
 
-	  			puts "   "+user.name+" - "+user.default_position
+	  			puts '   '+user.name+' - '+user.default_position
 
 	  			PatrolMember.create(
 
@@ -133,8 +133,8 @@ namespace :demo_club do
 						user_id: user_id,
 						award_number: award_number,
 						award_name: 'Silver Medallion Beach Management',
-						award_date: award_date.strftime("%Y-%m-%d"),
-						proficiency_date: (award_date+1.year).strftime("%Y-%m-%d"),
+						award_date: award_date.strftime('%Y-%m-%d'),
+						proficiency_date: (award_date+1.year).strftime('%Y-%m-%d'),
 						originating_organisation: club.name
 						)
 				end
@@ -145,8 +145,8 @@ namespace :demo_club do
 						user_id: user_id,
 						award_number: award_number,
 						award_name: 'Silver Medallion IRB Driver',
-						award_date: award_date.strftime("%Y-%m-%d"),
-						proficiency_date: (award_date+1.year).strftime("%Y-%m-%d"),
+						award_date: award_date.strftime('%Y-%m-%d'),
+						proficiency_date: (award_date+1.year).strftime('%Y-%m-%d'),
 						originating_organisation: club.name
 						)
 				end
@@ -157,8 +157,8 @@ namespace :demo_club do
 						user_id: user_id,
 						award_number: award_number,
 						award_name: 'IRB Crew Certificate',
-						award_date: award_date.strftime("%Y-%m-%d"),
-						proficiency_date: (award_date+1.year).strftime("%Y-%m-%d"),
+						award_date: award_date.strftime('%Y-%m-%d'),
+						proficiency_date: (award_date+1.year).strftime('%Y-%m-%d'),
 						originating_organisation: club.name
 						)
 				end
@@ -169,8 +169,8 @@ namespace :demo_club do
 						user_id: user_id,
 						award_number: award_number,
 						award_name: 'Advanced Resuscitation Techniques Certificate',
-						award_date: award_date.strftime("%Y-%m-%d"),
-						proficiency_date: (award_date+1.year).strftime("%Y-%m-%d"),
+						award_date: award_date.strftime('%Y-%m-%d'),
+						proficiency_date: (award_date+1.year).strftime('%Y-%m-%d'),
 						originating_organisation: club.name
 						)
 				end
@@ -181,14 +181,14 @@ namespace :demo_club do
 						user_id: user_id,
 						award_number: award_number,
 						award_name: 'Bronze Medallion',
-						award_date: award_date.strftime("%Y-%m-%d"),
-						proficiency_date: (award_date+1.year).strftime("%Y-%m-%d"),
+						award_date: award_date.strftime('%Y-%m-%d'),
+						proficiency_date: (award_date+1.year).strftime('%Y-%m-%d'),
 						originating_organisation: club.name
 						)
 				end
 
 				user.awards.each do |award|
-					puts "      "+award.award_number+" "+award.award_name
+					puts '      '+award.award_number+' '+award.award_name
 				end
 			end
 		end
@@ -197,7 +197,7 @@ namespace :demo_club do
 		# Create patrol roster
 		# start date, cycle through dates, check if saturday or sunday, morning or afternoon, allocate patrol, end date.
 		(Date.new(Date.today.year, 9, 25)..Date.new(Date.today.year+1, 4, 30)).each do |date|
-		  formatted_date = date.strftime("%Y-%m-%d")
+		  formatted_date = date.strftime('%Y-%m-%d')
 		  if date.saturday? || date.sunday?
 		  	Roster.create(
 	    		start: Time.zone.parse(formatted_date + ' ' + '07:45' + ':00').utc.iso8601,
@@ -207,7 +207,7 @@ namespace :demo_club do
 	  			secret: Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0,10].join)
 		  	)
 		  	roster = Roster.last
-		  	puts roster.patrol_name+'   '+roster.start.strftime("%a %d %b %Y")+'   '+roster.start.strftime("%H:%M")+' - '+roster.finish.strftime("%H:%M")
+		  	puts roster.patrol_name+'   '+roster.start.strftime('%a %d %b %Y')+'   '+roster.start.strftime('%H:%M')+' - '+roster.finish.strftime('%H:%M')
 		  	Roster.create(
 	    		start: Time.zone.parse(formatted_date + ' ' + '12:45' + ':00').utc.iso8601,
 	    		finish: Time.zone.parse(formatted_date + ' ' + '18:00' + ':00').utc.iso8601,
@@ -216,7 +216,7 @@ namespace :demo_club do
 	  			secret: Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0,10].join)
 		  	)
 			roster = Roster.last
-		  	puts roster.patrol_name+'   '+roster.start.strftime("%a %d %b %Y")+'   '+roster.start.strftime("%H:%M")+' - '+roster.finish.strftime("%H:%M")
+		  	puts roster.patrol_name+'   '+roster.start.strftime('%a %d %b %Y')+'   '+roster.start.strftime('%H:%M')+' - '+roster.finish.strftime('%H:%M')
 		  end
 		end
 

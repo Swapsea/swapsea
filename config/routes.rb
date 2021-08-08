@@ -67,7 +67,7 @@ Swapsea2::Application.routes.draw do
   get 'auth', to: 'home#token'
 
   %w( 400 402 403 404 405 406 408 422 500 502 503 504 505 ).each do |code|
-    get code, :to => "errors#show", :code => code
+    get code, :to => 'errors#show', :code => code
   end
 
   get 'admin', to: 'admin#index', as: 'admin'
@@ -139,11 +139,11 @@ Swapsea2::Application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    sessions: "users/sessions",
-    registrations: "users/registrations",
-    passwords: "users/passwords",
-    confirmations: "users/confirmations",
-    unlocks: "users/unlocks"
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
+    confirmations: 'users/confirmations',
+    unlocks: 'users/unlocks'
   }
 
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'

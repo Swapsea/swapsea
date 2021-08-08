@@ -31,7 +31,7 @@ class Award < ActiveRecord::Base
   		header = spreadsheet.row(5)
   		(6..spreadsheet.last_row).each do |i|
 	    	row = Hash[[header, spreadsheet.row(i)].transpose]
-	    	if row["Award Number"].present?
+	    	if row['Award Number'].present?
 
 	    		#award = find_by_award_number(row["Award Number"]) || new
 	    		#award.user_id = row["Member ID"]
@@ -46,13 +46,13 @@ class Award < ActiveRecord::Base
 	    		#award.save!
 
 	    		award = [
-					(row["Award Number"].gsub /'/, ''),
-					row["Award Name"],
-					row["Member ID"],
-					row["Award Date"],
-					row["Proficiency Date"],
-					row["Award Expiry Date"],
-					row["Award Originating Organisation"]
+					(row['Award Number'].gsub /'/, ''),
+					row['Award Name'],
+					row['Member ID'],
+					row['Award Date'],
+					row['Proficiency Date'],
+					row['Award Expiry Date'],
+					row['Award Originating Organisation']
 				]
 
 	    		values << award
@@ -65,10 +65,10 @@ class Award < ActiveRecord::Base
 
 	def self.open_spreadsheet(file)
   		case File.extname(file.original_filename)
-  			when ".txt" then Roo::CSV.new(file.path)
-  			when ".csv" then Roo::CSV.new(file.path)
-  			when ".xls" then Roo::Excel.new(file.path)
-  			when ".xlsx" then Roo::Excelx.new(file.path)
+  			when '.txt' then Roo::CSV.new(file.path)
+  			when '.csv' then Roo::CSV.new(file.path)
+  			when '.xls' then Roo::Excel.new(file.path)
+  			when '.xlsx' then Roo::Excelx.new(file.path)
   			else raise "Unknown file type: #{file.original_filename}"
   		end
 	end

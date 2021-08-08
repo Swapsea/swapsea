@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 RSpec.describe Swap, :type => :model do
 
 	before(:all) do
@@ -6,7 +6,7 @@ RSpec.describe Swap, :type => :model do
   end
 
   context '#Atributes' do
-    it "is valid with valid attributes" do
+    it 'is valid with valid attributes' do
       expect(@swap).to be_valid
     end
   end

@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 	def import
 		#begin
 			User.upload(params[:file])
-			redirect_to admin_users_path, notice: "Members imported."
+			redirect_to admin_users_path, notice: 'Members imported.'
 		#rescue
     	#redirect_to root_url, notice: "Invalid CSV file format."
   	#end

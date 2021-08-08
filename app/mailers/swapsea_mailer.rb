@@ -3,9 +3,9 @@ class SwapseaMailer < ActionMailer::Base
   def test
   	@user = User.find(4739300)
   	@url = 'https://www.swapsea.com.au'
-  	mail :subject => "Test Runner from Swapsea",
-         :to      => "alex@nerdx.com.au",
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+  	mail :subject => 'Test Runner from Swapsea',
+         :to      => 'alex@nerdx.com.au',
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to all users with a patrol in the next 7 days.
@@ -16,7 +16,7 @@ class SwapseaMailer < ActionMailer::Base
     @following_roster = following_roster
     mail :subject => @subject,
          :to      => user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
 
@@ -27,16 +27,16 @@ class SwapseaMailer < ActionMailer::Base
   def north_bondi_weekly_proficiencies(user, proficiency)
     @user = user
     @proficiency = proficiency
-    mail :subject => "Upcoming Skills Maintenance",
+    mail :subject => 'Upcoming Skills Maintenance',
          :to      => @user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   def north_bondi_not_yet_proficient(user)
     @user = user
-    mail :subject => "Sign Up for Skills Maintenance",
+    mail :subject => 'Sign Up for Skills Maintenance',
          :to      => @user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to offer user to confirm swap details.
@@ -44,9 +44,9 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.user
     @request = offer.request
-    mail :subject => "Swap confirmed",
+    mail :subject => 'Swap confirmed',
          :to      => offer.user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>",
+         :from    => 'Swapsea <noreply@swapsea.com.au>',
          :reply_to => offer.request.user.email
   end
 
@@ -55,9 +55,9 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.user
     @request = offer.request
-    mail :subject => "Offer unsuccessful",
+    mail :subject => 'Offer unsuccessful',
          :to      => offer.user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to offer user to notify them that their offer was declined.
@@ -65,9 +65,9 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.user
     @request = offer.request
-    mail :subject => "Offer declined",
+    mail :subject => 'Offer declined',
          :to      => offer.user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to request user to notify them that the offer was cancelled by the offer user.
@@ -75,9 +75,9 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.request.user
     @request = offer.request
-    mail :subject => "Offer cancelled",
+    mail :subject => 'Offer cancelled',
          :to      => offer.request.user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to request user to notify them that they have received an offer.
@@ -85,9 +85,9 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.request.user
     @request = offer.request
-    mail :subject => "Offer received",
+    mail :subject => 'Offer received',
          :to      => offer.request.user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to request user to notify them that the offer was accepted elsewhere or a request with identical detail was successful.
@@ -95,9 +95,9 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.request.user
     @request = offer.request
-    mail :subject => "Offer closed",
+    mail :subject => 'Offer closed',
          :to      => offer.request.user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>"
+         :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to request user to confirm swap details.
@@ -105,9 +105,9 @@ class SwapseaMailer < ActionMailer::Base
     @request = request
     @user = request.user
     @offer = request.accepted_offer
-    mail :subject => "Swap confirmed",
+    mail :subject => 'Swap confirmed',
          :to      => request.user.email,
-         :from    => "Swapsea <noreply@swapsea.com.au>",
+         :from    => 'Swapsea <noreply@swapsea.com.au>',
          :reply_to => request.accepted_offer.user.email
   end
 
@@ -116,9 +116,9 @@ class SwapseaMailer < ActionMailer::Base
     @request = offer.request
     @offer = offer
     @user = offer.user
-    mail :subject => "Request cancelled",
+    mail :subject => 'Request cancelled',
        :to      => offer.user.email,
-       :from    => "Swapsea <noreply@swapsea.com.au>"
+       :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to the offer user to notify them that the request was closed because it has been accepted as an offer elsewhere.
@@ -126,24 +126,24 @@ class SwapseaMailer < ActionMailer::Base
     @request = offer.request
     @offer = offer
     @user = offer.user
-    mail :subject => "Request closed",
+    mail :subject => 'Request closed',
        :to      => offer.user.email,
-       :from    => "Swapsea <noreply@swapsea.com.au>"
+       :from    => 'Swapsea <noreply@swapsea.com.au>'
   end
 
   def welcome_email(user)
     @user = user
-    mail :subject => "Activate your Swapsea account for 2021/22",
+    mail :subject => 'Activate your Swapsea account for 2021/22',
        :to      => user.email,
-       :from    => "Swapsea <help@swapsea.com.au>"
+       :from    => 'Swapsea <help@swapsea.com.au>'
   end
 
   def activity(subject, message)
     @subject = subject
     @message = message
     mail :subject => @subject,
-       :to      => "Alex <alex@swapsea.com.au>",
-       :from    => "Swapsea <help@swapsea.com.au>"
+       :to      => 'Alex <alex@swapsea.com.au>',
+       :from    => 'Swapsea <help@swapsea.com.au>'
   end
 
 ###############################################################################
@@ -165,10 +165,10 @@ class SwapseaMailer < ActionMailer::Base
     end
 
     # Send Email
-    mail :subject => (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime("%a %d %b %y %H:%M") + '-' + roster.finish.strftime("%H:%M"),
-    :to =>  to.collect(&:email).join(","),
+    mail :subject => (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime('%a %d %b %y %H:%M') + '-' + roster.finish.strftime('%H:%M'),
+    :to =>  to.collect(&:email).join(','),
     :cc => 'office@northbondisurfclub.com, captain@northbondisurfclub.com, vicecaptain@northbondisurfclub.com, alex@swapsea.com.au',
-    :from    => "Swapsea <help@swapsea.com.au>"
+    :from    => 'Swapsea <help@swapsea.com.au>'
   end
 
   def bronte_patrol_report(roster)
@@ -187,10 +187,10 @@ class SwapseaMailer < ActionMailer::Base
     end
 
     # Send Email
-    mail :subject => (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime("%a %d %b %y %H:%M") + '-' + roster.finish.strftime("%H:%M"),
-    :to =>  to.collect(&:email).join(","),
+    mail :subject => (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime('%a %d %b %y %H:%M') + '-' + roster.finish.strftime('%H:%M'),
+    :to =>  to.collect(&:email).join(','),
     #:cc => 'admin@brontesurfclub.com.au, iljko@double8.com.au, alex@swapsea.com.au',
-    :from    => "Swapsea <help@swapsea.com.au>"
+    :from    => 'Swapsea <help@swapsea.com.au>'
   end
 
 end

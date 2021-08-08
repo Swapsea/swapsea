@@ -20,10 +20,10 @@
 # Learn more: http://github.com/javan/whenever
 
 every 60.minutes do
-   rake "ts:index", :output => "/var/www/swapsea/production/shared/log/production.log",  :environment => 'production'
-   rake "ts:index", :output => "/var/www/swapsea/staging/shared/log/staging.log",  :environment => 'staging'
+   rake 'ts:index', :output => '/var/www/swapsea/production/shared/log/production.log',  :environment => 'production'
+   rake 'ts:index', :output => '/var/www/swapsea/staging/shared/log/staging.log',  :environment => 'staging'
 end
 
 every :reboot do
-  rake "thinking_sphinx:start"
+  rake 'thinking_sphinx:start'
 end

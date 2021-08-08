@@ -6,7 +6,7 @@ class RostersController < ApplicationController
   def import
     #begin
       Roster.upload(params[:file])
-      redirect_to admin_rosters_path, notice: "Roster imported."
+      redirect_to admin_rosters_path, notice: 'Roster imported.'
     #rescue
       #redirect_to root_url, notice: "Invalid CSV file format."
     #end
@@ -24,12 +24,12 @@ class RostersController < ApplicationController
     @patrols = Patrol.joins(:users).where(:organisation => selected_user.organisation)
 
     if params[:view] == 'all'
-        @rosters = Roster.where("organisation = ?", selected_user.organisation).sort_by(&:start)
-        @rosters_this_year = Roster.where("organisation = ?", selected_user.organisation)
+        @rosters = Roster.where('organisation = ?', selected_user.organisation).sort_by(&:start)
+        @rosters_this_year = Roster.where('organisation = ?', selected_user.organisation)
     else
         finish_time = Time.now - 3.hours
-        @rosters = Roster.where("finish >= ? AND organisation = ?", finish_time.to_s(:db), selected_user.organisation).sort_by(&:start)
-        @rosters_this_year = Roster.where("finish >= ? AND organisation = ?", finish_time.to_s(:db), selected_user.organisation)
+        @rosters = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation).sort_by(&:start)
+        @rosters_this_year = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation)
     end
 
     @rosters_this_year_sorted = @rosters_this_year.sort_by(&:start)
@@ -37,9 +37,9 @@ class RostersController < ApplicationController
   end
 
   def swaps
-    @my_requests = Request.joins(:roster).where(:user => selected_user, :status => 'open').order("rosters.start")
-    @my_offers = Offer.where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted']).joins(:roster).order("rosters.start desc")
-    @requests = Request.joins(:roster).where('start > ? AND status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation).order("rosters.start")
+    @my_requests = Request.joins(:roster).where(:user => selected_user, :status => 'open').order('rosters.start')
+    @my_offers = Offer.where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted']).joins(:roster).order('rosters.start desc')
+    @requests = Request.joins(:roster).where('start > ? AND status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation).order('rosters.start')
     @confirmed_offers = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted', selected_user.organisation).order(updated_at: :desc)
   end
 

@@ -20,12 +20,12 @@ class EmailsController < ApplicationController
 
 	def send_welcome_email_test
 		Email.welcome_email_test(params[:email])
-		redirect_to admin_emails_path, notice: "Sent welcome email to " + params[:email]
+		redirect_to admin_emails_path, notice: 'Sent welcome email to ' + params[:email]
 	end
 
 	def send_welcome_email
 		Email.welcome_email(params[:organisation])
-		redirect_to admin_emails_path, notice: "Sent welcome email(s) to " + params[:organisation]
+		redirect_to admin_emails_path, notice: 'Sent welcome email(s) to ' + params[:organisation]
 	end
 
 end

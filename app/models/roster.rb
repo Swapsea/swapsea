@@ -1,13 +1,13 @@
 class Roster < ActiveRecord::Base
 
-	belongs_to :patrol, primary_key: "name", foreign_key: "patrol_name"
+	belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
 	has_many :requests
 	has_many :swaps
 	has_many :offers
 
 	include PgSearch::Model
   	pg_search_scope :search, against: [:patrol_name, :organisation],
-  	using: {tsearch: {dictionary: "english"}}
+  	using: {tsearch: {dictionary: 'english'}}
 
 	def self.text_search(query)
 		if query.present?
@@ -232,11 +232,11 @@ class Roster < ActiveRecord::Base
 	def self.upload(file)
 		#Roster.delete_all #delete all data in table before import
   		allowed_attributes = [
-  			"Rostered Team Name",
-			"Patrol Roster Date",
-			"Patrol Roster Start Time",
-			"Patrol Roster Finish Time",
-			"Organisation Display Name"
+  			'Rostered Team Name',
+			'Patrol Roster Date',
+			'Patrol Roster Start Time',
+			'Patrol Roster Finish Time',
+			'Organisation Display Name'
   		]
 
   		spreadsheet = open_spreadsheet(file)
@@ -244,15 +244,15 @@ class Roster < ActiveRecord::Base
   		(6..spreadsheet.last_row).each do |i|
 	    	row = Hash[[header, spreadsheet.row(i)].transpose]
 	    		roster = Roster.new
-	    		roster.patrol_name = row["Rostered Team Name"]
-	    		date = row["Patrol Roster Date"].split('/')
+	    		roster.patrol_name = row['Rostered Team Name']
+	    		date = row['Patrol Roster Date'].split('/')
 	    		year = date[0].to_s
 	    		month = date [1].to_s
 	    		day = date [2].to_s
 	    		formatted_date = year+'-'+month+'-'+day
-	    		roster.start = Time.zone.parse(formatted_date + ' ' + row["Patrol Roster Start Time"] + ':00').utc.iso8601
-	    		roster.finish = Time.zone.parse(formatted_date + ' ' + row["Patrol Roster Finish Time"] + ':00').utc.iso8601
-	  			roster.organisation = row["Organisation Display Name"]
+	    		roster.start = Time.zone.parse(formatted_date + ' ' + row['Patrol Roster Start Time'] + ':00').utc.iso8601
+	    		roster.finish = Time.zone.parse(formatted_date + ' ' + row['Patrol Roster Finish Time'] + ':00').utc.iso8601
+	  			roster.organisation = row['Organisation Display Name']
 	  			roster.generate_secret
 	    		roster.save!
   		end
@@ -260,9 +260,9 @@ class Roster < ActiveRecord::Base
 
 	def self.open_spreadsheet(file)
   		case File.extname(file.original_filename)
-  			when ".csv" then Roo::CSV.new(file.path)
-  			when ".xls" then Roo::Excel.new(file.path)
-  			when ".xlsx" then Roo::Excelx.new(file.path)
+  			when '.csv' then Roo::CSV.new(file.path)
+  			when '.xls' then Roo::Excel.new(file.path)
+  			when '.xlsx' then Roo::Excelx.new(file.path)
   			else raise "Unknown file type: #{file.original_filename}"
   		end
 	end

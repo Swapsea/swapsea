@@ -45,7 +45,7 @@ class SwapseaSms
       "#{@next_roster.start.strftime("%H:%M")} -",
       "#{@next_roster.finish.strftime("%H:%M")}.",
       "Can't make it? Swap at www.swapsea.com.au.",
-      "Reply STOP to unsubscribe."
+      'Reply STOP to unsubscribe.'
     ].join(' ')
   end
 end

@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 RSpec.describe PatrolMember, :type => :model do
 
 	before(:all) do
@@ -6,7 +6,7 @@ RSpec.describe PatrolMember, :type => :model do
   end
 
   context '#Atributes' do
-    it "is valid with valid attributes" do
+    it 'is valid with valid attributes' do
       expect(@patrol_member).to be_valid
     end
   end

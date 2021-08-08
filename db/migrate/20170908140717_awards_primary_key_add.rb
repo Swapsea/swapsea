@@ -6,6 +6,6 @@ class AwardsPrimaryKeyAdd < ActiveRecord::Migration[5.0]
     # ActiveRecord::StatementInvalid: PG::InvalidTableDefinition: ERROR:  multiple primary keys for table "awards" are not allowed
     # execute "ALTER TABLE awards DROP CONSTRAINT awards_pkey"
 
-    execute "ALTER TABLE awards ADD PRIMARY KEY (award_number);"
+    execute 'ALTER TABLE awards ADD PRIMARY KEY (award_number);'
   end
 end

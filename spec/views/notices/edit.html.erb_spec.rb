@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "notices/edit", type: :view do
+RSpec.describe 'notices/edit', type: :view do
   before(:each) do
     @notice = assign(:notice, FactoryBot.create(:notice))
   end

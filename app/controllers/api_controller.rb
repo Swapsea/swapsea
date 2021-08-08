@@ -7,10 +7,10 @@ class ApiController < ApplicationController
   def upload_members
     @file = params[:file_data]
     if StagingUser.dump(@file)
-      EventLog.create!(subject: 'Import', desc: "Members import succeeded.")
+      EventLog.create!(subject: 'Import', desc: 'Members import succeeded.')
       head 200
     else
-      EventLog.create!(subject: 'Import', desc: "Members import failed.")
+      EventLog.create!(subject: 'Import', desc: 'Members import failed.')
       head 500
     end
   end
@@ -18,10 +18,10 @@ class ApiController < ApplicationController
   def upload_awards
     @file = params[:file_data]
     if StagingAward.dump(@file)
-      EventLog.create!(subject: 'Import', desc: "Awards import succeeded.")
+      EventLog.create!(subject: 'Import', desc: 'Awards import succeeded.')
       head 200
     else
-      EventLog.create!(subject: 'Import', desc: "Awards import failed.")
+      EventLog.create!(subject: 'Import', desc: 'Awards import failed.')
       head 500
     end
   end
@@ -29,10 +29,10 @@ class ApiController < ApplicationController
   def upload_patrol_members
     @file = params[:file_data]
     if StagingPatrolMember.dump(@file)
-      EventLog.create!(subject: 'Import', desc: "Patrol Member import succeeded.")
+      EventLog.create!(subject: 'Import', desc: 'Patrol Member import succeeded.')
       head 200
     else
-      EventLog.create!(subject: 'Import', desc: "Patrol Member import failed.")
+      EventLog.create!(subject: 'Import', desc: 'Patrol Member import failed.')
       head 500
     end
   end

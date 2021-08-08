@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "patrol_members/new", type: :view do
+RSpec.describe 'patrol_members/new', type: :view do
   before(:each) do
     @patrol_member = assign(:patrol_member, FactoryBot.create(:patrol_member))
   end

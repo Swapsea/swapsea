@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 RSpec.describe User, :type => :model do
 
 	before(:all) do
@@ -6,7 +6,7 @@ RSpec.describe User, :type => :model do
   end
 
   context '#Atributes' do
-    it "is valid with valid attributes" do
+    it 'is valid with valid attributes' do
       expect(@user).to be_valid
     end
   end
@@ -33,10 +33,10 @@ RSpec.describe User, :type => :model do
   end
 
   describe User do
-    let(:club) { double(name: "organisation") }
-    it "find club by name" do
+    let(:club) { double(name: 'organisation') }
+    it 'find club by name' do
       expect(Club).to receive(:find_by_name).and_return(club)
-      expect(Club.find_by_name("organisation")).to eq club
+      expect(Club.find_by_name('organisation')).to eq club
     end
   end
 end

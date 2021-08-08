@@ -12,18 +12,18 @@ class StagingUser < ApplicationRecord
 			row = Hash[[header, spreadsheet.row(i)].transpose]
 
 			user = [
-				row["Member ID"],
-				row["First Name"],
-				row["Last Name"],
-				row["Preferred Name"],
-				row["Date of Birth"],
-				(row["Mobile Phone"].split('\'')[1] if row["Mobile Phone"].present?),
-				row["Email Address 1"],
-				row["Sub-Membership Category"],
-				(row["Date Joined"] || DateTime.iso8601('1900-01-01')),
-				row["Status"],
-				row["Season"],
-				row["Organisation Display Name"]
+				row['Member ID'],
+				row['First Name'],
+				row['Last Name'],
+				row['Preferred Name'],
+				row['Date of Birth'],
+				(row['Mobile Phone'].split('\'')[1] if row['Mobile Phone'].present?),
+				row['Email Address 1'],
+				row['Sub-Membership Category'],
+				(row['Date Joined'] || DateTime.iso8601('1900-01-01')),
+				row['Status'],
+				row['Season'],
+				row['Organisation Display Name']
 			]
 
 			values << user
@@ -68,9 +68,9 @@ class StagingUser < ApplicationRecord
 
 	def self.open_spreadsheet(file)
 		case File.extname(file.original_filename)
-		when ".csv" then Roo::CSV.new(file.path)
-		when ".xls" then Roo::Excel.new(file.path)
-		when ".xlsx" then Roo::Excelx.new(file.path)
+		when '.csv' then Roo::CSV.new(file.path)
+		when '.xls' then Roo::Excel.new(file.path)
+		when '.xlsx' then Roo::Excelx.new(file.path)
 		else raise "Unknown file type: #{file.original_filename}"
 		end
 	end

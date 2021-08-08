@@ -47,7 +47,7 @@ RSpec.describe AwardsController, type: :controller do
     expect(response).to redirect_to award_path assigns :award
   end
 
-  it "should destroy award" do
+  it 'should destroy award' do
     award = create :award
     expect{ delete :destroy, params: { id: award }}.to change{ Award.count }.by(-1)
     expect(response).to redirect_to awards_path

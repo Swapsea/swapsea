@@ -1,7 +1,7 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "admin/index" do
-  it "displays all the text" do
+RSpec.describe 'admin/index' do
+  it 'displays all the text' do
     render
 
     expect(rendered).to match /Index/

@@ -1,7 +1,7 @@
 set :stage, :production
 
-set :deploy_to, "/var/www/swapsea/production"
-set :branch, "production"
+set :deploy_to, '/var/www/swapsea/production'
+set :branch, 'production'
 
 # Simple Role Syntax
 # ==================

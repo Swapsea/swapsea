@@ -4,6 +4,6 @@ FactoryBot.define do
     to { Faker::Internet.email }
     cc { Faker::Internet.email }
     bcc { Faker::Internet.email }
-    subject { "MyString" }
+    subject { 'MyString' }
   end
 end

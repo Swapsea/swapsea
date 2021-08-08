@@ -112,8 +112,8 @@ Swapsea2::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = ('true' == ENV['ACTION_MAILER_PERFORM_DELIVERIES'])
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.asset_host = "https://www.swapsea.com.au"
+  config.action_mailer.default :charset => 'utf-8'
+  config.action_mailer.asset_host = 'https://www.swapsea.com.au'
 
   config.action_mailer.smtp_settings = {
     :address              => ENV['SMTP_SERVER'],

@@ -6,7 +6,7 @@ class PatrolMembersController < ApplicationController
   def import
     #begin
       PatrolMember.upload(params[:file])
-      redirect_to admin_patrol_members_path, notice: "Patrol members imported."
+      redirect_to admin_patrol_members_path, notice: 'Patrol members imported.'
     #rescue
       #redirect_to root_url, notice: "Invalid CSV file format."
     #end

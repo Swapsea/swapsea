@@ -43,8 +43,8 @@ Swapsea2::Application.configure do
   # :file will write to tmp/mails.
   config.action_mailer.delivery_method = :file
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.asset_host = "https://www.swapsea.com.au"
+  config.action_mailer.default :charset => 'utf-8'
+  config.action_mailer.asset_host = 'https://www.swapsea.com.au'
 
   config.action_mailer.smtp_settings = {
     :address              => ENV['SMTP_SERVER'],

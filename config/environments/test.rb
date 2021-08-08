@@ -35,8 +35,8 @@ Swapsea2::Application.configure do
   config.active_support.deprecation = :stderr
   config.action_mailer.delivery_method = :file
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.asset_host = "https://www.swapsea.com.au"
+  config.action_mailer.default :charset => 'utf-8'
+  config.action_mailer.asset_host = 'https://www.swapsea.com.au'
   config.action_mailer.default_url_options = { :host => 'https://www.swapsea.com.au' }
 
   config.action_mailer.smtp_settings = {
