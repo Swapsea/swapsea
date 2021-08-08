@@ -18,30 +18,30 @@ class RequestsControllerTest < ActionController::TestCase
 
   test "should create request" do
     assert_difference('Request.count') do
-      post :create, request: { comment: @request.comment, email: @request.email, mobile: @request.mobile, roster_id: @request.roster_id, status: @request.status, user_id: @request.user_id }
+      post :create, params: { request: { comment: @request.comment, email: @request.email, mobile: @request.mobile, roster_id: @request.roster_id, status: @request.status, user_id: @request.user_id } }
     end
 
     assert_redirected_to request_path(assigns(:request))
   end
 
   test "should show request" do
-    get :show, id: @request
+    get :show, params: { id: @request }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @request
+    get :edit, params: { id: @request }
     assert_response :success
   end
 
   test "should update request" do
-    patch :update, id: @request, request: { comment: @request.comment, email: @request.email, mobile: @request.mobile, roster_id: @request.roster_id, status: @request.status, user_id: @request.user_id }
+    patch :update, params: { id: @request, request: { comment: @request.comment, email: @request.email, mobile: @request.mobile, roster_id: @request.roster_id, status: @request.status, user_id: @request.user_id } }
     assert_redirected_to request_path(assigns(:request))
   end
 
   test "should destroy request" do
     assert_difference('Request.count', -1) do
-      delete :destroy, id: @request
+      delete :destroy, params: { id: @request }
     end
 
     assert_redirected_to requests_path

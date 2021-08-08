@@ -18,30 +18,30 @@ class OutreachPatrolSignUpsControllerTest < ActionController::TestCase
 
   test "should create outreach_patrol_sign_up" do
     assert_difference('OutreachPatrolSignUp.count') do
-      post :create, outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id, user_id: @outreach_patrol_sign_up.user_id }
+      post :create, params: { outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id, user_id: @outreach_patrol_sign_up.user_id } }
     end
 
     assert_redirected_to outreach_patrol_sign_up_path(assigns(:outreach_patrol_sign_up))
   end
 
   test "should show outreach_patrol_sign_up" do
-    get :show, id: @outreach_patrol_sign_up
+    get :show, params: { id: @outreach_patrol_sign_up }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @outreach_patrol_sign_up
+    get :edit, params: { id: @outreach_patrol_sign_up }
     assert_response :success
   end
 
   test "should update outreach_patrol_sign_up" do
-    patch :update, id: @outreach_patrol_sign_up, outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id, user_id: @outreach_patrol_sign_up.user_id }
+    patch :update, params: { id: @outreach_patrol_sign_up, outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id, user_id: @outreach_patrol_sign_up.user_id } }
     assert_redirected_to outreach_patrol_sign_up_path(assigns(:outreach_patrol_sign_up))
   end
 
   test "should destroy outreach_patrol_sign_up" do
     assert_difference('OutreachPatrolSignUp.count', -1) do
-      delete :destroy, id: @outreach_patrol_sign_up
+      delete :destroy, params: { id: @outreach_patrol_sign_up }
     end
 
     assert_redirected_to outreach_patrol_sign_ups_path

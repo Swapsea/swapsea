@@ -18,30 +18,30 @@ class SettingsControllerTest < ActionController::TestCase
 
   test "should create setting" do
     assert_difference('Setting.count') do
-      post :create, setting: { key: @setting.key, value: @setting.value }
+      post :create, params: { setting: { key: @setting.key, value: @setting.value } }
     end
 
     assert_redirected_to setting_path(assigns(:setting))
   end
 
   test "should show setting" do
-    get :show, id: @setting
+    get :show, params: { id: @setting }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @setting
+    get :edit, params: { id: @setting }
     assert_response :success
   end
 
   test "should update setting" do
-    patch :update, id: @setting, setting: { key: @setting.key, value: @setting.value }
+    patch :update, params: { id: @setting, setting: { key: @setting.key, value: @setting.value } }
     assert_redirected_to setting_path(assigns(:setting))
   end
 
   test "should destroy setting" do
     assert_difference('Setting.count', -1) do
-      delete :destroy, id: @setting
+      delete :destroy, params: { id: @setting }
     end
 
     assert_redirected_to settings_path

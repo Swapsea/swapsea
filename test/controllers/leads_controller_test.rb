@@ -18,30 +18,30 @@ class LeadsControllerTest < ActionController::TestCase
 
   test "should create lead" do
     assert_difference('Lead.count') do
-      post :create, lead: { email: @lead.email, name: @lead.name, organisation: @lead.organisation }
+      post :create, params: { lead: { email: @lead.email, name: @lead.name, organisation: @lead.organisation } }
     end
 
     assert_redirected_to lead_path(assigns(:lead))
   end
 
   test "should show lead" do
-    get :show, id: @lead
+    get :show, params: { id: @lead }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @lead
+    get :edit, params: { id: @lead }
     assert_response :success
   end
 
   test "should update lead" do
-    patch :update, id: @lead, lead: { email: @lead.email, name: @lead.name, organisation: @lead.organisation }
+    patch :update, params: { id: @lead, lead: { email: @lead.email, name: @lead.name, organisation: @lead.organisation } }
     assert_redirected_to lead_path(assigns(:lead))
   end
 
   test "should destroy lead" do
     assert_difference('Lead.count', -1) do
-      delete :destroy, id: @lead
+      delete :destroy, params: { id: @lead }
     end
 
     assert_redirected_to leads_path

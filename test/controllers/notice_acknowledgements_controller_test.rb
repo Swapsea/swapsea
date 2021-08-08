@@ -18,30 +18,30 @@ class NoticeAcknowledgementsControllerTest < ActionController::TestCase
 
   test "should create notice_acknowledgement" do
     assert_difference('NoticeAcknowledgement.count') do
-      post :create, notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id, user_id: @notice_acknowledgement.user_id }
+      post :create, params: { notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id, user_id: @notice_acknowledgement.user_id } }
     end
 
     assert_redirected_to notice_acknowledgement_path(assigns(:notice_acknowledgement))
   end
 
   test "should show notice_acknowledgement" do
-    get :show, id: @notice_acknowledgement
+    get :show, params: { id: @notice_acknowledgement }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @notice_acknowledgement
+    get :edit, params: { id: @notice_acknowledgement }
     assert_response :success
   end
 
   test "should update notice_acknowledgement" do
-    patch :update, id: @notice_acknowledgement, notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id, user_id: @notice_acknowledgement.user_id }
+    patch :update, params: { id: @notice_acknowledgement, notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id, user_id: @notice_acknowledgement.user_id } }
     assert_redirected_to notice_acknowledgement_path(assigns(:notice_acknowledgement))
   end
 
   test "should destroy notice_acknowledgement" do
     assert_difference('NoticeAcknowledgement.count', -1) do
-      delete :destroy, id: @notice_acknowledgement
+      delete :destroy, params: { id: @notice_acknowledgement }
     end
 
     assert_redirected_to notice_acknowledgements_path

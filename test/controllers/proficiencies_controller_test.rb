@@ -18,30 +18,30 @@ class ProficienciesControllerTest < ActionController::TestCase
 
   test "should create proficiency" do
     assert_difference('Proficiency.count') do
-      post :create, proficiency: { finish: @proficiency.finish, max_online_signup: @proficiency.max_online_signup, max_signup: @proficiency.max_signup, name: @proficiency.name, start: @proficiency.start }
+      post :create, params: { proficiency: { finish: @proficiency.finish, max_online_signup: @proficiency.max_online_signup, max_signup: @proficiency.max_signup, name: @proficiency.name, start: @proficiency.start } }
     end
 
     assert_redirected_to proficiency_path(assigns(:proficiency))
   end
 
   test "should show proficiency" do
-    get :show, id: @proficiency
+    get :show, params: { id: @proficiency }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @proficiency
+    get :edit, params: { id: @proficiency }
     assert_response :success
   end
 
   test "should update proficiency" do
-    patch :update, id: @proficiency, proficiency: { finish: @proficiency.finish, max_online_signup: @proficiency.max_online_signup, max_signup: @proficiency.max_signup, name: @proficiency.name, start: @proficiency.start }
+    patch :update, params: { id: @proficiency, proficiency: { finish: @proficiency.finish, max_online_signup: @proficiency.max_online_signup, max_signup: @proficiency.max_signup, name: @proficiency.name, start: @proficiency.start } }
     assert_redirected_to proficiency_path(assigns(:proficiency))
   end
 
   test "should destroy proficiency" do
     assert_difference('Proficiency.count', -1) do
-      delete :destroy, id: @proficiency
+      delete :destroy, params: { id: @proficiency }
     end
 
     assert_redirected_to proficiencies_path

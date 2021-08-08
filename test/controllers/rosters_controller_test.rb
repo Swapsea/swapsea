@@ -18,30 +18,30 @@ class RostersControllerTest < ActionController::TestCase
 
   test "should create roster" do
     assert_difference('Roster.count') do
-      post :create, roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation, patrol: @roster.patrol, start: @roster.start }
+      post :create, params: { roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation, patrol: @roster.patrol, start: @roster.start } }
     end
 
     assert_redirected_to roster_path(assigns(:roster))
   end
 
   test "should show roster" do
-    get :show, id: @roster
+    get :show, params: { id: @roster }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @roster
+    get :edit, params: { id: @roster }
     assert_response :success
   end
 
   test "should update roster" do
-    patch :update, id: @roster, roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation, patrol: @roster.patrol, start: @roster.start }
+    patch :update, params: { id: @roster, roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation, patrol: @roster.patrol, start: @roster.start } }
     assert_redirected_to roster_path(assigns(:roster))
   end
 
   test "should destroy roster" do
     assert_difference('Roster.count', -1) do
-      delete :destroy, id: @roster
+      delete :destroy, params: { id: @roster }
     end
 
     assert_redirected_to rosters_path
