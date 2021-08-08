@@ -11,7 +11,7 @@ universal = function() {
 
     /* ---------------------------------------------- /*
         Make Table rows clickable
-    /* ---------------------------------------------- */  
+    /* ---------------------------------------------- */
 
     $("div.location").click(function() {
       window.location = $(this).data("link")
@@ -64,13 +64,13 @@ universal = function() {
     });
 
     function showMenu() {
-        
+
 
         overlayMenu.addClass('active');
     }
 
     function hideMenu() {
-        
+
 
         overlayMenu.removeClass('active');
     }

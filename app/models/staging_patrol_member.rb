@@ -10,7 +10,7 @@ class StagingPatrolMember < ApplicationRecord
 		header = spreadsheet.row(5)
 		(6..spreadsheet.last_row).each do |i|
 			row = Hash[[header, spreadsheet.row(i)].transpose]
-			
+
 			patrol_member = [
 				row["Member ID"],
 				row["Team Name"],

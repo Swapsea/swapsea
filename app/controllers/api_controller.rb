@@ -84,7 +84,7 @@ class ApiController < ApplicationController
   #def parse_csv_string(string)
   #	arr_of_arrs = CSV.parse(string)
   #	CSV.generate do |csv|
-  #		arr_of_arrs.each do |row|	
+  #		arr_of_arrs.each do |row|
   #			csv << row
   #		end
   #	end

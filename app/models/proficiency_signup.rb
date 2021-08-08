@@ -1,12 +1,12 @@
 class ProficiencySignup < ActiveRecord::Base
-	
+
 	include PublicActivity::Common
 
 	belongs_to :proficiency
 	belongs_to :user
 
 	# Returns User IDs for users that have signed up for a Proficiency.
-	def self.signed 
+	def self.signed
 		ProficiencySignup.pluck(:user_id)
 	end
 

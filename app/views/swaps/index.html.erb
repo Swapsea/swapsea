@@ -12,7 +12,7 @@
 
   <div class="col-sm-12">
     <div class="requests">
-      <% if @swaps.present? %>           
+      <% if @swaps.present? %>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2>Swap Requests</h2>
@@ -22,7 +22,7 @@
             <% @swaps.each do |request| %>
             <div class="swap-request">
               <div class="datetime col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <strong> 
+                <strong>
                   <%= request.roster.start.strftime("%a, %d %b %y") %>
                 </strong>
               </div><!--/.datetime -->
@@ -41,7 +41,7 @@
             <% end %>
           </div><!--/.swap-requests -->
         </div><!--/.panel-body -->
-      </div><!--/.panel -->       
+      </div><!--/.panel -->
       <% else %>
       <div class="panel panel-default">
         <div class="panel-heading">

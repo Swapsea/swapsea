@@ -24,7 +24,7 @@
 	</div>
 	<div class="panel-body">
 		<textarea rows="10" cols="70" onclick="this.focus();this.select()" readonly="readonly">
-<% users.sort!{ |a,b| a.last_name.downcase <=> b.last_name.downcase }.each do |member| 
+<% users.sort!{ |a,b| a.last_name.downcase <=> b.last_name.downcase }.each do |member|
 %><%= member.first_name %> <%= member.last_name %> &lt;<%= member.email %>&gt;&comma;
 <% end %></textarea>
 	</div>

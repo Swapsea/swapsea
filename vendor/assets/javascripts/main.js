@@ -42,10 +42,10 @@ $(function() {
     $(".dial").knob();
 });
 
-	
-	
-	
-	
+
+
+
+
 $(document).ready(function(){
 
 
@@ -65,7 +65,7 @@ $("div.right").toggleClass("mobile-content");
 //SIDEBAR MENU
 $('#sidebar-menu > ul > li > a').click(function() {
 	$('#sidebar-menu li').removeClass('selected');
-	$(this).closest('li').addClass('selected');	
+	$(this).closest('li').addClass('selected');
 	var checkElement = $(this).next();
 		if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
 			$(this).closest('li').removeClass('selected');
@@ -78,8 +78,8 @@ $('#sidebar-menu > ul > li > a').click(function() {
 		if($(this).closest('li').find('ul').children().length == 0) {
 			return true;
 			} else {
-			return false;	
-		}		
+			return false;
+		}
 });
 
 
@@ -139,7 +139,7 @@ $('.gallery-wrap').each(function() { // the containers for all your galleries
           enabled:true
         }
     });
-}); 
+});
 
 if ($('#morris-bar-home').length > 0){
 //MORRIS
@@ -227,14 +227,14 @@ Morris.Area({
 
   var Inputmask = function (element, options) {
     if (isAndroid) return // No support because caret positioning doesn't work on Android
-    
+
     this.$element = $(element)
     this.options = $.extend({}, Inputmask.DEFAULS, options)
     this.mask = String(this.options.mask)
-    
+
     this.init()
     this.listen()
-        
+
     this.checkVal() //Perform initial check for existing values
   }
 
@@ -253,7 +253,7 @@ Morris.Area({
     var defs = this.options.definitions
     var len = this.mask.length
 
-    this.tests = [] 
+    this.tests = []
     this.partialPosition = this.mask.length
     this.firstNonMaskPos = null
 
@@ -282,7 +282,7 @@ Morris.Area({
       }).join('')
     }, this))
   }
-    
+
   Inputmask.prototype.listen = function() {
     if (this.$element.attr("readonly")) return
 
@@ -326,19 +326,19 @@ Morris.Area({
         end = begin + range.text.length
       }
       return {
-        begin: begin, 
+        begin: begin,
         end: end
       }
     }
   }
-  
+
   Inputmask.prototype.seekNext = function(pos) {
     var len = this.mask.length
     while (++pos <= len && !this.tests[pos]);
 
     return pos
   }
-  
+
   Inputmask.prototype.seekPrev = function(pos) {
     while (--pos >= 0 && !this.tests[pos]);
 
@@ -388,7 +388,7 @@ Morris.Area({
 
   Inputmask.prototype.focusEvent = function() {
     this.focusText = this.$element.val()
-    var len = this.mask.length 
+    var len = this.mask.length
     var pos = this.checkVal()
     this.writeBuffer()
 
@@ -518,17 +518,17 @@ Morris.Area({
     return (this.partialPosition ? i : this.firstNonMaskPos)
   }
 
-  
+
   // INPUTMASK PLUGIN DEFINITION
   // ===========================
 
   var old = $.fn.inputmask
-  
+
   $.fn.inputmask = function (options) {
     return this.each(function () {
       var $this = $(this)
       var data = $this.data('inputmask')
-      
+
       if (!data) $this.data('inputmask', (data = new Inputmask(this, options)))
     })
   }

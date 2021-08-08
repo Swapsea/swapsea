@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
 
 	def index
 		@notices =  Notice.visible
-		
+
 		@my_roster = selected_user.custom_roster
 		@my_patrol = selected_user.patrol
 

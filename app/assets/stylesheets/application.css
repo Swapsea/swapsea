@@ -23,7 +23,7 @@
  *= require pace-theme-minimal
  *= require sortable
  *= require summernote
- 
+
  *= require overrides
  *= require home
 
@@ -31,4 +31,3 @@
 
  *= require_self
  */
-

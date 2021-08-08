@@ -24,7 +24,7 @@
             <% if selected_user != current_user %>
               <li><span>LOGGED IN AS</span><h3><%= current_user.name %></h3></li>
               <li><span>ACTING ON BEHALF OF</span><h3><%= selected_user.name %></h3></li>
-            <% else %> 
+            <% else %>
               <li><span>LOGGED IN AS</span><h3><%= current_user.name %></h3></li>
             <% end %>
             <li><%= link_to raw('<i class="fa fa-file"></i> My Account'), user_path(selected_user) %></li>
@@ -55,7 +55,7 @@
           </a>
         </div>
         <div class="body rows scroll-y">
-          <div class="sidebar-inner slimscroller">        
+          <div class="sidebar-inner slimscroller">
             <!--
             <div id="search">
               <form role="form">
@@ -137,11 +137,11 @@
               <ul class="nav extra-navbar navbar-nav navbar-right hidden-xs">
 
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> 
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
                   <% if selected_user != current_user %>
                     <%= current_user.name %> <i>as</i> <%= selected_user.name %>
-                  <% else %> 
-                    <%= selected_user.name %> 
+                  <% else %>
+                    <%= selected_user.name %>
                   <% end %>
                   <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -170,7 +170,7 @@
 
           <!-- Display selected user msg if another user selected -->
           <% if selected_user && (selected_user.id != current_user.id) %>
-            <div class="alert alert-warning switch-user-alert"> 
+            <div class="alert alert-warning switch-user-alert">
               <%= form_tag selected_user_path, method: :post do %>
                 You are currently viewing Swapsea as <strong><%= selected_user.first_name %> <%= selected_user.last_name %></strong>.
                 <%= hidden_field_tag 'path', request.path %>

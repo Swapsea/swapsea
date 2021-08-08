@@ -643,15 +643,15 @@
                 var c = b.data(this, "isotope");
                 if (!c) {
                     x("cannot call methods on isotope prior to initialization; attempted to call method '" + a + "'");
-                    return 
+                    return
                 }
                 if (!b.isFunction(c[a]) || a.charAt(0) === "_") {
                     x("no such method '" + a + "' for isotope instance");
-                    return 
+                    return
                 }
                 c[a].apply(c, d)
             })
-        } else 
+        } else
             this.each(function() {
                 var d = b.data(this, "isotope");
                 d ? (d.option(a), d._init(c)) : b.data(this, "isotope", new b.Isotope(a, this, c))

@@ -163,7 +163,7 @@ div.DTTT_print_info p {
 /*
  * FixedColumns styles
  */
- 
+
 div.DTFC_LeftHeadWrapper table,
 div.DTFC_LeftFootWrapper table,
 table.DTFC_Cloned tr.even {
@@ -202,7 +202,7 @@ div.DTFC_LeftFootWrapper table {
 
 
 
-/* 
+/*
  * DataTables Pagination Setting
  */
 
@@ -261,7 +261,7 @@ div.dataTables_info {
 }
 
 
-/* 
+/*
  * Autofill DataTables Setting
  */
 
@@ -286,7 +286,7 @@ div.AutoFill_border {
 /*
  * DataTables ColReorder Setting
  */
- 
+
 table.DTCR_clonedTable {
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 202;
@@ -343,12 +343,12 @@ button.ColVis_Button {
   height: 34px;
   padding: 0px 26px 0 12px;
 }
-button.ColVis_Button::-moz-focus-inner { 
+button.ColVis_Button::-moz-focus-inner {
   border: none !important;
   padding: 0;
 }
 button.ColVis_Button:focus,
-button.ColVis_Button:active { 
+button.ColVis_Button:active {
   outline: none;
 }
 div.ColVis_collectionBackground {
@@ -438,7 +438,7 @@ div.ColVis_catcher {
 /*
  * DataTables FixedHeader
  */
- 
+
 .FixedHeader_Cloned table.dataTable {
     margin: 0 !important;
 }
@@ -666,7 +666,7 @@ button.DTTT_button {
   padding: 3px 8px;
 }
 
-.DTTT_button embed { 
+.DTTT_button embed {
   outline: none;
 }
 
@@ -695,7 +695,7 @@ div.DTTT_disabled,
 a.DTTT_disabled {
   color: #999;
   border: 1px solid #d0d0d0;
-  
+
   background: #ffffff; /* Old browsers */
   background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* Chrome10+,Safari5.1+ */
   background:    -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* FF3.6+ */
@@ -779,7 +779,7 @@ div.DTTT_collection {
       -ms-border-radius: 5px;
        -o-border-radius: 5px;
           border-radius: 5px;
-  
+
   -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
      -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
       -ms-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -802,7 +802,7 @@ div.DTTT_collection a.DTTT_button {
   display: block;
   float: none;
   margin-bottom: 4px;
-  
+
   -webkit-box-shadow: 1px 1px 3px #999;
      -moz-box-shadow: 1px 1px 3px #999;
       -ms-box-shadow: 1px 1px 3px #999;
@@ -835,18 +835,18 @@ div.DTTT_collection a.DTTT_button {
   background:      -o-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* Opera 11.10+ */
   background:         linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
-  
+
   opacity: 0.95;
 
   border: 1px solid black;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  
+
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
       -ms-border-radius: 6px;
        -o-border-radius: 6px;
           border-radius: 6px;
-  
+
   -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
      -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
       -ms-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);

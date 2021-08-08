@@ -65,7 +65,7 @@ RSpec.describe LeadsController, type: :controller do
         expect(response).to redirect_to(thanks_path)
       end
     end
-  end 
+  end
 
   describe "DELETE #destroy" do
     it "destroys the requested lead" do

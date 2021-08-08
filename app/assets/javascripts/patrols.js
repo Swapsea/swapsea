@@ -16,13 +16,13 @@ patrols = function() {
     	paging: false,
     	info: false,
     	"oLanguage": { "sSearch": "" },
-  
+
     });
 
     $('.patrol-members-table').siblings('.dataTables_filter').addClass('position-relative');
     $('.patrol-members-contact-details-table').siblings('.dataTables_filter').addClass('position-relative');
-    $('.position-relative input').addClass('form-control'); 
-    $('.position-relative input').attr("placeholder", "Search"); 
+    $('.position-relative input').addClass('form-control');
+    $('.position-relative input').attr("placeholder", "Search");
 
 }
 

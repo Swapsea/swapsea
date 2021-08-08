@@ -5,7 +5,7 @@ class Roster < ActiveRecord::Base
 	has_many :swaps
 	has_many :offers
 
-	include PgSearch
+	include PgSearch::Model
   	pg_search_scope :search, against: [:patrol_name, :organisation],
   	using: {tsearch: {dictionary: "english"}}
 
@@ -60,7 +60,7 @@ class Roster < ActiveRecord::Base
 			:bronze => bronze,
 			:src => src
 			}
-		end 
+		end
 	end
 
 	def roster_awards_without_req(req)
@@ -90,7 +90,7 @@ class Roster < ActiveRecord::Base
 			:bronze => a_bronze,
 			:src => a_src
 			}
-		end 
+		end
 	end
 
 	def roster_meets_requirements(req)
@@ -120,7 +120,7 @@ class Roster < ActiveRecord::Base
 			:bronze => bronze,
 			:src => src
 			}
-		end 
+		end
 	end
 
 	def meets_requirements
@@ -150,8 +150,8 @@ class Roster < ActiveRecord::Base
 			:bronze => bronze,
 			:src => src
 			}
-		end 
-		
+		end
+
 	end
 
 	def awards
@@ -163,27 +163,27 @@ class Roster < ActiveRecord::Base
 	end
 
 	def awards_count
-		self.bronze = awards.count { |n| n.award_name == 'Bronze Medallion' } 
+		self.bronze = awards.count { |n| n.award_name == 'Bronze Medallion' }
 		self.bbm = awards.count { |n| n.award_name == 'Silver Medallion Beach Management' }
 		self.artc = awards.count { |n| (n.award_name == 'Advanced Resuscitation Techniques Certificate') || (n.award_name == 'Advanced Resuscitation Techniques [AID]') || (n.award_name == 'Advanced Resuscitation Techniques Refresher') || (n.award_name == 'Advanced Resuscitation Certificate') || (n.award_name == 'Advanced Resuscitation Certificate Instructor') }
 		self.irbd = awards.count { |n| n.award_name == 'Silver Medallion IRB Driver' }
 		self.irbc = awards.count { |n| n.award_name == 'IRB Crew Certificate' }
 		self.src = awards.count { |n| (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)') }
-		self.firstaid = awards.count { |n| n.award_name == 'Senior First Aid Certificate (PUA)' }		
-		self.spinal = awards.count { |n| n.award_name == 'Spinal Management' }	
+		self.firstaid = awards.count { |n| n.award_name == 'Senior First Aid Certificate (PUA)' }
+		self.spinal = awards.count { |n| n.award_name == 'Spinal Management' }
 		self.save
 	end
 
 	def qualifications
-		bronze = awards.count { |n| n.award_name == 'Bronze Medallion' } 
+		bronze = awards.count { |n| n.award_name == 'Bronze Medallion' }
 		bbm = awards.count { |n| n.award_name == 'Silver Medallion Beach Management' }
 		artc = awards.count { |n| (n.award_name == 'Advanced Resuscitation Techniques Certificate') || (n.award_name == 'Advanced Resuscitation Techniques [AID]') || (n.award_name == 'Advanced Resuscitation Techniques Refresher') || (n.award_name == 'Advanced Resuscitation Certificate') || (n.award_name == 'Advanced Resuscitation Certificate Instructor') }
 		irbd = awards.count { |n| n.award_name == 'Silver Medallion IRB Driver' }
-		irbc = awards.count { |n| n.award_name == 'IRB Crew Certificate' }	
+		irbc = awards.count { |n| n.award_name == 'IRB Crew Certificate' }
 		src = awards.count { |n| (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)') }
 		{
 			:bronze => bronze,
-			:bbm => bbm,	
+			:bbm => bbm,
 			:artc => artc,
 			:irbd => irbd,
 			:irbc => irbc,
@@ -209,7 +209,7 @@ class Roster < ActiveRecord::Base
 		ids.each do |i|
 			swap = swaps.where(:user_id => i.user.id).includes(:user).last
 			if ((swap.on_off_patrol == false) && (patrol.users.where(:id => i.user.id).present?))
-				removed << swap.user 
+				removed << swap.user
 			end
 		end
 		removed
@@ -231,11 +231,11 @@ class Roster < ActiveRecord::Base
 
 	def self.upload(file)
 		#Roster.delete_all #delete all data in table before import
-  		allowed_attributes = [ 
-  			"Rostered Team Name", 
-			"Patrol Roster Date", 
-			"Patrol Roster Start Time", 
-			"Patrol Roster Finish Time", 
+  		allowed_attributes = [
+  			"Rostered Team Name",
+			"Patrol Roster Date",
+			"Patrol Roster Start Time",
+			"Patrol Roster Finish Time",
 			"Organisation Display Name"
   		]
 
@@ -243,13 +243,13 @@ class Roster < ActiveRecord::Base
   		header = spreadsheet.row(5)
   		(6..spreadsheet.last_row).each do |i|
 	    	row = Hash[[header, spreadsheet.row(i)].transpose]
-	    		roster = Roster.new 
+	    		roster = Roster.new
 	    		roster.patrol_name = row["Rostered Team Name"]
 	    		date = row["Patrol Roster Date"].split('/')
 	    		year = date[0].to_s
 	    		month = date [1].to_s
 	    		day = date [2].to_s
-	    		formatted_date = year+'-'+month+'-'+day 
+	    		formatted_date = year+'-'+month+'-'+day
 	    		roster.start = Time.zone.parse(formatted_date + ' ' + row["Patrol Roster Start Time"] + ':00').utc.iso8601
 	    		roster.finish = Time.zone.parse(formatted_date + ' ' + row["Patrol Roster Finish Time"] + ':00').utc.iso8601
 	  			roster.organisation = row["Organisation Display Name"]

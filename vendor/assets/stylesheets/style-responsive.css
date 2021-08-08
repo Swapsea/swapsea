@@ -99,7 +99,7 @@
 		background: #ddd;
 	}
 	.user-profile-sidebar{text-align: center;}
-	
+
 }
 
 /*Phone*/
@@ -161,16 +161,16 @@
 		overflow: hidden;
 		background: #ddd;
 	}
-	
+
 	footer{text-align: center;}
-	
+
 	.lock-screen{text-align: center;}
 	.ava-lock-screen{text-align: center; margin-bottom: 20px;}
 	.ava-lock-screen img{
 		width: 100px;
 		margin: 0;
 	}
-	
+
 	.la-pricing-table .la-col-4{width: 50%;}
 	.user-profile-sidebar{text-align: center;}
 }

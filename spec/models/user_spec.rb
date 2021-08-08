@@ -36,7 +36,7 @@ RSpec.describe User, :type => :model do
     let(:club) { double(name: "organisation") }
     it "find club by name" do
       expect(Club).to receive(:find_by_name).and_return(club)
-      expect(Club.find_by_name("organisation")).to eq club 
+      expect(Club.find_by_name("organisation")).to eq club
     end
   end
 end

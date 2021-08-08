@@ -19,7 +19,7 @@ class PatrolsController < ApplicationController
     else
       @patrols = nil
     end
-    
+
     render layout: 'admin'
   end
 

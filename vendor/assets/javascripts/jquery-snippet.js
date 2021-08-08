@@ -517,7 +517,7 @@ ZeroClipboard.Client.prototype = {
                 setTimeout(function() {
                     c.receiveEvent("load", null)
                 }, 1);
-                return 
+                return
             }
             if (!this.ready && navigator.userAgent.match(/Firefox/) && navigator.userAgent.match(/Windows/)) {
                 var c = this;
@@ -525,7 +525,7 @@ ZeroClipboard.Client.prototype = {
                     c.receiveEvent("load", null)
                 }, 100);
                 this.ready = true;
-                return 
+                return
             }
             this.ready = true;
             try {
@@ -633,7 +633,7 @@ function sh_highlightString(X, ah) {
     var ab = function(c, b) {
         var g = c.length;
         if (g === 0) {
-            return 
+            return
         }
         if (!b) {
             var e = ai.length;
@@ -786,7 +786,7 @@ function sh_addClass(h, f) {
     var g = sh_getClasses(h);
     for (var e = 0; e < g.length; e++) {
         if (f.toLowerCase() === g[e].toLowerCase()) {
-            return 
+            return
         }
     }
     g.push(f);
@@ -937,7 +937,7 @@ function sh_getXMLHttpRequest() {
 function sh_load(language, element, prefix, suffix) {
     if (language in sh_requests) {
         sh_requests[language].push(element);
-        return 
+        return
     }
     sh_requests[language] = [element];
     var request = sh_getXMLHttpRequest();

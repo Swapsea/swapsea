@@ -151,11 +151,11 @@
                             if (h(b.target).is("a"))
                                 return;
                                 F(a, !1, !0)
-                            } else 
+                            } else
                                 y && (/ut|nd/.test(d) ? (g[z](B), e[z](C)) : (g[v](B), e[v](C)));
                                 if (J)
                                     b.stopPropagation();
-                                else 
+                                else
                                     return !1
                     }
                 });
@@ -179,18 +179,17 @@
                     else {
                         if (/wn|er|in/.test(d))
                             g[v](e);
-                        else 
+                        else
                             g[z](e + " " + w);
                         if (m.length && y && e == B)
                             m[/ut|nd/.test(d) ? z: v](C)
                         }
                     if (J)
                         b.stopPropagation();
-                    else 
+                    else
                         return !1
                 }
             })
         })
     }
 })(window.jQuery || window.Zepto);
-

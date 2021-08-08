@@ -43,7 +43,7 @@ class StagingAward < ApplicationRecord
 			staged_awards.each do |staged_award|
 
 				award = [
-					staged_award.award_number, 
+					staged_award.award_number,
 					staged_award.award_name,
 					staged_award.user_id,
 					staged_award.award_date,

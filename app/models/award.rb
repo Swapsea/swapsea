@@ -11,15 +11,15 @@ class Award < ActiveRecord::Base
 
 		#Award.joins(:user).where("users.organisation" => club).readonly(false).delete_all
 
-  		# allowed_attributes = [ 
-  		# 	"Member ID", 
-		# 	"Award Name", 
-		# 	"Award Number", 
-		# 	"Award Date", 
-		# 	"Proficiency Date", 
-		# 	"Award Expiry Date", 
-		# 	"Award Allocation Date", 
-		# 	"Proficiency Allocation Date", 
+  		# allowed_attributes = [
+  		# 	"Member ID",
+		# 	"Award Name",
+		# 	"Award Number",
+		# 	"Award Date",
+		# 	"Proficiency Date",
+		# 	"Award Expiry Date",
+		# 	"Award Allocation Date",
+		# 	"Proficiency Allocation Date",
 		# 	"Award Originating Organisation"
   		# ]
 
@@ -34,7 +34,7 @@ class Award < ActiveRecord::Base
 	    	if row["Award Number"].present?
 
 	    		#award = find_by_award_number(row["Award Number"]) || new
-	    		#award.user_id = row["Member ID"] 
+	    		#award.user_id = row["Member ID"]
 	    		#award.award_name = row["Award Name"]
 	    		#award.award_number = row["Award Number"].delete! ?'
 	  			#award.award_date = row["Award Date"]

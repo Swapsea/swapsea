@@ -14,9 +14,9 @@
 		<div class="col-sm-12">
 			<div class="requests">
 				<!-- Tab panes -->
-				<div class="tab-content">	
+				<div class="tab-content">
 					<div class="tab-pane active" id="swap-requests-tab">
-						<% if @requests.present? %>						
+						<% if @requests.present? %>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h2>Swap Requests</h2>
@@ -26,7 +26,7 @@
 										<% @requests.each do |request| %>
 											<div class="swap-request">
 												<div class="datetime col-xs-2 col-sm-2 col-md-2 col-lg-2">
-													<strong> 
+													<strong>
 														<%= request.roster.start.strftime("%a, %d %b %y") %>
 													</strong>
 												</div><!--/.datetime -->
@@ -53,7 +53,7 @@
 										<% end %>
 									</div><!--/.swap-requests -->
 								</div><!--/.panel-body -->
-							</div><!--/.panel -->				
+							</div><!--/.panel -->
 						<% else %>
 							<div class="panel panel-default">
 								<div class="panel-heading">
@@ -113,7 +113,7 @@
 							</div>
 						<% end %>
 					</div><!--/.tab -->
-			  
+
 					<div class="tab-pane" id="my-offers-tab">
 						<% if @my_offers.present? %>
 							<div class="panel panel-default">
@@ -183,7 +183,7 @@
 						<% end %>
 					</div><!--/.tab -->
 
-					
+
 
 					<div class="tab-pane" id="confirmed-swaps-tab">
 						<% if @confirmed_offers.present? %>
@@ -211,7 +211,7 @@
 												<%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
 												<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
 											</div>
-							          
+
 							            </div><!--/.swap-request -->
 									<% end %>
 									</div><!--/.swap-requests -->
@@ -227,7 +227,7 @@
 								</div>
 							</div>
 						<% end %>
-					</div>	
+					</div>
 				</div><!--/.tab-content -->
 			</div><!--/.requests -->
 		</div><!--/.col -->

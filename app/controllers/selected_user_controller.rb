@@ -5,10 +5,10 @@ class SelectedUserController < ApplicationController
 	def index
 
 		@referrer = request.referrer
-		
-		if selected_user.has_role? :admin 
+
+		if selected_user.has_role? :admin
 			@switch_users = User.all.order(:last_name)
-		elsif ((selected_user.has_role? :manager) && (selected_user.organisation.present?))							      			
+		elsif ((selected_user.has_role? :manager) && (selected_user.organisation.present?))
 			@switch_users = User.where(:organisation => selected_user.organisation).order(:last_name)
 		else
 			@switch_users = User.where(:email => selected_user.email).order(:last_name)

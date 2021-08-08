@@ -18,12 +18,10 @@ class Email < ActiveRecord::Base
               SwapseaMailer.weekly_rosters(user, next_roster, following_roster, subject).deliver
               SwapseaSms.weekly_roster(user, next_roster).deliver
               emails_sent = emails_sent + 1
-              Email.create!(to: user.email, subject: subject)
             elsif user_roster.first.present?
               SwapseaMailer.weekly_rosters(user, next_roster, nil, subject).deliver
               SwapseaSms.weekly_roster(user, next_roster).deliver
               emails_sent = emails_sent + 1
-              Email.create!(to: user.email, subject: subject)
             end
           end
         rescue Exception => ex
@@ -43,7 +41,6 @@ class Email < ActiveRecord::Base
 			proficiency.users.map do |user|
         begin
           SwapseaMailer.north_bondi_weekly_proficiencies(user, proficiency).deliver
-          Email.create!(to: user.email, subject: 'Upcoming Skills Maintenance')
           emails_sent += 1
         rescue Exception => ex
           Rails.logger.warn "Email::weekly_skills_maintenance user:#{user.id} has no email"
@@ -93,12 +90,12 @@ class Email < ActiveRecord::Base
 			subject = "Activity"
 			message = "North Bondi - Reports Sent: " + reports_sent.to_s
 			SwapseaMailer.activity(subject, message).deliver
-			
+
 		else
 			subject = "No Activity"
 			message = "North Bondi - No reports to send."
 			SwapseaMailer.activity(subject, message).deliver
-		end		
+		end
 	end
 	def self.bronte_patrol_reports
 		reports_sent = 0;

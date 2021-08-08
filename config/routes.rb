@@ -31,7 +31,7 @@ Swapsea2::Application.routes.draw do
   end
 
   resources :emails do
-    collection do 
+    collection do
       post 'send_weekly_patrol_rosters'
       post 'send_weekly_skills_maintenance'
       post 'send_welcome_email_test'
@@ -101,7 +101,7 @@ Swapsea2::Application.routes.draw do
   get 'swaps/:view', to: 'rosters#swaps'
 
   resources :patrol_members do
-    collection do 
+    collection do
       post :import
       get :admin
     end
@@ -114,14 +114,14 @@ Swapsea2::Application.routes.draw do
   end
 
   resources :awards do
-    collection do 
+    collection do
       post :import
       get :admin
     end
   end
 
   resources :rosters do
-    collection do 
+    collection do
       post :import
       get :member
       get :admin
@@ -129,7 +129,7 @@ Swapsea2::Application.routes.draw do
     member do
       get 'patrol'
       get 'report', defaults: { format: 'pdf' }
-    end 
+    end
   end
 
   get 'patrol-report/:token', to: 'rosters#patrol_report', as: 'patrol_report', defaults: { format: 'pdf' }
@@ -138,8 +138,8 @@ Swapsea2::Application.routes.draw do
     get 'login', to: 'users/sessions#new', as: 'login'
   end
 
-  devise_for :users, controllers: { 
-    sessions: "users/sessions", 
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
     registrations: "users/registrations",
     passwords: "users/passwords",
     confirmations: "users/confirmations",
@@ -159,14 +159,14 @@ Swapsea2::Application.routes.draw do
   get 'terms-of-use', to: 'home#terms_of_use', as: 'terms_of_use'
   get 'about', to: 'home#about_us', as: 'about_us'
 
-  resources :users do 
-    collection do 
+  resources :users do
+    collection do
       post :import
       get :admin
     end
   end
 
-  resources :leads do 
+  resources :leads do
     collection do
       get :admin
     end
@@ -208,7 +208,7 @@ Swapsea2::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
