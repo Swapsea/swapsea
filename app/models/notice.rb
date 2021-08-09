@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Notice < ActiveRecord::Base
 
 	belongs_to :club, foreign_key: :organisation, primary_key: :name

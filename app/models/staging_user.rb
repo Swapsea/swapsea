@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class StagingUser < ApplicationRecord
 
 	def self.dump(file)

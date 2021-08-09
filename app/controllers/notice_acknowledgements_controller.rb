@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class NoticeAcknowledgementsController < ApplicationController
   load_and_authorize_resource
   before_action :set_notice_acknowledgement, only: [:show, :edit, :update, :destroy]

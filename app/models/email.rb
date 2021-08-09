@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'swapsea_sms'
 
 class Email < ActiveRecord::Base

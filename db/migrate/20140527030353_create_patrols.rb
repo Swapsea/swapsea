@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreatePatrols < ActiveRecord::Migration
   def change
     create_table :patrols do |t|

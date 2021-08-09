@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Offer < ActiveRecord::Base
 
 	include PublicActivity::Common

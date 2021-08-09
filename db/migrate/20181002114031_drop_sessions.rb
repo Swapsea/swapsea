@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class DropSessions < ActiveRecord::Migration[5.0]
   def up
     drop_table :sessions

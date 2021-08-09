@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class OffersController < ApplicationController
   load_and_authorize_resource
   before_action :set_offer, only: [:show, :edit, :update, :destroy]

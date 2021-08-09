@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class StagingAward < ApplicationRecord
 
 	scope :current, -> { where('expiry_date > ? OR award_name = ?', DateTime.now, 'Silver Medallion Beach Management') }

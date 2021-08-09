@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ProficienciesController < ApplicationController
   load_and_authorize_resource
   before_action :set_proficiency, only: [:show, :edit, :update, :destroy]

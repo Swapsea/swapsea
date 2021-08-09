@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :demo_club do
 	desc 'Create demo club and populate'
 	task :populate, [:club_name] => :environment do |task, args|

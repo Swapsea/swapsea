@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class RequestsController < ApplicationController
   load_and_authorize_resource
   before_action :set_request, only: [:show, :edit, :update, :destroy]

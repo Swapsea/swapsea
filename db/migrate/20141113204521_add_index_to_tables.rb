@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddIndexToTables < ActiveRecord::Migration
   def change
   	add_index :awards, :user_id

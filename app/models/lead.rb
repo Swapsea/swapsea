@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Lead < ActiveRecord::Base
 
 validates :name, :organisation, :email, presence: { message: 'Cannot be blank.'}

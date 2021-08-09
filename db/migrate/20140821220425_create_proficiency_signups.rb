@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateProficiencySignups < ActiveRecord::Migration
   def change
     create_table :proficiency_signups do |t|

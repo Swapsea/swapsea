@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :swapsea do
   namespace :data do
     desc 'Daily transfer from staging tables to working tables.'

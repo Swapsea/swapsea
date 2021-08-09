@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ApiController < ApplicationController
   http_basic_authenticate_with name: ENV['API_BASIC_AUTH_USERNAME'], password: ENV['API_BASIC_AUTH_PASSWORD']
   skip_before_action :verify_authenticity_token

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PatrolMembersController < ApplicationController
   load_and_authorize_resource
   before_action :set_patrol_member, only: [:show, :edit, :update, :destroy]

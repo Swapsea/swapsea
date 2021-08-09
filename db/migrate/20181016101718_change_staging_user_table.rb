@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ChangeStagingUserTable < ActiveRecord::Migration[5.0]
   def change
   	change_column :staging_users, :dob, :date

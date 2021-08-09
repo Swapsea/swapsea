@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class OutreachPatrolsController < ApplicationController
   load_and_authorize_resource
   before_action :set_outreach_patrol, only: [:show, :edit, :update, :destroy]

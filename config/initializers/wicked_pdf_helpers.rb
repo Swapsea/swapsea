@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 def wicked_pdf_stylesheet_link_tag(*sources)
     sources.collect { |source|
       asset = Rails.application.assets.find_asset("#{source}.css")

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateStagingUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :staging_users do |t|

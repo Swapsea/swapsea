@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 set :stage, :production
 
 set :deploy_to, '/var/www/swapsea/production'

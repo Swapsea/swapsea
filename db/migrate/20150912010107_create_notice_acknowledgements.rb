@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateNoticeAcknowledgements < ActiveRecord::Migration
   def change
     create_table :notice_acknowledgements do |t|

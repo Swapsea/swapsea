@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class EmailsController < ApplicationController
 	load_and_authorize_resource
 	layout 'admin'

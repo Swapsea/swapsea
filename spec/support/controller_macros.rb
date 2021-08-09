@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # spec/support/controller_macros.rb
 
 module ControllerMacros

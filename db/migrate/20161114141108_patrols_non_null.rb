@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PatrolsNonNull < ActiveRecord::Migration
   def change
   	execute 'update patrols set need_bbm=0 where need_bbm IS NULL;'

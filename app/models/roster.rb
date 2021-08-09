@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Roster < ActiveRecord::Base
 
 	belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'

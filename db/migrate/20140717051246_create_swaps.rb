@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateSwaps < ActiveRecord::Migration
   def change
     create_table :swaps do |t|

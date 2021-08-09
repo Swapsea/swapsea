@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddUniqIdToChanges < ActiveRecord::Migration
   def change
     add_column :swaps, :uniq_id, :string

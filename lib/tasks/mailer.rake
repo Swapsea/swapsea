@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :swapsea do
   namespace :mailer do
     desc 'Weekly roster mailer'

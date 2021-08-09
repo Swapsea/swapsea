@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SwapsController < ApplicationController
   load_and_authorize_resource
   before_action :set_swap, only: [:show, :edit, :update, :destroy]

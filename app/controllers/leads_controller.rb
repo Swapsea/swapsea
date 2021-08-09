@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class LeadsController < ApplicationController
   load_and_authorize_resource
   before_action :set_lead, only: [:show, :edit, :update, :destroy]
