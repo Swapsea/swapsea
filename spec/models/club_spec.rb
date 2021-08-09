@@ -16,7 +16,6 @@ RSpec.describe Club, type: :model do
     it { is_expected.to have_many(:patrols) }
     it { is_expected.to have_many(:patrol_members).through(:patrols) }
     it { is_expected.to have_many(:rosters).through(:patrols) }
-    it { is_expected.to have_many(:rosters).through(:patrols) }
     it { is_expected.to have_many(:requests).through(:rosters) }
     it { is_expected.to have_many(:users).through(:patrol_members) }
     it { is_expected.to have_many(:awards).through(:users) }

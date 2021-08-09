@@ -23,11 +23,6 @@ RSpec.describe Lead, type: :model do
   end
 
   it do
-    expect(subject).to validate_presence_of(:organisation)
-      .with_message('Cannot be blank.')
-  end
-
-  it do
     expect(subject).to validate_uniqueness_of(:email)
       .with_message('This email has already been submitted.')
   end
