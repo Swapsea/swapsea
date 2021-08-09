@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Swapsea2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -14,7 +15,7 @@ Swapsea2::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  config.serve_static_assets = true
   config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
 
   # Show full error reports and disable caching.

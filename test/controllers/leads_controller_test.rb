@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class LeadsControllerTest < ActionController::TestCase
@@ -36,7 +37,8 @@ class LeadsControllerTest < ActionController::TestCase
   end
 
   test 'should update lead' do
-    patch :update, params: { id: @lead, lead: { email: @lead.email, name: @lead.name, organisation: @lead.organisation } }
+    patch :update,
+          params: { id: @lead, lead: { email: @lead.email, name: @lead.name, organisation: @lead.organisation } }
     assert_redirected_to lead_path(assigns(:lead))
   end
 

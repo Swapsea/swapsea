@@ -1,16 +1,17 @@
 # frozen_string_literal: true
+
 class RostersController < ApplicationController
   load_and_authorize_resource
-  #before_action :set_roster, only: [:show, :edit, :update, :destroy]
+  # before_action :set_roster, only: [:show, :edit, :update, :destroy]
   layout 'dashboard'
 
   def import
-    #begin
+    # begin
     Roster.upload(params[:file])
     redirect_to admin_rosters_path, notice: 'Roster imported.'
-    #rescue
-      #redirect_to root_url, notice: "Invalid CSV file format."
-    #end
+    # rescue
+    # redirect_to root_url, notice: "Invalid CSV file format."
+    # end
   end
 
   def admin
@@ -21,7 +22,6 @@ class RostersController < ApplicationController
   # GET /rosters
   # GET /rosters.json
   def index
-
     @patrols = Patrol.joins(:users).where(organisation: selected_user.organisation)
 
     if params[:view] == 'all'
@@ -29,19 +29,25 @@ class RostersController < ApplicationController
       @rosters_this_year = Roster.where('organisation = ?', selected_user.organisation)
     else
       finish_time = Time.now - 3.hours
-      @rosters = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation).sort_by(&:start)
-      @rosters_this_year = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation)
+      @rosters = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
+                              selected_user.organisation).sort_by(&:start)
+      @rosters_this_year = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
+                                        selected_user.organisation)
     end
 
     @rosters_this_year_sorted = @rosters_this_year.sort_by(&:start)
-    @uniq_patrol_dates = @rosters_this_year_sorted.map{ |d| d.start.strftime('%d %b %y') }.uniq
+    @uniq_patrol_dates = @rosters_this_year_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
   end
 
   def swaps
     @my_requests = Request.joins(:roster).where(user: selected_user, status: 'open').order('rosters.start')
-    @my_offers = Offer.where(user: selected_user, status: ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted']).joins(:roster).order('rosters.start desc')
-    @requests = Request.joins(:roster).where('start > ? AND status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation).order('rosters.start')
-    @confirmed_offers = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted', selected_user.organisation).order(updated_at: :desc)
+    @my_offers = Offer.where(user: selected_user,
+                             status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
+                                      'deleted']).joins(:roster).order('rosters.start desc')
+    @requests = Request.joins(:roster).where('start > ? AND status = ? AND rosters.organisation = ?',
+                                             DateTime.now - 3.hours, 'open', selected_user.organisation).order('rosters.start')
+    @confirmed_offers = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted',
+                                                   selected_user.organisation).order(updated_at: :desc)
   end
 
   def patrol
@@ -54,8 +60,7 @@ class RostersController < ApplicationController
       format.pdf do
         render  pdf: "#{@roster.patrol.name}",
                 layout: 'pdf.html.erb',
-                 show_as_html: params[:debug].present?
-
+                show_as_html: params[:debug].present?
       end
     end
   end
@@ -66,9 +71,8 @@ class RostersController < ApplicationController
       respond_to do |format|
         format.pdf do
           render pdf: "#{@roster.patrol.name}",
-                  layout: 'pdf.html.erb',
-                   show_as_html: params[:debug].present?
-
+                 layout: 'pdf.html.erb',
+                 show_as_html: params[:debug].present?
         end
       end
     else
@@ -139,12 +143,13 @@ class RostersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    #def set_roster
-    #  @roster = Roster.find(params[:id])
-    #end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Use callbacks to share common setup or constraints between actions.
+  # def set_roster
+  #  @roster = Roster.find(params[:id])
+  # end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
   def roster_params
     params.require(:roster).permit(:organisation, :patrol, :start, :finish)
   end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class OffersControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class OffersControllerTest < ActionController::TestCase
 
   test 'should create offer' do
     assert_difference('Offer.count') do
-      post :create, params: { offer: { comment: @offer.comment, email: @offer.email, mobile: @offer.mobile, request_id: @offer.request_id, status: @offer.status, user_id: @offer.user_id } }
+      post :create,
+           params: { offer: { comment: @offer.comment, email: @offer.email, mobile: @offer.mobile, request_id: @offer.request_id,
+                              status: @offer.status, user_id: @offer.user_id } }
     end
 
     assert_redirected_to offer_path(assigns(:offer))
@@ -36,7 +39,10 @@ class OffersControllerTest < ActionController::TestCase
   end
 
   test 'should update offer' do
-    patch :update, params: { id: @offer, offer: { comment: @offer.comment, email: @offer.email, mobile: @offer.mobile, request_id: @offer.request_id, status: @offer.status, user_id: @offer.user_id } }
+    patch :update,
+          params: { id: @offer,
+                    offer: { comment: @offer.comment, email: @offer.email, mobile: @offer.mobile, request_id: @offer.request_id,
+                             status: @offer.status, user_id: @offer.user_id } }
     assert_redirected_to offer_path(assigns(:offer))
   end
 

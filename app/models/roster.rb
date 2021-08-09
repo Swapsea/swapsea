@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class Roster < ActiveRecord::Base
 
+class Roster < ActiveRecord::Base
   belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
   has_many :requests
   has_many :swaps
@@ -8,7 +8,7 @@ class Roster < ActiveRecord::Base
 
   include PgSearch::Model
   pg_search_scope :search, against: [:patrol_name, :organisation],
-   using: {tsearch: {dictionary: 'english'}}
+                           using: { tsearch: { dictionary: 'english' } }
 
   def self.text_search(query)
     if query.present?
@@ -31,35 +31,35 @@ class Roster < ActiveRecord::Base
   end
 
   def generate_secret
-    self.secret = Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0,10].join)
-    end
+    self.secret = Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0, 10].join)
+  end
 
   def swap_meets_requirements(req, sub)
     bbm = qualifications[:bbm].to_i - req.qualifications[:bbm].to_i + sub.qualifications[:bbm].to_i
     irbd = qualifications[:irbd].to_i - req.qualifications[:irbd].to_i + sub.qualifications[:irbd].to_i
     irbc = qualifications[:irbc].to_i - req.qualifications[:irbc].to_i + sub.qualifications[:irbc].to_i
     artc = qualifications[:artc].to_i - req.qualifications[:artc].to_i + sub.qualifications[:artc].to_i
-    bronze = qualifications[:bronze].to_i - req.qualifications[:bronze].to_i + sub.qualifications[:bronze] .to_i
+    bronze = qualifications[:bronze].to_i - req.qualifications[:bronze].to_i + sub.qualifications[:bronze].to_i
     src = qualifications[:src].to_i - req.qualifications[:src].to_i + sub.qualifications[:src].to_i
     if !(bbm >= patrol.need_bbm) || !(irbd >= patrol.need_irbd) || !(irbc >= patrol.need_irbc) || !(artc >= patrol.need_artc) || !(bronze >= patrol.need_bronze) || !(src >= patrol.need_src)
       {
-      result: false,
-      bbm: bbm,
-      irbd: irbd,
-      irbc: irbc,
-      artc: artc,
-      bronze: bronze,
-      src: src
+        result: false,
+        bbm: bbm,
+        irbd: irbd,
+        irbc: irbc,
+        artc: artc,
+        bronze: bronze,
+        src: src
       }
     else
       {
-      result: true,
-      bbm: bbm,
-      irbd: irbd,
-      irbc: irbc,
-      artc: artc,
-      bronze: bronze,
-      src: src
+        result: true,
+        bbm: bbm,
+        irbd: irbd,
+        irbc: irbc,
+        artc: artc,
+        bronze: bronze,
+        src: src
       }
     end
   end
@@ -73,23 +73,23 @@ class Roster < ActiveRecord::Base
     a_src = src.to_i - req.qualifications[:src].to_i
     if !(a_bbm >= patrol.need_bbm) || !(a_irbd >= patrol.need_irbd) || !(a_irbc >= patrol.need_irbc) || !(a_artc >= patrol.need_artc) || !(a_bronze >= patrol.need_bronze) || !(a_src >= patrol.need_src)
       {
-      result: false,
-      bbm: a_bbm,
-      irbd: a_irbd,
-      irbc: a_irbc,
-      artc: a_artc,
-      bronze: a_bronze,
-      src: a_src
+        result: false,
+        bbm: a_bbm,
+        irbd: a_irbd,
+        irbc: a_irbc,
+        artc: a_artc,
+        bronze: a_bronze,
+        src: a_src
       }
     else
       {
-      result: true,
-      bbm: a_bbm,
-      irbd: a_irbd,
-      irbc: a_irbc,
-      artc: a_artc,
-      bronze: a_bronze,
-      src: a_src
+        result: true,
+        bbm: a_bbm,
+        irbd: a_irbd,
+        irbc: a_irbc,
+        artc: a_artc,
+        bronze: a_bronze,
+        src: a_src
       }
     end
   end
@@ -103,23 +103,23 @@ class Roster < ActiveRecord::Base
     src = qualifications[:src].to_i - req.qualifications[:src].to_i
     if !(bbm >= patrol.need_bbm) || !(irbd >= patrol.need_irbd) || !(irbc >= patrol.need_irbc) || !(artc >= patrol.need_artc) || !(bronze >= patrol.need_bronze) || !(src >= patrol.need_src)
       {
-      result: false,
-      bbm: bbm,
-      irbd: irbd,
-      irbc: irbc,
-      artc: artc,
-      bronze: bronze,
-      src: src
+        result: false,
+        bbm: bbm,
+        irbd: irbd,
+        irbc: irbc,
+        artc: artc,
+        bronze: bronze,
+        src: src
       }
     else
       {
-      result: true,
-      bbm: bbm,
-      irbd: irbd,
-      irbc: irbc,
-      artc: artc,
-      bronze: bronze,
-      src: src
+        result: true,
+        bbm: bbm,
+        irbd: irbd,
+        irbc: irbc,
+        artc: artc,
+        bronze: bronze,
+        src: src
       }
     end
   end
@@ -133,26 +133,25 @@ class Roster < ActiveRecord::Base
     src = qualifications[:src].to_i
     if !(bbm >= patrol.need_bbm) || !(irbd >= patrol.need_irbd) || !(irbc >= patrol.need_irbc) || !(artc >= patrol.need_artc) || !(bronze >= patrol.need_bronze) || !(src >= patrol.need_src)
       {
-      result: false,
-      bbm: bbm,
-      irbd: irbd,
-      irbc: irbc,
-      artc: artc,
-      bronze: bronze,
-      src: src
+        result: false,
+        bbm: bbm,
+        irbd: irbd,
+        irbc: irbc,
+        artc: artc,
+        bronze: bronze,
+        src: src
       }
     else
       {
-      result: true,
-      bbm: bbm,
-      irbd: irbd,
-      irbc: irbc,
-      artc: artc,
-      bronze: bronze,
-      src: src
+        result: true,
+        bbm: bbm,
+        irbd: irbd,
+        irbc: irbc,
+        artc: artc,
+        bronze: bronze,
+        src: src
       }
     end
-
   end
 
   def awards
@@ -166,10 +165,14 @@ class Roster < ActiveRecord::Base
   def awards_count
     self.bronze = awards.count { |n| n.award_name == 'Bronze Medallion' }
     self.bbm = awards.count { |n| n.award_name == 'Silver Medallion Beach Management' }
-    self.artc = awards.count { |n| (n.award_name == 'Advanced Resuscitation Techniques Certificate') || (n.award_name == 'Advanced Resuscitation Techniques [AID]') || (n.award_name == 'Advanced Resuscitation Techniques Refresher') || (n.award_name == 'Advanced Resuscitation Certificate') || (n.award_name == 'Advanced Resuscitation Certificate Instructor') }
+    self.artc = awards.count { |n|
+      (n.award_name == 'Advanced Resuscitation Techniques Certificate') || (n.award_name == 'Advanced Resuscitation Techniques [AID]') || (n.award_name == 'Advanced Resuscitation Techniques Refresher') || (n.award_name == 'Advanced Resuscitation Certificate') || (n.award_name == 'Advanced Resuscitation Certificate Instructor')
+    }
     self.irbd = awards.count { |n| n.award_name == 'Silver Medallion IRB Driver' }
     self.irbc = awards.count { |n| n.award_name == 'IRB Crew Certificate' }
-    self.src = awards.count { |n| (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)') }
+    self.src = awards.count { |n|
+      (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)')
+    }
     self.firstaid = awards.count { |n| n.award_name == 'Senior First Aid Certificate (PUA)' }
     self.spinal = awards.count { |n| n.award_name == 'Spinal Management' }
     self.save
@@ -178,10 +181,14 @@ class Roster < ActiveRecord::Base
   def qualifications
     bronze = awards.count { |n| n.award_name == 'Bronze Medallion' }
     bbm = awards.count { |n| n.award_name == 'Silver Medallion Beach Management' }
-    artc = awards.count { |n| (n.award_name == 'Advanced Resuscitation Techniques Certificate') || (n.award_name == 'Advanced Resuscitation Techniques [AID]') || (n.award_name == 'Advanced Resuscitation Techniques Refresher') || (n.award_name == 'Advanced Resuscitation Certificate') || (n.award_name == 'Advanced Resuscitation Certificate Instructor') }
+    artc = awards.count { |n|
+      (n.award_name == 'Advanced Resuscitation Techniques Certificate') || (n.award_name == 'Advanced Resuscitation Techniques [AID]') || (n.award_name == 'Advanced Resuscitation Techniques Refresher') || (n.award_name == 'Advanced Resuscitation Certificate') || (n.award_name == 'Advanced Resuscitation Certificate Instructor')
+    }
     irbd = awards.count { |n| n.award_name == 'Silver Medallion IRB Driver' }
     irbc = awards.count { |n| n.award_name == 'IRB Crew Certificate' }
-    src = awards.count { |n| (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)') }
+    src = awards.count { |n|
+      (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)')
+    }
     {
       bronze: bronze,
       bbm: bbm,
@@ -226,19 +233,19 @@ class Roster < ActiveRecord::Base
       end
     else
       # will check if member is part of patrol that is rosterd on
-      patrol.users.where(id: user.id).present? #returns true or false
+      patrol.users.where(id: user.id).present? # returns true or false
     end
   end
 
   def self.upload(file)
-    #Roster.delete_all #delete all data in table before import
+    # Roster.delete_all #delete all data in table before import
     allowed_attributes = [
-       'Rostered Team Name',
-     'Patrol Roster Date',
-     'Patrol Roster Start Time',
-     'Patrol Roster Finish Time',
-     'Organisation Display Name'
-     ]
+      'Rostered Team Name',
+      'Patrol Roster Date',
+      'Patrol Roster Start Time',
+      'Patrol Roster Finish Time',
+      'Organisation Display Name'
+    ]
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
@@ -250,7 +257,7 @@ class Roster < ActiveRecord::Base
       year = date[0].to_s
       month = date [1].to_s
       day = date [2].to_s
-      formatted_date = year+'-'+month+'-'+day
+      formatted_date = year + '-' + month + '-' + day
       roster.start = Time.zone.parse(formatted_date + ' ' + row['Patrol Roster Start Time'] + ':00').utc.iso8601
       roster.finish = Time.zone.parse(formatted_date + ' ' + row['Patrol Roster Finish Time'] + ':00').utc.iso8601
       roster.organisation = row['Organisation Display Name']
@@ -261,11 +268,10 @@ class Roster < ActiveRecord::Base
 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
-       when '.csv' then Roo::CSV.new(file.path)
-       when '.xls' then Roo::Excel.new(file.path)
-       when '.xlsx' then Roo::Excelx.new(file.path)
-       else raise "Unknown file type: #{file.original_filename}"
-     end
+    when '.csv' then Roo::CSV.new(file.path)
+    when '.xls' then Roo::Excel.new(file.path)
+    when '.xlsx' then Roo::Excelx.new(file.path)
+    else raise "Unknown file type: #{file.original_filename}"
+    end
   end
-
 end

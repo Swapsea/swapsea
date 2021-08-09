@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'notice_acknowledgements/edit', type: :view do
@@ -10,11 +11,9 @@ RSpec.describe 'notice_acknowledgements/edit', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', notice_acknowledgement_path(@notice_acknowledgement), 'post' do
-
       assert_select 'input#notice_acknowledgement_notice_id[name=?]', 'notice_acknowledgement[notice_id]'
 
       assert_select 'input#notice_acknowledgement_user_id[name=?]', 'notice_acknowledgement[user_id]'
-
     end
   end
 end

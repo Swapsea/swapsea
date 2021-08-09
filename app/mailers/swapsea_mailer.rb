@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class SwapseaMailer < ActionMailer::Base
 
+class SwapseaMailer < ActionMailer::Base
   def test
     @user = User.find(4739300)
     @url = 'https://www.swapsea.com.au'
@@ -20,9 +20,7 @@ class SwapseaMailer < ActionMailer::Base
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
-
   ## To be generalised
-
 
   # Sent to all users with a proficiency in the next 7 days.
   def north_bondi_weekly_proficiencies(user, proficiency)
@@ -118,8 +116,8 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.user
     mail subject: 'Request cancelled',
-       to: offer.user.email,
-       from: 'Swapsea <noreply@swapsea.com.au>'
+         to: offer.user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to the offer user to notify them that the request was closed because it has been accepted as an offer elsewhere.
@@ -128,28 +126,28 @@ class SwapseaMailer < ActionMailer::Base
     @offer = offer
     @user = offer.user
     mail subject: 'Request closed',
-       to: offer.user.email,
-       from: 'Swapsea <noreply@swapsea.com.au>'
+         to: offer.user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
   def welcome_email(user)
     @user = user
     mail subject: 'Activate your Swapsea account for 2021/22',
-       to: user.email,
-       from: 'Swapsea <help@swapsea.com.au>'
+         to: user.email,
+         from: 'Swapsea <help@swapsea.com.au>'
   end
 
   def activity(subject, message)
     @subject = subject
     @message = message
     mail subject: @subject,
-       to: 'Alex <alex@swapsea.com.au>',
-       from: 'Swapsea <help@swapsea.com.au>'
+         to: 'Alex <alex@swapsea.com.au>',
+         from: 'Swapsea <help@swapsea.com.au>'
   end
 
-###############################################################################
-# => To consolidate
-###############################################################################
+  ###############################################################################
+  # => To consolidate
+  ###############################################################################
   def north_bondi_patrol_report(roster)
     @roster = roster
     # Collect PC and VC Emails
@@ -167,9 +165,9 @@ class SwapseaMailer < ActionMailer::Base
 
     # Send Email
     mail subject: (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime('%a %d %b %y %H:%M') + '-' + roster.finish.strftime('%H:%M'),
-    to: to.collect(&:email).join(','),
-    cc: 'office@northbondisurfclub.com, captain@northbondisurfclub.com, vicecaptain@northbondisurfclub.com, alex@swapsea.com.au',
-    from: 'Swapsea <help@swapsea.com.au>'
+         to: to.collect(&:email).join(','),
+         cc: 'office@northbondisurfclub.com, captain@northbondisurfclub.com, vicecaptain@northbondisurfclub.com, alex@swapsea.com.au',
+         from: 'Swapsea <help@swapsea.com.au>'
   end
 
   def bronte_patrol_report(roster)
@@ -189,9 +187,8 @@ class SwapseaMailer < ActionMailer::Base
 
     # Send Email
     mail subject: (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime('%a %d %b %y %H:%M') + '-' + roster.finish.strftime('%H:%M'),
-    to: to.collect(&:email).join(','),
-    #:cc => 'admin@brontesurfclub.com.au, iljko@double8.com.au, alex@swapsea.com.au',
-    from: 'Swapsea <help@swapsea.com.au>'
+         to: to.collect(&:email).join(','),
+         #:cc => 'admin@brontesurfclub.com.au, iljko@double8.com.au, alex@swapsea.com.au',
+         from: 'Swapsea <help@swapsea.com.au>'
   end
-
 end

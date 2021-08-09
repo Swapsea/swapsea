@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class RostersControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class RostersControllerTest < ActionController::TestCase
 
   test 'should create roster' do
     assert_difference('Roster.count') do
-      post :create, params: { roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation, patrol: @roster.patrol, start: @roster.start } }
+      post :create,
+           params: { roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation,
+                               patrol: @roster.patrol, start: @roster.start } }
     end
 
     assert_redirected_to roster_path(assigns(:roster))
@@ -36,7 +39,10 @@ class RostersControllerTest < ActionController::TestCase
   end
 
   test 'should update roster' do
-    patch :update, params: { id: @roster, roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation, patrol: @roster.patrol, start: @roster.start } }
+    patch :update,
+          params: { id: @roster,
+                    roster: { finish: @roster.finish, key: @roster.key, organisation: @roster.organisation, patrol: @roster.patrol,
+                              start: @roster.start } }
     assert_redirected_to roster_path(assigns(:roster))
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class ChangesControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class ChangesControllerTest < ActionController::TestCase
 
   test 'should create change' do
     assert_difference('Change.count') do
-      post :create, params: { change: { on_off_patrol: @change.on_off_patrol, roster_id: @change.roster_id, user_id: @change.user_id } }
+      post :create,
+           params: { change: { on_off_patrol: @change.on_off_patrol, roster_id: @change.roster_id,
+                               user_id: @change.user_id } }
     end
 
     assert_redirected_to change_path(assigns(:change))
@@ -36,7 +39,10 @@ class ChangesControllerTest < ActionController::TestCase
   end
 
   test 'should update change' do
-    patch :update, params: { id: @change, change: { on_off_patrol: @change.on_off_patrol, roster_id: @change.roster_id, user_id: @change.user_id } }
+    patch :update,
+          params: { id: @change,
+                    change: { on_off_patrol: @change.on_off_patrol, roster_id: @change.roster_id,
+                              user_id: @change.user_id } }
     assert_redirected_to change_path(assigns(:change))
   end
 

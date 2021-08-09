@@ -1,9 +1,9 @@
 # frozen_string_literal: true
-class User < ActiveRecord::Base
 
+class User < ActiveRecord::Base
   rolify
-    # Include default devise modules. Others available are:
-    # :confirmable, :lockable, :timeoutable and :omniauthable  :validatable
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable  :validatable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable
 
   after_create :assign_default_role
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   include PgSearch::Model
   pg_search_scope :search, against: [:first_name, :last_name],
-  using: {tsearch: {dictionary: 'english'}}
+                           using: { tsearch: { dictionary: 'english' } }
 
   def self.text_search(query)
     if query.present?
@@ -40,10 +40,10 @@ class User < ActiveRecord::Base
     users.each do |user|
       user.bronze = user.awards.where(award_name: 'Bronze Medallion').present?
       user.bbm = user.awards.where(award_name: 'Silver Medallion Beach Management').present?
-      user.artc = user.awards.where({award_name: 'Advanced Resuscitation Techniques Certificate'} || {award_name: 'Advanced Resuscitation Techniques [AID]'} || {award_name: 'Advanced Resuscitation Techniques Refresher'} || {award_name: 'Advanced Resuscitation Certificate'} || {award_name: 'Advanced Resuscitation Certificate Instructor'}).present?
+      user.artc = user.awards.where({ award_name: 'Advanced Resuscitation Techniques Certificate' } || { award_name: 'Advanced Resuscitation Techniques [AID]' } || { award_name: 'Advanced Resuscitation Techniques Refresher' } || { award_name: 'Advanced Resuscitation Certificate' } || { award_name: 'Advanced Resuscitation Certificate Instructor' }).present?
       user.irbd = user.awards.where(award_name: 'Silver Medallion IRB Driver').present?
       user.irbc = user.awards.where(award_name: 'IRB Crew Certificate').present?
-      user.src = user.awards.where({award_name: 'Surf Rescue Certificate'} || {award_name: 'Surf Rescue Certificate (CPR Endorsed)'}).present?
+      user.src = user.awards.where({ award_name: 'Surf Rescue Certificate' } || { award_name: 'Surf Rescue Certificate (CPR Endorsed)' }).present?
       user.save
     end
   end
@@ -66,11 +66,11 @@ class User < ActiveRecord::Base
 
   def email_required?
     false
- end
+  end
 
   def password_required?
     false
- end
+  end
 
   def has_position?(position)
     if patrol_member.present? && patrol_member.default_position.present?
@@ -93,7 +93,8 @@ class User < ActiveRecord::Base
 
     rosters = custom_roster - request.user.custom_roster
     rosters.each do |roster|
-      if !(request.offer_already_exists?(roster, self)) && (DateTime.now <= roster.start) && !request.roster.user_rostered_on(self)
+      if !(request.offer_already_exists?(roster,
+                                         self)) && (DateTime.now <= roster.start) && !request.roster.user_rostered_on(self)
         offers << roster
       end
     end
@@ -117,11 +118,17 @@ class User < ActiveRecord::Base
   end
 
   def additional_rosters
-    swaps.select('roster_id, user_id').where(on_off_patrol: true).joins(:roster).where('start >= ?', Time.now.to_s(:db)).map { |n| n.roster }
+    swaps.select('roster_id, user_id').where(on_off_patrol: true).joins(:roster).where('start >= ?',
+                                                                                       Time.now.to_s(:db)).map { |n|
+      n.roster
+    }
   end
 
   def subtracted_rosters
-    swaps.select('roster_id, user_id').where(on_off_patrol: false).joins(:roster).where('start >= ?', Time.now.to_s(:db)).map { |n| n.roster }
+    swaps.select('roster_id, user_id').where(on_off_patrol: false).joins(:roster).where('start >= ?',
+                                                                                        Time.now.to_s(:db)).map { |n|
+      n.roster
+    }
   end
 
   def has_multiple_emails?
@@ -135,10 +142,10 @@ class User < ActiveRecord::Base
   def qualifications
     bronze = awards.where(award_name: 'Bronze Medallion').count
     bbm = awards.where(award_name: 'Silver Medallion Beach Management').count
-    artc = awards.where({award_name: 'Advanced Resuscitation Techniques Certificate'} || {award_name: 'Advanced Resuscitation Techniques [AID]'} || {award_name: 'Advanced Resuscitation Techniques Refresher'} || {award_name: 'Advanced Resuscitation Certificate'} || {award_name: 'Advanced Resuscitation Certificate Instructor'}).count
+    artc = awards.where({ award_name: 'Advanced Resuscitation Techniques Certificate' } || { award_name: 'Advanced Resuscitation Techniques [AID]' } || { award_name: 'Advanced Resuscitation Techniques Refresher' } || { award_name: 'Advanced Resuscitation Certificate' } || { award_name: 'Advanced Resuscitation Certificate Instructor' }).count
     irbd = awards.where(award_name: 'Silver Medallion IRB Driver').count
     irbc = awards.where(award_name: 'IRB Crew Certificate').count
-    src = awards.where({award_name: 'Surf Rescue Certificate'} || {award_name: 'Surf Rescue Certificate (CPR Endorsed)'}).count
+    src = awards.where({ award_name: 'Surf Rescue Certificate' } || { award_name: 'Surf Rescue Certificate (CPR Endorsed)' }).count
     {
       bronze: bronze,
       bbm: bbm,
@@ -150,38 +157,36 @@ class User < ActiveRecord::Base
   end
 
   def generate_ics
-    self.ics = Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0,10].join)
+    self.ics = Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0, 10].join)
   end
 
   def self.upload(file)
-
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
-
-        row = Hash[[header, spreadsheet.row(i)].transpose]
-        user = find_by_id(row['Member ID']) || new
-        user.id = row['Member ID']
-        user.first_name = row['First Name']
-        user.last_name = row['Last Name']
-        user.preferred_name = row['Preferred Name']
-        user.gender = row['Gender']
-        user.dob = row['Date of Birth']
-        user.mobile_phone = row['Mobile Phone'].split('\'')[1] if row['Mobile Phone'].present?
-        #user.home_phone = row["Home Phone"].split('\'')[1] if row["Home Phone"].present?
-        user.email = row['Email Address 1']
-        user.category = row['Membership Category']
-        user.date_joined_organisation = row['Date Joined'] || DateTime.iso8601('1900-01-01')
-        user.status = row['Status']
-        user.season = row['Season']
-        user.organisation = row['Organisation Display Name']
-        if !user.ics.present?
-          user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.shuffle[0,64].join)
-        end
-
-        user.save!
+      row = Hash[[header, spreadsheet.row(i)].transpose]
+      user = find_by_id(row['Member ID']) || new
+      user.id = row['Member ID']
+      user.first_name = row['First Name']
+      user.last_name = row['Last Name']
+      user.preferred_name = row['Preferred Name']
+      user.gender = row['Gender']
+      user.dob = row['Date of Birth']
+      user.mobile_phone = row['Mobile Phone'].split('\'')[1] if row['Mobile Phone'].present?
+      # user.home_phone = row["Home Phone"].split('\'')[1] if row["Home Phone"].present?
+      user.email = row['Email Address 1']
+      user.category = row['Membership Category']
+      user.date_joined_organisation = row['Date Joined'] || DateTime.iso8601('1900-01-01')
+      user.status = row['Status']
+      user.season = row['Season']
+      user.organisation = row['Organisation Display Name']
+      if !user.ics.present?
+        user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.shuffle[0, 64].join)
       end
+
+      user.save!
     end
+  end
 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
@@ -195,4 +200,4 @@ class User < ActiveRecord::Base
   def self.juniors
     all.where(patrol: nil).where.not(dob: nil).select { |u| (Date.today.year - u.dob.year) < 19 }
   end
-  end
+end

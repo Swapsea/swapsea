@@ -1,28 +1,29 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'notices/index', type: :view do
   before(:each) do
     assign(:notices, [
-      Notice.create!(
-        title: 'Title',
-        desc: 'Desc',
-        link: 'Link',
-        link_desc: 'LinkDesc',
-        image: 'Image',
-        video: 'Video',
-        user_id: '3'
-     ),
-      Notice.create!(
-        title: 'Title',
-        desc: 'Desc',
-        link: 'Link',
-        link_desc: 'LinkDesc',
-        image: 'Image',
-        video: 'Video',
-        user_id: '3'
-     )
-    ])
+             Notice.create!(
+               title: 'Title',
+               desc: 'Desc',
+               link: 'Link',
+               link_desc: 'LinkDesc',
+               image: 'Image',
+               video: 'Video',
+               user_id: '3'
+             ),
+             Notice.create!(
+               title: 'Title',
+               desc: 'Desc',
+               link: 'Link',
+               link_desc: 'LinkDesc',
+               image: 'Image',
+               video: 'Video',
+               user_id: '3'
+             )
+           ])
   end
 
   it 'renders a list of notices' do

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AwardsController, type: :controller do
@@ -23,7 +24,7 @@ RSpec.describe AwardsController, type: :controller do
 
   it 'show post to create an award' do
     award_attrs = attributes_for :award
-    expect{ post :create, params: { award: award_attrs }}.to change { Award.count }.by 1
+    expect { post :create, params: { award: award_attrs } }.to change { Award.count }.by 1
     expect(response).to redirect_to award_path assigns :award
   end
 
@@ -42,15 +43,15 @@ RSpec.describe AwardsController, type: :controller do
   it 'should put to update an award' do
     today = Date.today
     award = create :award
-    params = { id: award.id, award: { expiry_date: today }}
+    params = { id: award.id, award: { expiry_date: today } }
     expect(award.expiry_date).to be_nil
-    expect{ patch :update, params: params }.to change{ award.reload.expiry_date }.from(nil).to(today)
+    expect { patch :update, params: params }.to change { award.reload.expiry_date }.from(nil).to(today)
     expect(response).to redirect_to award_path assigns :award
   end
 
   it 'should destroy award' do
     award = create :award
-    expect{ delete :destroy, params: { id: award }}.to change{ Award.count }.by(-1)
+    expect { delete :destroy, params: { id: award } }.to change { Award.count }.by(-1)
     expect(response).to redirect_to awards_path
   end
 end

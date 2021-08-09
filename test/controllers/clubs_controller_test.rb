@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class ClubsControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class ClubsControllerTest < ActionController::TestCase
 
   test 'should create club' do
     assert_difference('Club.count') do
-      post :create, params: { club: { name: @club.name, outreach: @club.outreach, patrols: @club.patrols, rosters: @club.rosters, secret: @club.secret, short_name: @club.short_name, skills_maintenance: @club.skills_maintenance, swaps: @club.swaps } }
+      post :create,
+           params: { club: { name: @club.name, outreach: @club.outreach, patrols: @club.patrols, rosters: @club.rosters,
+                             secret: @club.secret, short_name: @club.short_name, skills_maintenance: @club.skills_maintenance, swaps: @club.swaps } }
     end
 
     assert_redirected_to club_path(assigns(:club))
@@ -36,7 +39,10 @@ class ClubsControllerTest < ActionController::TestCase
   end
 
   test 'should update club' do
-    patch :update, params: { id: @club, club: { name: @club.name, outreach: @club.outreach, patrols: @club.patrols, rosters: @club.rosters, secret: @club.secret, short_name: @club.short_name, skills_maintenance: @club.skills_maintenance, swaps: @club.swaps } }
+    patch :update,
+          params: { id: @club,
+                    club: { name: @club.name, outreach: @club.outreach, patrols: @club.patrols, rosters: @club.rosters,
+                            secret: @club.secret, short_name: @club.short_name, skills_maintenance: @club.skills_maintenance, swaps: @club.swaps } }
     assert_redirected_to club_path(assigns(:club))
   end
 

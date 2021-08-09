@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PatrolsController < ApplicationController
   load_and_authorize_resource
   before_action :set_patrol, only: [:show, :edit, :update, :destroy]
@@ -86,13 +87,15 @@ class PatrolsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_patrol
     @patrol = Patrol.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def patrol_params
-    params.require(:patrol).permit(:organisation, :name, :short_name, :key, :special_event, :need_bbm, :need_irbd, :need_irbc, :need_artc, :need_firstaid, :need_bronze, :need_src)
+    params.require(:patrol).permit(:organisation, :name, :short_name, :key, :special_event, :need_bbm, :need_irbd,
+                                   :need_irbc, :need_artc, :need_firstaid, :need_bronze, :need_src)
   end
 end

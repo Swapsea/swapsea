@@ -1,15 +1,16 @@
 # frozen_string_literal: true
+
 class UsersController < ApplicationController
   load_and_authorize_resource
   layout 'basic'
 
   def index
-  #@users = User.all
-    #if params.has_key?(:s)
+    # @users = User.all
+    # if params.has_key?(:s)
     #	@users = ThinkingSphinx.search.paginate(:page => params[:page], :per_page => 30) Riddle::Query.escape(params[:s]), :classes => [User]
-    #else
+    # else
     @users = User.paginate(page: params[:page], per_page: 30)
-    #end
+    # end
     render layout: 'admin'
   end
 
@@ -33,12 +34,11 @@ class UsersController < ApplicationController
   end
 
   def import
-    #begin
+    # begin
     User.upload(params[:file])
     redirect_to admin_users_path, notice: 'Members imported.'
-    #rescue
-      #redirect_to root_url, notice: "Invalid CSV file format."
-    #end
+    # rescue
+    # redirect_to root_url, notice: "Invalid CSV file format."
+    # end
   end
-
 end

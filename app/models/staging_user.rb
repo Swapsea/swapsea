@@ -1,11 +1,11 @@
 # frozen_string_literal: true
+
 class StagingUser < ApplicationRecord
-
   def self.dump(file)
-
     values = []
 
-    columns = [:user_id, :first_name, :last_name, :preferred_name, :dob, :mobile_phone, :email, :category, :date_joined_organisation, :status, :season, :organisation]
+    columns = [:user_id, :first_name, :last_name, :preferred_name, :dob, :mobile_phone, :email, :category,
+               :date_joined_organisation, :status, :season, :organisation]
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
@@ -28,43 +28,37 @@ class StagingUser < ApplicationRecord
       ]
 
       values << user
-
     end
 
     StagingUser.import columns, values, validate: true
-
   end
 
   def self.transfer
-
     staged_users = StagingUser.all
 
     staged_users.each do |staged_user|
+      user = User.find_or_initialize_by(id: staged_user.user_id)
 
-        user = User.find_or_initialize_by(id: staged_user.user_id)
-
-        user.id = staged_user.user_id
-        user.first_name = staged_user.first_name
-        user.last_name = staged_user.last_name
-        user.preferred_name = staged_user.preferred_name
-        user.dob = staged_user.dob
-        user.mobile_phone = staged_user.mobile_phone
-        user.email = staged_user.email
-        user.category = staged_user.category
-        user.date_joined_organisation = staged_user.date_joined_organisation
-        user.status = staged_user.status
-        user.season = staged_user.season
-        user.organisation = staged_user.organisation
-        if !user.ics.present?
-          user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.shuffle[0,64].join)
-              end
-
-        user.save
-
+      user.id = staged_user.user_id
+      user.first_name = staged_user.first_name
+      user.last_name = staged_user.last_name
+      user.preferred_name = staged_user.preferred_name
+      user.dob = staged_user.dob
+      user.mobile_phone = staged_user.mobile_phone
+      user.email = staged_user.email
+      user.category = staged_user.category
+      user.date_joined_organisation = staged_user.date_joined_organisation
+      user.status = staged_user.status
+      user.season = staged_user.season
+      user.organisation = staged_user.organisation
+      if !user.ics.present?
+        user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.shuffle[0, 64].join)
       end
 
-      #StagingUser.delete_all
+      user.save
+    end
 
+    # StagingUser.delete_all
   end
 
   def self.open_spreadsheet(file)
@@ -75,5 +69,4 @@ class StagingUser < ApplicationRecord
     else raise "Unknown file type: #{file.original_filename}"
     end
   end
-
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class OutreachPatrolsController < ApplicationController
   load_and_authorize_resource
   before_action :set_outreach_patrol, only: [:show, :edit, :update, :destroy]
@@ -7,9 +8,10 @@ class OutreachPatrolsController < ApplicationController
   # GET /outreach_patrols
   # GET /outreach_patrols.json
   def index
-    @outreach_patrols = OutreachPatrol.all.where('finish >= ? AND organisation = ?', DateTime.now, selected_user.organisation)
+    @outreach_patrols = OutreachPatrol.all.where('finish >= ? AND organisation = ?', DateTime.now,
+                                                 selected_user.organisation)
     @routreach_patrols_sorted = @outreach_patrols.sort_by(&:start)
-    @uniq_outreach_patrol_dates = @routreach_patrols_sorted.map{ |d| d.start.strftime('%d %b %y') }.uniq
+    @uniq_outreach_patrol_dates = @routreach_patrols_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
     @outreach_patrol_sign_up = OutreachPatrolSignUp.new
   end
 
@@ -76,12 +78,13 @@ class OutreachPatrolsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_outreach_patrol
     @outreach_patrol = OutreachPatrol.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def outreach_patrol_params
     params.require(:outreach_patrol).permit(:location, :start, :finish, :organisation)
   end

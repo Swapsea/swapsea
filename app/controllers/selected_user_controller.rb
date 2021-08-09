@@ -1,10 +1,10 @@
 # frozen_string_literal: true
+
 class SelectedUserController < ApplicationController
   load_and_authorize_resource class: false
   layout 'dashboard'
 
   def index
-
     @referrer = request.referrer
 
     if selected_user.has_role? :admin
@@ -14,14 +14,13 @@ class SelectedUserController < ApplicationController
     else
       @switch_users = User.where(email: selected_user.email).order(:last_name)
     end
-
   end
 
   def set
     if ((params.has_key?(:uid)) && User.exists?(params[:uid])) && ((selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.email == User.find(params[:uid]).email))
       session[:selected_user_id] = params[:uid]
     else
-      #cancel impersonate
+      # cancel impersonate
       session[:selected_user_id] = current_user.id
     end
 
@@ -34,7 +33,7 @@ class SelectedUserController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def selected_user_params
     params.require(:selected_user).permit(:path, :uid)
   end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'proficiency_signups/edit', type: :view do
@@ -10,11 +11,9 @@ RSpec.describe 'proficiency_signups/edit', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', proficiency_signup_path(@proficiency_signup), 'post' do
-
       assert_select 'input#proficiency_signup_proficiency_id[name=?]', 'proficiency_signup[proficiency_id]'
 
       assert_select 'input#proficiency_signup_user_id[name=?]', 'proficiency_signup[user_id]'
-
     end
   end
 end

@@ -1,18 +1,18 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'awards/index', type: :view do
-
-  let(:user) {FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   before(:each) do
     assign(:awards, [
-      Award.create!(
-        award_number: 'AwardNumber',
-        award_name: 'AwardName',
-        user_id: user.id
-     )
-    ])
+             Award.create!(
+               award_number: 'AwardNumber',
+               award_name: 'AwardName',
+               user_id: user.id
+             )
+           ])
   end
 
   it 'renders a list of awards' do

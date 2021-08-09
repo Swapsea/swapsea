@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ProficiencySignupsController, type: :controller do
@@ -18,7 +19,7 @@ RSpec.describe ProficiencySignupsController, type: :controller do
     skip('Add a hash of attributes invalid for your model')
   }
 
-  let(:valid_session) { FactoryBot.create(:user)  }
+  let(:valid_session) { FactoryBot.create(:user) }
 
   describe 'GET #index' do
     it 'returns a success response' do
@@ -31,7 +32,7 @@ RSpec.describe ProficiencySignupsController, type: :controller do
     it 'returns a success response' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
       proficiency_signup = create :proficiency_signup
-      get :show, params: {id: proficiency_signup.to_param}
+      get :show, params: { id: proficiency_signup.to_param }
       expect(response).to be_successful
     end
   end
@@ -46,7 +47,7 @@ RSpec.describe ProficiencySignupsController, type: :controller do
   describe 'GET #edit' do
     it 'returns a success response' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
-      get :edit, params: {id: proficiency_signup.to_param}
+      get :edit, params: { id: proficiency_signup.to_param }
       expect(response).to be_successful
     end
   end
@@ -72,15 +73,14 @@ RSpec.describe ProficiencySignupsController, type: :controller do
     it 'destroys the requested proficiency_signup' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
       expect {
-        delete :destroy, params: {id: proficiency_signup.to_param}
+        delete :destroy, params: { id: proficiency_signup.to_param }
       }.to change(ProficiencySignup, :count).by(-1)
     end
 
     it 'redirects to the proficiency_signups list' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
-      delete :destroy, params: {id: proficiency_signup.to_param}
+      delete :destroy, params: { id: proficiency_signup.to_param }
       expect(response).to redirect_to(proficiencies_path)
     end
   end
-
 end

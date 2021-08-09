@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-module ApplicationHelper
 
+module ApplicationHelper
   def title(title = nil)
     if title.present?
       content_for :title, title
@@ -8,5 +8,4 @@ module ApplicationHelper
       content_for?(:title) ? 'Swapsea | ' + content_for(:title) : 'Swapsea'
     end
   end
-
 end

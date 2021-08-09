@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class ProficiencySignup < ActiveRecord::Base
 
+class ProficiencySignup < ActiveRecord::Base
   include PublicActivity::Common
 
   belongs_to :proficiency
@@ -16,5 +16,4 @@ class ProficiencySignup < ActiveRecord::Base
   def self.unsigned
     PatrolMember.pluck(:user_id) - ProficiencySignup.pluck(:user_id)
   end
-
 end

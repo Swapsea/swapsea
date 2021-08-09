@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class OutreachPatrolsControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class OutreachPatrolsControllerTest < ActionController::TestCase
 
   test 'should create outreach_patrol' do
     assert_difference('OutreachPatrol.count') do
-      post :create, params: { outreach_patrol: { finish: @outreach_patrol.finish, location: @outreach_patrol.location, start: @outreach_patrol.start } }
+      post :create,
+           params: { outreach_patrol: { finish: @outreach_patrol.finish, location: @outreach_patrol.location,
+                                        start: @outreach_patrol.start } }
     end
 
     assert_redirected_to outreach_patrol_path(assigns(:outreach_patrol))
@@ -36,7 +39,10 @@ class OutreachPatrolsControllerTest < ActionController::TestCase
   end
 
   test 'should update outreach_patrol' do
-    patch :update, params: { id: @outreach_patrol, outreach_patrol: { finish: @outreach_patrol.finish, location: @outreach_patrol.location, start: @outreach_patrol.start } }
+    patch :update,
+          params: { id: @outreach_patrol,
+                    outreach_patrol: { finish: @outreach_patrol.finish, location: @outreach_patrol.location,
+                                       start: @outreach_patrol.start } }
     assert_redirected_to outreach_patrol_path(assigns(:outreach_patrol))
   end
 

@@ -1,20 +1,21 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'leads/index', type: :view do
   before(:each) do
     assign(:leads, [
-      Lead.create!(
-        name: 'Name',
-        email: 'test1@gmail.com',
-        organisation: 'Organisation'
-     ),
-       Lead.create!(
-        name: 'Name',
-        email: 'test2@gmail.com',
-        organisation: 'Organisation'
-     )
-    ])
+             Lead.create!(
+               name: 'Name',
+               email: 'test1@gmail.com',
+               organisation: 'Organisation'
+             ),
+             Lead.create!(
+               name: 'Name',
+               email: 'test2@gmail.com',
+               organisation: 'Organisation'
+             )
+           ])
   end
 
   it 'renders a list of leads' do

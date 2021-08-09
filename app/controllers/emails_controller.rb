@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class EmailsController < ApplicationController
   load_and_authorize_resource
   layout 'admin'
@@ -6,7 +7,7 @@ class EmailsController < ApplicationController
   def admin
     render layout: 'admin'
 
-    #@emails = ActionMailer::Base.deliveries
+    # @emails = ActionMailer::Base.deliveries
   end
 
   def send_weekly_patrol_rosters
@@ -28,5 +29,4 @@ class EmailsController < ApplicationController
     Email.welcome_email(params[:organisation])
     redirect_to admin_emails_path, notice: 'Sent welcome email(s) to ' + params[:organisation]
   end
-
 end

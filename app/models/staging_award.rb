@@ -1,13 +1,13 @@
 # frozen_string_literal: true
-class StagingAward < ApplicationRecord
 
+class StagingAward < ApplicationRecord
   scope :current, -> { where('expiry_date > ? OR award_name = ?', DateTime.now, 'Silver Medallion Beach Management') }
 
   def self.dump(file)
-
     values = []
 
-    columns = [:award_number, :award_name, :user_id, :award_date, :proficiency_date, :expiry_date, :originating_organisation]
+    columns = [:award_number, :award_name, :user_id, :award_date, :proficiency_date, :expiry_date,
+               :originating_organisation]
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
@@ -30,37 +30,33 @@ class StagingAward < ApplicationRecord
     end
 
     StagingAward.import columns, values, validate: true
-
   end
 
   def self.transfer
-
     staged_awards = StagingAward.current
 
     values = []
 
-    columns = [:award_number, :award_name, :user_id, :award_date, :proficiency_date, :expiry_date, :originating_organisation]
+    columns = [:award_number, :award_name, :user_id, :award_date, :proficiency_date, :expiry_date,
+               :originating_organisation]
 
     staged_awards.each do |staged_award|
+      award = [
+        staged_award.award_number,
+        staged_award.award_name,
+        staged_award.user_id,
+        staged_award.award_date,
+        staged_award.proficiency_date,
+        staged_award.expiry_date,
+        staged_award.originating_organisation,
+      ]
 
-        award = [
-          staged_award.award_number,
-          staged_award.award_name,
-          staged_award.user_id,
-          staged_award.award_date,
-          staged_award.proficiency_date,
-          staged_award.expiry_date,
-          staged_award.originating_organisation,
-        ]
-
-        values << award
-
-      end
+      values << award
+    end
 
     if Award.import columns, values, validate: true, on_duplicate_key_ignore: true
       StagingAward.delete_all
     end
-
   end
 
   def self.open_spreadsheet(file)
@@ -72,5 +68,4 @@ class StagingAward < ApplicationRecord
     else raise "Unknown file type: #{file.original_filename}"
     end
   end
-
 end

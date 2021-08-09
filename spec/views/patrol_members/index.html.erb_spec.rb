@@ -1,23 +1,23 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'patrol_members/index', type: :view do
   before(:each) do
     assign(:patrol_members, [
-      PatrolMember.create!(
-        user_id: '1',
-        default_position: 'DefaultPosition',
-        organisation: 'Organisation',
-        patrol_name: 'PatrolName'
-
-     ),
-      PatrolMember.create!(
-        user_id: '1',
-        default_position: 'DefaultPosition',
-        organisation: 'Organisation',
-        patrol_name: 'PatrolName'
-     )
-    ])
+             PatrolMember.create!(
+               user_id: '1',
+               default_position: 'DefaultPosition',
+               organisation: 'Organisation',
+               patrol_name: 'PatrolName'
+             ),
+             PatrolMember.create!(
+               user_id: '1',
+               default_position: 'DefaultPosition',
+               organisation: 'Organisation',
+               patrol_name: 'PatrolName'
+             )
+           ])
   end
 
   it 'renders a list of patrol_memeber' do

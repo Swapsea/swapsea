@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class Patrol < ActiveRecord::Base
 
+class Patrol < ActiveRecord::Base
   belongs_to :club, foreign_key: 'organisation', primary_key: 'name'
   has_many :patrol_members, foreign_key: 'patrol_name', primary_key: 'name'
   has_many :users, through: :patrol_members
@@ -23,10 +23,10 @@ class Patrol < ActiveRecord::Base
   def qualifications
     bronze = awards.where(award_name: 'Bronze Medallion').count
     bbm = awards.where(award_name: 'Silver Medallion Beach Management').count
-    artc = awards.where({award_name: 'Advanced Resuscitation Techniques Certificate'} || {award_name: 'Advanced Resuscitation Techniques [AID]'} || {award_name: 'Advanced Resuscitation Techniques Refresher'} || {award_name: 'Advanced Resuscitation Certificate'} || {award_name: 'Advanced Resuscitation Certificate Instructor'}).count
+    artc = awards.where({ award_name: 'Advanced Resuscitation Techniques Certificate' } || { award_name: 'Advanced Resuscitation Techniques [AID]' } || { award_name: 'Advanced Resuscitation Techniques Refresher' } || { award_name: 'Advanced Resuscitation Certificate' } || { award_name: 'Advanced Resuscitation Certificate Instructor' }).count
     irbc = awards.where(award_name: 'IRB Crew Certificate').count
     irbd = awards.where(award_name: 'Silver Medallion IRB Driver').count
-    src = awards.where({award_name: 'Surf Rescue Certificate'} || {award_name: 'Surf Rescue Certificate (CPR Endorsed)'}).count
+    src = awards.where({ award_name: 'Surf Rescue Certificate' } || { award_name: 'Surf Rescue Certificate (CPR Endorsed)' }).count
     {
       bbm: bbm,
       irbd: irbd,
@@ -50,5 +50,4 @@ class Patrol < ActiveRecord::Base
   def short_name
     self[:short_name] || self.name
   end
-
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class NoticesControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class NoticesControllerTest < ActionController::TestCase
 
   test 'should create notice' do
     assert_difference('Notice.count') do
-      post :create, params: { notice: { club_id: @notice.club_id, desc: @notice.desc, image: @notice.image, link: @notice.link, link_desc: @notice.link_desc, system_wide: @notice.system_wide, title: @notice.title, user_id: @notice.user_id, video: @notice.video, visible: @notice.visible, visible_from: @notice.visible_from, visible_to: @notice.visible_to } }
+      post :create,
+           params: { notice: { club_id: @notice.club_id, desc: @notice.desc, image: @notice.image, link: @notice.link,
+                               link_desc: @notice.link_desc, system_wide: @notice.system_wide, title: @notice.title, user_id: @notice.user_id, video: @notice.video, visible: @notice.visible, visible_from: @notice.visible_from, visible_to: @notice.visible_to } }
     end
 
     assert_redirected_to notice_path(assigns(:notice))
@@ -36,7 +39,10 @@ class NoticesControllerTest < ActionController::TestCase
   end
 
   test 'should update notice' do
-    patch :update, params: { id: @notice, notice: { club_id: @notice.club_id, desc: @notice.desc, image: @notice.image, link: @notice.link, link_desc: @notice.link_desc, system_wide: @notice.system_wide, title: @notice.title, user_id: @notice.user_id, video: @notice.video, visible: @notice.visible, visible_from: @notice.visible_from, visible_to: @notice.visible_to } }
+    patch :update,
+          params: { id: @notice,
+                    notice: { club_id: @notice.club_id, desc: @notice.desc, image: @notice.image, link: @notice.link,
+                              link_desc: @notice.link_desc, system_wide: @notice.system_wide, title: @notice.title, user_id: @notice.user_id, video: @notice.video, visible: @notice.visible, visible_from: @notice.visible_from, visible_to: @notice.visible_to } }
     assert_redirected_to notice_path(assigns(:notice))
   end
 

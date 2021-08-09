@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class HomeController < ApplicationController
   load_and_authorize_resource class: false
 
@@ -22,5 +23,4 @@ class HomeController < ApplicationController
   def terms_of_use
     render layout: 'basic'
   end
-
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class NoticeAcknowledgementsControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class NoticeAcknowledgementsControllerTest < ActionController::TestCase
 
   test 'should create notice_acknowledgement' do
     assert_difference('NoticeAcknowledgement.count') do
-      post :create, params: { notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id, user_id: @notice_acknowledgement.user_id } }
+      post :create,
+           params: { notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id,
+                                               user_id: @notice_acknowledgement.user_id } }
     end
 
     assert_redirected_to notice_acknowledgement_path(assigns(:notice_acknowledgement))
@@ -36,7 +39,10 @@ class NoticeAcknowledgementsControllerTest < ActionController::TestCase
   end
 
   test 'should update notice_acknowledgement' do
-    patch :update, params: { id: @notice_acknowledgement, notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id, user_id: @notice_acknowledgement.user_id } }
+    patch :update,
+          params: { id: @notice_acknowledgement,
+                    notice_acknowledgement: { notice_id: @notice_acknowledgement.notice_id,
+                                              user_id: @notice_acknowledgement.user_id } }
     assert_redirected_to notice_acknowledgement_path(assigns(:notice_acknowledgement))
   end
 

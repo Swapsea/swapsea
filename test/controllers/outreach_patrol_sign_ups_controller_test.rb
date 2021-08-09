@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class OutreachPatrolSignUpsControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class OutreachPatrolSignUpsControllerTest < ActionController::TestCase
 
   test 'should create outreach_patrol_sign_up' do
     assert_difference('OutreachPatrolSignUp.count') do
-      post :create, params: { outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id, user_id: @outreach_patrol_sign_up.user_id } }
+      post :create,
+           params: { outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id,
+                                                user_id: @outreach_patrol_sign_up.user_id } }
     end
 
     assert_redirected_to outreach_patrol_sign_up_path(assigns(:outreach_patrol_sign_up))
@@ -36,7 +39,10 @@ class OutreachPatrolSignUpsControllerTest < ActionController::TestCase
   end
 
   test 'should update outreach_patrol_sign_up' do
-    patch :update, params: { id: @outreach_patrol_sign_up, outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id, user_id: @outreach_patrol_sign_up.user_id } }
+    patch :update,
+          params: { id: @outreach_patrol_sign_up,
+                    outreach_patrol_sign_up: { outreach_patrol_id: @outreach_patrol_sign_up.outreach_patrol_id,
+                                               user_id: @outreach_patrol_sign_up.user_id } }
     assert_redirected_to outreach_patrol_sign_up_path(assigns(:outreach_patrol_sign_up))
   end
 

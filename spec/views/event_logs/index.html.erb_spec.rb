@@ -1,18 +1,19 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'event_logs/index', type: :view do
   before(:each) do
     assign(:event_logs, [
-      EventLog.create!(
-        subject: 'Subject',
-        desc: 'Desc'
-     ),
-      EventLog.create!(
-        subject: 'Subject',
-        desc: 'Desc'
-     )
-    ])
+             EventLog.create!(
+               subject: 'Subject',
+               desc: 'Desc'
+             ),
+             EventLog.create!(
+               subject: 'Subject',
+               desc: 'Desc'
+             )
+           ])
   end
 
   it 'renders a list of event_logs' do

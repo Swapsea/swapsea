@@ -1,18 +1,19 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'clubs/index', type: :view do
   before(:each) do
     assign(:clubs, [
-      Club.create!(
-        name: 'Name',
-        short_name: 'ShortName'
-     ),
-      Club.create!(
-        name: 'Name',
-        short_name: 'ShortName'
-     )
-    ])
+             Club.create!(
+               name: 'Name',
+               short_name: 'ShortName'
+             ),
+             Club.create!(
+               name: 'Name',
+               short_name: 'ShortName'
+             )
+           ])
   end
 
   it 'renders a list of clubs' do

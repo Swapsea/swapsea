@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'twilio-ruby'
 
 class SwapseaSms
@@ -26,7 +27,6 @@ class SwapseaSms
   end
 
   private
-
 
   def recipient_number
     if TESTING_PHONE_NUMBER

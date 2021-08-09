@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateNotices < ActiveRecord::Migration
   def change
     create_table :notices do |t|

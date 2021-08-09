@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class PatrolMembersControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class PatrolMembersControllerTest < ActionController::TestCase
 
   test 'should create patrol_member' do
     assert_difference('PatrolMember.count') do
-      post :create, params: { patrol_member: { default_position: @patrol_member.default_position, patrol_id: @patrol_member.patrol_id, patrol_key: @patrol_member.patrol_key, user_id: @patrol_member.user_id } }
+      post :create,
+           params: { patrol_member: { default_position: @patrol_member.default_position, patrol_id: @patrol_member.patrol_id,
+                                      patrol_key: @patrol_member.patrol_key, user_id: @patrol_member.user_id } }
     end
 
     assert_redirected_to patrol_member_path(assigns(:patrol_member))
@@ -36,7 +39,10 @@ class PatrolMembersControllerTest < ActionController::TestCase
   end
 
   test 'should update patrol_member' do
-    patch :update, params: { id: @patrol_member, patrol_member: { default_position: @patrol_member.default_position, patrol_id: @patrol_member.patrol_id, patrol_key: @patrol_member.patrol_key, user_id: @patrol_member.user_id } }
+    patch :update,
+          params: { id: @patrol_member,
+                    patrol_member: { default_position: @patrol_member.default_position, patrol_id: @patrol_member.patrol_id,
+                                     patrol_key: @patrol_member.patrol_key, user_id: @patrol_member.user_id } }
     assert_redirected_to patrol_member_path(assigns(:patrol_member))
   end
 

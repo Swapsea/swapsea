@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SwapsController, type: :controller do
@@ -24,7 +25,7 @@ RSpec.describe SwapsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # EventLogsController. Be sure to keep this updated too.
-  let(:valid_session) { FactoryBot.create(:user)  }
+  let(:valid_session) { FactoryBot.create(:user) }
 
   before do
     sign_in create :administrator
@@ -59,10 +60,9 @@ RSpec.describe SwapsController, type: :controller do
   end
 
   describe 'GET #confirmed' do
-   it 'returns a success response' do
-     get :confirmed
-     expect(response).to be_successful
-   end
- end
-
+    it 'returns a success response' do
+      get :confirmed
+      expect(response).to be_successful
+    end
+  end
 end

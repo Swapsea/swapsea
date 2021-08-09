@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe LeadsController, type: :controller do
@@ -18,7 +19,7 @@ RSpec.describe LeadsController, type: :controller do
     skip('Add a hash of attributes invalid for your model')
   }
 
-  let(:valid_session) { FactoryBot.create(:user)  }
+  let(:valid_session) { FactoryBot.create(:user) }
 
   describe 'GET #admin' do
     it 'returns a success response' do
@@ -31,7 +32,7 @@ RSpec.describe LeadsController, type: :controller do
     it 'returns a success response' do
       lead = FactoryBot.create(:lead)
       lead = create :lead
-      get :show, params: {id: lead.to_param}
+      get :show, params: { id: lead.to_param }
       expect(response).to be_successful
     end
   end
@@ -46,7 +47,7 @@ RSpec.describe LeadsController, type: :controller do
   describe 'GET #edit' do
     it 'returns a success response' do
       lead = FactoryBot.create(:lead)
-      get :edit, params: {id: lead.to_param}
+      get :edit, params: { id: lead.to_param }
       expect(response).to be_successful
     end
   end
@@ -56,13 +57,13 @@ RSpec.describe LeadsController, type: :controller do
       it 'creates a new Lead' do
         lead_attrs = attributes_for :lead
         expect {
-          post :create, params: {lead: lead_attrs}
+          post :create, params: { lead: lead_attrs }
         }.to change(Lead, :count).by(1)
       end
 
       it 'redirects to the created lead' do
         lead_attrs = attributes_for :lead
-        post :create, params: {lead: lead_attrs}
+        post :create, params: { lead: lead_attrs }
         expect(response).to redirect_to(thanks_path)
       end
     end
@@ -72,15 +73,14 @@ RSpec.describe LeadsController, type: :controller do
     it 'destroys the requested lead' do
       lead = FactoryBot.create(:lead)
       expect {
-        delete :destroy, params: {id: lead.to_param}
+        delete :destroy, params: { id: lead.to_param }
       }.to change(Lead, :count).by(-1)
     end
 
     it 'redirects to the leads list' do
       lead = FactoryBot.create(:lead)
-      delete :destroy, params: {id: lead.to_param}
+      delete :destroy, params: { id: lead.to_param }
       expect(response).to redirect_to(leads_url)
     end
   end
-
 end

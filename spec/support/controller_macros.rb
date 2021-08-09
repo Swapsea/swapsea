@@ -1,8 +1,8 @@
 # frozen_string_literal: true
+
 # spec/support/controller_macros.rb
 
 module ControllerMacros
-
   def login_user
     before(:each) do
       @request.env['devise.mapping'] = Devise.mappings[:user]

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe NoticeAcknowledgement, type: :model do
-
   before(:all) do
     @notice_acknowledgement = FactoryBot.create(:notice_acknowledgement)
   end
@@ -13,7 +13,7 @@ RSpec.describe NoticeAcknowledgement, type: :model do
   end
 
   describe NoticeAcknowledgement, 'association' do
-     it { should belong_to(:notice)}
-     it { should belong_to(:user)}
-   end
+    it { should belong_to(:notice) }
+    it { should belong_to(:user) }
+  end
 end

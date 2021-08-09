@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class Offer < ActiveRecord::Base
 
+class Offer < ActiveRecord::Base
   include PublicActivity::Common
 
   belongs_to :request
@@ -26,5 +26,4 @@ class Offer < ActiveRecord::Base
   def corresponding_requests
     Request.where('id != ? AND user_id = ? AND roster_id = ? AND status = ?', request.id, user.id, roster_id, 'open')
   end
-
 end

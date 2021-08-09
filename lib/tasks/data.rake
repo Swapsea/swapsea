@@ -1,9 +1,9 @@
 # frozen_string_literal: true
+
 namespace :swapsea do
   namespace :data do
     desc 'Daily transfer from staging tables to working tables.'
     task transfer: :environment do |task|
-
       if StagingAward.transfer
         EventLog.create!(subject: 'Transfer', desc: 'Awards import success.')
       else
@@ -31,7 +31,6 @@ namespace :swapsea do
       else
         EventLog.create!(subject: 'Transfer', desc: 'No junior members found to remove.')
       end
-
     end
   end
 end

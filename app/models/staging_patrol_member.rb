@@ -1,8 +1,7 @@
 # frozen_string_literal: true
+
 class StagingPatrolMember < ApplicationRecord
-
   def self.dump(file)
-
     values = []
 
     columns = [:user_id, :patrol_name, :default_position, :organisation]
@@ -20,15 +19,12 @@ class StagingPatrolMember < ApplicationRecord
       ]
 
       values << patrol_member
-
     end
 
     StagingPatrolMember.import columns, values, validate: true
-
   end
 
   def self.transfer
-
     staged_patrol_members = StagingPatrolMember.all
 
     success_count = 0
@@ -36,9 +32,7 @@ class StagingPatrolMember < ApplicationRecord
     total_count = staged_patrol_members.count
 
     PatrolMember.transaction do
-
       staged_patrol_members.each do |staged_patrol_member|
-
         if Patrol.find_by(name: staged_patrol_member.patrol_name, organisation: staged_patrol_member.organisation)
 
           patrol_member = PatrolMember.find_or_initialize_by(user_id: staged_patrol_member.user_id)
@@ -66,12 +60,9 @@ class StagingPatrolMember < ApplicationRecord
           patrol_member.save
 
         end
-
       end
-
     end
-
-end
+  end
 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
@@ -81,5 +72,4 @@ end
     else raise "Unknown file type: #{file.original_filename}"
     end
   end
-
 end

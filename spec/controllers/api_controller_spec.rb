@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ApiController, type: :controller do
@@ -46,9 +47,8 @@ RSpec.describe ApiController, type: :controller do
   end
 
   describe 'POST #upload_patrol_members' do
-   it 'returns http success' do
-     post :upload_patrol_members, params: { file_data: file_data }
-   end
- end
-
+    it 'returns http success' do
+      post :upload_patrol_members, params: { file_data: file_data }
+    end
+  end
 end

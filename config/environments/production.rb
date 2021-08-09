@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Swapsea2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -75,7 +76,7 @@ Swapsea2::Application.configure do
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
-  config.log_tags = [ :uuid ]
+  config.log_tags = [:uuid]
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
@@ -125,5 +126,4 @@ Swapsea2::Application.configure do
     authentication: :plain,
     domain: ENV['SMTP_DOMAIN'] || 'localhost',
   }
-
 end

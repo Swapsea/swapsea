@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe Email, type: :model do
-
   before(:all) do
     @email = FactoryBot.create(:email)
   end
@@ -11,5 +11,4 @@ RSpec.describe Email, type: :model do
       expect(@email).to be_valid
     end
   end
-
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ClubsController < ApplicationController
   load_and_authorize_resource
   before_action :set_club, only: [:show, :edit, :update]
@@ -73,13 +74,15 @@ class ClubsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_club
     @club = Club.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def club_params
-    params.require(:club).permit(:name, :short_name, :patrols, :rosters, :swaps, :show_patrols, :show_rosters, :show_swaps, :show_outreach, :show_skills_maintenance, :lat, :lon)
+    params.require(:club).permit(:name, :short_name, :patrols, :rosters, :swaps, :show_patrols, :show_rosters,
+                                 :show_swaps, :show_outreach, :show_skills_maintenance, :lat, :lon)
   end
 end

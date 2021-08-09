@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class RequestsControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class RequestsControllerTest < ActionController::TestCase
 
   test 'should create request' do
     assert_difference('Request.count') do
-      post :create, params: { request: { comment: @request.comment, email: @request.email, mobile: @request.mobile, roster_id: @request.roster_id, status: @request.status, user_id: @request.user_id } }
+      post :create,
+           params: { request: { comment: @request.comment, email: @request.email, mobile: @request.mobile,
+                                roster_id: @request.roster_id, status: @request.status, user_id: @request.user_id } }
     end
 
     assert_redirected_to request_path(assigns(:request))
@@ -36,7 +39,10 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test 'should update request' do
-    patch :update, params: { id: @request, request: { comment: @request.comment, email: @request.email, mobile: @request.mobile, roster_id: @request.roster_id, status: @request.status, user_id: @request.user_id } }
+    patch :update,
+          params: { id: @request,
+                    request: { comment: @request.comment, email: @request.email, mobile: @request.mobile, roster_id: @request.roster_id,
+                               status: @request.status, user_id: @request.user_id } }
     assert_redirected_to request_path(assigns(:request))
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'test_helper'
 
 class ProficiencySignupsControllerTest < ActionController::TestCase
@@ -19,7 +20,9 @@ class ProficiencySignupsControllerTest < ActionController::TestCase
 
   test 'should create proficiency_signup' do
     assert_difference('ProficiencySignup.count') do
-      post :create, params: { proficiency_signup: { proficiency_id: @proficiency_signup.proficiency_id, user_id: @proficiency_signup.user_id } }
+      post :create,
+           params: { proficiency_signup: { proficiency_id: @proficiency_signup.proficiency_id,
+                                           user_id: @proficiency_signup.user_id } }
     end
 
     assert_redirected_to proficiency_signup_path(assigns(:proficiency_signup))
@@ -36,7 +39,10 @@ class ProficiencySignupsControllerTest < ActionController::TestCase
   end
 
   test 'should update proficiency_signup' do
-    patch :update, params: { id: @proficiency_signup, proficiency_signup: { proficiency_id: @proficiency_signup.proficiency_id, user_id: @proficiency_signup.user_id } }
+    patch :update,
+          params: { id: @proficiency_signup,
+                    proficiency_signup: { proficiency_id: @proficiency_signup.proficiency_id,
+                                          user_id: @proficiency_signup.user_id } }
     assert_redirected_to proficiency_signup_path(assigns(:proficiency_signup))
   end
 

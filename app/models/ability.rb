@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
@@ -83,7 +84,7 @@ class Ability
       cannot :index, User
       can [:index], :dashboard
       can [:index, :set], :selected_user
-      can [:report,:patrol_report], Roster do |roster|
+      can [:report, :patrol_report], Roster do |roster|
         roster.organisation == user.organisation
       end
     elsif user.has_role? :member
@@ -139,6 +140,5 @@ class Ability
       can :activate, User
       can [:index, :privacy_policy, :terms_of_use, :thanks, :contact_us], :home
     end
-
   end
 end

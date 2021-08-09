@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe Request, type: :model do
-
   before(:all) do
     @request = FactoryBot.create(:request)
   end
@@ -13,8 +13,8 @@ RSpec.describe Request, type: :model do
   end
 
   describe Request, 'association' do
-     it { should belong_to(:roster) }
-     it { should belong_to(:user) }
-     it { should have_many(:offers) }
-   end
+    it { should belong_to(:roster) }
+    it { should belong_to(:user) }
+    it { should have_many(:offers) }
+  end
 end

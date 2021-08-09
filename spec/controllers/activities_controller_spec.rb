@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ActivitiesController, type: :controller do
@@ -9,5 +10,4 @@ RSpec.describe ActivitiesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
 end

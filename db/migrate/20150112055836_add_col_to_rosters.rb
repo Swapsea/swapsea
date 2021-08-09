@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddColToRosters < ActiveRecord::Migration
   def change
     add_column :rosters, :bbm, :integer

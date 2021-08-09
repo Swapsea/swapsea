@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe DashboardController, type: :controller do
@@ -18,7 +19,7 @@ RSpec.describe DashboardController, type: :controller do
     skip('Add a hash of attributes invalid for your model')
   }
 
-  let(:valid_session) { FactoryBot.create(:user)  }
+  let(:valid_session) { FactoryBot.create(:user) }
 
   describe 'GET #index' do
     it 'returns a success response' do
@@ -26,6 +27,4 @@ RSpec.describe DashboardController, type: :controller do
       expect(response).to be_successful
     end
   end
-
-
 end

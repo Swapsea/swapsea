@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class NoticeAcknowledgementsController < ApplicationController
   load_and_authorize_resource
   before_action :set_notice_acknowledgement, only: [:show, :edit, :update, :destroy]
@@ -39,6 +40,7 @@ class NoticeAcknowledgementsController < ApplicationController
   end
 
   private
+
   def set_notice_acknowledgement
     @notice_acknowledgement = NoticeAcknowledgement.find(params[:id])
   end

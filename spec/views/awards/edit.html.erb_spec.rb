@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'awards/edit', type: :view do
@@ -10,7 +11,6 @@ RSpec.describe 'awards/edit', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', award_path(@award), 'post' do
-
       assert_select 'input#award_award_name[name=?]', 'award[award_name]'
 
       assert_select 'input#award_award_number[name=?]', 'award[award_number]'

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateOffers < ActiveRecord::Migration
   def change
     create_table :offers do |t|

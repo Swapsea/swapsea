@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class LeadsController < ApplicationController
   load_and_authorize_resource
   before_action :set_lead, only: [:show, :edit, :update, :destroy]
@@ -66,12 +67,13 @@ class LeadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_lead
     @lead = Lead.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def lead_params
     params.require(:lead).permit(:name, :email, :organisation, :phone)
   end

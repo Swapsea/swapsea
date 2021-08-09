@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe ProficiencySignup, type: :model do
-
   before(:all) do
     @proficiency_signup = FactoryBot.create(:proficiency_signup)
   end
@@ -13,7 +13,7 @@ RSpec.describe ProficiencySignup, type: :model do
   end
 
   describe ProficiencySignup, 'association' do
-     it { should belong_to(:proficiency)}
-     it { should belong_to(:user)}
-   end
+    it { should belong_to(:proficiency) }
+    it { should belong_to(:user) }
+  end
 end

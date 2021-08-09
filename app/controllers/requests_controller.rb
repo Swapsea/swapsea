@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class RequestsController < ApplicationController
   load_and_authorize_resource
   before_action :set_request, only: [:show, :edit, :update, :destroy]
@@ -35,7 +36,6 @@ class RequestsController < ApplicationController
     else
       redirect_to dashboard_path, notice: 'Member not rostered on.'
     end
-
   end
 
   # GET /requests/1/edit
@@ -47,7 +47,6 @@ class RequestsController < ApplicationController
   # POST /requests
   # POST /requests.json
   def create
-
     # Check if request already exists.
     @request_exists = Request.find_by(roster_id: request_params[:roster_id], user_id: selected_user, status: 'open')
 
@@ -96,20 +95,21 @@ class RequestsController < ApplicationController
         offer.create_activity :destroy, owner: selected_user
         offer.status = 'deleted'
         offer.save
-        #SwapseaMailer.request_cancelled(offer).deliver
+        # SwapseaMailer.request_cancelled(offer).deliver
       end
       redirect_to swaps_path
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_request
     @request = Request.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def request_params
     params.require(:request).permit(:roster_id, :user_id, :comment, :mobile, :email, :status)
   end
-  end
+end

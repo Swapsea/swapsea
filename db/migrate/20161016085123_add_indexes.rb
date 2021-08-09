@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddIndexes < ActiveRecord::Migration
   def change
     add_index :patrols, [:organisation, :name]
@@ -6,5 +7,4 @@ class AddIndexes < ActiveRecord::Migration
     add_index :rosters, [:organisation, :patrol_name]
     execute('ALTER TABLE public.awards ADD CONSTRAINT award_number UNIQUE (award_number);')
   end
-
 end

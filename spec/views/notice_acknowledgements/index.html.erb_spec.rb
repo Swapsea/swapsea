@@ -1,18 +1,19 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'notice_acknowledgements/index', type: :view do
   before(:each) do
     assign(:notice_acknowledgements, [
-      NoticeAcknowledgement.create!(
-        notice_id: '3',
-        user_id: '1'
-     ),
-      NoticeAcknowledgement.create!(
-        notice_id: '3',
-        user_id: '1'
-     )
-    ])
+             NoticeAcknowledgement.create!(
+               notice_id: '3',
+               user_id: '1'
+             ),
+             NoticeAcknowledgement.create!(
+               notice_id: '3',
+               user_id: '1'
+             )
+           ])
   end
 
   it 'renders a list of notice_acknowledgements' do

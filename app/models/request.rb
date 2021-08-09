@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class Request < ActiveRecord::Base
 
+class Request < ActiveRecord::Base
   include PublicActivity::Common
 
   belongs_to :roster
@@ -34,14 +34,13 @@ class Request < ActiveRecord::Base
       o.status = 'removed'
       if o.save
         SwapseaMailer.request_closed(o).deliver
-          else
-            raise 'Error accepting offer. (Code 3)'
-          end
+      else
+        raise 'Error accepting offer. (Code 3)'
+      end
     end
   end
 
   def offers_that_match_request
     Offer.where('roster_id = ? AND user_id =? AND status = ?', roster_id, user_id, 'pending')
   end
-
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateStagingPatrolMembers < ActiveRecord::Migration[5.0]
   def change
     create_table :staging_patrol_members do |t|

@@ -1,11 +1,13 @@
 # frozen_string_literal: true
+
 require 'swapsea_sms'
 
 class Email < ActiveRecord::Base
   def self.weekly_patrol_rosters(organisation)
     emails_sent = 0;
     # Who is on patrol in the next week.
-    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.week, organisation)
+    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.week,
+                           organisation)
     rosters.map do |roster|
       roster.current.each do |user|
         begin
@@ -33,11 +35,11 @@ class Email < ActiveRecord::Base
     'Sent ' + emails_sent.to_s + ' weekly patrol emails for ' + organisation.to_s
   end
 
-
   def self.weekly_skills_maintenance(organisation)
     emails_sent = 0;
     # Who has skills maintenance this week.
-    proficiencies = Proficiency.where('start >= ? AND start <=? AND organisation = ?', DateTime.now, DateTime.now + 1.week, organisation)
+    proficiencies = Proficiency.where('start >= ? AND start <=? AND organisation = ?', DateTime.now,
+                                      DateTime.now + 1.week, organisation)
     proficiencies.map do |proficiency|
       proficiency.users.map do |user|
         begin
@@ -51,14 +53,12 @@ class Email < ActiveRecord::Base
     'Sent ' + emails_sent.to_s + ' weekly skills maintenance emails for ' + organisation.to_s
   end
 
-
   def self.north_bondi_not_yet_proficient
     ProficiencySignup.unsigned.each do |user_id|
       user = User.find(user_id)
       SwapseaMailer.north_bondi_not_yet_proficient(user).deliver
     end
   end
-
 
   def self.welcome_email(organisation)
     emails_sent = 0;
@@ -71,18 +71,18 @@ class Email < ActiveRecord::Base
     'Sent ' + emails_sent.to_s + ' welcome emails for ' + organisation
   end
 
-
   def self.welcome_email_test(email)
     u = User.find_by(email: email)
     SwapseaMailer.welcome_email(u).deliver
   end
 
-###############################################################################
-# => To consolidate
-###############################################################################
+  ###############################################################################
+  # => To consolidate
+  ###############################################################################
   def self.north_bondi_patrol_reports
     reports_sent = 0;
-    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.day, 'North Bondi SLSC')
+    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.day,
+                           'North Bondi SLSC')
     rosters.map do |roster|
       SwapseaMailer.north_bondi_patrol_report(roster).deliver
       reports_sent = reports_sent + 1
@@ -98,9 +98,11 @@ class Email < ActiveRecord::Base
       SwapseaMailer.activity(subject, message).deliver
     end
   end
+
   def self.bronte_patrol_reports
     reports_sent = 0;
-    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.day, 'Bronte SLSC')
+    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.day,
+                           'Bronte SLSC')
     rosters.map do |roster|
       SwapseaMailer.bronte_patrol_report(roster).deliver
       reports_sent = reports_sent + 1
@@ -115,5 +117,4 @@ class Email < ActiveRecord::Base
       SwapseaMailer.activity(subject, message).deliver
     end
   end
-
 end

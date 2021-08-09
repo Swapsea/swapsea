@@ -1,22 +1,24 @@
 # frozen_string_literal: true
+
 class PatrolMembersController < ApplicationController
   load_and_authorize_resource
   before_action :set_patrol_member, only: [:show, :edit, :update, :destroy]
   layout 'dashboard'
 
   def import
-    #begin
+    # begin
     PatrolMember.upload(params[:file])
     redirect_to admin_patrol_members_path, notice: 'Patrol members imported.'
-    #rescue
-      #redirect_to root_url, notice: "Invalid CSV file format."
-    #end
+    # rescue
+    # redirect_to root_url, notice: "Invalid CSV file format."
+    # end
   end
 
   # GET /patrol_members
   # GET /patrol_members.json
   def index
-    @patrol_members = PatrolMember.where(organisation: selected_user.organisation).paginate(page: params[:page], per_page: 30)
+    @patrol_members = PatrolMember.where(organisation: selected_user.organisation).paginate(page: params[:page],
+                                                                                            per_page: 30)
   end
 
   def admin
@@ -79,12 +81,13 @@ class PatrolMembersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_patrol_member
     @patrol_member = PatrolMember.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def patrol_member_params
     params.require(:patrol_member).permit(:user_id, :patrol_id, :patrol_key, :default_position)
   end
