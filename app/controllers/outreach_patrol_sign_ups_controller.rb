@@ -69,12 +69,12 @@ class OutreachPatrolSignUpsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_outreach_patrol_sign_up
-      @outreach_patrol_sign_up = OutreachPatrolSignUp.find(params[:id])
-    end
+  def set_outreach_patrol_sign_up
+    @outreach_patrol_sign_up = OutreachPatrolSignUp.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def outreach_patrol_sign_up_params
-      params.require(:outreach_patrol_sign_up).permit(:user_id, :outreach_patrol_id)
-    end
+  def outreach_patrol_sign_up_params
+    params.require(:outreach_patrol_sign_up).permit(:user_id, :outreach_patrol_id)
+  end
 end

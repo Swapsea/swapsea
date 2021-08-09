@@ -39,11 +39,11 @@ class NoticeAcknowledgementsController < ApplicationController
   end
 
   private
-    def set_notice_acknowledgement
-      @notice_acknowledgement = NoticeAcknowledgement.find(params[:id])
-    end
+  def set_notice_acknowledgement
+    @notice_acknowledgement = NoticeAcknowledgement.find(params[:id])
+  end
 
-    def notice_acknowledgement_params
-      params.require(:notice_acknowledgement).permit(:user_id, :notice_id)
-    end
+  def notice_acknowledgement_params
+    params.require(:notice_acknowledgement).permit(:user_id, :notice_id)
+  end
 end

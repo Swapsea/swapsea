@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe EventLog, type: :model do
 
-	before(:all) do
+  before(:all) do
     @event_log = FactoryBot.create(:event_log)
   end
 

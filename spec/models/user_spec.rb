@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe User, type: :model do
 
-	before(:all) do
+  before(:all) do
     @user = FactoryBot.create(:user)
   end
 
@@ -13,18 +13,18 @@ RSpec.describe User, type: :model do
   end
 
   describe User, 'association' do
-    it { should have_many(:awards) }
-    it { should have_many(:requests) }
-    it { should have_many(:offers) }
-    it { should have_one(:patrol_member) }
-    it { should have_one(:patrol).through(:patrol_member) }
-    it { should have_many(:rosters).through(:patrol) }
-    it { should have_many(:proficiency_signups) }
-    it { should have_many(:proficiencies).through(:proficiency_signups) }
-    it { should have_many(:swaps) }
-    it { should have_many(:notices) }
-    it { should have_many(:notice_acknowledgements) }
-	end
+     it { should have_many(:awards) }
+     it { should have_many(:requests) }
+     it { should have_many(:offers) }
+     it { should have_one(:patrol_member) }
+     it { should have_one(:patrol).through(:patrol_member) }
+     it { should have_many(:rosters).through(:patrol) }
+     it { should have_many(:proficiency_signups) }
+     it { should have_many(:proficiencies).through(:proficiency_signups) }
+     it { should have_many(:swaps) }
+     it { should have_many(:notices) }
+     it { should have_many(:notice_acknowledgements) }
+   end
 
   context '::name' do
     let(:user) { create :user, first_name: 'First', last_name: 'Last' }

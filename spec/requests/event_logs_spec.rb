@@ -7,7 +7,7 @@ RSpec.describe 'EventLogs', type: :request do
       get event_logs_path
       expect(response).to have_http_status(302)
 
-    	follow_redirect!
+      follow_redirect!
       expect(response).to have_http_status(200)
     end
   end

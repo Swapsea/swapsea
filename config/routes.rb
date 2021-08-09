@@ -26,9 +26,9 @@ Swapsea2::Application.routes.draw do
   get 'ics/:key', to: 'users#ics', as: 'ics'
 
   resources :clubs do
-      collection do
-      get :admin
-    end
+    collection do
+    get :admin
+  end
   end
 
   resources :emails do

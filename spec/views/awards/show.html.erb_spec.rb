@@ -4,12 +4,12 @@ require 'rails_helper'
 RSpec.describe 'awards/show', type: :view do
 
   before(:each) do
-		@award = assign(:award, Award.create!(
-			award_number: 'AwardNumber',
+    @award = assign(:award, Award.create!(
+      award_number: 'AwardNumber',
         award_name: 'AwardName',
         user_id: '1'
-		))
-	end
+    ))
+  end
 
   it 'renders attributes in <p>' do
     render

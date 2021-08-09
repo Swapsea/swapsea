@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe Swap, type: :model do
 
-	before(:all) do
+  before(:all) do
     @swap = FactoryBot.create(:swap)
   end
 
@@ -13,7 +13,7 @@ RSpec.describe Swap, type: :model do
   end
 
   describe Swap, 'association' do
-    it { should belong_to(:user) }
+     it { should belong_to(:user) }
      it { should belong_to(:roster) }
-	end
+   end
 end

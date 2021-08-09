@@ -58,11 +58,11 @@ RSpec.describe SwapsController, type: :controller do
     end
   end
 
-   describe 'GET #confirmed' do
-    it 'returns a success response' do
-      get :confirmed
-      expect(response).to be_successful
-    end
-  end
+  describe 'GET #confirmed' do
+   it 'returns a success response' do
+     get :confirmed
+     expect(response).to be_successful
+   end
+ end
 
 end

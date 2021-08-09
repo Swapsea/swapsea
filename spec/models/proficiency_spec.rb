@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe Proficiency, type: :model do
 
-	before(:all) do
+  before(:all) do
     @proficiency = FactoryBot.create(:proficiency)
   end
 
@@ -13,8 +13,8 @@ RSpec.describe Proficiency, type: :model do
   end
 
   describe Proficiency, 'association' do
-   	it { should belong_to(:club).with_foreign_key('organisation').with_primary_key('name') }
-    it { should have_many(:proficiency_signups) }
-    it { should have_many(:users).through(:proficiency_signups) }
-	end
+     it { should belong_to(:club).with_foreign_key('organisation').with_primary_key('name') }
+     it { should have_many(:proficiency_signups) }
+     it { should have_many(:users).through(:proficiency_signups) }
+   end
 end

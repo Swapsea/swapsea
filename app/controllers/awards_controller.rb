@@ -10,8 +10,8 @@ class AwardsController < ApplicationController
   def import
         #@club = params[:club]
       #begin
-        Award.upload(params[:file])
-        redirect_to admin_awards_path, notice: 'Awards imported.'
+    Award.upload(params[:file])
+    redirect_to admin_awards_path, notice: 'Awards imported.'
       #rescue
         #redirect_to root_url, notice: "Invalid CSV file format."
       #end
@@ -69,12 +69,12 @@ class AwardsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_award
-      @award = Award.find(params[:id])
-    end
+  def set_award
+    @award = Award.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def award_params
-      params.require(:award).permit(:user_id, :award_name, :award_number, :award_date, :proficiency_date, :expiry_date, :award_allocation_date, :proficiency_allocation_date, :originating_organisation)
-    end
+  def award_params
+    params.require(:award).permit(:user_id, :award_name, :award_number, :award_date, :proficiency_date, :expiry_date, :award_allocation_date, :proficiency_allocation_date, :originating_organisation)
+  end
 end

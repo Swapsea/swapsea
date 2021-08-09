@@ -78,12 +78,12 @@ class SwapsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_swap
-      @swap = swap.find(params[:id])
-    end
+  def set_swap
+    @swap = swap.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def swap_params
-      params.require(:swap).permit(:roster_id, :user_id, :on_off_patrol)
-    end
+  def swap_params
+    params.require(:swap).permit(:roster_id, :user_id, :on_off_patrol)
+  end
 end

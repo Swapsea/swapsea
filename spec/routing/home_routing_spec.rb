@@ -20,8 +20,8 @@ RSpec.describe HomeController, type: :routing do
       expect(get: '/terms-of-use').to route_to('home#terms_of_use')
     end
 
-     it 'routes to #about_us' do
-      expect(get: '/about').to route_to('home#about_us')
-    end
+    it 'routes to #about_us' do
+     expect(get: '/about').to route_to('home#about_us')
+   end
   end
 end

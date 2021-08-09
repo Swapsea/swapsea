@@ -6,8 +6,8 @@ class RostersController < ApplicationController
 
   def import
     #begin
-      Roster.upload(params[:file])
-      redirect_to admin_rosters_path, notice: 'Roster imported.'
+    Roster.upload(params[:file])
+    redirect_to admin_rosters_path, notice: 'Roster imported.'
     #rescue
       #redirect_to root_url, notice: "Invalid CSV file format."
     #end
@@ -25,12 +25,12 @@ class RostersController < ApplicationController
     @patrols = Patrol.joins(:users).where(organisation: selected_user.organisation)
 
     if params[:view] == 'all'
-        @rosters = Roster.where('organisation = ?', selected_user.organisation).sort_by(&:start)
-        @rosters_this_year = Roster.where('organisation = ?', selected_user.organisation)
+      @rosters = Roster.where('organisation = ?', selected_user.organisation).sort_by(&:start)
+      @rosters_this_year = Roster.where('organisation = ?', selected_user.organisation)
     else
-        finish_time = Time.now - 3.hours
-        @rosters = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation).sort_by(&:start)
-        @rosters_this_year = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation)
+      finish_time = Time.now - 3.hours
+      @rosters = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation).sort_by(&:start)
+      @rosters_this_year = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db), selected_user.organisation)
     end
 
     @rosters_this_year_sorted = @rosters_this_year.sort_by(&:start)
@@ -145,7 +145,7 @@ class RostersController < ApplicationController
     #end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def roster_params
-      params.require(:roster).permit(:organisation, :patrol, :start, :finish)
-    end
+  def roster_params
+    params.require(:roster).permit(:organisation, :patrol, :start, :finish)
+  end
 end

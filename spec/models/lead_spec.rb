@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe Lead, type: :model do
 
-	before(:all) do
+  before(:all) do
     @lead = FactoryBot.create(:lead)
   end
 
@@ -12,7 +12,7 @@ RSpec.describe Lead, type: :model do
     end
   end
 
- 	it do
+  it do
     should validate_presence_of(:name).
       with_message('Cannot be blank.')
   end

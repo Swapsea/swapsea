@@ -29,7 +29,7 @@ class ProficienciesController < ApplicationController
       @proficiencies = nil
     end
 
-      render layout: 'admin'
+    render layout: 'admin'
   end
 
   # GET /proficiencies/1
@@ -80,23 +80,23 @@ class ProficienciesController < ApplicationController
   def destroy
     respond_to do |format|
     # if there are sign ups, don't allow destroy
-    if @proficiency.proficiency_signups.count == 0
+      if @proficiency.proficiency_signups.count == 0
         @proficiency.destroy
         format.html { redirect_to admin_proficiencies_path }
-      else
-      format.html { render admin_proficiencies_path, notice: 'Unable to delete proficiency, as there are signups.' }
-      end
+        else
+          format.html { render admin_proficiencies_path, notice: 'Unable to delete proficiency, as there are signups.' }
+        end
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_proficiency
-      @proficiency = Proficiency.find(params[:id])
-    end
+  def set_proficiency
+    @proficiency = Proficiency.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def proficiency_params
-      params.require(:proficiency).permit(:name, :start, :finish, :max_signup, :max_online_signup, :organisation)
-    end
+  def proficiency_params
+    params.require(:proficiency).permit(:name, :start, :finish, :max_signup, :max_online_signup, :organisation)
+  end
 end

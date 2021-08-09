@@ -7,10 +7,10 @@ describe 'home', type: :feature do
     @user = FactoryBot.create(:user)
   end
 
-	it 'Home page' do
-	    visit '/'
-	    expect(page).to have_text('Welcome to Swapsea')
-	end
+  it 'Home page' do
+    visit '/'
+    expect(page).to have_text('Welcome to Swapsea')
+  end
 
   it 'signs users in' do
     visit '/users/sign_in'

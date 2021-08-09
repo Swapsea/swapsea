@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe Club, type: :model do
 
-	before(:all) do
+  before(:all) do
     @club = FactoryBot.create(:club)
   end
 
@@ -13,12 +13,12 @@ RSpec.describe Club, type: :model do
   end
 
   describe Club, 'association' do
-    it { should have_many(:patrols) }
-    it { should have_many(:patrol_members).through(:patrols) }
-    it { should have_many(:rosters).through(:patrols) }
-    it { should have_many(:rosters).through(:patrols) }
-    it { should have_many(:requests).through(:rosters) }
-    it { should have_many(:users).through(:patrol_members) }
-    it { should have_many(:awards).through(:users) }
-	end
+     it { should have_many(:patrols) }
+     it { should have_many(:patrol_members).through(:patrols) }
+     it { should have_many(:rosters).through(:patrols) }
+     it { should have_many(:rosters).through(:patrols) }
+     it { should have_many(:requests).through(:rosters) }
+     it { should have_many(:users).through(:patrol_members) }
+     it { should have_many(:awards).through(:users) }
+   end
 end

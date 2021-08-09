@@ -68,12 +68,12 @@ class ProficiencySignupsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_proficiency_signup
-      @proficiency_signup = ProficiencySignup.find(params[:id])
-    end
+  def set_proficiency_signup
+    @proficiency_signup = ProficiencySignup.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def proficiency_signup_params
-      params.require(:proficiency_signup).permit(:user_id, :proficiency_id)
-    end
+  def proficiency_signup_params
+    params.require(:proficiency_signup).permit(:user_id, :proficiency_id)
+  end
 end

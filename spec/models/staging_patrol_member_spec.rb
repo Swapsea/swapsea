@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe StagingPatrolMember, type: :model do
 
-	before(:all) do
+  before(:all) do
     @staging_patrol_member = FactoryBot.create(:staging_patrol_member)
   end
 

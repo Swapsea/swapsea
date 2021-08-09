@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.describe PatrolMember, type: :model do
 
-	before(:all) do
+  before(:all) do
     @patrol_member = FactoryBot.create(:patrol_member)
   end
 
@@ -13,7 +13,7 @@ RSpec.describe PatrolMember, type: :model do
   end
 
   describe PatrolMember, 'association' do
-    it { should belong_to(:user)}
-    it { should belong_to(:patrol).with_foreign_key('patrol_name').with_primary_key('name') }
-	end
+     it { should belong_to(:user)}
+     it { should belong_to(:patrol).with_foreign_key('patrol_name').with_primary_key('name') }
+   end
 end

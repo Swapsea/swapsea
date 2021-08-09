@@ -45,11 +45,11 @@ class NoticesController < ApplicationController
   end
 
   private
-    def set_notice
-      @notice = Notice.find(params[:id])
-    end
+  def set_notice
+    @notice = Notice.find(params[:id])
+  end
 
-    def notice_params
-      params.require(:notice).permit(:title, :desc, :link, :link_desc, :image, :video, :user_id, :on_behalf, :visible_from, :visible_to, :visible, :organisation, :system_wide)
-    end
+  def notice_params
+    params.require(:notice).permit(:title, :desc, :link, :link_desc, :image, :video, :user_id, :on_behalf, :visible_from, :visible_to, :visible, :organisation, :system_wide)
+  end
 end

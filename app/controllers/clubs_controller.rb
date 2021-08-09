@@ -74,12 +74,12 @@ class ClubsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_club
-      @club = Club.find(params[:id])
-    end
+  def set_club
+    @club = Club.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def club_params
-      params.require(:club).permit(:name, :short_name, :patrols, :rosters, :swaps, :show_patrols, :show_rosters, :show_swaps, :show_outreach, :show_skills_maintenance, :lat, :lon)
-    end
+  def club_params
+    params.require(:club).permit(:name, :short_name, :patrols, :rosters, :swaps, :show_patrols, :show_rosters, :show_swaps, :show_outreach, :show_skills_maintenance, :lat, :lon)
+  end
 end

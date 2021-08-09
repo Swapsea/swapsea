@@ -6,8 +6,8 @@ class PatrolMembersController < ApplicationController
 
   def import
     #begin
-      PatrolMember.upload(params[:file])
-      redirect_to admin_patrol_members_path, notice: 'Patrol members imported.'
+    PatrolMember.upload(params[:file])
+    redirect_to admin_patrol_members_path, notice: 'Patrol members imported.'
     #rescue
       #redirect_to root_url, notice: "Invalid CSV file format."
     #end
@@ -80,12 +80,12 @@ class PatrolMembersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_patrol_member
-      @patrol_member = PatrolMember.find(params[:id])
-    end
+  def set_patrol_member
+    @patrol_member = PatrolMember.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def patrol_member_params
-      params.require(:patrol_member).permit(:user_id, :patrol_id, :patrol_key, :default_position)
-    end
+  def patrol_member_params
+    params.require(:patrol_member).permit(:user_id, :patrol_id, :patrol_key, :default_position)
+  end
 end

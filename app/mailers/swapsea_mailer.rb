@@ -2,9 +2,9 @@
 class SwapseaMailer < ActionMailer::Base
 
   def test
-  	@user = User.find(4739300)
-  	@url = 'https://www.swapsea.com.au'
-  	mail subject: 'Test Runner from Swapsea',
+    @user = User.find(4739300)
+    @url = 'https://www.swapsea.com.au'
+    mail subject: 'Test Runner from Swapsea',
          to: 'alex@nerdx.com.au',
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
