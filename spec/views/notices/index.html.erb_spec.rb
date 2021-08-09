@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'notices/index', type: :view do
-  before(:each) do
+  before do
     assign(:notices, [
              Notice.create!(
                title: 'Title',

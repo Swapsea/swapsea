@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'settings/edit', type: :view do
-  before(:each) do
+  before do
     @setting = assign(:setting, FactoryBot.create(:setting))
   end
 

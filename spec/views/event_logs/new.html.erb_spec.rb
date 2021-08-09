@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'event_logs/new', type: :view do
-  before(:each) do
+  before do
     assign(:event_log, EventLog.new(
                          subject: 'MyString',
                          desc: 'MyString'

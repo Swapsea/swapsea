@@ -6,7 +6,7 @@ RSpec.describe Setting, type: :model do
     @setting = FactoryBot.create(:setting)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@setting).to be_valid
     end

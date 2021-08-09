@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'clubs/new', type: :view do
-  before(:each) do
+  before do
     assign(:club, Club.new(
                     name: 'Name',
                     short_name: 'ShortName'

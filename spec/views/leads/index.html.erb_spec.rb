@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'leads/index', type: :view do
-  before(:each) do
+  before do
     assign(:leads, [
              Lead.create!(
                name: 'Name',

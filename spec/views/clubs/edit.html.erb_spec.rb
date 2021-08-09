@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'clubs/edit', type: :view do
-  before(:each) do
+  before do
     @club = assign(:club, FactoryBot.create(:club))
   end
 

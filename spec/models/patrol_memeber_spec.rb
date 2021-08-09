@@ -6,14 +6,14 @@ RSpec.describe PatrolMember, type: :model do
     @patrol_member = FactoryBot.create(:patrol_member)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@patrol_member).to be_valid
     end
   end
 
   describe PatrolMember, 'association' do
-    it { should belong_to(:user) }
-    it { should belong_to(:patrol).with_foreign_key('patrol_name').with_primary_key('name') }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:patrol).with_foreign_key('patrol_name').with_primary_key('name') }
   end
 end

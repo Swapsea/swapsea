@@ -6,7 +6,7 @@ RSpec.describe EventLog, type: :model do
     @event_log = FactoryBot.create(:event_log)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@event_log).to be_valid
     end

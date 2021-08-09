@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'notice_acknowledgements/show', type: :view do
-  before(:each) do
+  before do
     @notice_acknowledgement = assign(:notice_acknowledgement, FactoryBot.create(:notice_acknowledgement))
   end
 

@@ -6,7 +6,7 @@ RSpec.describe StagingUser, type: :model do
     @staging_user = FactoryBot.create(:staging_user)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@staging_user).to be_valid
     end

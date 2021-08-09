@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'offers/edit', type: :view do
-  before(:each) do
+  before do
     @offer = assign(:offer, FactoryBot.create(:offer))
   end
 

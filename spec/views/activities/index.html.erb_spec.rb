@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'activities/index', type: :view do
-  before(:each) do
+  before do
     assign(:activities, [
              PublicActivity::Activity.create!(
                trackable_type: 'Offer',

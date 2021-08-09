@@ -6,7 +6,7 @@ RSpec.describe Email, type: :model do
     @email = FactoryBot.create(:email)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@email).to be_valid
     end

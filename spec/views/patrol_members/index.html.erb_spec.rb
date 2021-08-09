@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'patrol_members/index', type: :view do
-  before(:each) do
+  before do
     assign(:patrol_members, [
              PatrolMember.create!(
                user_id: '1',

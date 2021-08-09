@@ -6,7 +6,7 @@ RSpec.describe StagingAward, type: :model do
     @staging_award = FactoryBot.create(:staging_award)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@staging_award).to be_valid
     end

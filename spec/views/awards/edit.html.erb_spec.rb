@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'awards/edit', type: :view do
-  before(:each) do
+  before do
     @award = assign(:award, FactoryBot.create(:award))
   end
 

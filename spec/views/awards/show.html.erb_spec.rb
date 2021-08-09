@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'awards/show', type: :view do
-  before(:each) do
+  before do
     @award = assign(:award, Award.create!(
                               award_number: 'AwardNumber',
                               award_name: 'AwardName',

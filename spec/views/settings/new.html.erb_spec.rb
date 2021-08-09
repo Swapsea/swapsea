@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'settings/new', type: :view do
-  before(:each) do
+  before do
     assign(:setting, Setting.new(
                        key: '1',
                        value: 'Value'

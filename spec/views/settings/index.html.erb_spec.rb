@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'settings/index', type: :view do
-  before(:each) do
+  before do
     assign(:settings, [
              Setting.create!(
                key: '1',

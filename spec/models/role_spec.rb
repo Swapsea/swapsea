@@ -6,14 +6,14 @@ RSpec.describe Role, type: :model do
     @role = FactoryBot.create(:role)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@role).to be_valid
     end
   end
 
   describe Role, 'association' do
-    it { should have_and_belong_to_many(:users) }
-    it { should belong_to(:resource) }
+    it { is_expected.to have_and_belong_to_many(:users) }
+    it { is_expected.to belong_to(:resource) }
   end
 end

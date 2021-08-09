@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'offers/new', type: :view do
-  before(:each) do
+  before do
     assign(:offer, Offer.new(
                      request_id: '1',
                      user_id: '2',

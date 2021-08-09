@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'clubs/admin', type: :view do
-  before(:each) do
+  before do
     assign(:clubs, [
              Club.create!(
                name: 'Name',

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'notices/edit', type: :view do
-  before(:each) do
+  before do
     @notice = assign(:notice, FactoryBot.create(:notice))
   end
 

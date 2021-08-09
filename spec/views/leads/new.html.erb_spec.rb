@@ -4,7 +4,7 @@ require 'faker'
 require 'rails_helper'
 
 RSpec.describe 'leads/new', type: :view do
-  before(:each) do
+  before do
     assign(:lead, Lead.new(
                     name: 'Name',
                     email: 'Faker::Internet.email',

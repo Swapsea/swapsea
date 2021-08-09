@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'swaps/new', type: :view do
-  before(:each) do
+  before do
     assign(:swap, Swap.new(
                     roster_id: '1',
                     user_id: '2',

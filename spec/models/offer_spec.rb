@@ -6,15 +6,15 @@ RSpec.describe Offer, type: :model do
     @offer = FactoryBot.create(:offer)
   end
 
-  context '#Atributes' do
+  describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@offer).to be_valid
     end
   end
 
   describe Offer, 'association' do
-    it { should belong_to(:user) }
-    it { should belong_to(:request) }
-    it { should belong_to(:roster) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:request) }
+    it { is_expected.to belong_to(:roster) }
   end
 end

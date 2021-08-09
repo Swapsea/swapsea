@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'event_logs/edit', type: :view do
-  before(:each) do
+  before do
     @event_log = assign(:event_log, FactoryBot.create(:event_log))
   end
 

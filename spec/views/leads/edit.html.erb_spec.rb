@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'leads/edit', type: :view do
-  before(:each) do
+  before do
     @lead = assign(:lead, FactoryBot.create(:lead))
   end
 

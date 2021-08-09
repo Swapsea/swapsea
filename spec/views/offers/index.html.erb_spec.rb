@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'offers/index', type: :view do
-  before(:each) do
+  before do
     assign(:offers, [
              Offer.create!(
                request_id: '3',

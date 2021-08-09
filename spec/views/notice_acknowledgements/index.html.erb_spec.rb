@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'notice_acknowledgements/index', type: :view do
-  before(:each) do
+  before do
     assign(:notice_acknowledgements, [
              NoticeAcknowledgement.create!(
                notice_id: '3',
