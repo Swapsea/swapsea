@@ -46,6 +46,6 @@ begin
     User.find_by(email: 'member2@swapsea.com.au').add_role(:member)
     User.find_by(email: 'member3@swapsea.com.au').add_role(:member)
     User.find_by(email: 'member4@swapsea.com.au').add_role(:member)
-  end # transaction
+  end
 rescue ActiveRecord::RecordNotSaved
 end

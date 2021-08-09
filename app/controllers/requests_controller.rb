@@ -2,13 +2,13 @@
 
 class RequestsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_request, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all.where(organisation = ?', selected_user.organisation)
+    @requests = Request.all.where(organisation = "'", selected_user.organisation)
   end
 
   # GET /requests/1
@@ -17,7 +17,7 @@ class RequestsController < ApplicationController
     @offer = Offer.new
     @offers = @request.offers.where(status: 'pending').sort_by(&:id)
     @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
-    @awards = @request.user.awards.map { |n| n.award_name }
+    @awards = @request.user.awards.map(&:award_name)
   end
 
   def confirm_cancel

@@ -2,7 +2,7 @@
 
 class NoticesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_notice, only: [:show, :edit, :update, :destroy]
+  before_action :set_notice, only: %i[show edit update destroy]
   respond_to :html
   layout 'admin'
 
@@ -25,8 +25,7 @@ class NoticesController < ApplicationController
     respond_with(@notice)
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @notice = Notice.new(notice_params)

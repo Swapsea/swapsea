@@ -2,21 +2,21 @@
 
 class ProficienciesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_proficiency, only: [:show, :edit, :update, :destroy]
+  before_action :set_proficiency, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /proficiencies
   # GET /proficiencies.json
   def index
-    if current_user.has_role?(:admin)
-      @proficiencies = Proficiency.all.where('organisation = ?', selected_user.organisation).order(:start)
-    elsif current_user.has_role?(:manager)
-      @proficiencies = Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
+    @proficiencies = if current_user.has_role?(:admin)
+                       Proficiency.all.where('organisation = ?', selected_user.organisation).order(:start)
+                     elsif current_user.has_role?(:manager)
+                       Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
                                              selected_user.organisation)
-    else
-      @proficiencies = Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 10.minutes,
+                     else
+                       Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 10.minutes,
                                              selected_user.organisation)
-    end
+                     end
 
     @proficiencies_sorted = @proficiencies.sort_by(&:start)
     @uniq_proficiency_dates = @proficiencies_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
@@ -24,22 +24,19 @@ class ProficienciesController < ApplicationController
   end
 
   def admin
-    if current_user.has_role?(:admin)
-      @proficiencies = Proficiency.all.order(:start)
-    elsif current_user.has_role?(:manager)
-      @proficiencies = Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
+    @proficiencies = if current_user.has_role?(:admin)
+                       Proficiency.all.order(:start)
+                     elsif current_user.has_role?(:manager)
+                       Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
                                              selected_user.organisation)
-    else
-      @proficiencies = nil
-    end
+                     end
 
     render layout: 'admin'
   end
 
   # GET /proficiencies/1
   # GET /proficiencies/1.json
-  def show
-  end
+  def show; end
 
   # GET /proficiencies/new
   def new
@@ -59,9 +56,9 @@ class ProficienciesController < ApplicationController
 
     respond_to do |format|
       if @proficiency.save
-        format.html {
+        format.html do
           redirect_to admin_proficiencies_path, notice: 'Skill Maintenance Session was successfully created.'
-        }
+        end
         format.json { render action: 'index', status: :created, location: @proficiency }
       else
         format.html { render action: 'new' }
@@ -74,9 +71,9 @@ class ProficienciesController < ApplicationController
   def update
     respond_to do |format|
       if @proficiency.update(proficiency_params)
-        format.html {
+        format.html do
           redirect_to admin_proficiencies_path, notice: 'Skill Maintenance Session was successfully updated.'
-        }
+        end
       else
         format.html { render admin_proficiencies_path, notice: 'There was an error.' }
       end
@@ -88,7 +85,7 @@ class ProficienciesController < ApplicationController
   def destroy
     respond_to do |format|
       # if there are sign ups, don't allow destroy
-      if @proficiency.proficiency_signups.count == 0
+      if @proficiency.proficiency_signups.count.zero?
         @proficiency.destroy
         format.html { redirect_to admin_proficiencies_path }
       else

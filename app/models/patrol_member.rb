@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PatrolMember < ActiveRecord::Base
+class PatrolMember < ApplicationRecord
   belongs_to :user
   belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
 
@@ -22,30 +22,25 @@ class PatrolMember < ActiveRecord::Base
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      if Patrol.find_by(name: row['Team Name'], organisation: row['Organisation Display Name'])
+      next unless Patrol.find_by(name: row['Team Name'], organisation: row['Organisation Display Name'])
 
-        patrol_member = find_by(user_id: row['Member ID']) || new
-        user = User.find_by(id: row['Member ID'])
-        if user.present?
-          user.patrol_name = row['Team Name']
-          user.default_position = row['Team Position']
-          if user.default_position == 'Award Member'
-            user.default_position = 'Member'
-          end
-          user.save
-        end
-        patrol_member.user_id = row['Member ID']
-        patrol_member.patrol_name = row['Team Name']
-        patrol_member.default_position = row['Team Position']
-        patrol_member.organisation = row['Organisation Display Name']
-
-        # modify default position nameing for palm beach
-        if patrol_member.default_position == 'Award Member'
-          patrol_member.default_position = 'Member'
-        end
-
-        patrol_member.save
+      patrol_member = find_by(user_id: row['Member ID']) || new
+      user = User.find_by(id: row['Member ID'])
+      if user.present?
+        user.patrol_name = row['Team Name']
+        user.default_position = row['Team Position']
+        user.default_position = 'Member' if user.default_position == 'Award Member'
+        user.save
       end
+      patrol_member.user_id = row['Member ID']
+      patrol_member.patrol_name = row['Team Name']
+      patrol_member.default_position = row['Team Position']
+      patrol_member.organisation = row['Organisation Display Name']
+
+      # modify default position nameing for palm beach
+      patrol_member.default_position = 'Member' if patrol_member.default_position == 'Award Member'
+
+      patrol_member.save
     end
   end
 

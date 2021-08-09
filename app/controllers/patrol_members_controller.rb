@@ -2,7 +2,7 @@
 
 class PatrolMembersController < ApplicationController
   load_and_authorize_resource
-  before_action :set_patrol_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_patrol_member, only: %i[show edit update destroy]
   layout 'dashboard'
 
   def import
@@ -28,8 +28,7 @@ class PatrolMembersController < ApplicationController
 
   # GET /patrol_members/1
   # GET /patrol_members/1.json
-  def show
-  end
+  def show; end
 
   # GET /patrol_members/new
   def new
@@ -37,8 +36,7 @@ class PatrolMembersController < ApplicationController
   end
 
   # GET /patrol_members/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /patrol_members
   # POST /patrol_members.json

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class SwapseaMailer < ActionMailer::Base
+class SwapseaMailer < ApplicationMailer
   def test
-    @user = User.find(4739300)
+    @user = User.find(4_739_300)
     @url = 'https://www.swapsea.com.au'
     mail subject: 'Test Runner from Swapsea',
          to: 'alex@nerdx.com.au',
@@ -151,20 +151,16 @@ class SwapseaMailer < ActionMailer::Base
   def north_bondi_patrol_report(roster)
     @roster = roster
     # Collect PC and VC Emails
-    to = Array.new
-    if roster.patrol.patrol_captains
-      roster.patrol.patrol_captains.each do |pc|
-        to << pc
-      end
+    to = []
+    roster.patrol.patrol_captains&.each do |pc|
+      to << pc
     end
-    if roster.patrol.vice_captains
-      roster.patrol.vice_captains.each do |vc|
-        to << vc
-      end
+    roster.patrol.vice_captains&.each do |vc|
+      to << vc
     end
 
     # Send Email
-    mail subject: (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime('%a %d %b %y %H:%M') + '-' + roster.finish.strftime('%H:%M'),
+    mail subject: "#{roster.patrol.short_name.presence || roster.patrol.name} - #{roster.start.strftime('%a %d %b %y %H:%M')}-#{roster.finish.strftime('%H:%M')}",
          to: to.collect(&:email).join(','),
          cc: 'office@northbondisurfclub.com, captain@northbondisurfclub.com, vicecaptain@northbondisurfclub.com, alex@swapsea.com.au',
          from: 'Swapsea <help@swapsea.com.au>'
@@ -173,20 +169,16 @@ class SwapseaMailer < ActionMailer::Base
   def bronte_patrol_report(roster)
     @roster = roster
     # Collect PC and VC Emails
-    to = Array.new
-    if roster.patrol.patrol_captains
-      roster.patrol.patrol_captains.each do |pc|
-        to << pc
-      end
+    to = []
+    roster.patrol.patrol_captains&.each do |pc|
+      to << pc
     end
-    if roster.patrol.vice_captains
-      roster.patrol.vice_captains.each do |vc|
-        to << vc
-      end
+    roster.patrol.vice_captains&.each do |vc|
+      to << vc
     end
 
     # Send Email
-    mail subject: (roster.patrol.short_name.present? ? roster.patrol.short_name : roster.patrol.name) + ' - ' + roster.start.strftime('%a %d %b %y %H:%M') + '-' + roster.finish.strftime('%H:%M'),
+    mail subject: "#{roster.patrol.short_name.presence || roster.patrol.name} - #{roster.start.strftime('%a %d %b %y %H:%M')}-#{roster.finish.strftime('%H:%M')}",
          to: to.collect(&:email).join(','),
          #:cc => 'admin@brontesurfclub.com.au, iljko@double8.com.au, alex@swapsea.com.au',
          from: 'Swapsea <help@swapsea.com.au>'

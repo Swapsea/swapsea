@@ -28,7 +28,7 @@ class RostersController < ApplicationController
       @rosters = Roster.where('organisation = ?', selected_user.organisation).sort_by(&:start)
       @rosters_this_year = Roster.where('organisation = ?', selected_user.organisation)
     else
-      finish_time = Time.now - 3.hours
+      finish_time = Time.zone.now - 3.hours
       @rosters = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
                               selected_user.organisation).sort_by(&:start)
       @rosters_this_year = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
@@ -58,7 +58,7 @@ class RostersController < ApplicationController
     @roster = Roster.find(params[:id])
     respond_to do |format|
       format.pdf do
-        render  pdf: "#{@roster.patrol.name}",
+        render  pdf: @roster.patrol.name.to_s,
                 layout: 'pdf.html.erb',
                 show_as_html: params[:debug].present?
       end
@@ -70,7 +70,7 @@ class RostersController < ApplicationController
     if @roster.present?
       respond_to do |format|
         format.pdf do
-          render pdf: "#{@roster.patrol.name}",
+          render pdf: @roster.patrol.name.to_s,
                  layout: 'pdf.html.erb',
                  show_as_html: params[:debug].present?
         end

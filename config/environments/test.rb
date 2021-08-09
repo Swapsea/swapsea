@@ -48,6 +48,6 @@ Swapsea2::Application.configure do
     user_name: ENV['SMTP_USERNAME'],
     password: ENV['SMTP_PASSWORD'],
     authentication: :plain,
-    domain: ENV['SMTP_DOMAIN'] || 'localhost',
+    domain: ENV['SMTP_DOMAIN'] || 'localhost'
   }
 end

@@ -4,8 +4,8 @@ class StagingUser < ApplicationRecord
   def self.dump(file)
     values = []
 
-    columns = [:user_id, :first_name, :last_name, :preferred_name, :dob, :mobile_phone, :email, :category,
-               :date_joined_organisation, :status, :season, :organisation]
+    columns = %i[user_id first_name last_name preferred_name dob mobile_phone email category
+                 date_joined_organisation status season organisation]
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
@@ -51,9 +51,7 @@ class StagingUser < ApplicationRecord
       user.status = staged_user.status
       user.season = staged_user.season
       user.organisation = staged_user.organisation
-      if !user.ics.present?
-        user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.shuffle[0, 64].join)
-      end
+      user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.sample(64).join) if user.ics.blank?
 
       user.save
     end

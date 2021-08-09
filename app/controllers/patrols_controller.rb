@@ -2,35 +2,33 @@
 
 class PatrolsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_patrol, only: [:show, :edit, :update, :destroy]
+  before_action :set_patrol, only: %i[show edit update destroy]
   layout 'dashboard'
 
   def index
-    if selected_user.has_role?(:admin)
-      @clubs = Club.show_patrols
-    else
-      @clubs = Club.show_patrols.where(name: selected_user.organisation)
-    end
+    @clubs = if selected_user.has_role?(:admin)
+               Club.show_patrols
+             else
+               Club.show_patrols.where(name: selected_user.organisation)
+             end
   end
 
   def admin
-    if current_user.has_role?(:admin)
-      @patrols = Patrol.all
-    elsif current_user.has_role?(:manager)
-      @patrols = Patrol.all.where('organisation = ?', current_user.organisation)
-    else
-      @patrols = nil
-    end
+    @patrols = if current_user.has_role?(:admin)
+                 Patrol.all
+               elsif current_user.has_role?(:manager)
+                 Patrol.all.where('organisation = ?', current_user.organisation)
+               end
 
     render layout: 'admin'
   end
 
   def show
-    if (selected_user.has_role? :admin)
+    if selected_user.has_role? :admin
       @patrol = Patrol.find(params[:id])
       @club = @patrol.club
     else
-      @club = Club.find_by_name!(selected_user.organisation)
+      @club = Club.find_by!(name: selected_user.organisation)
       @patrol = @club.patrols.find(params[:id])
     end
   end

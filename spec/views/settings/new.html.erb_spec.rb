@@ -6,7 +6,7 @@ RSpec.describe 'settings/new', type: :view do
   before(:each) do
     assign(:setting, Setting.new(
                        key: '1',
-                       value: 'Value',
+                       value: 'Value'
                      ))
   end
 

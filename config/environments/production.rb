@@ -35,7 +35,7 @@ Swapsea2::Application.configure do
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
   # Precompile additional assets
-  config.assets.precompile += %w(
+  config.assets.precompile += %w[
     .svg .eot .woff .ttf
 
     admin-layout.css admin-layout.js
@@ -56,7 +56,7 @@ Swapsea2::Application.configure do
     selected_user.css selected_user.js
     users.css users.js
     reports.css
-  )
+  ]
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -112,7 +112,7 @@ Swapsea2::Application.configure do
   config.action_mailer.default_url_options = { host: ENV['ACTION_MAILER_HOST'] }
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = ('true' == ENV['ACTION_MAILER_PERFORM_DELIVERIES'])
+  config.action_mailer.perform_deliveries = (ENV['ACTION_MAILER_PERFORM_DELIVERIES'] == 'true')
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.asset_host = 'https://www.swapsea.com.au'
@@ -124,6 +124,6 @@ Swapsea2::Application.configure do
     user_name: ENV['SMTP_USERNAME'],
     password: ENV['SMTP_PASSWORD'],
     authentication: :plain,
-    domain: ENV['SMTP_DOMAIN'] || 'localhost',
+    domain: ENV['SMTP_DOMAIN'] || 'localhost'
   }
 end

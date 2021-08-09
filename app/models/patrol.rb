@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Patrol < ActiveRecord::Base
+class Patrol < ApplicationRecord
   belongs_to :club, foreign_key: 'organisation', primary_key: 'name'
   has_many :patrol_members, foreign_key: 'patrol_name', primary_key: 'name'
   has_many :users, through: :patrol_members
@@ -48,6 +48,6 @@ class Patrol < ActiveRecord::Base
   end
 
   def short_name
-    self[:short_name] || self.name
+    self[:short_name] || name
   end
 end

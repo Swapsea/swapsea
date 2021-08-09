@@ -2,7 +2,7 @@
 
 class ClubsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_club, only: [:show, :edit, :update]
+  before_action :set_club, only: %i[show edit update]
   layout 'dashboard'
 
   # GET /clubs

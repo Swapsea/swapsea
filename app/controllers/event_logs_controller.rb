@@ -2,7 +2,7 @@
 
 class EventLogsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_event_log, only: [:show, :edit, :update, :destroy]
+  before_action :set_event_log, only: %i[show edit update destroy]
   layout 'admin'
 
   # GET /event_logs
@@ -13,8 +13,7 @@ class EventLogsController < ApplicationController
 
   # GET /event_logs/1
   # GET /event_logs/1.json
-  def show
-  end
+  def show; end
 
   # GET /event_logs/new
   def new
@@ -22,8 +21,7 @@ class EventLogsController < ApplicationController
   end
 
   # GET /event_logs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /event_logs
   # POST /event_logs.json

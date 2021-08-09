@@ -48,7 +48,7 @@ class Ability
       can [:read], Request do |request|
         request.user.organisation == user.organisation
       end
-      can [:update, :destroy, :confirm_cancel], Request, user: user
+      can %i[update destroy confirm_cancel], Request, user: user
       cannot [:update], Request do |request|
         request.offers.where(status: 'accepted').present?
       end
@@ -57,7 +57,7 @@ class Ability
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
         offer.user.organisation == user.organisation
       end
-      can [:update, :destroy, :confirm_cancel], Offer, user: user
+      can %i[update destroy confirm_cancel], Offer, user: user
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
@@ -74,16 +74,16 @@ class Ability
       can [:read, :destroy], ProficiencySignup do |prof_signup|
         prof_signup.user.organisation == user.organisation
       end
-      can [:read, :index], OutreachPatrol
-      can [:read, :create], OutreachPatrolSignUp
+      can %i[read index], OutreachPatrol
+      can %i[read create], OutreachPatrolSignUp
       can :destroy, OutreachPatrolSignUp
       can [:read, :ics], User do |u|
         u.organisation == user.organisation
       end
-      can [:index, :privacy_policy, :terms_of_use, :thanks, :contact_us], :home
+      can %i[index privacy_policy terms_of_use thanks contact_us], :home
       cannot :index, User
       can [:index], :dashboard
-      can [:index, :set], :selected_user
+      can %i[index set], :selected_user
       can [:report, :patrol_report], Roster do |roster|
         roster.organisation == user.organisation
       end
@@ -101,7 +101,7 @@ class Ability
       can [:read], Request do |request|
         request.user.organisation == user.organisation
       end
-      can [:update, :destroy, :confirm_cancel], Request, user: user
+      can %i[update destroy confirm_cancel], Request, user: user
       cannot [:update], Request do |request|
         request.offers.where(status: 'accepted').present?
       end
@@ -110,7 +110,7 @@ class Ability
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
         offer.user.organisation == user.organisation
       end
-      can [:update, :destroy, :confirm_cancel], Offer, user: user
+      can %i[update destroy confirm_cancel], Offer, user: user
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
@@ -122,23 +122,23 @@ class Ability
         prof_signup.user.organisation == user.organisation
       end
       can :destroy, ProficiencySignup, user: user
-      can [:read, :index], OutreachPatrol
-      can [:read, :create], OutreachPatrolSignUp
+      can %i[read index], OutreachPatrol
+      can %i[read create], OutreachPatrolSignUp
       can :destroy, OutreachPatrolSignUp, user: user
       can [:read, :ics], User do |u|
         u.organisation == user.organisation
       end
-      can [:index, :privacy_policy, :terms_of_use, :thanks, :contact_us], :home
+      can %i[index privacy_policy terms_of_use thanks contact_us], :home
       cannot :index, User
       can [:index], :dashboard
-      can [:index, :set], :selected_user
+      can %i[index set], :selected_user
     else
       can :patrol_report, Roster
       can :create, Lead
-      can [:read, :ics], User
-      cannot [:index, :show], User
+      can %i[read ics], User
+      cannot %i[index show], User
       can :activate, User
-      can [:index, :privacy_policy, :terms_of_use, :thanks, :contact_us], :home
+      can %i[index privacy_policy terms_of_use thanks contact_us], :home
     end
   end
 end

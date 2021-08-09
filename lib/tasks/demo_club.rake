@@ -2,13 +2,13 @@
 
 namespace :demo_club do
   desc 'Create demo club and populate'
-  task :populate, [:club_name] => :environment do |task, args|
+  task :populate, [:club_name] => :environment do |_task, args|
     club_name = args[:club_name]
 
     # Create club
     Club.create(name: club_name, short_name: club_name, show_patrols: true, show_rosters: true, show_swaps: true,
                 show_skills_maintenance: false, show_outreach: false, lat: -33.89051, lon: 151.280002)
-    club = Club.find_by_name(club_name)
+    club = Club.find_by(name: club_name)
 
     puts club.name
 
@@ -93,7 +93,7 @@ namespace :demo_club do
           email: Faker::Internet.email,
           password: 'password',
           mobile_phone: '0401222333',
-          dob: Time.at((date2.to_f - date1.to_f) * rand + date1.to_f).strftime('%y-%m-%d'),
+          dob: Time.zone.at((date2.to_f - date1.to_f) * rand + date1.to_f).strftime('%y-%m-%d'),
           date_joined_organisation: today.strftime('%y-%m-%d'),
           category: 'Active (18yrs and over)',
           status: 'Active',
@@ -113,7 +113,7 @@ namespace :demo_club do
 
         user = User.find(user_id)
 
-        puts '   ' + user.name + ' - ' + user.default_position
+        puts "   #{user.name} - #{user.default_position}"
 
         PatrolMember.create(
           user_id: user_id,
@@ -124,7 +124,7 @@ namespace :demo_club do
 
         # Create awards
         if user.bbm
-          award_number = 'DNS' + rand.to_s[2..10]
+          award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
             user_id: user_id,
@@ -136,7 +136,7 @@ namespace :demo_club do
           )
         end
         if user.irbd
-          award_number = 'DNS' + rand.to_s[2..10]
+          award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
             user_id: user_id,
@@ -148,7 +148,7 @@ namespace :demo_club do
           )
         end
         if user.irbc
-          award_number = 'DNS' + rand.to_s[2..10]
+          award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
             user_id: user_id,
@@ -160,7 +160,7 @@ namespace :demo_club do
           )
         end
         if user.artc
-          award_number = 'DNS' + rand.to_s[2..10]
+          award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
             user_id: user_id,
@@ -172,7 +172,7 @@ namespace :demo_club do
           )
         end
         if user.bronze
-          award_number = 'DNS' + rand.to_s[2..10]
+          award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
             user_id: user_id,
@@ -185,7 +185,7 @@ namespace :demo_club do
         end
 
         user.awards.each do |award|
-          puts '      ' + award.award_number + ' ' + award.award_name
+          puts "      #{award.award_number} #{award.award_name}"
         end
       end
     end
@@ -194,35 +194,33 @@ namespace :demo_club do
     # start date, cycle through dates, check if saturday or sunday, morning or afternoon, allocate patrol, end date.
     (Date.new(Date.today.year, 9, 25)..Date.new(Date.today.year + 1, 4, 30)).each do |date|
       formatted_date = date.strftime('%Y-%m-%d')
-      if date.saturday? || date.sunday?
-        Roster.create(
-          start: Time.zone.parse(formatted_date + ' ' + '07:45' + ':00').utc.iso8601,
-          finish: Time.zone.parse(formatted_date + ' ' + '13:00' + ':00').utc.iso8601,
-          organisation: club.name,
-          patrol_name: Patrol.where(organisation: club.name).sample.name,
-          secret: Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0, 10].join)
-        )
-        roster = Roster.last
-        puts roster.patrol_name + '   ' + roster.start.strftime('%a %d %b %Y') + '   ' + roster.start.strftime('%H:%M') + ' - ' + roster.finish.strftime('%H:%M')
-        Roster.create(
-          start: Time.zone.parse(formatted_date + ' ' + '12:45' + ':00').utc.iso8601,
-          finish: Time.zone.parse(formatted_date + ' ' + '18:00' + ':00').utc.iso8601,
-          organisation: club.name,
-          patrol_name: Patrol.where(organisation: club.name).sample.name,
-          secret: Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0, 10].join)
-        )
-        roster = Roster.last
-        puts roster.patrol_name + '   ' + roster.start.strftime('%a %d %b %Y') + '   ' + roster.start.strftime('%H:%M') + ' - ' + roster.finish.strftime('%H:%M')
-      end
+      next unless date.saturday? || date.sunday?
+
+      Roster.create(
+        start: Time.zone.parse("#{formatted_date} 07:45:00").utc.iso8601,
+        finish: Time.zone.parse("#{formatted_date} 13:00:00").utc.iso8601,
+        organisation: club.name,
+        patrol_name: Patrol.where(organisation: club.name).sample.name,
+        secret: Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
+      )
+      roster = Roster.last
+      puts "#{roster.patrol_name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
+      Roster.create(
+        start: Time.zone.parse("#{formatted_date} 12:45:00").utc.iso8601,
+        finish: Time.zone.parse("#{formatted_date} 18:00:00").utc.iso8601,
+        organisation: club.name,
+        patrol_name: Patrol.where(organisation: club.name).sample.name,
+        secret: Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
+      )
+      roster = Roster.last
+      puts "#{roster.patrol_name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
     end
 
-    Roster.where(organisation: club.name).each do |roster|
-      roster.awards_count
-    end
+    Roster.where(organisation: club.name).each(&:awards_count)
   end
 
   desc "Destroy all records related to the fake club and it's members."
-  task :destroy, [:club_name] => :environment do |task, args|
+  task :destroy, [:club_name] => :environment do |_task, args|
     club_name = args[:club_name]
 
     Club.where(name: club_name).destroy_all

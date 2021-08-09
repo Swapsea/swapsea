@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Notice < ActiveRecord::Base
+class Notice < ApplicationRecord
   belongs_to :club, foreign_key: :organisation, primary_key: :name
   belongs_to :user
   has_many :notice_acknowledgements

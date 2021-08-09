@@ -2,7 +2,7 @@
 
 class SwapsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_swap, only: [:show, :edit, :update, :destroy]
+  before_action :set_swap, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /swaps
@@ -23,15 +23,14 @@ class SwapsController < ApplicationController
   end
 
   def confirmed
-    @swaps = Offer.includes(:user, :request, :roster, roster: [:patrol], user: [:patrol], request: [:user, roster: [:patrol]]).where(
+    @swaps = Offer.includes(:user, :request, :roster, roster: [:patrol], user: [:patrol], request: [:user, { roster: [:patrol] }]).where(
       'offers.status = ? AND rosters.organisation = ?', 'accepted', selected_user.organisation
     ).references(:rosters).order(updated_at: :desc)
   end
 
   # GET /swaps/1
   # GET /swaps/1.json
-  def show
-  end
+  def show; end
 
   # GET /swaps/new
   def new
@@ -39,8 +38,7 @@ class SwapsController < ApplicationController
   end
 
   # GET /swaps/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /swaps
   # POST /swaps.json

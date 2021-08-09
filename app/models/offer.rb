@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Offer < ActiveRecord::Base
+class Offer < ApplicationRecord
   include PublicActivity::Common
 
   belongs_to :request

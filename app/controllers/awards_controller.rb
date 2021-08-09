@@ -2,7 +2,7 @@
 
 class AwardsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_award, only: [:show, :edit, :update, :destroy]
+  before_action :set_award, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /awards
@@ -25,8 +25,7 @@ class AwardsController < ApplicationController
 
   # GET /awards/1
   # GET /awards/1.json
-  def show
-  end
+  def show; end
 
   # POST /awards
   # POST /awards.json

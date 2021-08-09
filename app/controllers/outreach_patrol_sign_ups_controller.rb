@@ -2,7 +2,7 @@
 
 class OutreachPatrolSignUpsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_outreach_patrol_sign_up, only: [:show, :edit, :update, :destroy]
+  before_action :set_outreach_patrol_sign_up, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /outreach_patrol_sign_ups
@@ -13,8 +13,7 @@ class OutreachPatrolSignUpsController < ApplicationController
 
   # GET /outreach_patrol_sign_ups/1
   # GET /outreach_patrol_sign_ups/1.json
-  def show
-  end
+  def show; end
 
   # GET /outreach_patrol_sign_ups/new
   def new
@@ -22,8 +21,7 @@ class OutreachPatrolSignUpsController < ApplicationController
   end
 
   # GET /outreach_patrol_sign_ups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /outreach_patrol_sign_ups
   # POST /outreach_patrol_sign_ups.json

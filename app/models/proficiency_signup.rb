@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProficiencySignup < ActiveRecord::Base
+class ProficiencySignup < ApplicationRecord
   include PublicActivity::Common
 
   belongs_to :proficiency

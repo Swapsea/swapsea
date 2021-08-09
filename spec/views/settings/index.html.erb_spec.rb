@@ -7,11 +7,11 @@ RSpec.describe 'settings/index', type: :view do
     assign(:settings, [
              Setting.create!(
                key: '1',
-               value: 'Value',
+               value: 'Value'
              ),
              Setting.create!(
                key: '1',
-               value: 'Value',
+               value: 'Value'
              )
            ])
   end

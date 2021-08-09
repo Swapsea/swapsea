@@ -2,7 +2,7 @@
 
 class NoticeAcknowledgementsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_notice_acknowledgement, only: [:show, :edit, :update, :destroy]
+  before_action :set_notice_acknowledgement, only: %i[show edit update destroy]
   layout 'admin'
   respond_to :html
 
@@ -20,8 +20,7 @@ class NoticeAcknowledgementsController < ApplicationController
     respond_with(@notice_acknowledgement)
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @notice_acknowledgement = NoticeAcknowledgement.new(notice_acknowledgement_params)

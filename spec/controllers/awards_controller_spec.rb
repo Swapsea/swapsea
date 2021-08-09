@@ -14,7 +14,7 @@ RSpec.describe AwardsController, type: :controller do
   it 'should get "admin"' do
     get :admin
     expect(response).to be_successful
-    expect(assigns :awards).not_to be_nil
+    expect(assigns(:awards)).not_to be_nil
   end
 
   it 'should get new' do

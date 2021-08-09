@@ -3,7 +3,7 @@
 namespace :swapsea do
   namespace :data do
     desc 'Daily transfer from staging tables to working tables.'
-    task transfer: :environment do |task|
+    task transfer: :environment do |_task|
       if StagingAward.transfer
         EventLog.create!(subject: 'Transfer', desc: 'Awards import success.')
       else
@@ -23,7 +23,7 @@ namespace :swapsea do
       end
 
       NumJuniors = User.juniors.length
-      if NumJuniors > 0
+      if NumJuniors.positive?
         EventLog.create!(subject: 'Transfer', desc: "Removing #{NumJuniors} junior members...")
         User.where(id: User.juniors.pluck(:id)).delete_all
         NumJuniors = User.juniors.length

@@ -10,14 +10,14 @@ RSpec.describe 'offers/index', type: :view do
                user_id: '1',
                comment: 'Comment',
                status: 'Status',
-               mobile: 'Mobile',
+               mobile: 'Mobile'
              ),
              Offer.create!(
                request_id: '3',
                user_id: '1',
                comment: 'Comment',
                status: 'Status',
-               mobile: 'Mobile',
+               mobile: 'Mobile'
              )
            ])
   end

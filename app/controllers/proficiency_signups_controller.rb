@@ -2,7 +2,7 @@
 
 class ProficiencySignupsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_proficiency_signup, only: [:show, :edit, :update, :destroy]
+  before_action :set_proficiency_signup, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /proficiency_signups
@@ -13,8 +13,7 @@ class ProficiencySignupsController < ApplicationController
 
   # GET /proficiency_signups/1
   # GET /proficiency_signups/1.json
-  def show
-  end
+  def show; end
 
   # GET /proficiency_signups/new
   def new
@@ -22,8 +21,7 @@ class ProficiencySignupsController < ApplicationController
   end
 
   # GET /proficiency_signups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /proficiency_signups
   # POST /proficiency_signups.json
@@ -35,16 +33,16 @@ class ProficiencySignupsController < ApplicationController
       # Check member hasn't already signed up to proficiency.
       if ProficiencySignup.joins(:proficiency).where('user_id = ? AND start >= ? AND name = ?', selected_user.id,
                                                      DateTime.now, @proficiency_signup.proficiency.name).present?
-        format.html {
+        format.html do
           redirect_to proficiencies_path, alert: 'You are already signed up to this type of Skills Maintenance session.'
-        }
+        end
       elsif @proficiency_signup.save
         format.html { redirect_to proficiencies_path, notice: 'Skills Maintenance signup was successful.' }
       else
-        format.html {
+        format.html do
           redirect_to proficiencies_path,
                       alert: 'Skills Maintenance signup was unsuccessful. Contact Us below for help.'
-        }
+        end
       end
     end
   end

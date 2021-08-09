@@ -11,13 +11,13 @@ RSpec.describe ProficiencySignupsController, type: :controller do
     sign_in create :administrator
   end
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     skip('Add a hash of attributes valid for your model')
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     skip('Add a hash of attributes invalid for your model')
-  }
+  end
 
   let(:valid_session) { FactoryBot.create(:user) }
 
@@ -72,9 +72,9 @@ RSpec.describe ProficiencySignupsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested proficiency_signup' do
       proficiency_signup = FactoryBot.create(:proficiency_signup)
-      expect {
+      expect do
         delete :destroy, params: { id: proficiency_signup.to_param }
-      }.to change(ProficiencySignup, :count).by(-1)
+      end.to change(ProficiencySignup, :count).by(-1)
     end
 
     it 'redirects to the proficiency_signups list' do

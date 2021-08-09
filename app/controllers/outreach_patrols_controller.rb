@@ -2,7 +2,7 @@
 
 class OutreachPatrolsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_outreach_patrol, only: [:show, :edit, :update, :destroy]
+  before_action :set_outreach_patrol, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /outreach_patrols

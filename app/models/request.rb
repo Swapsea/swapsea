@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Request < ActiveRecord::Base
+class Request < ApplicationRecord
   include PublicActivity::Common
 
   belongs_to :roster

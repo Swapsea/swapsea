@@ -6,27 +6,26 @@ class StagingAward < ApplicationRecord
   def self.dump(file)
     values = []
 
-    columns = [:award_number, :award_name, :user_id, :award_date, :proficiency_date, :expiry_date,
-               :originating_organisation]
+    columns = %i[award_number award_name user_id award_date proficiency_date expiry_date
+                 originating_organisation]
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      if row['Award Number'].present?
+      next if row['Award Number'].blank?
 
-        award = [
-          (row['Award Number'].gsub /'/, ''),
-          row['Award Name'],
-          row['Member ID'],
-          row['Award Date'],
-          row['Proficiency Date'],
-          row['Award Expiry Date'],
-          row['Award Originating Organisation']
-        ]
+      award = [
+        row['Award Number'].gsub(/'/, ''),
+        row['Award Name'],
+        row['Member ID'],
+        row['Award Date'],
+        row['Proficiency Date'],
+        row['Award Expiry Date'],
+        row['Award Originating Organisation']
+      ]
 
-        values << award
-      end
+      values << award
     end
 
     StagingAward.import columns, values, validate: true
@@ -37,8 +36,8 @@ class StagingAward < ApplicationRecord
 
     values = []
 
-    columns = [:award_number, :award_name, :user_id, :award_date, :proficiency_date, :expiry_date,
-               :originating_organisation]
+    columns = %i[award_number award_name user_id award_date proficiency_date expiry_date
+                 originating_organisation]
 
     staged_awards.each do |staged_award|
       award = [
@@ -48,15 +47,13 @@ class StagingAward < ApplicationRecord
         staged_award.award_date,
         staged_award.proficiency_date,
         staged_award.expiry_date,
-        staged_award.originating_organisation,
+        staged_award.originating_organisation
       ]
 
       values << award
     end
 
-    if Award.import columns, values, validate: true, on_duplicate_key_ignore: true
-      StagingAward.delete_all
-    end
+    StagingAward.delete_all if Award.import columns, values, validate: true, on_duplicate_key_ignore: true
   end
 
   def self.open_spreadsheet(file)

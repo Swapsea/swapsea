@@ -11,13 +11,13 @@ RSpec.describe DashboardController, type: :controller do
     sign_in create :administrator
   end
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     skip('Add a hash of attributes valid for your model')
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     skip('Add a hash of attributes invalid for your model')
-  }
+  end
 
   let(:valid_session) { FactoryBot.create(:user) }
 

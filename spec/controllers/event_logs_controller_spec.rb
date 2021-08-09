@@ -37,13 +37,13 @@ RSpec.describe EventLogsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # EventLog. As you add validations to EventLog, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     skip('Add a hash of attributes valid for your model')
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     skip('Add a hash of attributes invalid for your model')
-  }
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -89,9 +89,9 @@ RSpec.describe EventLogsController, type: :controller do
     context 'with valid params' do
       it 'creates a new EventLog' do
         event_log_attrs = attributes_for :event_log
-        expect {
+        expect do
           post :create, params: { event_log: event_log_attrs }
-        }.to change(EventLog, :count).by(1)
+        end.to change(EventLog, :count).by(1)
       end
 
       it 'redirects to the created event_log' do
@@ -105,9 +105,9 @@ RSpec.describe EventLogsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested event_log' do
       event_log = FactoryBot.create(:event_log)
-      expect {
+      expect do
         delete :destroy, params: { id: event_log.to_param }
-      }.to change(EventLog, :count).by(-1)
+      end.to change(EventLog, :count).by(-1)
     end
 
     it 'redirects to the event_logs list' do

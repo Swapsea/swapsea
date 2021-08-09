@@ -11,13 +11,13 @@ RSpec.describe SettingsController, type: :controller do
     sign_in create :administrator
   end
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     skip('Add a hash of attributes valid for your model')
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     skip('Add a hash of attributes invalid for your model')
-  }
+  end
 
   let(:valid_session) { FactoryBot.create(:user) }
 
@@ -56,9 +56,9 @@ RSpec.describe SettingsController, type: :controller do
     context 'with valid params' do
       it 'creates a new Setting' do
         setting_attrs = attributes_for :setting
-        expect {
+        expect do
           post :create, params: { setting: setting_attrs }
-        }.to change(Setting, :count).by(1)
+        end.to change(Setting, :count).by(1)
       end
 
       it 'redirects to the created setting' do
@@ -72,9 +72,9 @@ RSpec.describe SettingsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested setting' do
       setting = FactoryBot.create(:setting)
-      expect {
+      expect do
         delete :destroy, params: { id: setting.to_param }
-      }.to change(Setting, :count).by(-1)
+      end.to change(Setting, :count).by(-1)
     end
 
     it 'redirects to the setting list' do

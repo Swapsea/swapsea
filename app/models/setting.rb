@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class Setting < ActiveRecord::Base
+class Setting < ApplicationRecord
 end

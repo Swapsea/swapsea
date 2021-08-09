@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable  :validatable
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :notice_acknowledgements
 
   include PgSearch::Model
-  pg_search_scope :search, against: [:first_name, :last_name],
+  pg_search_scope :search, against: %i[first_name last_name],
                            using: { tsearch: { dictionary: 'english' } }
 
   def self.text_search(query)
@@ -89,12 +89,12 @@ class User < ActiveRecord::Base
   end
 
   def offers_available_for(request)
-    offers = Array.new
+    offers = []
 
     rosters = custom_roster - request.user.custom_roster
     rosters.each do |roster|
-      if !(request.offer_already_exists?(roster,
-                                         self)) && (DateTime.now <= roster.start) && !request.roster.user_rostered_on(self)
+      if !request.offer_already_exists?(roster,
+                                        self) && (DateTime.now <= roster.start) && !request.roster.user_rostered_on(self)
         offers << roster
       end
     end
@@ -103,12 +103,10 @@ class User < ActiveRecord::Base
   end
 
   def custom_roster
-    custom_roster = rosters.where('start >= ?', Time.now.to_s(:db)).distinct + additional_rosters
+    custom_roster = rosters.where('start >= ?', Time.zone.now.to_s(:db)).distinct + additional_rosters
     subtracted_rosters.each do |roster|
       # Check first, they may have moved patrols mid-season
-      if custom_roster.index(roster)
-        custom_roster.delete_at(custom_roster.index(roster))
-      end
+      custom_roster.delete_at(custom_roster.index(roster)) if custom_roster.index(roster)
     end
     custom_roster.sort_by(&:start)
   end
@@ -119,24 +117,16 @@ class User < ActiveRecord::Base
 
   def additional_rosters
     swaps.select('roster_id, user_id').where(on_off_patrol: true).joins(:roster).where('start >= ?',
-                                                                                       Time.now.to_s(:db)).map { |n|
-      n.roster
-    }
+                                                                                       Time.zone.now.to_s(:db)).map(&:roster)
   end
 
   def subtracted_rosters
     swaps.select('roster_id, user_id').where(on_off_patrol: false).joins(:roster).where('start >= ?',
-                                                                                        Time.now.to_s(:db)).map { |n|
-      n.roster
-    }
+                                                                                        Time.zone.now.to_s(:db)).map(&:roster)
   end
 
   def has_multiple_emails?
-    if User.where(email: email).count >= 2
-      return true
-    else
-      return false
-    end
+    User.where(email: email).count >= 2
   end
 
   def qualifications
@@ -157,7 +147,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_ics
-    self.ics = Digest::SHA256.hexdigest(('a'..'z').to_a.shuffle[0, 10].join)
+    self.ics = Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
   end
 
   def self.upload(file)
@@ -165,7 +155,7 @@ class User < ActiveRecord::Base
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      user = find_by_id(row['Member ID']) || new
+      user = find_by(id: row['Member ID']) || new
       user.id = row['Member ID']
       user.first_name = row['First Name']
       user.last_name = row['Last Name']
@@ -180,9 +170,7 @@ class User < ActiveRecord::Base
       user.status = row['Status']
       user.season = row['Season']
       user.organisation = row['Organisation Display Name']
-      if !user.ics.present?
-        user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.shuffle[0, 64].join)
-      end
+      user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.sample(64).join) if user.ics.blank?
 
       user.save!
     end

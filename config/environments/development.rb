@@ -33,11 +33,11 @@ Swapsea2::Application.configure do
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
-  if ENV['REDIS_URL']
-    config.cache_store = :redis_store, ENV['REDIS_URL']
-  else
-    config.cache_store = :null_store
-  end
+  config.cache_store = if ENV['REDIS_URL']
+                         [:redis_store, ENV['REDIS_URL']]
+                       else
+                         :null_store
+                       end
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the ActionMailer::Base.deliveries array.
@@ -55,6 +55,6 @@ Swapsea2::Application.configure do
     user_name: ENV['SMTP_USERNAME'],
     password: ENV['SMTP_PASSWORD'],
     authentication: :plain,
-    domain: ENV['SMTP_DOMAIN'] || 'localhost',
+    domain: ENV['SMTP_DOMAIN'] || 'localhost'
   }
 end

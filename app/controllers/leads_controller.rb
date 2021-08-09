@@ -2,7 +2,7 @@
 
 class LeadsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_lead, only: [:show, :edit, :update, :destroy]
+  before_action :set_lead, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /leads
@@ -14,8 +14,7 @@ class LeadsController < ApplicationController
 
   # GET /leads/1
   # GET /leads/1.json
-  def show
-  end
+  def show; end
 
   # GET /leads/new
   def new
@@ -23,8 +22,7 @@ class LeadsController < ApplicationController
   end
 
   # GET /leads/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /leads
   # POST /leads.json

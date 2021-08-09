@@ -2,7 +2,7 @@
 
 class OffersController < ApplicationController
   load_and_authorize_resource
-  before_action :set_offer, only: [:show, :edit, :update, :destroy]
+  before_action :set_offer, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /offers
@@ -13,8 +13,7 @@ class OffersController < ApplicationController
 
   # GET /offers/1
   # GET /offers/1.json
-  def show
-  end
+  def show; end
 
   # GET /offers/new
   def new
@@ -22,8 +21,7 @@ class OffersController < ApplicationController
   end
 
   # GET /offers/1/edit
-  def edit
-  end
+  def edit; end
 
   def confirm_accept
     @offer = Offer.find(params[:id])
@@ -53,18 +51,18 @@ class OffersController < ApplicationController
   # should only by accessable be either requestor or admin
   def accept
     @offer = Offer.find(params[:id])
-    if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now()
+    if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now
       @request = @offer.request
-      trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.shuffle[0, 16].join).first(10)
+      trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
 
       # Remove requestor from old roster
       @swap_requestor_off = Swap.new
       @requestor_uniq_id = Swap.where(user_id: @request.user.id, roster_id: @request.roster.id).first
-      if @requestor_uniq_id.present?
-        @requestor_uniq_id = @requestor_uniq_id.uniq_id
-      else
-        @requestor_uniq_id = Digest::MD5.hexdigest(('a'..'z').to_a.shuffle[0, 16].join).first(10)
-      end
+      @requestor_uniq_id = if @requestor_uniq_id.present?
+                             @requestor_uniq_id.uniq_id
+                           else
+                             Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
+                           end
       @swap_requestor_off.trans_id = trans_id
       @swap_requestor_off.uniq_id = @requestor_uniq_id
       @swap_requestor_off.roster_id = @request.roster.id
@@ -75,11 +73,11 @@ class OffersController < ApplicationController
       # Remove offerer from old roster
       @swap_offerer_off = Swap.new
       @offerer_uniq_id = Swap.where(user_id: @offer.user.id, roster_id: @offer.roster.id).first
-      if @offerer_uniq_id.present?
-        @offerer_uniq_id = @offerer_uniq_id.uniq_id
-      else
-        @offerer_uniq_id = Digest::MD5.hexdigest(('a'..'z').to_a.shuffle[0, 16].join).first(10)
-      end
+      @offerer_uniq_id = if @offerer_uniq_id.present?
+                           @offerer_uniq_id.uniq_id
+                         else
+                           Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
+                         end
       @swap_offerer_off.trans_id = trans_id
       @swap_offerer_off.uniq_id = @offerer_uniq_id
       @swap_offerer_off.roster_id = @offer.roster.id
@@ -168,7 +166,7 @@ class OffersController < ApplicationController
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
             end
           end
-        end # transaction
+        end
 
         SwapseaMailer.offer_successful(@offer).deliver
         SwapseaMailer.request_successful(@request).deliver

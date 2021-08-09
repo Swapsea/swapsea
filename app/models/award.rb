@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Award < ActiveRecord::Base
+class Award < ApplicationRecord
   belongs_to :user
 
   # Allow duplicate award numbers if same member belongs to two clubs simultaneously.
@@ -25,39 +25,38 @@ class Award < ActiveRecord::Base
 
     values = []
 
-    columns = [:award_number, :award_name, :user_id, :award_date, :proficiency_date, :expiry_date,
-               :originating_organisation]
+    columns = %i[award_number award_name user_id award_date proficiency_date expiry_date
+                 originating_organisation]
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      if row['Award Number'].present?
+      next if row['Award Number'].blank?
 
-        # award = find_by_award_number(row["Award Number"]) || new
-        # award.user_id = row["Member ID"]
-        # award.award_name = row["Award Name"]
-        # award.award_number = row["Award Number"].delete! ?'
-        # award.award_date = row["Award Date"]
-        # award.proficiency_date = row["Proficiency Date"]
-        # award.expiry_date = row["Expiry Date"]
-        # award.award_allocation_date = row["Award Allocation Date"]
-        # award.proficiency_allocation_date = row["Proficiency Allocation Date"]
-        # award.originating_organisation = row["Originating Organisation"]
-        # award.save!
+      # award = find_by_award_number(row["Award Number"]) || new
+      # award.user_id = row["Member ID"]
+      # award.award_name = row["Award Name"]
+      # award.award_number = row["Award Number"].delete! ?'
+      # award.award_date = row["Award Date"]
+      # award.proficiency_date = row["Proficiency Date"]
+      # award.expiry_date = row["Expiry Date"]
+      # award.award_allocation_date = row["Award Allocation Date"]
+      # award.proficiency_allocation_date = row["Proficiency Allocation Date"]
+      # award.originating_organisation = row["Originating Organisation"]
+      # award.save!
 
-        award = [
-          (row['Award Number'].gsub /'/, ''),
-          row['Award Name'],
-          row['Member ID'],
-          row['Award Date'],
-          row['Proficiency Date'],
-          row['Award Expiry Date'],
-          row['Award Originating Organisation']
-        ]
+      award = [
+        row['Award Number'].gsub(/'/, ''),
+        row['Award Name'],
+        row['Member ID'],
+        row['Award Date'],
+        row['Proficiency Date'],
+        row['Award Expiry Date'],
+        row['Award Originating Organisation']
+      ]
 
-        values << award
-      end
+      values << award
     end
 
     Award.import columns, values, validate: true
