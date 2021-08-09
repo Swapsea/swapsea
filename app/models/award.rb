@@ -60,7 +60,7 @@ class Award < ActiveRecord::Base
   			end
   		end
 
-  		Award.import columns, values, :validate => true
+  		Award.import columns, values, validate: true
 
 	end
 

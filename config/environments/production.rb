@@ -108,22 +108,22 @@ Swapsea2::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => ENV['ACTION_MAILER_HOST'] }
+  config.action_mailer.default_url_options = { host: ENV['ACTION_MAILER_HOST'] }
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = ('true' == ENV['ACTION_MAILER_PERFORM_DELIVERIES'])
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => 'utf-8'
+  config.action_mailer.default charset: 'utf-8'
   config.action_mailer.asset_host = 'https://www.swapsea.com.au'
 
   config.action_mailer.smtp_settings = {
-    :address              => ENV['SMTP_SERVER'],
-    :port                 => ENV['SMTP_PORT'] || 587,
-    :enable_starttls_auto => true,
-    :user_name            => ENV['SMTP_USERNAME'],
-    :password             => ENV['SMTP_PASSWORD'],
-    :authentication       => :plain,
-    :domain               => ENV['SMTP_DOMAIN'] || 'localhost',
+    address: ENV['SMTP_SERVER'],
+    port: ENV['SMTP_PORT'] || 587,
+    enable_starttls_auto: true,
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: :plain,
+    domain: ENV['SMTP_DOMAIN'] || 'localhost',
   }
 
 end

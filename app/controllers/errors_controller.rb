@@ -3,7 +3,7 @@ class ErrorsController < ApplicationController
 
 def show
 	@exception = env['action_dispatch.exception']
-	render status_code.to_s, :status => status_code, :layout => 'blank'
+	render status_code.to_s, status: status_code, layout: 'blank'
 end
 
 protected

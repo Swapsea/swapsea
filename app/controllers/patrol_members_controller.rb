@@ -16,7 +16,7 @@ class PatrolMembersController < ApplicationController
   # GET /patrol_members
   # GET /patrol_members.json
   def index
-    @patrol_members = PatrolMember.where(:organisation => selected_user.organisation).paginate(:page => params[:page], :per_page => 30)
+    @patrol_members = PatrolMember.where(organisation: selected_user.organisation).paginate(page: params[:page], per_page: 30)
   end
 
   def admin

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe OutreachPatrol, :type => :model do
+RSpec.describe OutreachPatrol, type: :model do
 
 	before(:all) do
     @outreach_patrol = FactoryBot.create(:outreach_patrol)

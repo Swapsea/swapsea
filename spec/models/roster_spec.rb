@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe Roster, :type => :model do
+RSpec.describe Roster, type: :model do
 
 	before(:all) do
     @roster = FactoryBot.create(:roster)

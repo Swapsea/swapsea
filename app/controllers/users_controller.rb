@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 		#if params.has_key?(:s)
 		#	@users = ThinkingSphinx.search.paginate(:page => params[:page], :per_page => 30) Riddle::Query.escape(params[:s]), :classes => [User]
 		#else
-			@users = User.paginate(:page => params[:page], :per_page => 30)
+			@users = User.paginate(page: params[:page], per_page: 30)
 		#end
 		render layout: 'admin'
 	end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 	end
 
 	def ics
-		@user = User.find_by(:ics => params[:key])
+		@user = User.find_by(ics: params[:key])
 	end
 
 	def import

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe ProficiencySignup, :type => :model do
+RSpec.describe ProficiencySignup, type: :model do
 
 	before(:all) do
     @proficiency_signup = FactoryBot.create(:proficiency_signup)

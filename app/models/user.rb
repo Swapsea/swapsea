@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
     has_many :requests
     has_many :offers
     has_one :patrol_member
-    has_one :patrol, :through => :patrol_member
-    has_many :rosters, :through => :patrol
+    has_one :patrol, through: :patrol_member
+    has_many :rosters, through: :patrol
     has_many :proficiency_signups
-    has_many :proficiencies, :through => :proficiency_signups
+    has_many :proficiencies, through: :proficiency_signups
     has_many :outreach_patrols_sign_ups
     has_many :outreach_patrols, through: :outreach_patrols_sign_ups
     has_many :swaps
@@ -38,12 +38,12 @@ class User < ActiveRecord::Base
     def self.awards
       users = User.all
       users.each do |user|
-          user.bronze = user.awards.where(:award_name => 'Bronze Medallion').present?
-          user.bbm = user.awards.where(:award_name => 'Silver Medallion Beach Management').present?
-          user.artc = user.awards.where({:award_name => 'Advanced Resuscitation Techniques Certificate'} || {:award_name => 'Advanced Resuscitation Techniques [AID]'} || {:award_name => 'Advanced Resuscitation Techniques Refresher'} || {:award_name => 'Advanced Resuscitation Certificate'} || {:award_name => 'Advanced Resuscitation Certificate Instructor'}).present?
-          user.irbd = user.awards.where(:award_name => 'Silver Medallion IRB Driver').present?
-          user.irbc = user.awards.where(:award_name => 'IRB Crew Certificate').present?
-          user.src = user.awards.where({:award_name => 'Surf Rescue Certificate'} || {:award_name => 'Surf Rescue Certificate (CPR Endorsed)'}).present?
+          user.bronze = user.awards.where(award_name: 'Bronze Medallion').present?
+          user.bbm = user.awards.where(award_name: 'Silver Medallion Beach Management').present?
+          user.artc = user.awards.where({award_name: 'Advanced Resuscitation Techniques Certificate'} || {award_name: 'Advanced Resuscitation Techniques [AID]'} || {award_name: 'Advanced Resuscitation Techniques Refresher'} || {award_name: 'Advanced Resuscitation Certificate'} || {award_name: 'Advanced Resuscitation Certificate Instructor'}).present?
+          user.irbd = user.awards.where(award_name: 'Silver Medallion IRB Driver').present?
+          user.irbc = user.awards.where(award_name: 'IRB Crew Certificate').present?
+          user.src = user.awards.where({award_name: 'Surf Rescue Certificate'} || {award_name: 'Surf Rescue Certificate (CPR Endorsed)'}).present?
           user.save
       end
     end
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
     end
 
     def club
-      Club.find_by(:name => organisation)
+      Club.find_by(name: organisation)
     end
 
     def assign_default_role
@@ -117,15 +117,15 @@ class User < ActiveRecord::Base
   end
 
   def additional_rosters
-    swaps.select('roster_id, user_id').where(:on_off_patrol => true).joins(:roster).where('start >= ?', Time.now.to_s(:db)).map { |n| n.roster }
+    swaps.select('roster_id, user_id').where(on_off_patrol: true).joins(:roster).where('start >= ?', Time.now.to_s(:db)).map { |n| n.roster }
   end
 
   def subtracted_rosters
-    swaps.select('roster_id, user_id').where(:on_off_patrol => false).joins(:roster).where('start >= ?', Time.now.to_s(:db)).map { |n| n.roster }
+    swaps.select('roster_id, user_id').where(on_off_patrol: false).joins(:roster).where('start >= ?', Time.now.to_s(:db)).map { |n| n.roster }
   end
 
   def has_multiple_emails?
-    if User.where(:email => email).count >= 2
+    if User.where(email: email).count >= 2
       return true
     else
       return false
@@ -133,19 +133,19 @@ class User < ActiveRecord::Base
   end
 
   def qualifications
-    bronze = awards.where(:award_name => 'Bronze Medallion').count
-    bbm = awards.where(:award_name => 'Silver Medallion Beach Management').count
-    artc = awards.where({:award_name => 'Advanced Resuscitation Techniques Certificate'} || {:award_name => 'Advanced Resuscitation Techniques [AID]'} || {:award_name => 'Advanced Resuscitation Techniques Refresher'} || {:award_name => 'Advanced Resuscitation Certificate'} || {:award_name => 'Advanced Resuscitation Certificate Instructor'}).count
-    irbd = awards.where(:award_name => 'Silver Medallion IRB Driver').count
-    irbc = awards.where(:award_name => 'IRB Crew Certificate').count
-    src = awards.where({:award_name => 'Surf Rescue Certificate'} || {:award_name => 'Surf Rescue Certificate (CPR Endorsed)'}).count
+    bronze = awards.where(award_name: 'Bronze Medallion').count
+    bbm = awards.where(award_name: 'Silver Medallion Beach Management').count
+    artc = awards.where({award_name: 'Advanced Resuscitation Techniques Certificate'} || {award_name: 'Advanced Resuscitation Techniques [AID]'} || {award_name: 'Advanced Resuscitation Techniques Refresher'} || {award_name: 'Advanced Resuscitation Certificate'} || {award_name: 'Advanced Resuscitation Certificate Instructor'}).count
+    irbd = awards.where(award_name: 'Silver Medallion IRB Driver').count
+    irbc = awards.where(award_name: 'IRB Crew Certificate').count
+    src = awards.where({award_name: 'Surf Rescue Certificate'} || {award_name: 'Surf Rescue Certificate (CPR Endorsed)'}).count
     {
-      :bronze => bronze,
-      :bbm => bbm,
-      :artc => artc,
-      :irbd => irbd,
-      :irbc => irbc,
-      :src => src
+      bronze: bronze,
+      bbm: bbm,
+      artc: artc,
+      irbd: irbd,
+      irbc: irbc,
+      src: src
     }
   end
 

@@ -4,11 +4,11 @@ require 'rails_helper'
 RSpec.describe 'offers/new', type: :view do
   before(:each) do
     assign(:offer, Offer.new(
-      :request_id => '1',
-      :user_id => '2',
-      :comment => 'MyString',
-      :status => 'MyString',
-      :mobile => 'MyString'
+      request_id: '1',
+      user_id: '2',
+      comment: 'MyString',
+      status: 'MyString',
+      mobile: 'MyString'
     ))
   end
 

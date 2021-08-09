@@ -31,7 +31,7 @@ class StagingUser < ApplicationRecord
 
 		end
 
-		StagingUser.import columns, values, :validate => true
+		StagingUser.import columns, values, validate: true
 
 	end
 

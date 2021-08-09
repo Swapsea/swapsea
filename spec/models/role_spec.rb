@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe Role, :type => :model do
+RSpec.describe Role, type: :model do
 
 	before(:all) do
     @role = FactoryBot.create(:role)

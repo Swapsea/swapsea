@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 require 'capybara'
-describe 'home', :type => :feature do
+describe 'home', type: :feature do
 
   before(:all) do
     @user = FactoryBot.create(:user)
@@ -14,8 +14,8 @@ describe 'home', :type => :feature do
 
   it 'signs users in' do
     visit '/users/sign_in'
-    fill_in 'user[email]', :with => @user.email
-    fill_in 'user[password]', :with => 'swapsea'
+    fill_in 'user[email]', with: @user.email
+    fill_in 'user[password]', with: 'swapsea'
     click_button 'Login'
     expect(page).to have_text('Notice Board')
   end

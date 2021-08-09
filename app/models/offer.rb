@@ -9,7 +9,7 @@ class Offer < ActiveRecord::Base
 
 	# Returns array of offers for the same rostered patrol.
 	def requests
-		Offer.where(:roster => roster)
+		Offer.where(roster: roster)
 	end
 
 	# Returns array of offers for the same rostered patrol for the same user, made to other requests.

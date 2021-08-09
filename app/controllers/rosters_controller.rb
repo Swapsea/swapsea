@@ -22,7 +22,7 @@ class RostersController < ApplicationController
   # GET /rosters.json
   def index
 
-    @patrols = Patrol.joins(:users).where(:organisation => selected_user.organisation)
+    @patrols = Patrol.joins(:users).where(organisation: selected_user.organisation)
 
     if params[:view] == 'all'
         @rosters = Roster.where('organisation = ?', selected_user.organisation).sort_by(&:start)
@@ -38,8 +38,8 @@ class RostersController < ApplicationController
   end
 
   def swaps
-    @my_requests = Request.joins(:roster).where(:user => selected_user, :status => 'open').order('rosters.start')
-    @my_offers = Offer.where(:user => selected_user, :status => ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted']).joins(:roster).order('rosters.start desc')
+    @my_requests = Request.joins(:roster).where(user: selected_user, status: 'open').order('rosters.start')
+    @my_offers = Offer.where(user: selected_user, status: ['pending','cancelled','closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful', 'deleted']).joins(:roster).order('rosters.start desc')
     @requests = Request.joins(:roster).where('start > ? AND status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation).order('rosters.start')
     @confirmed_offers = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted', selected_user.organisation).order(updated_at: :desc)
   end
@@ -52,8 +52,8 @@ class RostersController < ApplicationController
     @roster = Roster.find(params[:id])
     respond_to do |format|
       format.pdf do
-        render  :pdf => "#{@roster.patrol.name}",
-                :layout => 'pdf.html.erb',
+        render  pdf: "#{@roster.patrol.name}",
+                layout: 'pdf.html.erb',
                  show_as_html: params[:debug].present?
 
       end
@@ -61,12 +61,12 @@ class RostersController < ApplicationController
   end
 
   def patrol_report
-    @roster = Roster.find_by(:secret => params[:token])
+    @roster = Roster.find_by(secret: params[:token])
     if @roster.present?
       respond_to do |format|
         format.pdf do
-          render :pdf => "#{@roster.patrol.name}",
-                  :layout => 'pdf.html.erb',
+          render pdf: "#{@roster.patrol.name}",
+                  layout: 'pdf.html.erb',
                    show_as_html: params[:debug].present?
 
         end

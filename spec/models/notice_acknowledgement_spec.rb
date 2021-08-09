@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe NoticeAcknowledgement, :type => :model do
+RSpec.describe NoticeAcknowledgement, type: :model do
 
 	before(:all) do
     @notice_acknowledgement = FactoryBot.create(:notice_acknowledgement)

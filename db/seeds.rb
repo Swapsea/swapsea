@@ -29,12 +29,12 @@ begin
 		User.create(first_name: 'Three', last_name: 'Member3', email: 'member3@swapsea.com.au', password: 'swapsea', organisation: 'Swapsea SLSC')
 		User.create(first_name: 'Four', last_name: 'Member4', email: 'member4@swapsea.com.au', password: 'swapsea', organisation: 'Swapsea SLSC')
 
-		User.find_by(:email => 'alex.admin@swapsea.com.au').add_role(:admin)
-		User.find_by(:email => 'mark.manager@swapsea.com.au').add_role(:manager)
-		User.find_by(:email => 'member1@swapsea.com.au').add_role(:member)
-		User.find_by(:email => 'member2@swapsea.com.au').add_role(:member)
-		User.find_by(:email => 'member3@swapsea.com.au').add_role(:member)
-		User.find_by(:email => 'member4@swapsea.com.au').add_role(:member)
+		User.find_by(email: 'alex.admin@swapsea.com.au').add_role(:admin)
+		User.find_by(email: 'mark.manager@swapsea.com.au').add_role(:manager)
+		User.find_by(email: 'member1@swapsea.com.au').add_role(:member)
+		User.find_by(email: 'member2@swapsea.com.au').add_role(:member)
+		User.find_by(email: 'member3@swapsea.com.au').add_role(:member)
+		User.find_by(email: 'member4@swapsea.com.au').add_role(:member)
 
     end #transaction
 

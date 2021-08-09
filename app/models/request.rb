@@ -8,11 +8,11 @@ class Request < ActiveRecord::Base
 	has_many :offers
 
 	def offer_already_exists?(roster, user)
-		offers.where(:user => user, :roster => roster, :status => 'pending').present?
+		offers.where(user: user, roster: roster, status: 'pending').present?
 	end
 
 	def accepted_offer
-	  	offers.where(:status => 'accepted').first if offers.where(:status => 'accepted').present?
+	  	offers.where(status: 'accepted').first if offers.where(status: 'accepted').present?
 	end
 
 	def offers_with_status(status)

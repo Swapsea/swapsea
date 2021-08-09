@@ -47,16 +47,16 @@ class Ability
         can [:read], Request do |request|
             request.user.organisation == user.organisation
         end
-        can [:update, :destroy, :confirm_cancel], Request, :user => user
+        can [:update, :destroy, :confirm_cancel], Request, user: user
         cannot [:update], Request do |request|
-            request.offers.where(:status => 'accepted').present?
+            request.offers.where(status: 'accepted').present?
         end
         cannot :index, Request
         can [:create], Offer
         can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
             offer.user.organisation == user.organisation
         end
-        can [:update, :destroy, :confirm_cancel], Offer, :user => user
+        can [:update, :destroy, :confirm_cancel], Offer, user: user
         can [:accept, :decline], Offer do |offer|
             offer.request.user == user
         end
@@ -100,16 +100,16 @@ class Ability
         can [:read], Request do |request|
             request.user.organisation == user.organisation
         end
-        can [:update, :destroy, :confirm_cancel], Request, :user => user
+        can [:update, :destroy, :confirm_cancel], Request, user: user
         cannot [:update], Request do |request|
-            request.offers.where(:status => 'accepted').present?
+            request.offers.where(status: 'accepted').present?
         end
         cannot :index, Request
         can [:create], Offer
         can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
             offer.user.organisation == user.organisation
         end
-        can [:update, :destroy, :confirm_cancel], Offer, :user => user
+        can [:update, :destroy, :confirm_cancel], Offer, user: user
         can [:accept, :decline], Offer do |offer|
             offer.request.user == user
         end
@@ -120,10 +120,10 @@ class Ability
         can [:read], ProficiencySignup do |prof_signup|
             prof_signup.user.organisation == user.organisation
         end
-        can :destroy, ProficiencySignup, :user => user
+        can :destroy, ProficiencySignup, user: user
         can [:read, :index], OutreachPatrol
         can [:read, :create], OutreachPatrolSignUp
-        can :destroy, OutreachPatrolSignUp, :user => user
+        can :destroy, OutreachPatrolSignUp, user: user
         can [:read, :ics], User do |u|
             u.organisation == user.organisation
         end

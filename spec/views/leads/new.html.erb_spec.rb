@@ -5,9 +5,9 @@ require 'rails_helper'
 RSpec.describe 'leads/new', type: :view do
   before(:each) do
     assign(:lead, Lead.new(
-      :name => 'Name',
-      :email => 'Faker::Internet.email',
-      :organisation => 'Organisation'
+      name: 'Name',
+      email: 'Faker::Internet.email',
+      organisation: 'Organisation'
     ))
   end
 

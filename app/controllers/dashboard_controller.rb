@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class DashboardController < ApplicationController
-	load_and_authorize_resource :class => false
+	load_and_authorize_resource class: false
 
 	def index
 		@notices =  Notice.visible

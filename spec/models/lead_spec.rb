@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe Lead, :type => :model do
+RSpec.describe Lead, type: :model do
 
 	before(:all) do
     @lead = FactoryBot.create(:lead)

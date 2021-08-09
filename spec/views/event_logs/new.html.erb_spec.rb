@@ -4,8 +4,8 @@ require 'rails_helper'
 RSpec.describe 'event_logs/new', type: :view do
   before(:each) do
     assign(:event_log, EventLog.new(
-      :subject => 'MyString',
-      :desc => 'MyString'
+      subject: 'MyString',
+      desc: 'MyString'
     ))
   end
 

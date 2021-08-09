@@ -5,7 +5,7 @@ class PatrolMember < ActiveRecord::Base
 	belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
 
   def rosters
-    Roster.all.where(:patrol_name => patrol_name)
+    Roster.all.where(patrol_name: patrol_name)
   end
 
 	def self.upload(file)
@@ -22,10 +22,10 @@ class PatrolMember < ActiveRecord::Base
 		header = spreadsheet.row(5)
 		(6..spreadsheet.last_row).each do |i|
     	row = Hash[[header, spreadsheet.row(i)].transpose]
-      if Patrol.find_by(:name => row['Team Name'], :organisation => row['Organisation Display Name'])
+      if Patrol.find_by(name: row['Team Name'], organisation: row['Organisation Display Name'])
 
-        patrol_member = find_by(:user_id => row['Member ID']) || new
-        user = User.find_by(:id => row['Member ID'])
+        patrol_member = find_by(user_id: row['Member ID']) || new
+        user = User.find_by(id: row['Member ID'])
         if user.present?
           user.patrol_name = row['Team Name']
           user.default_position = row['Team Position']

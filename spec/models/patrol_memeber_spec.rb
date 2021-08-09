@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe PatrolMember, :type => :model do
+RSpec.describe PatrolMember, type: :model do
 
 	before(:all) do
     @patrol_member = FactoryBot.create(:patrol_member)

@@ -68,7 +68,7 @@ Swapsea2::Application.routes.draw do
   get 'auth', to: 'home#token'
 
   %w( 400 402 403 404 405 406 408 422 500 502 503 504 505 ).each do |code|
-    get code, :to => 'errors#show', :code => code
+    get code, to: 'errors#show', code: code
   end
 
   get 'admin', to: 'admin#index', as: 'admin'

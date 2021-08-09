@@ -2,7 +2,7 @@
 namespace :swapsea do
   namespace :data do
     desc 'Daily transfer from staging tables to working tables.'
-    task :transfer => :environment do |task|
+    task transfer: :environment do |task|
 
       if StagingAward.transfer
         EventLog.create!(subject: 'Transfer', desc: 'Awards import success.')

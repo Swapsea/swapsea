@@ -30,7 +30,7 @@ Swapsea2::Application.configure do
   config.assets.debug = true
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   if ENV['REDIS_URL']
     config.cache_store = :redis_store, ENV['REDIS_URL']
@@ -44,17 +44,17 @@ Swapsea2::Application.configure do
   # :file will write to tmp/mails.
   config.action_mailer.delivery_method = :file
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default :charset => 'utf-8'
+  config.action_mailer.default charset: 'utf-8'
   config.action_mailer.asset_host = 'https://www.swapsea.com.au'
 
   config.action_mailer.smtp_settings = {
-    :address              => ENV['SMTP_SERVER'],
-    :port                 => ENV['SMTP_PORT'] || 587,
-    :enable_starttls_auto => true,
-    :user_name            => ENV['SMTP_USERNAME'],
-    :password             => ENV['SMTP_PASSWORD'],
-    :authentication       => :plain,
-    :domain               => ENV['SMTP_DOMAIN'] || 'localhost',
+    address: ENV['SMTP_SERVER'],
+    port: ENV['SMTP_PORT'] || 587,
+    enable_starttls_auto: true,
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: :plain,
+    domain: ENV['SMTP_DOMAIN'] || 'localhost',
   }
 
   end

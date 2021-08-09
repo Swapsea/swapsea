@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @offer = Offer.new
-    @offers = @request.offers.where(:status => 'pending').sort_by(&:id)
+    @offers = @request.offers.where(status: 'pending').sort_by(&:id)
     @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
     @awards = @request.user.awards.map { |n| n.award_name }
   end
@@ -49,7 +49,7 @@ class RequestsController < ApplicationController
   def create
 
     # Check if request already exists.
-    @request_exists = Request.find_by(:roster_id => request_params[:roster_id], :user_id => selected_user, :status => 'open')
+    @request_exists = Request.find_by(roster_id: request_params[:roster_id], user_id: selected_user, status: 'open')
 
     if @request_exists
       redirect_to @request_exists, notice: 'Request already exists.'

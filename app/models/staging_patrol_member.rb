@@ -23,7 +23,7 @@ class StagingPatrolMember < ApplicationRecord
 
 		end
 
-		StagingPatrolMember.import columns, values, :validate => true
+		StagingPatrolMember.import columns, values, validate: true
 
 	end
 

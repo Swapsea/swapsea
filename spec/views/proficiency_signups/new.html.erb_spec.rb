@@ -4,8 +4,8 @@ require 'rails_helper'
 RSpec.describe 'proficiency_signups/new', type: :view do
   before(:each) do
     assign(:proficiency_signup, ProficiencySignup.new(
-      :proficiency_id => '1',
-      :user_id => '2'
+      proficiency_id: '1',
+      user_id: '2'
     ))
   end
 

@@ -4,8 +4,8 @@ require 'rails_helper'
 RSpec.describe 'notice_acknowledgements/new', type: :view do
   before(:each) do
     assign(:notice_acknowledgement, NoticeAcknowledgement.new(
-      :notice_id => '1',
-      :user_id => '2'
+      notice_id: '1',
+      user_id: '2'
     ))
   end
 

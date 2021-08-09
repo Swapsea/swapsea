@@ -4,7 +4,7 @@ require 'test_helper'
 class EmailsControllerTest < ActionController::TestCase
    test 'that welcome sends' do
 
-    u = User.find_by(:email => 'mark@swapsea.com.au')
+    u = User.find_by(email: 'mark@swapsea.com.au')
     email = SwapseaMailer.welcome_email(u)
 
     # Send the email, then test that it got queued

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe Request, :type => :model do
+RSpec.describe Request, type: :model do
 
 	before(:all) do
     @request = FactoryBot.create(:request)

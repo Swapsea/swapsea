@@ -4,9 +4,9 @@ require 'rails_helper'
 RSpec.describe 'awards/new', type: :view do
   before(:each) do
     assign(:award, Award.new(
-       :award_number => 'AwardNumber',
-        :award_name => 'AwardName',
-        :user_id => '1'
+       award_number: 'AwardNumber',
+        award_name: 'AwardName',
+        user_id: '1'
     ))
   end
 

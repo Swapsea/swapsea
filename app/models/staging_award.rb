@@ -29,7 +29,7 @@ class StagingAward < ApplicationRecord
 			end
 		end
 
-		StagingAward.import columns, values, :validate => true
+		StagingAward.import columns, values, validate: true
 
 	end
 
@@ -57,7 +57,7 @@ class StagingAward < ApplicationRecord
 
 			end
 
-		if Award.import columns, values, :validate => true, on_duplicate_key_ignore: true
+		if Award.import columns, values, validate: true, on_duplicate_key_ignore: true
 			StagingAward.delete_all
 		end
 

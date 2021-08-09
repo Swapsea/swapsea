@@ -62,7 +62,7 @@ class Email < ActiveRecord::Base
 
 	def self.welcome_email(organisation)
 		emails_sent = 0;
-		PatrolMember.where(:organisation => organisation).map do |pm|
+		PatrolMember.where(organisation: organisation).map do |pm|
 			if (pm.user.email?)
 				SwapseaMailer.welcome_email(pm.user).deliver
 				emails_sent = emails_sent + 1
@@ -73,7 +73,7 @@ class Email < ActiveRecord::Base
 
 
 	def self.welcome_email_test(email)
-		u = User.find_by(:email => email)
+		u = User.find_by(email: email)
 		SwapseaMailer.welcome_email(u).deliver
 	end
 

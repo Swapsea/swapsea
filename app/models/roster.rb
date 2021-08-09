@@ -43,23 +43,23 @@ class Roster < ActiveRecord::Base
 		src = qualifications[:src].to_i - req.qualifications[:src].to_i + sub.qualifications[:src].to_i
 		if !(bbm >= patrol.need_bbm) || !(irbd >= patrol.need_irbd) || !(irbc >= patrol.need_irbc) || !(artc >= patrol.need_artc) || !(bronze >= patrol.need_bronze) || !(src >= patrol.need_src)
 			{
-			:result => false,
-			:bbm => bbm,
-			:irbd => irbd,
-			:irbc => irbc,
-			:artc => artc,
-			:bronze => bronze,
-			:src => src
+			result: false,
+			bbm: bbm,
+			irbd: irbd,
+			irbc: irbc,
+			artc: artc,
+			bronze: bronze,
+			src: src
 			}
 		else
 			{
-			:result => true,
-			:bbm => bbm,
-			:irbd => irbd,
-			:irbc => irbc,
-			:artc => artc,
-			:bronze => bronze,
-			:src => src
+			result: true,
+			bbm: bbm,
+			irbd: irbd,
+			irbc: irbc,
+			artc: artc,
+			bronze: bronze,
+			src: src
 			}
 		end
 	end
@@ -73,23 +73,23 @@ class Roster < ActiveRecord::Base
 		a_src = src.to_i - req.qualifications[:src].to_i
 		if !(a_bbm >= patrol.need_bbm) || !(a_irbd >= patrol.need_irbd) || !(a_irbc >= patrol.need_irbc) || !(a_artc >= patrol.need_artc) || !(a_bronze >= patrol.need_bronze) || !(a_src >= patrol.need_src)
 			{
-			:result => false,
-			:bbm => a_bbm,
-			:irbd => a_irbd,
-			:irbc => a_irbc,
-			:artc => a_artc,
-			:bronze => a_bronze,
-			:src => a_src
+			result: false,
+			bbm: a_bbm,
+			irbd: a_irbd,
+			irbc: a_irbc,
+			artc: a_artc,
+			bronze: a_bronze,
+			src: a_src
 			}
 		else
 			{
-			:result => true,
-			:bbm => a_bbm,
-			:irbd => a_irbd,
-			:irbc => a_irbc,
-			:artc => a_artc,
-			:bronze => a_bronze,
-			:src => a_src
+			result: true,
+			bbm: a_bbm,
+			irbd: a_irbd,
+			irbc: a_irbc,
+			artc: a_artc,
+			bronze: a_bronze,
+			src: a_src
 			}
 		end
 	end
@@ -103,23 +103,23 @@ class Roster < ActiveRecord::Base
 		src = qualifications[:src].to_i - req.qualifications[:src].to_i
 		if !(bbm >= patrol.need_bbm) || !(irbd >= patrol.need_irbd) || !(irbc >= patrol.need_irbc) || !(artc >= patrol.need_artc) || !(bronze >= patrol.need_bronze) || !(src >= patrol.need_src)
 			{
-			:result => false,
-			:bbm => bbm,
-			:irbd => irbd,
-			:irbc => irbc,
-			:artc => artc,
-			:bronze => bronze,
-			:src => src
+			result: false,
+			bbm: bbm,
+			irbd: irbd,
+			irbc: irbc,
+			artc: artc,
+			bronze: bronze,
+			src: src
 			}
 		else
 			{
-			:result => true,
-			:bbm => bbm,
-			:irbd => irbd,
-			:irbc => irbc,
-			:artc => artc,
-			:bronze => bronze,
-			:src => src
+			result: true,
+			bbm: bbm,
+			irbd: irbd,
+			irbc: irbc,
+			artc: artc,
+			bronze: bronze,
+			src: src
 			}
 		end
 	end
@@ -133,23 +133,23 @@ class Roster < ActiveRecord::Base
 		src = qualifications[:src].to_i
 		if !(bbm >= patrol.need_bbm) || !(irbd >= patrol.need_irbd) || !(irbc >= patrol.need_irbc) || !(artc >= patrol.need_artc) || !(bronze >= patrol.need_bronze) || !(src >= patrol.need_src)
 			{
-			:result => false,
-			:bbm => bbm,
-			:irbd => irbd,
-			:irbc => irbc,
-			:artc => artc,
-			:bronze => bronze,
-			:src => src
+			result: false,
+			bbm: bbm,
+			irbd: irbd,
+			irbc: irbc,
+			artc: artc,
+			bronze: bronze,
+			src: src
 			}
 		else
 			{
-			:result => true,
-			:bbm => bbm,
-			:irbd => irbd,
-			:irbc => irbc,
-			:artc => artc,
-			:bronze => bronze,
-			:src => src
+			result: true,
+			bbm: bbm,
+			irbd: irbd,
+			irbc: irbc,
+			artc: artc,
+			bronze: bronze,
+			src: src
 			}
 		end
 
@@ -183,12 +183,12 @@ class Roster < ActiveRecord::Base
 		irbc = awards.count { |n| n.award_name == 'IRB Crew Certificate' }
 		src = awards.count { |n| (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)') }
 		{
-			:bronze => bronze,
-			:bbm => bbm,
-			:artc => artc,
-			:irbd => irbd,
-			:irbc => irbc,
-			:src => src
+			bronze: bronze,
+			bbm: bbm,
+			artc: artc,
+			irbd: irbd,
+			irbc: irbc,
+			src: src
 		}
 	end
 
@@ -196,8 +196,8 @@ class Roster < ActiveRecord::Base
 		added = Array.new
 		ids = swaps.select(:user_id).distinct
 		ids.each do |i|
-			swap = swaps.where(:user_id => i.user.id).includes(:user).last
-			if ((swap.on_off_patrol == true) && (!patrol.users.where(:id => i.user.id).present?))
+			swap = swaps.where(user_id: i.user.id).includes(:user).last
+			if ((swap.on_off_patrol == true) && (!patrol.users.where(id: i.user.id).present?))
 				added << swap.user
 			end
 		end
@@ -208,8 +208,8 @@ class Roster < ActiveRecord::Base
 		removed = Array.new
 		ids = swaps.select(:user_id).distinct
 		ids.each do |i|
-			swap = swaps.where(:user_id => i.user.id).includes(:user).last
-			if ((swap.on_off_patrol == false) && (patrol.users.where(:id => i.user.id).present?))
+			swap = swaps.where(user_id: i.user.id).includes(:user).last
+			if ((swap.on_off_patrol == false) && (patrol.users.where(id: i.user.id).present?))
 				removed << swap.user
 			end
 		end
@@ -217,16 +217,16 @@ class Roster < ActiveRecord::Base
 	end
 
 	def user_rostered_on(user)
-		if swaps.where(:user_id => user.id).present?
+		if swaps.where(user_id: user.id).present?
 			# find last swap and determine if 'on' or 'off' patrol
-			if swaps.where(:user_id => user.id).last.on_off_patrol == true
+			if swaps.where(user_id: user.id).last.on_off_patrol == true
 				true
 			else
 				false
 			end
 		else
 			# will check if member is part of patrol that is rosterd on
-			patrol.users.where(:id => user.id).present? #returns true or false
+			patrol.users.where(id: user.id).present? #returns true or false
 		end
 	end
 

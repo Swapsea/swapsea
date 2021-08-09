@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe StagingAward, :type => :model do
+RSpec.describe StagingAward, type: :model do
 
 	before(:all) do
     @staging_award = FactoryBot.create(:staging_award)
