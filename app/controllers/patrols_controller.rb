@@ -17,7 +17,7 @@ class PatrolsController < ApplicationController
     @patrols = if current_user.has_role?(:admin)
                  Patrol.all
                elsif current_user.has_role?(:manager)
-                 Patrol.all.where('organisation = ?', current_user.organisation)
+                 Patrol.all.where(organisation: current_user.organisation)
                end
 
     render layout: 'admin'

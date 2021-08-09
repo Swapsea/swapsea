@@ -10,7 +10,7 @@ class StagingUser < ApplicationRecord
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
+      row = [header, spreadsheet.row(i)].transpose.to_h
 
       user = [
         row['Member ID'],

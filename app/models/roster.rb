@@ -242,13 +242,13 @@ class Roster < ApplicationRecord
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
+      row = [header, spreadsheet.row(i)].transpose.to_h
       roster = Roster.new
       roster.patrol_name = row['Rostered Team Name']
       date = row['Patrol Roster Date'].split('/')
       year = date[0].to_s
-      month = date [1].to_s
-      day = date [2].to_s
+      month = date[1].to_s
+      day = date[2].to_s
       formatted_date = "#{year}-#{month}-#{day}"
       roster.start = Time.zone.parse("#{formatted_date} #{row['Patrol Roster Start Time']}:00").utc.iso8601
       roster.finish = Time.zone.parse("#{formatted_date} #{row['Patrol Roster Finish Time']}:00").utc.iso8601

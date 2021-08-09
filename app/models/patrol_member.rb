@@ -21,7 +21,7 @@ class PatrolMember < ApplicationRecord
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
+      row = [header, spreadsheet.row(i)].transpose.to_h
       next unless Patrol.find_by(name: row['Team Name'], organisation: row['Organisation Display Name'])
 
       patrol_member = find_by(user_id: row['Member ID']) || new
