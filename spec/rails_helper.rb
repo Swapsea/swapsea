@@ -38,6 +38,28 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  Capybara.default_driver = :selenium # :selenium_chrome and :selenium_chrome_headless are also registered
+
+  Capybara.current_driver = :selenium
+
+  Capybara.server = :puma # Until your setup is working
+
+  # Capybara.run_server = false
+  # Capybara.app_host = "http://localhost:3000"
+
+  # config.before(:suite) do
+  #   DatabaseCleaner[:active_record].strategy = :transaction
+  #   DatabaseCleaner.clean_with(:truncation)
+  # end
+
+  # config.before(:each) do
+  #   DatabaseCleaner.start
+  # end
+
+  # config.after(:each) do
+  #   DatabaseCleaner.clean
+  # end
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
