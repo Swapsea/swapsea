@@ -2,6 +2,8 @@ AllCops:
   TargetRailsVersion: 5.0
 Gemspec/DateAssignment: # (new in 1.10)
   Enabled: true
+Layout/LineLength:
+  Enabled: false
 Layout/SpaceBeforeBrackets: # (new in 1.7)
   Enabled: true
 Lint/AmbiguousAssignment: # (new in 1.7)
@@ -37,10 +39,7 @@ Lint/UnexpectedBlockArity: # (new in 1.5)
 Lint/UnmodifiedReduceAccumulator: # (new in 1.1)
   Enabled: true
 Metrics/BlockLength:
-  Exclude:
-    - "Rakefile"
-    - "**/*.rake"
-    - "test/**/*.rb"
+  IgnoredMethods: ["describe", "context"]
 Style/ArgumentsForwarding: # (new in 1.1)
   Enabled: true
 Style/CollectionCompact: # (new in 1.2)

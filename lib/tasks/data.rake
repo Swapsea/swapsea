@@ -25,7 +25,7 @@ namespace :swapsea do
       NumJuniors = User.juniors.length
       if NumJuniors.positive?
         EventLog.create!(subject: 'Transfer', desc: "Removing #{NumJuniors} junior members...")
-        User.where(id: User.juniors.pluck(:id)).delete_all
+        User.where(id: User.juniors.select(:id)).delete_all
         NumJuniors = User.juniors.length
         EventLog.create!(subject: 'Transfer', desc: "There are #{NumJuniors} junior members remaining.")
       else

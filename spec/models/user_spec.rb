@@ -35,12 +35,11 @@ RSpec.describe User, type: :model do
   end
 
   describe User do
-    let(:club) { double(name: 'organisation') }
+    let(:club) { String(name: 'organisation') }
 
     it 'find club by name' do
-      expect(Club).to receive(:find_by_name).and_return(club)
+      expect(Club).to receive(:find_by).and_return(club)
       expect(Club.find_by(name: 'organisation')).to eq club
-      # expect(Club.find_by_name('organisation')).to eq club
     end
   end
 end
