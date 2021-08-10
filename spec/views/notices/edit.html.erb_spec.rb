@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "notices/edit", type: :view do
-  before(:each) do
+RSpec.describe 'notices/edit', type: :view do
+  before do
     @notice = assign(:notice, FactoryBot.create(:notice))
   end
 

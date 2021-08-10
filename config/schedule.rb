@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -20,10 +22,10 @@
 # Learn more: http://github.com/javan/whenever
 
 every 60.minutes do
-   rake "ts:index", :output => "/var/www/swapsea/production/shared/log/production.log",  :environment => 'production'
-   rake "ts:index", :output => "/var/www/swapsea/staging/shared/log/staging.log",  :environment => 'staging'
+  rake 'ts:index', output: '/var/www/swapsea/production/shared/log/production.log', environment: 'production'
+  rake 'ts:index', output: '/var/www/swapsea/staging/shared/log/staging.log', environment: 'staging'
 end
 
 every :reboot do
-  rake "thinking_sphinx:start"
+  rake 'thinking_sphinx:start'
 end

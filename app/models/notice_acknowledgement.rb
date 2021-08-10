@@ -1,7 +1,6 @@
-class NoticeAcknowledgement < ActiveRecord::Base
+# frozen_string_literal: true
 
-
-	belongs_to :notice
-	belongs_to :user
-
+class NoticeAcknowledgement < ApplicationRecord
+  belongs_to :notice
+  belongs_to :user
 end

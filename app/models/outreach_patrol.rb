@@ -1,7 +1,7 @@
-class OutreachPatrol < ActiveRecord::Base
+# frozen_string_literal: true
 
-	belongs_to :club, foreign_key: :organisation, primary_key: :name
-	has_many :outreach_patrol_sign_ups
-	has_many :users, through: :outreach_patrol_sign_ups
-
+class OutreachPatrol < ApplicationRecord
+  belongs_to :club, foreign_key: :organisation, primary_key: :name
+  has_many :outreach_patrol_sign_ups
+  has_many :users, through: :outreach_patrol_sign_ups
 end

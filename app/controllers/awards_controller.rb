@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 class AwardsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_award, only: [:show, :edit, :update, :destroy]
+  before_action :set_award, only: %i[show edit update destroy]
   layout 'dashboard'
 
   # GET /awards
   # GET /awards.json
 
   def import
-        #@club = params[:club]
-      #begin
-        Award.upload(params[:file])
-        redirect_to admin_awards_path, notice: "Awards imported."
-      #rescue
-        #redirect_to root_url, notice: "Invalid CSV file format."
-      #end
+    # @club = params[:club]
+    # begin
+    Award.upload(params[:file])
+    redirect_to admin_awards_path, notice: 'Awards imported.'
+    # rescue
+    # redirect_to root_url, notice: "Invalid CSV file format."
+    # end
   end
 
   def admin
@@ -23,8 +25,7 @@ class AwardsController < ApplicationController
 
   # GET /awards/1
   # GET /awards/1.json
-  def show
-  end
+  def show; end
 
   # POST /awards
   # POST /awards.json
@@ -67,13 +68,15 @@ class AwardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_award
-      @award = Award.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def award_params
-      params.require(:award).permit(:user_id, :award_name, :award_number, :award_date, :proficiency_date, :expiry_date, :award_allocation_date, :proficiency_allocation_date, :originating_organisation)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_award
+    @award = Award.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def award_params
+    params.require(:award).permit(:user_id, :award_name, :award_number, :award_date, :proficiency_date, :expiry_date,
+                                  :award_allocation_date, :proficiency_allocation_date, :originating_organisation)
+  end
 end

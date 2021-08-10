@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class SettingsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_setting, only: [:show, :edit, :update, :destroy]
+  before_action :set_setting, only: %i[show edit update destroy]
   layout 'admin'
 
   # GET /settings
@@ -11,8 +13,7 @@ class SettingsController < ApplicationController
 
   # GET /settings/1
   # GET /settings/1.json
-  def show
-  end
+  def show; end
 
   # GET /settings/new
   def new
@@ -20,8 +21,7 @@ class SettingsController < ApplicationController
   end
 
   # GET /settings/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /settings
   # POST /settings.json
@@ -64,13 +64,14 @@ class SettingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_setting
-      @setting = Setting.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def setting_params
-      params.require(:setting).permit(:key, :value)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_setting
+    @setting = Setting.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def setting_params
+    params.require(:setting).permit(:key, :value)
+  end
 end

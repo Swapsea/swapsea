@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
@@ -5,7 +7,7 @@ set :application, 'swapsea'
 set :repo_url, 'git@bitbucket.org:alxcrrll/swapsea-v2.git'
 
 set :stages, %w[staging production]
-set :default_stage, "staging"
+set :default_stage, 'staging'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -34,13 +36,13 @@ set :ssh_options, {
 }
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w[config/database.yml]
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w[bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system]
 
 # Default value for default_env is {}
-#set :default_env, { path: "$PATH:/home/deploy/.rvm/rubies/ruby-2.1.0/bin/ruby" }
+# set :default_env, { path: "$PATH:/home/deploy/.rvm/rubies/ruby-2.1.0/bin/ruby" }
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
@@ -49,7 +51,6 @@ set :keep_releases, 5
 require 'thinking_sphinx/capistrano'
 
 namespace :deploy do
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -68,5 +69,4 @@ namespace :deploy do
       # end
     end
   end
-
 end

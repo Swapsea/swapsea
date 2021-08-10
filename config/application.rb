@@ -1,4 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('boot', __dir__)
 
 require 'csv'
 require 'rails/all'
@@ -22,6 +24,6 @@ module Swapsea2
     # config.i18n.default_locale = :de
 
     # Custom exceptions
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
   end
 end

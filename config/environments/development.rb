@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Swapsea2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -14,7 +16,7 @@ Swapsea2::Application.configure do
   config.action_controller.perform_caching = true
 
   # Assets
-  #config.action_controller.asset_host = "http://localhost"
+  # config.action_controller.asset_host = "http://localhost"
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -29,13 +31,13 @@ Swapsea2::Application.configure do
   config.assets.debug = true
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
-  if ENV['REDIS_URL']
-    config.cache_store = :redis_store, ENV['REDIS_URL']
-  else
-    config.cache_store = :null_store
-  end
+  config.cache_store = if ENV['REDIS_URL']
+                         [:redis_store, ENV['REDIS_URL']]
+                       else
+                         :null_store
+                       end
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the ActionMailer::Base.deliveries array.
@@ -43,17 +45,16 @@ Swapsea2::Application.configure do
   # :file will write to tmp/mails.
   config.action_mailer.delivery_method = :file
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.asset_host = "https://www.swapsea.com.au"
+  config.action_mailer.default charset: 'utf-8'
+  config.action_mailer.asset_host = 'https://www.swapsea.com.au'
 
   config.action_mailer.smtp_settings = {
-    :address              => ENV['SMTP_SERVER'],
-    :port                 => ENV['SMTP_PORT'] || 587,
-    :enable_starttls_auto => true,
-    :user_name            => ENV['SMTP_USERNAME'],
-    :password             => ENV['SMTP_PASSWORD'],
-    :authentication       => :plain,
-    :domain               => ENV['SMTP_DOMAIN'] || 'localhost',
+    address: ENV['SMTP_SERVER'],
+    port: ENV['SMTP_PORT'] || 587,
+    enable_starttls_auto: true,
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: :plain,
+    domain: ENV['SMTP_DOMAIN'] || 'localhost'
   }
-
-  end
+end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Swapsea2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -13,7 +15,7 @@ Swapsea2::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  config.serve_static_assets = true
   config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
 
   # Show full error reports and disable caching.
@@ -35,17 +37,17 @@ Swapsea2::Application.configure do
   config.active_support.deprecation = :stderr
   config.action_mailer.delivery_method = :file
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.asset_host = "https://www.swapsea.com.au"
-  config.action_mailer.default_url_options = { :host => 'https://www.swapsea.com.au' }
+  config.action_mailer.default charset: 'utf-8'
+  config.action_mailer.asset_host = 'https://www.swapsea.com.au'
+  config.action_mailer.default_url_options = { host: 'https://www.swapsea.com.au' }
 
   config.action_mailer.smtp_settings = {
-    :address              => ENV['SMTP_SERVER'],
-    :port                 => ENV['SMTP_PORT'] || 587,
-    :enable_starttls_auto => true,
-    :user_name            => ENV['SMTP_USERNAME'],
-    :password             => ENV['SMTP_PASSWORD'],
-    :authentication       => :plain,
-    :domain               => ENV['SMTP_DOMAIN'] || 'localhost',
+    address: ENV['SMTP_SERVER'],
+    port: ENV['SMTP_PORT'] || 587,
+    enable_starttls_auto: true,
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: :plain,
+    domain: ENV['SMTP_DOMAIN'] || 'localhost'
   }
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'faker'
 FactoryBot.define do
   factory :email do
     to { Faker::Internet.email }
     cc { Faker::Internet.email }
     bcc { Faker::Internet.email }
-    subject { "MyString" }
+    subject { 'MyString' }
   end
 end

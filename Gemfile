@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 ruby '2.4.1'
 
@@ -48,6 +50,8 @@ group :development, :test do
   gem 'shoulda', '~> 3.5'
   gem 'shoulda-callback-matchers'
   gem 'shoulda-matchers', '~> 2.0'
+  gem 'selenium-webdriver'
+  gem 'webdrivers', '~> 4.0'
 end
 
 gem 'activerecord-import'

@@ -1,5 +1,6 @@
-Swapsea2::Application.routes.draw do
+# frozen_string_literal: true
 
+Swapsea2::Application.routes.draw do
   resources :event_logs
 
   resources :activities
@@ -16,16 +17,16 @@ Swapsea2::Application.routes.draw do
   post 'api/v1/import/members', to: 'api#upload_members'
   post 'api/v1/import/awards', to: 'api#upload_awards'
   post 'api/v1/import/patrol-members', to: 'api#upload_patrol_members'
-  #post 'api/v1/import/rosters', to: 'api#import_rosters'
+  # post 'api/v1/import/rosters', to: 'api#import_rosters'
   get 'api/v1/transfer/members', to: 'api#transfer_members'
   get 'api/v1/transfer/awards', to: 'api#transfer_awards'
   get 'api/v1/transfer/patrol-members', to: 'api#transfer_patrol_members'
-  #get 'api/v1/transfer', to: 'api#transfer'
+  # get 'api/v1/transfer', to: 'api#transfer'
 
   get 'ics/:key', to: 'users#ics', as: 'ics'
 
   resources :clubs do
-      collection do
+    collection do
       get :admin
     end
   end
@@ -66,8 +67,8 @@ Swapsea2::Application.routes.draw do
   get 'token', to: 'home#token'
   get 'auth', to: 'home#token'
 
-  %w( 400 402 403 404 405 406 408 422 500 502 503 504 505 ).each do |code|
-    get code, :to => "errors#show", :code => code
+  %w[400 402 403 404 405 406 408 422 500 502 503 504 505].each do |code|
+    get code, to: 'errors#show', code: code
   end
 
   get 'admin', to: 'admin#index', as: 'admin'
@@ -79,7 +80,6 @@ Swapsea2::Application.routes.draw do
       get 'my-offers'
     end
   end
-
 
   resources :offers do
     member do
@@ -139,11 +139,11 @@ Swapsea2::Application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    sessions: "users/sessions",
-    registrations: "users/registrations",
-    passwords: "users/passwords",
-    confirmations: "users/confirmations",
-    unlocks: "users/unlocks"
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
+    confirmations: 'users/confirmations',
+    unlocks: 'users/unlocks'
   }
 
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
@@ -171,8 +171,6 @@ Swapsea2::Application.routes.draw do
       get :admin
     end
   end
-
-
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

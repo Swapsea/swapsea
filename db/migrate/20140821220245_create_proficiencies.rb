@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProficiencies < ActiveRecord::Migration
   def change
     create_table :proficiencies do |t|

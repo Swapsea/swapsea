@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOutreachPatrols < ActiveRecord::Migration
   def change
     create_table :outreach_patrols do |t|

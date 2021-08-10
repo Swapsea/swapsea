@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSettings < ActiveRecord::Migration
   def change
     create_table :settings do |t|

@@ -1,9 +1,9 @@
-class Swap < ActiveRecord::Base
+# frozen_string_literal: true
 
-	include PublicActivity::Model
-	tracked owner: ->(controller, model) { controller && controller.selected_user }
+class Swap < ApplicationRecord
+  include PublicActivity::Model
+  tracked owner: ->(controller, _model) { controller && controller.selected_user }
 
-	belongs_to :roster, touch: true
-	belongs_to :user
-
+  belongs_to :roster, touch: true
+  belongs_to :user
 end

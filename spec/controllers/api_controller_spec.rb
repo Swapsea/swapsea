@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ApiController, type: :controller do
@@ -32,22 +34,21 @@ RSpec.describe ApiController, type: :controller do
   # end
   let(:file_data) { Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/file.csv'))) }
 
-  describe "POST #upload_members" do
-    it "returns http success" do
-      post :upload_members, file_data: file_data
+  describe 'POST #upload_members' do
+    it 'returns http success' do
+      post :upload_members, params: { file_data: file_data }
     end
   end
 
-  describe "POST #upload_awards" do
-    it "returns http success" do
-      post :upload_awards, file_data: file_data
+  describe 'POST #upload_awards' do
+    it 'returns http success' do
+      post :upload_awards, params: { file_data: file_data }
     end
   end
 
-   describe "POST #upload_patrol_members" do
-    it "returns http success" do
-      post :upload_patrol_members, file_data: file_data
+  describe 'POST #upload_patrol_members' do
+    it 'returns http success' do
+      post :upload_patrol_members, params: { file_data: file_data }
     end
   end
-
 end

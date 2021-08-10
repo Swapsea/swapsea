@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'twilio-ruby'
 
 class SwapseaSms
@@ -6,11 +8,11 @@ class SwapseaSms
   TWILIO_PHONE_NUMBER  = ENV['TWILIO_PHONE_NUMBER']
   TESTING_PHONE_NUMBER = ENV['TESTING_PHONE_NUMBER']
 
-  def self.weekly_roster *args
-    new *args
+  def self.weekly_roster(*args)
+    new(*args)
   end
 
-  def initialize *args
+  def initialize(*args)
     @user, @next_roster = args
   end
 
@@ -26,7 +28,6 @@ class SwapseaSms
 
   private
 
-
   def recipient_number
     if TESTING_PHONE_NUMBER
       TESTING_PHONE_NUMBER
@@ -41,11 +42,11 @@ class SwapseaSms
   def message_body
     [
       "Upcoming patrol #{@user.organisation} \"#{@next_roster.patrol_name}\"",
-      "on #{@next_roster.start.strftime("%a %d %b %y")},",
-      "#{@next_roster.start.strftime("%H:%M")} -",
-      "#{@next_roster.finish.strftime("%H:%M")}.",
+      "on #{@next_roster.start.strftime('%a %d %b %y')},",
+      "#{@next_roster.start.strftime('%H:%M')} -",
+      "#{@next_roster.finish.strftime('%H:%M')}.",
       "Can't make it? Swap at www.swapsea.com.au.",
-      "Reply STOP to unsubscribe."
+      'Reply STOP to unsubscribe.'
     ].join(' ')
   end
 end

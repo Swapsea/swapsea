@@ -1,34 +1,38 @@
-class Users::PasswordsController < Devise::PasswordsController
-  layout 'basic'
+# frozen_string_literal: true
 
-  # GET /resource/password/new
-  # def new
-  #   super
-  # end
+module Users
+  class PasswordsController < Devise::PasswordsController
+    layout 'basic'
 
-  # POST /resource/password
-  # def create
-  #   super
-  # end
+    # GET /resource/password/new
+    # def new
+    #   super
+    # end
 
-  # GET /resource/password/edit?reset_password_token=abcdef
-  # def edit
-  #   super
-  # end
+    # POST /resource/password
+    # def create
+    #   super
+    # end
 
-  # PUT /resource/password
-  # def update
-  #   super
-  # end
+    # GET /resource/password/edit?reset_password_token=abcdef
+    # def edit
+    #   super
+    # end
 
-  # protected
+    # PUT /resource/password
+    # def update
+    #   super
+    # end
 
-  def after_resetting_password_path_for(resource)
-     dashboard_path
+    # protected
+
+    def after_resetting_password_path_for(_resource)
+      dashboard_path
+    end
+
+    # The path used after sending reset password instructions
+    # def after_sending_reset_password_instructions_path_for(resource_name)
+    #   super(resource_name)
+    # end
   end
-
-  # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
 end
