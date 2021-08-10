@@ -8,7 +8,7 @@ describe "home", :type => :feature do
 
 	it "Dashboard" do
 	    visit '/dashboard'
-	    expect(page).to have_text('help@swapsea.com.au') 
-	    expect(page).to have_text('Swapsea')	
+	    expect(page).to have_text('help@swapsea.com.au')
+	    expect(page).to have_text('Swapsea')
 	end
 end

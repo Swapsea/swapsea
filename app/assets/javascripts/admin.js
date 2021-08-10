@@ -21,7 +21,7 @@ admin = function() {
         }
         $(e).slimScroll(n)
     };
-    
+
     var handleSidebarMenu = function() {
         "use strict";
         $(".sidebar .nav > .has-sub > a").click(function() {
@@ -635,7 +635,7 @@ admin = function() {
             $('#setting_business_postal_postcode').prop( "disabled", false );
 
         }
-        
+
 
     };
 
@@ -654,7 +654,7 @@ admin = function() {
 
     // CREATE NEW USER
     $("#new_user").on("ajax:success", function (event, data, status, xhr) {
-        
+
         // Clear form
         $("#new_user").find('input[type=text],input[type=file],input[type=password]').val('');
         // Clear classes
@@ -670,15 +670,15 @@ admin = function() {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
             },
-            type: "growl-success"                               
+            type: "growl-success"
         });
         // Add new user to list
         console.log(data);
         $('tr.highlight').removeClass('highlight');
         $('#users_table').children('tbody').prepend('<tr class="highlight"><td>'+data['first_name']+'</td><td>'+data['last_name']+'</td><td>'+data['email']+'</td><td id="user-'+data['id']+'-roles"><button class="btn btn-xs btn-success" data-toggle="modal" data-user-id="'+data['id'] +'" data-user-path="/user/'+data['id']+'" data-user-full-name="'+data['first_name']+' '+data['last_name']+'" data-target="#addRoleModal">Add <i class="fa fa-plus"></i></button></td><td></td></tr>');
-    
+
     }).on("ajax:error", function (event, data, status, xhr) {
-        
+
         // Remove errors
         $('.parsley-errors-list').children().empty();
         // Remove error class
@@ -708,7 +708,7 @@ admin = function() {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
             },
-            type: "growl-success"                               
+            type: "growl-success"
         });
         $('#user-'+data['user']['id']+'-roles').prepend('<button class="btn btn-xs btn-inverse capitalize" data-toggle="modal" data-target="#removeRoleModal" data-role-id="'+data['role']['id']+'" data-user-id="'+data['user']['id']+'" data-role-id-user-id="'+data['role']['id']+'-'+data['user']['id']+'">'+data['role']['name']+' <i class="fa fa-times"></i></button> ');
     }).on("ajax:error", function (event, data, status, xhr) {
@@ -719,7 +719,7 @@ admin = function() {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
             },
-            type: "growl-error"                               
+            type: "growl-error"
         });
     });
 
@@ -739,7 +739,7 @@ admin = function() {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
             },
-            type: "growl-success"                               
+            type: "growl-success"
         });
         $('[data-role-id-user-id="'+data['role']['id']+'-'+data['user']['id']+'"]').remove();
     }).on("ajax:error", function (event, data, status, xhr) {
@@ -750,7 +750,7 @@ admin = function() {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
             },
-            type: "growl-error"                               
+            type: "growl-error"
         });
     });
 
@@ -771,7 +771,7 @@ admin = function() {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
             },
-            type: "growl-success"                               
+            type: "growl-success"
         });
         $('[data-tr-user-id="'+data+'"]').remove();
     }).on("ajax:error", function (event, data, status, xhr) {
@@ -784,7 +784,7 @@ admin = function() {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
             },
-            type: "growl-error"                               
+            type: "growl-error"
         });
     });
 

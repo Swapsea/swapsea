@@ -169,7 +169,7 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
                         }
                         r.offset = o - e.contextOffset + e.contextScroll - i;
                         if (r.options.onlyOnScroll && l != null ||!r.enabled) {
-                            return 
+                            return
                         }
                         if (l !== null && l < (s = e.oldScroll) && s <= r.offset) {
                             return r.trigger([e.backward])
@@ -220,7 +220,7 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
             }
             t.prototype.trigger = function(t) {
                 if (!this.enabled) {
-                    return 
+                    return
                 }
                 if (this.callback != null) {
                     this.callback.apply(this.element, t)

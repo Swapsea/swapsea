@@ -9,9 +9,9 @@ class PatrolMember < ActiveRecord::Base
 
 	def self.upload(file)
 		#PatrolMember.delete_all #destory all data in table before import
-  		
-    allowed_attributes = [ 
-		    "Member ID", 
+
+    allowed_attributes = [
+		    "Member ID",
         "Team Name",
         "Team Position",
         "Organisation Display Name"
@@ -22,7 +22,7 @@ class PatrolMember < ActiveRecord::Base
 		(6..spreadsheet.last_row).each do |i|
     	row = Hash[[header, spreadsheet.row(i)].transpose]
       if Patrol.find_by(:name => row["Team Name"], :organisation => row["Organisation Display Name"])
-     
+
         patrol_member = find_by(:user_id => row["Member ID"]) || new
         user = User.find_by(:id => row["Member ID"])
         if user.present?
@@ -46,7 +46,7 @@ class PatrolMember < ActiveRecord::Base
   			patrol_member.save
   		end
 		end
-      
+
 	end
 
 	def self.open_spreadsheet(file)

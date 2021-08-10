@@ -7,7 +7,7 @@ class NoticesController < ApplicationController
 
   def admin
     @notices = Notice.all
-    @notices_preview =  Notice.visible 
+    @notices_preview =  Notice.visible
   end
 
   def index

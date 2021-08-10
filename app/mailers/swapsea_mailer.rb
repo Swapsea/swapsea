@@ -136,8 +136,6 @@ class SwapseaMailer < ActionMailer::Base
     mail :subject => "Activate your Swapsea account for 2021/22",
        :to      => user.email,
        :from    => "Swapsea <help@swapsea.com.au>"
-
-    Email.create!(to: user.email, subject: "Activate your Swapsea account for 2021/22")
   end
 
   def activity(subject, message)
@@ -146,8 +144,6 @@ class SwapseaMailer < ActionMailer::Base
     mail :subject => @subject,
        :to      => "Alex <alex@swapsea.com.au>",
        :from    => "Swapsea <help@swapsea.com.au>"
-
-    Email.create!(to: "Alex <alex@swapsea.com.au>", subject: @subject)
   end
 
 ###############################################################################

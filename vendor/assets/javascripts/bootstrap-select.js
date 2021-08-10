@@ -582,7 +582,7 @@
                 }
             }
             if (!o.length) {
-                return 
+                return
             }
             if (/(38|40)/.test(p.keyCode)) {
                 if (!s) {

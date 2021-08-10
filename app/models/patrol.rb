@@ -9,12 +9,12 @@ class Patrol < ActiveRecord::Base
   # Returns array of patrol requirements
   def requirements
     {
-      :bbm => need_bbm, 
-      :irbd => need_irbd, 
-      :irbc => need_irbc, 
-      :artc => need_artc, 
-      :bronze => need_bronze, 
-      :src => need_src 
+      :bbm => need_bbm,
+      :irbd => need_irbd,
+      :irbc => need_irbc,
+      :artc => need_artc,
+      :bronze => need_bronze,
+      :src => need_src
     }
   end
 

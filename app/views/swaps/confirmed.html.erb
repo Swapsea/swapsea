@@ -23,7 +23,7 @@
               <% @swaps.map do |offer| %>
               <div class="swap-request">
                 <div class="details col-xs-5">
-                  <span class="name"><s><%= offer.request.user.name %></s></span> 
+                  <span class="name"><s><%= offer.request.user.name %></s></span>
                   <span class="name"><strong><%= offer.user.name %></strong></span><br/>
                   <%= offer.request.roster.patrol.short_name ? offer.request.roster.patrol.short_name : offer.request.roster.patrol.name %><br/>
                   <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>

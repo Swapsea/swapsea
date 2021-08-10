@@ -8,7 +8,7 @@
 
 begin
 
-	ActiveRecord::Base.transaction do 
+	ActiveRecord::Base.transaction do
 
 		Role.create(name: 'member')
 		Role.create(name: 'manager')
@@ -19,7 +19,7 @@ begin
 		Patrol.create(organisation: "Swapsea SLSC", name: "Patrol 02", short_name:  "P02", need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_bronze: 3, need_src: 0)
 		Patrol.create(organisation: "Swapsea SLSC", name: "Patrol 03", short_name:  "P03", need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_bronze: 3, need_src: 0)
 		Patrol.create(organisation: "Swapsea SLSC", name: "Patrol 04", short_name:  "P04", need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_bronze: 3, need_src: 0)
-		Patrol.create(organisation: "Swapsea SLSC", name: "Patrol 05", short_name:  "P05", need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_bronze: 3, need_src: 0
+		Patrol.create(organisation: "Swapsea SLSC", name: "Patrol 05", short_name:  "P05", need_bbm: 1, need_irbd: 1, need_irbc: 1, need_artc: 1, need_firstaid: 0, need_bronze: 3, need_src: 0)
 
 		User.create(first_name: 'Alex', last_name: 'Admin', email: 'alex.admin@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
 		User.create(first_name: 'Mark', last_name: 'Manager', email: 'mark.manager@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
@@ -27,7 +27,7 @@ begin
 		User.create(first_name: 'Two', last_name: 'Member2', email: 'member2@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
 		User.create(first_name: 'Three', last_name: 'Member3', email: 'member3@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
 		User.create(first_name: 'Four', last_name: 'Member4', email: 'member4@swapsea.com.au', password: "swapsea", organisation: "Swapsea SLSC")
-		
+
 		User.find_by(:email => 'alex.admin@swapsea.com.au').add_role(:admin)
 		User.find_by(:email => 'mark.manager@swapsea.com.au').add_role(:manager)
 		User.find_by(:email => 'member1@swapsea.com.au').add_role(:member)
@@ -38,6 +38,5 @@ begin
     end #transaction
 
 rescue ActiveRecord::RecordNotSaved
-	
-end
 
+end

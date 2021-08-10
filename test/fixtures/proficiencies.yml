@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: 
+  name:
   start: 2014-08-22 08:02:45
   finish: 2014-08-22 08:02:45
   max_signup: 1
   max_online_signup: 1
 
 two:
-  name: 
+  name:
   start: 2014-08-22 08:02:45
   finish: 2014-08-22 08:02:45
   max_signup: 1

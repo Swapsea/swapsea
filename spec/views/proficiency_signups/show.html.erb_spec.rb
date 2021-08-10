@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "proficiency_signups/show", type: :view do
- 
+
   before(:each) do
 		@proficiency_signup = assign(:proficiency_signup, ProficiencySignup.create!(
 			:proficiency_id => "3",

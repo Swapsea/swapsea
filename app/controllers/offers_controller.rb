@@ -12,7 +12,7 @@ class OffersController < ApplicationController
   # GET /offers/1
   # GET /offers/1.json
   def show
-    
+
   end
 
   # GET /offers/new
@@ -61,7 +61,7 @@ class OffersController < ApplicationController
           @requestor_uniq_id = Swap.where(user_id: @request.user.id, roster_id: @request.roster.id).first
           if @requestor_uniq_id.present?
             @requestor_uniq_id = @requestor_uniq_id.uniq_id
-          else  
+          else
             @requestor_uniq_id = Digest::MD5.hexdigest(('a'..'z').to_a.shuffle[0,16].join).first(10)
           end
           @swap_requestor_off.trans_id = trans_id
@@ -70,7 +70,7 @@ class OffersController < ApplicationController
           @swap_requestor_off.user_id = @request.user.id
           @swap_requestor_off.on_off_patrol = false
           #@swap_requestor_off.save
-          
+
 
           # Remove offerer from old roster
           @swap_offerer_off = Swap.new
@@ -86,7 +86,7 @@ class OffersController < ApplicationController
           @swap_offerer_off.user_id = @offer.user.id
           @swap_offerer_off.on_off_patrol = false
           #@swap_offerer_off.save
-          
+
           # Add requestor to new roster
           @swap_requestor_on = Swap.new
           @swap_requestor_on.trans_id = trans_id
@@ -114,7 +114,7 @@ class OffersController < ApplicationController
 
         begin
 
-          ActiveRecord::Base.transaction do 
+          ActiveRecord::Base.transaction do
 
             @swap_requestor_off.save!
             @swap_offerer_off.save!
@@ -124,7 +124,7 @@ class OffersController < ApplicationController
             @request.save!
             @request.roster.awards_count
             @offer.roster.awards_count
-            
+
             @offer.create_activity :confirm, owner: selected_user
 
             # Close same offer made to other requests.
@@ -173,12 +173,12 @@ class OffersController < ApplicationController
             end
 
           end #transaction
-        
+
           SwapseaMailer.offer_successful(@offer).deliver
           SwapseaMailer.request_successful(@request).deliver
           redirect_to request_path(@offer.request), notice: 'Offer accepted! The swap is confirmed and you will both receive a confirmation email.'
-        
-        rescue ActiveRecord::RecordNotSaved 
+
+        rescue ActiveRecord::RecordNotSaved
           redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 5)'
         end
     else
@@ -191,7 +191,7 @@ class OffersController < ApplicationController
   def decline
     @offer = Offer.find(params[:id])
     @offer.status = 'declined'
-    
+
     # send email to offerer
 
     if @offer.save
@@ -214,9 +214,9 @@ class OffersController < ApplicationController
       if @offer.save
         @offer.create_activity :create, owner: selected_user
         SwapseaMailer.offer_received(@offer).deliver
-        redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.' 
+        redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.'
       else
-        redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.' 
+        redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.'
       end
   end
 

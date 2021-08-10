@@ -11,12 +11,12 @@ class Ability
     #     can :read, :all
     #   end
     #
-    # The first argument to `can` is the action you are giving the user 
+    # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
     # here are :read, :create, :update and :destroy.
     #
-    # The second argument is the resource the user can perform the action on. 
+    # The second argument is the resource the user can perform the action on.
     # If you pass :all it will apply to every resource. Otherwise pass a Ruby
     # class of the resource.
     #
@@ -28,11 +28,11 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    
+
     if user.has_role? :admin
         can :manage, :all
     elsif user.has_role? :manager
-        can :set, SelectedUser 
+        can :set, SelectedUser
         can :read, Patrol do |patrol|
             patrol.organisation == user.organisation
         end
@@ -138,6 +138,6 @@ class Ability
         can :activate, User
         can [:index, :privacy_policy, :terms_of_use, :thanks, :contact_us], :home
     end
-    
+
   end
 end

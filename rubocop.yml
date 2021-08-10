@@ -1,0 +1,9 @@
+AllCops:
+  TargetRailsVersion: 5.0
+
+Rails/ApplicationRecord:
+  Enabled: false
+Rails/ApplicationJob:
+  Enabled: false
+Rails/HttpPositionalArguments:
+  Enabled: true

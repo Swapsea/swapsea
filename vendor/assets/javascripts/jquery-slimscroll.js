@@ -107,7 +107,7 @@
                             c.remove();
                             g.remove();
                             b.unwrap();
-                            return 
+                            return
                         }
                         m(n, !1, !0)
                     }
