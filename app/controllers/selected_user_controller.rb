@@ -17,12 +17,12 @@ class SelectedUserController < ApplicationController
   end
 
   def set
-    if (params.key?(:uid) && User.exists?(params[:uid])) && ((selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.email == User.find(params[:uid]).email))
-      session[:selected_user_id] = params[:uid]
-    else
-      # cancel impersonate
-      session[:selected_user_id] = current_user.id
-    end
+    session[:selected_user_id] = if (params.key?(:uid) && User.exists?(params[:uid])) && ((selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.email == User.find(params[:uid]).email))
+                                   params[:uid]
+                                 else
+                                   # cancel impersonate
+                                   current_user.id
+                                 end
 
     if params[:referrer].present?
       redirect_to params[:referrer]
