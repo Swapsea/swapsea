@@ -25,5 +25,4 @@ describe 'home', type: :feature do
   #   fill_in "user[email]",  with:  @user.email
   #   click_button "Send Password Reset"
   # end
-
 end

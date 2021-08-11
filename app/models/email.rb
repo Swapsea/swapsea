@@ -63,7 +63,7 @@ class Email < ApplicationRecord
   def self.welcome_email(organisation)
     emails_sent = 0
     PatrolMember.where(organisation: organisation).map do |pm|
-      if (pm.user.present? && pm.user.email.present?)
+      if pm.user.present? && pm.user.email.present?
         SwapseaMailer.welcome_email(pm.user).deliver
         emails_sent += 1
       end
