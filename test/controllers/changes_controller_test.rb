@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class ChangesControllerTest < ActionController::TestCase
-  setup do
+  before do
     @change = changes(:one)
   end
 

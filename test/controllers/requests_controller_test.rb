@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class RequestsControllerTest < ActionController::TestCase
-  setup do
+  before do
     @request = requests(:one)
   end
 

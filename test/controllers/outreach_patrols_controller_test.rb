@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class OutreachPatrolsControllerTest < ActionController::TestCase
-  setup do
+  before do
     @outreach_patrol = outreach_patrols(:one)
   end
 

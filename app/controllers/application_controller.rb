@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
   rescue_from CanCan::AccessDenied do |exception|
-    Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
+    Rails.logger.debug { "Access denied on #{exception.action} #{exception.subject.inspect}" }
     if user_signed_in?
       redirect_to dashboard_path, alert: exception.message
     else

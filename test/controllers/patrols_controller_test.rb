@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class PatrolsControllerTest < ActionController::TestCase
-  setup do
+  before do
     @patrol = patrols(:one)
   end
 

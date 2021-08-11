@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class RostersControllerTest < ActionController::TestCase
-  setup do
+  before do
     @roster = rosters(:one)
   end
 

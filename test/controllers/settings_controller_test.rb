@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class SettingsControllerTest < ActionController::TestCase
-  setup do
+  before do
     @setting = settings(:one)
   end
 
