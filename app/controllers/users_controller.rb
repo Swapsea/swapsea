@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def ics
-    @user = User.find_by(ics: params[:key]) or raise ActiveRecord::RecordNotFound, "ICS key not found."
+    @user = User.find_by(ics: params[:key]) or raise ActiveRecord::RecordNotFound, 'ICS key not found.'
   end
 
   def import

@@ -1,4 +1,14 @@
+# Please keep AllCops, Bundler, Layout, Style, Metrics groups and then order cops
+# alphabetically
+#
+# References:
+#   * https://github.com/bbatsov/ruby-style-guide
+#   * https://rubocop.readthedocs.io/
 AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: false
+  # TargetRubyVersion: 2.4.1
   TargetRailsVersion: 5.0
 Gemspec/DateAssignment: # (new in 1.10)
   Enabled: true
@@ -6,6 +16,7 @@ Layout/LineLength:
   Enabled: false
 Layout/SpaceBeforeBrackets: # (new in 1.7)
   Enabled: true
+
 Lint/AmbiguousAssignment: # (new in 1.7)
   Enabled: true
 Lint/DeprecatedConstants: # (new in 1.8)
@@ -38,8 +49,10 @@ Lint/UnexpectedBlockArity: # (new in 1.5)
   Enabled: true
 Lint/UnmodifiedReduceAccumulator: # (new in 1.1)
   Enabled: true
+
 Metrics/BlockLength:
   IgnoredMethods: ["describe", "context"]
+
 Style/ArgumentsForwarding: # (new in 1.1)
   Enabled: true
 Style/CollectionCompact: # (new in 1.2)
@@ -64,13 +77,20 @@ Style/StringChars: # (new in 1.12)
   Enabled: true
 Style/SwapValues: # (new in 1.1)
   Enabled: true
+
 Rails/ActiveRecordCallbacksOrder: # (new in 2.7)
   Enabled: true
 Rails/AfterCommitOverride: # (new in 2.8)
   Enabled: true
+Rails/ApplicationJob:
+  Enabled: false
+Rails/ApplicationRecord:
+  Enabled: true
 Rails/AttributeDefaultBlockValue: # (new in 2.9)
   Enabled: true
 Rails/FindById: # (new in 2.7)
+  Enabled: true
+Rails/HttpPositionalArguments:
   Enabled: true
 Rails/Inquiry: # (new in 2.7)
   Enabled: true
@@ -97,10 +117,4 @@ Rails/WhereEquals: # (new in 2.9)
 Rails/WhereExists: # (new in 2.7)
   Enabled: true
 Rails/WhereNot: # (new in 2.8)
-  Enabled: true
-Rails/ApplicationRecord:
-  Enabled: true
-Rails/ApplicationJob:
-  Enabled: false
-Rails/HttpPositionalArguments:
   Enabled: true
