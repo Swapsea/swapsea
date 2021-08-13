@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class ProficiencySignupsControllerTest < ActionController::TestCase
-  setup do
+  before do
     @proficiency_signup = proficiency_signups(:one)
   end
 

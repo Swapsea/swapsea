@@ -10,10 +10,10 @@ class ApiController < ApplicationController
     @file = params[:file_data]
     if StagingUser.dump(@file)
       EventLog.create!(subject: 'Import', desc: 'Members import succeeded.')
-      head 200
+      head :ok
     else
       EventLog.create!(subject: 'Import', desc: 'Members import failed.')
-      head 500
+      head :internal_server_error
     end
   end
 
@@ -21,10 +21,10 @@ class ApiController < ApplicationController
     @file = params[:file_data]
     if StagingAward.dump(@file)
       EventLog.create!(subject: 'Import', desc: 'Awards import succeeded.')
-      head 200
+      head :ok
     else
       EventLog.create!(subject: 'Import', desc: 'Awards import failed.')
-      head 500
+      head :internal_server_error
     end
   end
 
@@ -32,25 +32,25 @@ class ApiController < ApplicationController
     @file = params[:file_data]
     if StagingPatrolMember.dump(@file)
       EventLog.create!(subject: 'Import', desc: 'Patrol Member import succeeded.')
-      head 200
+      head :ok
     else
       EventLog.create!(subject: 'Import', desc: 'Patrol Member import failed.')
-      head 500
+      head :internal_server_error
     end
   end
 
   def transfer_users
-    head 200
+    head :ok
     StagingUser.transfer
   end
 
   def transfer_awards
-    head 200
+    head :ok
     StagingAward.transfer
   end
 
   def transfer_patrol_members
-    head 200
+    head :ok
     StagingPatrolMember.transfer
   end
 

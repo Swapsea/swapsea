@@ -10,26 +10,24 @@ class Email < ApplicationRecord
                            organisation)
     rosters.map do |roster|
       roster.current.each do |user|
-        begin
-          subject = "Upcoming Patrol - #{user.organisation}"
-          user_roster = user.custom_roster.sort_by(&:start)
+        subject = "Upcoming Patrol - #{user.organisation}"
+        user_roster = user.custom_roster.sort_by(&:start)
 
-          if user_roster.first.present?
-            next_roster = user_roster.first
-            if user_roster.second.present?
-              following_roster = user_roster.second
-              SwapseaMailer.weekly_rosters(user, next_roster, following_roster, subject).deliver
-              SwapseaSms.weekly_roster(user, next_roster).deliver
-              emails_sent += 1
-            elsif user_roster.first.present?
-              SwapseaMailer.weekly_rosters(user, next_roster, nil, subject).deliver
-              SwapseaSms.weekly_roster(user, next_roster).deliver
-              emails_sent += 1
-            end
+        if user_roster.first.present?
+          next_roster = user_roster.first
+          if user_roster.second.present?
+            following_roster = user_roster.second
+            SwapseaMailer.weekly_rosters(user, next_roster, following_roster, subject).deliver
+            SwapseaSms.weekly_roster(user, next_roster).deliver
+            emails_sent += 1
+          elsif user_roster.first.present?
+            SwapseaMailer.weekly_rosters(user, next_roster, nil, subject).deliver
+            SwapseaSms.weekly_roster(user, next_roster).deliver
+            emails_sent += 1
           end
-        rescue Exception => e
-          Rails.logger.warn "Email::weekly_patrol_rosters user:#{user.id} has no email"
         end
+      rescue Exception => e
+        Rails.logger.warn "Email::weekly_patrol_rosters user:#{user.id} has no email"
       end
     end
     "Sent #{emails_sent} weekly patrol emails for #{organisation}"
@@ -42,12 +40,10 @@ class Email < ApplicationRecord
                                       DateTime.now + 1.week, organisation)
     proficiencies.map do |proficiency|
       proficiency.users.map do |user|
-        begin
-          SwapseaMailer.north_bondi_weekly_proficiencies(user, proficiency).deliver
-          emails_sent += 1
-        rescue Exception => e
-          Rails.logger.warn "Email::weekly_skills_maintenance user:#{user.id} has no email"
-        end
+        SwapseaMailer.north_bondi_weekly_proficiencies(user, proficiency).deliver
+        emails_sent += 1
+      rescue Exception => e
+        Rails.logger.warn "Email::weekly_skills_maintenance user:#{user.id} has no email"
       end
     end
     "Sent #{emails_sent} weekly skills maintenance emails for #{organisation}"
@@ -90,13 +86,12 @@ class Email < ApplicationRecord
     if reports_sent >= 1
       subject = 'Activity'
       message = "North Bondi - Reports Sent: #{reports_sent}"
-      SwapseaMailer.activity(subject, message).deliver
 
     else
       subject = 'No Activity'
       message = 'North Bondi - No reports to send.'
-      SwapseaMailer.activity(subject, message).deliver
     end
+    SwapseaMailer.activity(subject, message).deliver
   end
 
   def self.bronte_patrol_reports
@@ -110,11 +105,10 @@ class Email < ApplicationRecord
     if reports_sent >= 1
       subject = 'Activity'
       message = "Bronte - Reports Sent: #{reports_sent}"
-      SwapseaMailer.activity(subject, message).deliver
     else
       subject = 'No Activity'
       message = 'Bronte - No reports to send.'
-      SwapseaMailer.activity(subject, message).deliver
     end
+    SwapseaMailer.activity(subject, message).deliver
   end
 end

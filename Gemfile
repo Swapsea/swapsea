@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.4.1'
+ruby '2.7.4'
 
 gem 'pg'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -27,7 +27,7 @@ group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
   gem 'listen'
   gem 'rb-readline'
-  gem 'rubocop', '~> 1.12', require: false
+  gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'
@@ -55,6 +55,7 @@ group :development, :test do
 end
 
 gem 'activerecord-import'
+gem 'bigdecimal', '1.3.5'
 gem 'cancancan'
 gem 'delayed_job_active_record'
 gem 'devise'

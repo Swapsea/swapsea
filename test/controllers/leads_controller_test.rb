@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class LeadsControllerTest < ActionController::TestCase
-  setup do
+  before do
     @lead = leads(:one)
   end
 
