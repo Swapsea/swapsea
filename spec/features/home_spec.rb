@@ -25,4 +25,21 @@ describe 'home', type: :feature do
   #   fill_in "user[email]",  with:  @user.email
   #   click_button "Send Password Reset"
   # end
+
+  it 'views open swaps' do
+    visit '/swaps'
+    expect(page).to have_text('SWAP REQUESTS')
+  end
+  it 'views confirmed swaps' do
+    visit '/swaps/confirmed'
+    expect(page).to have_text('SWAP REQUESTS')
+  end
+  it 'views my requests' do
+    visit '/swaps/my-requests'
+    expect(page).to have_text('MY REQUESTS')
+  end
+  it 'views my requests' do
+    visit '/swaps/my-offers'
+    expect(page).to have_text('MY OFFERS')
+  end
 end

@@ -50,6 +50,9 @@ GEM
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.4)
+    bullet (6.1.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.1.3)
     cancancan (3.3.0)
     capybara (3.35.3)
@@ -126,10 +129,6 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     ffi (1.15.3)
-    fontcustom (2.0.0)
-      json (~> 1.4)
-      listen (>= 1.0, < 4.0)
-      thor (~> 0.14)
     formatador (0.3.0)
     globalid (0.5.2)
       activesupport (>= 5.0)
@@ -157,7 +156,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (1.8.6)
     jwt (2.2.3)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -376,6 +374,7 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.0.0)
+    uniform_notifier (1.14.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (3.7.0)
@@ -405,6 +404,7 @@ DEPENDENCIES
   bcrypt
   bigdecimal (= 1.3.5)
   binding_of_caller
+  bullet
   byebug
   cancancan
   capybara
@@ -416,7 +416,6 @@ DEPENDENCIES
   exception_notification
   factory_bot_rails
   faker
-  fontcustom
   guard-rspec
   jbuilder
   jquery-rails

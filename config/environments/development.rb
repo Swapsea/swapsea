@@ -57,4 +57,13 @@ Swapsea2::Application.configure do
     authentication: :plain,
     domain: ENV['SMTP_DOMAIN'] || 'localhost'
   }
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.unused_eager_loading_enable = false
+  end
 end

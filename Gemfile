@@ -25,6 +25,7 @@ end
 
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
+  gem 'bullet'
   gem 'listen'
   gem 'rb-readline'
   gem 'rubocop', require: false
@@ -60,7 +61,7 @@ gem 'cancancan'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'exception_notification'
-gem 'fontcustom'
+# gem 'fontcustom'
 gem 'jquery-ui-rails'
 gem 'jwt'
 gem 'pg_search'
