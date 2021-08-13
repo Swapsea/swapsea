@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateSwaps < ActiveRecord::Migration
+class CreateSwaps < ActiveRecord::Migration[5.0]
   def change
     create_table :swaps do |t|
       t.string :roster_id
