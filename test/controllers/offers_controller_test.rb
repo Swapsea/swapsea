@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class OffersControllerTest < ActionController::TestCase
-  setup do
+  before do
     @offer = offers(:one)
   end
 

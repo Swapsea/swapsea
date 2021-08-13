@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class NoticesControllerTest < ActionController::TestCase
-  setup do
+  before do
     @notice = notices(:one)
   end
 
