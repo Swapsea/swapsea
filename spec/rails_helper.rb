@@ -38,11 +38,11 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  Capybara.default_driver = :selenium # :selenium_chrome and :selenium_chrome_headless are also registered
-
-  Capybara.current_driver = :selenium
-
-  Capybara.server = :puma # Until your setup is working
+  Capybara.default_driver = :selenium_chrome # :selenium_chrome and :selenium_chrome_headless are also registered
+  Capybara.current_driver = :selenium_chrome
+  Capybara.javascript_driver = :selenium_chrome
+  Capybara.server = :puma
+  Capybara.test_id = 'data-test-id'
 
   # Capybara.run_server = false
   # Capybara.app_host = "http://localhost:3000"
