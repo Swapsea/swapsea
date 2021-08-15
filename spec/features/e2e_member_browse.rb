@@ -37,7 +37,19 @@ feature 'e2e Happy Path' do
     visit '/swaps/my-offers'
     expect(page).to have_text('MY OFFERS')
 
-    page.save_and_open_screenshot
+    visit '/patrols'
+    expect(page).to have_text('Patrols')
+
+    visit '/rosters'
+    expect(page).to have_text('Rosters')
+
+    visit '/proficiencies'
+    expect(page).to have_text('Skills Maintenance')
+
+    visit '/outreach_patrols'
+    expect(page).to have_text('Extra Patrols')
+
+    # page.save_and_open_screenshot
 
     # Logout cancelled
     find("a.dropdown-toggle").click
