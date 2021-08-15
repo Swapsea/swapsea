@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreatePatrols < ActiveRecord::Migration
+class CreatePatrols < ActiveRecord::Migration[5.0]
   def change
     create_table :patrols do |t|
       t.string :name

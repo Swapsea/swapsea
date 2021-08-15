@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddIndexToTables < ActiveRecord::Migration
+class AddIndexToTables < ActiveRecord::Migration[5.0]
   def change
     add_index :awards, :user_id
     add_index :awards, :award_name

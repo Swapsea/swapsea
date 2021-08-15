@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateOffers < ActiveRecord::Migration
+class CreateOffers < ActiveRecord::Migration[5.0]
   def change
     create_table :offers do |t|
       t.integer :request_id
