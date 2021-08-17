@@ -6,8 +6,8 @@
       <div>
         <p class="text-center">Are you sure want to logout?</p>
         <p class="text-center">
-        <button class="btn btn-danger md-close">Cancel</button>
-        <%= link_to 'Yes, Logout', destroy_user_session_path, :class => "btn btn-success md-close", :method => "delete" %>
+        <button class="btn btn-danger md-close"  data-test-id="logout-cancel">Cancel</button>
+        <%= link_to 'Yes, Logout', destroy_user_session_path, :class => "btn btn-success md-close", :method => "delete", :id => "logout-confirm" %>
         </p>
       </div>
     </div>
@@ -20,8 +20,8 @@
       <div>
         <p class="text-center">Are you sure want to logout?</p>
         <p class="text-center">
-        <button class="btn btn-danger md-close">Cancel</button>
-        <%= link_to 'Yes, Logout', destroy_user_session_path, :class => "btn btn-success md-close", :method => "delete" %>
+        <button class="btn btn-danger md-close" data-test-id="logout-cancel">Cancel</button>
+        <%= link_to 'Yes, Logout', destroy_user_session_path, :class => "btn btn-success md-close", :method => "delete", :id => "logout-confirm" %>
         </p>
       </div>
     </div>

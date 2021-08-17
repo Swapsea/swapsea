@@ -25,6 +25,7 @@ end
 
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
+  gem 'capybara-screenshot'
   gem 'listen'
   gem 'rb-readline'
   gem 'rubocop', require: false
