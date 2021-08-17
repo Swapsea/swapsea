@@ -8,8 +8,8 @@ AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
   ExtraDetails: false
-  # TargetRubyVersion: 2.4.1
-  TargetRailsVersion: 5.1
+  TargetRubyVersion: 2.7.4
+  TargetRailsVersion: 5.2.6
   NewCops: enable
 Gemspec/DateAssignment: # (new in 1.10)
   Enabled: true

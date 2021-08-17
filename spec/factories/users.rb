@@ -18,6 +18,12 @@ FactoryBot.define do
     end
   end
 
+  factory :manager_user, parent: :user, aliases: [:manager] do
+    after(:create) do |user, _evaluator|
+      user.add_role :manager
+    end
+  end
+
   factory :admin_user, parent: :user, aliases: [:administrator] do
     after(:create) do |user, _evaluator|
       user.add_role :admin
