@@ -13,13 +13,10 @@ gem 'jquery-rails'
 gem 'puma'
 gem 'redis-rails'
 gem 'sass-rails'
-gem 'therubyracer', platforms: :ruby
-gem 'turbolinks'
 gem 'uglifier'
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
   gem 'scout_apm'
 end
 
@@ -61,7 +58,6 @@ gem 'cancancan'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'exception_notification'
-gem 'fontcustom'
 gem 'jquery-ui-rails'
 gem 'jwt'
 gem 'pg_search'
@@ -71,6 +67,4 @@ gem 'rolify'
 gem 'roo', '2.5.1'
 gem 'simple_form'
 gem 'twilio-ruby'
-gem 'wicked_pdf'
 gem 'will_paginate'
-gem 'wkhtmltopdf-binary'

@@ -129,10 +129,6 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     ffi (1.15.3)
-    fontcustom (2.0.0)
-      json (~> 1.4)
-      listen (>= 1.0, < 4.0)
-      thor (~> 0.14)
     formatador (0.3.0)
     globalid (0.5.2)
       activesupport (>= 5.0)
@@ -160,13 +156,11 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (1.8.6)
     jwt (2.2.3)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    libv8 (3.16.14.19)
     listen (3.6.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -236,11 +230,6 @@ GEM
       loofah (~> 2.3)
     rails4-autocomplete (1.1.1)
       rails (>= 3.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (5.0.7.2)
       actionpack (= 5.0.7.2)
       activesupport (= 5.0.7.2)
@@ -270,7 +259,6 @@ GEM
       redis-store (>= 1.2, < 2)
     redis-store (1.9.0)
       redis (>= 4, < 5)
-    ref (2.0.0)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -361,15 +349,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     twilio-ruby (5.57.1)
       faraday (>= 0.9, < 2.0)
       jwt (>= 1.5, <= 2.5)
@@ -393,10 +375,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.1.0)
-      activesupport
     will_paginate (3.3.0)
-    wkhtmltopdf-binary (0.12.6.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -420,7 +399,6 @@ DEPENDENCIES
   exception_notification
   factory_bot_rails
   faker
-  fontcustom
   guard-rspec
   jbuilder
   jquery-rails
@@ -436,7 +414,6 @@ DEPENDENCIES
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-controller-testing
   rails4-autocomplete
-  rails_12factor
   rb-readline
   redis-rails
   rolify
@@ -455,15 +432,11 @@ DEPENDENCIES
   spring
   spring-watcher-listen
   sqlite3
-  therubyracer
-  turbolinks
   twilio-ruby
   uglifier
   web-console
   webdrivers (~> 4.0)
-  wicked_pdf
   will_paginate
-  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 2.7.4p191
