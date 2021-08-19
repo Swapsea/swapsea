@@ -5,7 +5,11 @@ Swapsea is a superior, award-winning patrol swap system for Australian Surf Life
 - See CONTRIBUTING.md for instructions on how to contribute to Swapsea.
 - See LICENSE.md for the terms under which Swapsea is Open Source.
 
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
 [![Build Status](https://travis-ci.com/Swapsea/swapsea.svg?branch=staging)](https://travis-ci.com/Swapsea/swapsea)
+
 
 ## Frequently Asked Questions
 
@@ -37,6 +41,22 @@ Then run the Rails application in development:
 ```bash
 rails server
 ```
+
+Run the browser tests with:
+
+`bundle exec rspec spec/features/*.rb`
+
+### Pre-commit hooks
+
+We use pre-commit to keep the code base nice and clean. Run manually with:
+
+`pre-commit run --all-files`
+
+### Rubocop
+
+We use Rubocop to keep our Ruby code conventional. Run manually with:
+
+`rubocop --require rubocop-rails --require rubocop-rspec`
 
 ## Creating Demo Club Data
 
