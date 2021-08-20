@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module EmailLoggingAfterFilter
+module ::EmailLoggingAfterFilter
   def self.included(mailer)
     mailer.class_eval do
       after_action :log_email
