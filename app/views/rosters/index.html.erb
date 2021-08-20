@@ -1,12 +1,11 @@
+<h1>Rosters</h1>
 <% if @patrols.empty? %>
   <div class="box-info">
-    <h1>No Patrols?</h1>
-    <p>There are no patrols listed in the system yet.</p>
+    <p>Rosters are not available as there are no patrols loaded into Swapsea yet. Please check again later or contact your Club.</p>
   </div>
 <% elsif @rosters.empty? %>
   <div class="box-info">
-    <h1>What, no rosters?</h1>
-    <p>There are no rosters listed in the system yet.</p>
+    <p>Rosters are not loaded into Swapsea yet. Please check again later or contact your Club.</p>
   </div>
 <% else %>
   <%= render 'patrol_timeline' %>
