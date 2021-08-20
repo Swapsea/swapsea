@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class ClubsControllerTest < ActionController::TestCase
-  setup do
+  before do
     @club = clubs(:one)
   end
 

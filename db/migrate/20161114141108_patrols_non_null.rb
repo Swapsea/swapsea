@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PatrolsNonNull < ActiveRecord::Migration
+class PatrolsNonNull < ActiveRecord::Migration[5.0]
   def change
     execute 'update patrols set need_bbm=0 where need_bbm IS NULL;'
     execute 'update patrols set need_irbd=0 where need_irbd IS NULL;'

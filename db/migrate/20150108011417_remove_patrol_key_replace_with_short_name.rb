@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RemovePatrolKeyReplaceWithShortName < ActiveRecord::Migration
+class RemovePatrolKeyReplaceWithShortName < ActiveRecord::Migration[5.0]
   def change
     remove_column :patrols, :key, :string
     add_column :patrols, :short_name, :string

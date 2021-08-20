@@ -1,33 +1,46 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.4.1'
+ruby '2.7.4'
 
-gem 'pg'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
-
+gem 'activerecord', '>= 5.2.4.5'
+gem 'activerecord-import'
 gem 'bcrypt'
+gem 'bigdecimal', '1.3.5'
+gem 'cancancan'
 gem 'coffee-rails'
+gem 'delayed_job_active_record'
+gem 'devise'
+gem 'exception_notification'
 gem 'jbuilder'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jwt'
+gem 'pg'
+gem 'pg_search'
+gem 'public_activity'
 gem 'puma'
+gem 'rails', '~> 5.2.4'
 gem 'redis-rails'
+gem 'rolify'
+gem 'roo'
 gem 'sass-rails'
-gem 'therubyracer', platforms: :ruby
-gem 'turbolinks'
+gem 'simple_form'
+gem 'twilio-ruby'
 gem 'uglifier'
+gem 'will_paginate'
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
   gem 'scout_apm'
 end
 
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
+  gem 'capybara-screenshot'
   gem 'listen'
   gem 'rb-readline'
-  gem 'rubocop', '~> 1.12', require: false
+  gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'
@@ -53,22 +66,3 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 2.0'
   gem 'webdrivers', '~> 4.0'
 end
-
-gem 'activerecord-import'
-gem 'cancancan'
-gem 'delayed_job_active_record'
-gem 'devise'
-gem 'exception_notification'
-gem 'fontcustom'
-gem 'jquery-ui-rails'
-gem 'jwt'
-gem 'pg_search'
-gem 'public_activity'
-gem 'rails4-autocomplete'
-gem 'rolify'
-gem 'roo', '2.5.1'
-gem 'simple_form'
-gem 'twilio-ruby'
-gem 'wicked_pdf'
-gem 'will_paginate'
-gem 'wkhtmltopdf-binary'

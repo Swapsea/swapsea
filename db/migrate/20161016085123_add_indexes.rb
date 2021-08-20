@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddIndexes < ActiveRecord::Migration
+class AddIndexes < ActiveRecord::Migration[5.0]
   def change
     add_index :patrols, %i[organisation name]
     add_index :patrol_members, [:organisation]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateProficiencies < ActiveRecord::Migration
+class CreateProficiencies < ActiveRecord::Migration[5.0]
   def change
     create_table :proficiencies do |t|
       t.string :name

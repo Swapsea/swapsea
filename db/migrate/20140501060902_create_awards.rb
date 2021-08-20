@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateAwards < ActiveRecord::Migration
+class CreateAwards < ActiveRecord::Migration[5.0]
   def change
     create_table :awards, id: false do |t|
       t.string :award_number

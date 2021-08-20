@@ -3,7 +3,7 @@
 namespace :demo_club do
   desc 'Create demo club and populate'
   task :populate, [:club_name] => :environment do |_task, args|
-    club_name = args[:club_name]
+    club_name = args[:club_name] || "Swapsea SLSC"
 
     # Create club
     Club.create(name: club_name, short_name: club_name, show_patrols: true, show_rosters: true, show_swaps: true,
@@ -42,8 +42,6 @@ namespace :demo_club do
           artc = true
           spinal = true
           firstaid = true
-          bronze = true
-          src = false
         when 1
           default_position = 'Vice Captain'
           bbm = true
@@ -52,8 +50,6 @@ namespace :demo_club do
           artc = true
           spinal = true
           firstaid = true
-          bronze = true
-          src = false
         when 2
           default_position = 'IRB Driver'
           bbm = false
@@ -62,8 +58,6 @@ namespace :demo_club do
           artc = false
           spinal = true
           firstaid = true
-          bronze = true
-          src = false
         when 3 || 4
           default_position = 'IRB Crew'
           bbm = false
@@ -72,8 +66,6 @@ namespace :demo_club do
           artc = false
           spinal = false
           firstaid = true
-          bronze = true
-          src = false
         else
           default_position = 'Bronze Member'
           bbm = false
@@ -82,9 +74,9 @@ namespace :demo_club do
           artc = [true, false].sample
           spinal = false
           firstaid = [true, false].sample
-          bronze = true
-          src = false
         end
+        bronze = true
+        src = false
 
         User.create(
           id: user_id,

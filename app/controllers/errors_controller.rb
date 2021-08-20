@@ -9,6 +9,6 @@ class ErrorsController < ApplicationController
   protected
 
   def status_code
-    request.path[1..-1] || 500
+    request.path[1..] || 500
   end
 end
