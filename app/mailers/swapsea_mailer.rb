@@ -180,7 +180,6 @@ class SwapseaMailer < ApplicationMailer
     # Send Email
     mail subject: "#{roster.patrol.short_name.presence || roster.patrol.name} - #{roster.start.strftime('%a %d %b %y %H:%M')}-#{roster.finish.strftime('%H:%M')}",
          to: to.collect(&:email).join(','),
-         #:cc => 'admin@brontesurfclub.com.au, iljko@double8.com.au, alex@swapsea.com.au',
          from: 'Swapsea <help@swapsea.com.au>'
   end
 end

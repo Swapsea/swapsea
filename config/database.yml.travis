@@ -1,0 +1,9 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  pool: 5
+
+test:
+  <<: *default
+  database: swapsea_test
