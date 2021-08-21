@@ -34,6 +34,7 @@ group :development do
   gem 'spring-watcher-listen'
   gem 'sqlite3'	# Use sqlite3 as the database for Active Record
   gem 'web-console'  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'mailcatcher'
 end
 
 group :development, :test do
