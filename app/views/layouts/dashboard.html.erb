@@ -31,7 +31,7 @@
             <% if (current_user.has_role? :admin) || (current_user.has_role? :manager) || (current_user.has_multiple_emails?) %>
               <li><%= link_to raw('<i class="fa fa-users"></i> Switch Users'), switch_user_path %></li>
             <% end %>
-            <li><a class="md-trigger" data-modal="logout-modal-alt"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li><a class="md-trigger" data-modal="logout-modal-alt" data-test-id="logout-link"><i class="fa fa-sign-out"></i> Logout</a></li>
             <% if selected_user.has_role? :admin %>
               <li class="divider"></li>
               <li><%= link_to raw('<i class="fa fa-cog"></i> Admin'), admin_path %></li>
@@ -136,7 +136,7 @@
 
               <ul class="nav extra-navbar navbar-nav navbar-right hidden-xs">
 
-                <li class="dropdown">
+                <li class="dropdown" id="user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
                   <% if selected_user != current_user %>
                     <%= current_user.name %> <i>as</i> <%= selected_user.name %>
@@ -149,7 +149,7 @@
                     <% if (current_user.has_role? :admin) || (current_user.has_role? :manager) || (current_user.has_multiple_emails?) %>
                       <li><%= link_to raw('<i class="fa fa-users"></i> Switch Users'), switch_user_path %></li>
                     <% end %>
-                    <li><a class="md-trigger" data-modal="logout-modal-alt"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    <li><a class="md-trigger" data-modal="logout-modal-alt" data-test-id="logout-link"><i class="fa fa-sign-out"></i> Logout</a></li>
                     <% if current_user.has_role? :admin %>
                       <li class="divider"></li>
                       <li><%= link_to raw('<i class="fa fa-cog"></i> Admin'), admin_path %></li>
