@@ -39,8 +39,10 @@ group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
   gem 'capybara-screenshot'
   gem 'listen'
+  gem 'pre-commit', require: false
   gem 'rb-readline'
   gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'

@@ -1,9 +1,16 @@
+inherit_from: .rubocop_todo.yml
+
 # Please keep AllCops, Bundler, Layout, Style, Metrics groups and then order cops
 # alphabetically
 #
 # References:
 #   * https://github.com/bbatsov/ruby-style-guide
 #   * https://rubocop.readthedocs.io/
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec # or rubocop-minitest
+
 AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
