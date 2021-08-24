@@ -2,7 +2,7 @@
         <div class="full-content-center animated fadeIn extra-margin-top">
             <%= image_tag('alternate-logo.png', :class => "modal-logo") %>
             <div class="box-info">
-                <h2>Activate direct access<h2/>
+                <h2>Activate direct access</h2>
                 <p>Enter your email address below</p>
                 <%= simple_form_for(resource, :as => resource_name, :url => activate_path, :html => { :method => :post }) do |f| %>
                 <%= f.error_notification %>
