@@ -1,6 +1,6 @@
 <div class="patrol row">
   <div class="col-sm-9">
-    <% if ((selected_user.has_role? :admin) && (selected_user.has_role? :admin)) %>
+    <% if (selected_user.has_role? :admin) %>
       <strong><%= p.organisation %></strong><br />
     <% end %>
     <strong>

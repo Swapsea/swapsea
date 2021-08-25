@@ -19,7 +19,7 @@ class Roster < ApplicationRecord
   end
 
   def current
-    patrol.users - removed + added
+    patrol.users.includes([:awards, :patrol_member]) - removed + added
   end
 
   def members
@@ -27,7 +27,7 @@ class Roster < ApplicationRecord
   end
 
   def remaining_members
-    patrol.users - removed
+    patrol.users.includes([:awards, :patrol_member]) - removed
   end
 
   def generate_secret

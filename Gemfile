@@ -37,6 +37,7 @@ end
 
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
+  gem 'bullet'
   gem 'capybara-screenshot'
   gem 'listen'
   gem 'pre-commit', require: false
