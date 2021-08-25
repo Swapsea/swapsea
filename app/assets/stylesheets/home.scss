@@ -324,8 +324,6 @@ hr {
 ================================= */
 
 .pricing {
-    margin-top: 50px;
-    padding-top: 50px;
     padding-bottom: 120px;
     .pricing-charts {
         margin-top: 35px;
@@ -343,7 +341,6 @@ hr {
             width: 97%;
             min-height: 315px;
             position: relative;
-            top: 37px;
             @media (max-width: 991px) {
                 float: none !important;
                 left: 0px !important;

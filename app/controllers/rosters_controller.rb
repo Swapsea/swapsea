@@ -25,13 +25,13 @@ class RostersController < ApplicationController
     @patrols = Patrol.joins(:users).where(organisation: selected_user.organisation)
 
     if params[:view] == 'all'
-      @rosters = Roster.where(organisation: selected_user.organisation).sort_by(&:start)
-      @rosters_this_year = Roster.where(organisation: selected_user.organisation)
+      @rosters = Roster.includes([:patrol]).where(organisation: selected_user.organisation).sort_by(&:start)
+      @rosters_this_year = Roster.includes([:patrol]).where(organisation: selected_user.organisation)
     else
       finish_time = Time.zone.now - 3.hours
-      @rosters = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
+      @rosters = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
                               selected_user.organisation).sort_by(&:start)
-      @rosters_this_year = Roster.where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
+      @rosters_this_year = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
                                         selected_user.organisation)
     end
 

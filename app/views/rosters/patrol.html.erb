@@ -5,9 +5,9 @@
     <ul class="nav nav-pills">
 
 
-      <li class="col-xs-12"><%= link_to 'Back to Rosters', rosters_path %></li>
+      <li class="col-xs-12"><%= link_to raw('<i class="fa fa-backward"></i> Back to Rosters'), rosters_path %></li>
       <% if (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) || (selected_user.has_role? :admin) %>
-      <li class="col-xs-12"><%= link_to 'Patrol Report', report_roster_path(@roster) %></li>
+      <li class="col-xs-12"><%#= link_to 'Patrol Report', report_roster_path(@roster) %></li>
       <% end %>
     </ul>
 

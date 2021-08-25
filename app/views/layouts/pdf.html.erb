@@ -7,7 +7,6 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Swapsea" %>">
 		<meta name="keywords" content="Swapsea">
-		<meta name="author" content="Mark Hudson and Alex Carroll">
 		<%= wicked_pdf_stylesheet_link_tag "reports" %>
 		<%= csrf_meta_tags %>
 		<%= yield(:head) %>

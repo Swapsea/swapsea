@@ -4,7 +4,7 @@
 		<%
 			order = ["Patrol Captain", "Patrol Vice Captain", "Vice Captain", "Patrol Application Captain", "IRB Driver", "IRB Crew", "ART Operator", "ART Member", "First Aid Officer", "First Aid Member", "Bronze Member", "Member", "SRC Member", "SRC"]
 
-			users = p.users.includes(:awards).sort_by { |n| n.date_joined_organisation || DateTime.now}
+			users = p.users.includes(:awards, :patrol_member).sort_by { |n| n.date_joined_organisation || DateTime.now}
 			users.sort_by! { |n| order.index n.default_position }
 		%>
 
