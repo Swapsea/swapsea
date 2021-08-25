@@ -103,7 +103,7 @@ class User < ApplicationRecord
   end
 
   def custom_roster
-    custom_roster = rosters.where('start >= ?', Time.zone.now.to_s(:db)).distinct + additional_rosters
+    custom_roster = rosters.includes([:patrol]).where('start >= ?', Time.zone.now.to_s(:db)).distinct + additional_rosters
     subtracted_rosters.each do |roster|
       # Check first, they may have moved patrols mid-season
       custom_roster.delete_at(custom_roster.index(roster)) if custom_roster.index(roster)
@@ -186,6 +186,6 @@ class User < ApplicationRecord
   end
 
   def self.juniors
-    all.where(patrol: nil).where.not(dob: nil).select { |u| (Date.today.year - u.dob.year) < 19 }
+    all.where(patrol_member: nil).where.not(dob: nil).select { |u| (Date.today.year - u.dob.year) < 19 }
   end
 end

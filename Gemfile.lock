@@ -54,6 +54,9 @@ GEM
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.4)
+    bullet (6.1.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.1.3)
     cancancan (3.3.0)
     capybara (3.35.3)
@@ -197,6 +200,9 @@ GEM
     pg_search (2.3.5)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    pluginator (1.5.0)
+    pre-commit (0.39.0)
+      pluginator (~> 1.5)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -304,6 +310,9 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.10.0)
       parser (>= 3.0.1.1)
+    rubocop-performance (1.11.5)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     rubocop-rails (2.11.3)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -365,6 +374,7 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.0.0)
+    uniform_notifier (1.14.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (3.7.0)
@@ -392,6 +402,7 @@ DEPENDENCIES
   bcrypt
   bigdecimal (= 1.3.5)
   binding_of_caller
+  bullet
   byebug
   cancancan
   capybara
@@ -414,6 +425,7 @@ DEPENDENCIES
   newrelic_rpm
   pg
   pg_search
+  pre-commit
   public_activity
   puma
   rails (~> 5.2.4)
@@ -424,6 +436,7 @@ DEPENDENCIES
   roo
   rspec-rails
   rubocop
+  rubocop-performance
   rubocop-rails
   rubocop-rspec
   sass-rails
