@@ -12,13 +12,13 @@ repos:
       - id: trailing-whitespace
   # - repo: local
   #   hooks:
-  #     - id: rspec-tests
-  #       name: Run Tests
-  #       description: Ensures the unit tests still pass
-  #       language: ruby
-  #       entry: bundle exec rspec
+  #     # - id: rspec-tests
+  #     #   name: Run Tests
+  #     #   description: Ensures the unit tests still pass
+  #     #   language: ruby
+  #     #   entry: bundle exec rspec
   #     - id: rubocop-autocorrect
   #       name: RuboCop Autocorrect issues
   #       description: Ensures code hygiene
-  #       entry: rubocop --require rubocop-rails --require rubocop-rspec -A
+  #       entry: bundle exec rubocop
   #       language: ruby

@@ -3,7 +3,7 @@
 namespace :demo_club do
   desc 'Create demo club and populate'
   task :populate, [:club_name] => :environment do |_task, args|
-    club_name = args[:club_name] || "Swapsea SLSC"
+    club_name = args[:club_name] || 'Swapsea SLSC'
 
     # Create club
     Club.create(name: club_name, short_name: club_name, show_patrols: true, show_rosters: true, show_swaps: true,
