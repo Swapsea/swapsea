@@ -186,6 +186,6 @@ class User < ApplicationRecord
   end
 
   def self.juniors
-    all.where(patrol: nil).where.not(dob: nil).select { |u| (Date.today.year - u.dob.year) < 19 }
+    all.where(patrol_member: nil).where.not(dob: nil).select { |u| (Date.today.year - u.dob.year) < 19 }
   end
 end
