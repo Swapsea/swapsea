@@ -74,7 +74,7 @@ class AwardsController < ApplicationController
     @award = Award.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def award_params
     params.require(:award).permit(:user_id, :award_name, :award_number, :award_date, :proficiency_date, :expiry_date,
                                   :award_allocation_date, :proficiency_allocation_date, :originating_organisation)

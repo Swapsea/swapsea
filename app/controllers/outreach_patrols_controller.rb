@@ -84,7 +84,7 @@ class OutreachPatrolsController < ApplicationController
     @outreach_patrol = OutreachPatrol.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def outreach_patrol_params
     params.require(:outreach_patrol).permit(:location, :start, :finish, :organisation)
   end
