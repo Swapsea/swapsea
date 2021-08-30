@@ -246,7 +246,7 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def offer_params
     params.require(:offer).permit(:request_id, :roster_id, :user_id, :comment, :mobile, :email, :status)
   end

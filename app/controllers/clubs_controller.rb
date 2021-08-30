@@ -80,7 +80,7 @@ class ClubsController < ApplicationController
     @club = Club.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def club_params
     params.require(:club).permit(:name, :short_name, :patrols, :rosters, :swaps, :show_patrols, :show_rosters,
                                  :show_swaps, :show_outreach, :show_skills_maintenance, :lat, :lon)

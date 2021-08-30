@@ -85,7 +85,7 @@ class PatrolMembersController < ApplicationController
     @patrol_member = PatrolMember.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def patrol_member_params
     params.require(:patrol_member).permit(:user_id, :patrol_id, :patrol_key, :default_position)
   end
