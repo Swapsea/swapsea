@@ -4,30 +4,27 @@ Swapsea - Offer Received
 G'day <%= @user.first_name %>,
 
 You have a new offer!
+View it now at <%= request_url(@request) %>.
 
 New offer
 ---------
 <%= @offer.roster.patrol_name %>
-<%= @offer.roster.start.strftime("%A %d %B %Y") %>
-<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
-Status: <%= @offer.status.capitalize %>
+<%= @offer.roster.start.strftime("%A %d %B %Y") %>, <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
 From: <%= @offer.user.first_name %> <%= @offer.user.last_name %>
+Comment: <%= @offer.comment %>
 
 Your swap request
 -----------------
 <%= @request.roster.patrol_name %>
-<%= @request.roster.start.strftime("%A %d %B %Y") %>
-<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
-Status: <%= @request.status.capitalize %>
+<%= @request.roster.start.strftime("%A %d %B %Y") %>, <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
 
 Current offers
 --------------
 <% @request.offers.where(:status => 'pending').each do |offer| %>
 <%= offer.roster.patrol_name %>
-<%= offer.roster.start.strftime("%A %d %B %Y") %>
-<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
-Status: <%= offer.status.capitalize %>
+<%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
 From: <%= offer.user.first_name %> <%= offer.user.last_name %>
+Comment: <%= @offer.comment %>
 
 <% end %>
 
@@ -36,7 +33,7 @@ A quick swap is a good swap
 Offers won't wait for you. Most members make the same offer to multiple people at the same time. We'll let you do the math, but we encourage you to secure offers quickly to avoid disappointment.
 
 
-You can login to Swapsea at www.swapsea.com.au
+View all offers at <%= request_url(@request) %>
 
 
 Have a great weekend!
