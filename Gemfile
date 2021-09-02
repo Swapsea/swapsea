@@ -41,6 +41,7 @@ group :development do
   gem 'capybara-screenshot'
   gem 'listen'
   gem 'pre-commit', require: false
+  gem 'rails_real_favicon'
   gem 'rb-readline'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false

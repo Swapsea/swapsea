@@ -8,6 +8,7 @@
 		<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Swapsea" %>">
 		<meta name="keywords" content="Swapsea - online patrol swaps">
 		<%= stylesheet_link_tag "application", :media => "all" %>
+		<%= render 'application/favicon' %>
 		<%= csrf_meta_tags %>
 	</head>
 	<body>
