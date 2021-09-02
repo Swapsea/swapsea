@@ -5,9 +5,9 @@ class EmailsController < ApplicationController
   layout 'admin'
 
   def admin
+    @emails = Email.order(created_at: :desc).paginate(page: params[:page],
+                                 per_page: 10)
     render layout: 'admin'
-
-    # @emails = ActionMailer::Base.deliveries
   end
 
   def send_weekly_patrol_rosters
