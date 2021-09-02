@@ -15,7 +15,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @offer = Offer.new
-    @offers = @request.offers.includes([:user, :roster]).where(status: 'pending').sort_by(&:id)
+    @offers = @request.offers.includes(%i[user roster]).where(status: 'pending').sort_by(&:id)
     @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
     @awards = @request.user.awards.map(&:award_name)
   end
@@ -108,7 +108,7 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def request_params
     params.require(:request).permit(:roster_id, :user_id, :comment, :mobile, :email, :status)
   end
