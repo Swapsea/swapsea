@@ -116,14 +116,13 @@
           G'day <%= @user.first_name %>,
         </p>
         <p>
-          You have a new offer!
+          You have a new offer - <strong><%= link_to 'View it now', @request %></strong>!
         </p>
         <p>
           <strong>Your swap request</strong><br/>
           <%= @request.roster.start.strftime("%A %d %B %Y") %>,
           <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
           <%= @request.roster.patrol_name %><br/>
-          Status: <%= @request.status.capitalize %>
         </p>
         <p>
           <strong>Current offers</strong><br/>
@@ -133,6 +132,7 @@
             <div class="roster"><%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %></div>
             <div class="patrol"><%= offer.roster.patrol_name %></div>
             <div class="member"><%= offer.user.first_name %> <%= offer.user.last_name %></div>
+            <div class="comment"><%= offer.comment %></div>
           </div>
           <% end %>
         </p>
@@ -142,7 +142,7 @@
         </p>
         <br/>
         <p>
-          <a href="https://www.swapsea.com.au/users/sign_in">Click here</a> to login to Swapsea.
+          <%= link_to 'View all offers now', @request %>.
         </p>
         <p>
           Have a great weekend!
