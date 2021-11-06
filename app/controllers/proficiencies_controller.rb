@@ -8,14 +8,14 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies
   # GET /proficiencies.json
   def index
-    @proficiencies = if current_user.has_role?(:admin)
-                       Proficiency.all.where(organisation: selected_user.organisation).order(:start)
-                     elsif current_user.has_role?(:manager)
-                       Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
-                                             selected_user.organisation)
+    @proficiencies = if selected_user.has_role?(:admin)
+                       Proficiency.all.includes([:proficiency_signups], [:users]).where(organisation: selected_user.organisation).order(:start)
+                     elsif selected_user.has_role?(:manager)
+                       Proficiency.all.includes([:proficiency_signups], [:users]).where('start >= ? AND organisation = ?', DateTime.now - 10.days,
+                                                                                        selected_user.organisation)
                      else
-                       Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 10.minutes,
-                                             selected_user.organisation)
+                       Proficiency.all.includes([:proficiency_signups], [:users]).where('start >= ? AND organisation = ?', DateTime.now - 10.minutes,
+                                                                                        selected_user.organisation)
                      end
 
     @proficiencies_sorted = @proficiencies.sort_by(&:start)
@@ -24,11 +24,11 @@ class ProficienciesController < ApplicationController
   end
 
   def admin
-    @proficiencies = if current_user.has_role?(:admin)
-                       Proficiency.all.order(:start)
-                     elsif current_user.has_role?(:manager)
-                       Proficiency.all.where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
-                                             selected_user.organisation)
+    @proficiencies = if selected_user.has_role?(:admin)
+                       Proficiency.all.includes([:proficiency_signups], [:users]).order(:start)
+                     elsif selected_user.has_role?(:manager)
+                       Proficiency.all.includes([:proficiency_signups], [:users]).where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
+                                                                                        selected_user.organisation)
                      end
 
     render layout: 'admin'
