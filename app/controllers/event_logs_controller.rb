@@ -70,7 +70,7 @@ class EventLogsController < ApplicationController
     @event_log = EventLog.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def event_log_params
     params.require(:event_log).permit(:type, :desc)
   end

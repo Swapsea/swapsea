@@ -74,7 +74,7 @@ class OutreachPatrolSignUpsController < ApplicationController
     @outreach_patrol_sign_up = OutreachPatrolSignUp.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def outreach_patrol_sign_up_params
     params.require(:outreach_patrol_sign_up).permit(:user_id, :outreach_patrol_id)
   end

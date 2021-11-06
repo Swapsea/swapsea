@@ -87,7 +87,7 @@ class SwapsController < ApplicationController
     @swap = swap.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def swap_params
     params.require(:swap).permit(:roster_id, :user_id, :on_off_patrol)
   end

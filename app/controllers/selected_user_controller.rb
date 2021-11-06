@@ -33,7 +33,7 @@ class SelectedUserController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def selected_user_params
     params.require(:selected_user).permit(:path, :uid)
   end

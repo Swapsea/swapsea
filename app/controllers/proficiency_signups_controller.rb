@@ -78,7 +78,7 @@ class ProficiencySignupsController < ApplicationController
     @proficiency_signup = ProficiencySignup.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def proficiency_signup_params
     params.require(:proficiency_signup).permit(:user_id, :proficiency_id)
   end

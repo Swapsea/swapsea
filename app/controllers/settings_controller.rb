@@ -70,7 +70,7 @@ class SettingsController < ApplicationController
     @setting = Setting.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the allowlist through.
   def setting_params
     params.require(:setting).permit(:key, :value)
   end
