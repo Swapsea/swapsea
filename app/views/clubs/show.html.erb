@@ -10,20 +10,20 @@
   <td><%= @club.short_name %></td>
 </tr>
 <tr>
-  <td>Members:</td>
-  <td><%= @club.users.count %></td>
+  <td>Active:</td>
+  <td><%= @club.is_active %></td>
 </tr>
 <tr>
-  <td>Patrols:</td>
-  <td><%= @club.patrols.count %></td>
+  <td>Patrol Reminders via Email:</td>
+  <td><%= @club.enable_patrol_reminders_email %></td>
 </tr>
 <tr>
-  <td>Rosters:</td>
-  <td><%= @club.rosters.count %></td>
+  <td>Patrol Reminders via SMS:</td>
+  <td><%= @club.enable_patrol_reminders_sms %></td>
 </tr>
 <tr>
-  <td>Requests:</td>
-  <td><%= @club.requests.count %></td>
+  <td>Skills Maintenance Reminders via Email:</td>
+  <td><%= @club.enable_proficiency_reminders_email %></td>
 </tr>
 <tr>
   <td>Show Patrols:</td>
@@ -42,12 +42,28 @@
   <td><%= @club.show_outreach %></td>
 </tr>
 <tr>
-  <td>Skills maintenance:</td>
+  <td>Show Skills maintenance:</td>
   <td><%= @club.show_skills_maintenance %></td>
 </tr>
 <tr>
   <td>Lat/Lon</td>
   <td><%= @club.lat %>/<%= @club.lon %></td>
+</tr>
+<tr>
+  <td>Members:</td>
+  <td><%= @club.users.count %></td>
+</tr>
+<tr>
+  <td>Patrols:</td>
+  <td><%= @club.patrols.count %></td>
+</tr>
+<tr>
+  <td>Rosters:</td>
+  <td><%= @club.rosters.count %></td>
+</tr>
+<tr>
+  <td>Requests:</td>
+  <td><%= @club.requests.count %></td>
 </tr>
 </table>
 

@@ -11,5 +11,6 @@ class Club < ApplicationRecord
   has_many :outreach_patrols
   has_many :notices
 
+  scope :is_active, -> { where(is_active: true) }
   scope :show_patrols, -> { where(show_patrols: true) }
 end

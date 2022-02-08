@@ -83,6 +83,7 @@ class ClubsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def club_params
     params.require(:club).permit(:name, :short_name, :patrols, :rosters, :swaps, :show_patrols, :show_rosters,
-                                 :show_swaps, :show_outreach, :show_skills_maintenance, :lat, :lon)
+                                 :show_swaps, :show_outreach, :show_skills_maintenance, :lat, :lon,
+                                 :is_active, :enable_patrol_reminders_email, :enable_patrol_reminders_sms, :enable_proficiency_reminders_email)
   end
 end
