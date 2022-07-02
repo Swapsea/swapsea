@@ -77,7 +77,7 @@ class ClubsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_club
-    @club = Club.find(params[:id])
+    @club = Club.find(params[:id], is_active: true)
   end
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
