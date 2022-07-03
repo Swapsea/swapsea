@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.7.4'
+ruby '3.1.2'
 
-gem 'activerecord', '>= 5.2.4.5'
+gem 'activerecord', '~> 6.0.5'
 gem 'activerecord-import'
 gem 'bcrypt'
-gem 'bigdecimal', '1.3.5'
 gem 'cancancan'
 gem 'coffee-rails'
 gem 'delayed_job_active_record'
@@ -16,11 +15,12 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jwt'
-gem 'pg'
+gem 'net-smtp'
 gem 'pg_search'
 gem 'public_activity'
+gem 'pg'
 gem 'puma'
-gem 'rails', '~> 5.2.4'
+gem 'rails', '~> 6.0.5'
 gem 'redis-rails'
 gem 'rolify'
 gem 'roo'
@@ -43,12 +43,12 @@ group :development do
   gem 'pre-commit', require: false
   gem 'rails_real_favicon'
   gem 'rb-readline'
-  gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'spring'
+  gem 'rubocop', require: false
   gem 'spring-watcher-listen'
+  gem 'spring'
   gem 'sqlite3'	# Use sqlite3 as the database for Active Record
   gem 'web-console'  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 end
@@ -65,8 +65,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
-  gem 'shoulda', '~> 3.5'
+  gem 'shoulda'
   gem 'shoulda-callback-matchers'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers', '~> 4.0'
 end
