@@ -5,8 +5,10 @@ Swapsea is a superior, award-winning patrol swap system for Australian Surf Life
 - See CONTRIBUTING.md for instructions on how to contribute to Swapsea.
 - See LICENSE.md for the terms under which Swapsea is Open Source.
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+---
 
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Build Status](https://app.travis-ci.com/Swapsea/swapsea.svg?branch=staging)](https://app.travis-ci.com/Swapsea/swapsea)
 
 ## Frequently Asked Questions
