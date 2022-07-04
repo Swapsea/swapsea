@@ -8,7 +8,7 @@ RSpec.describe AwardsController, type: :controller do
   render_views
 
   before do
-    sign_in create :administrator
+    sign_in create :admin
   end
 
   it 'gets "admin"' do

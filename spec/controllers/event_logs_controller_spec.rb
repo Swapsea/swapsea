@@ -31,7 +31,7 @@ RSpec.describe EventLogsController, type: :controller do
   render_views
 
   before do
-    sign_in create :administrator
+    sign_in create :admin
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -51,7 +51,7 @@ RSpec.describe EventLogsController, type: :controller do
   let(:valid_session) { FactoryBot.create(:user) }
 
   before do
-    sign_in create :administrator
+    sign_in create :admin
   end
 
   describe 'GET #index' do
