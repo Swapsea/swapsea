@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'notices/edit', type: :view do
   before do
-    @notice = assign(:notice, FactoryBot.create(:notice))
+    @notice = assign(:notice, create(:notice))
   end
 
   # it "renders the edit notice form" do

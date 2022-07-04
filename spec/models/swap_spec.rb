@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe Swap, type: :model do
   before(:all) do
-    @swap = FactoryBot.create(:swap)
+    @swap = create(:swap)
   end
 
   describe '#Atributes' do

@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe Proficiency, type: :model do
   before(:all) do
-    @proficiency = FactoryBot.create(:proficiency)
+    @proficiency = create(:proficiency)
   end
 
   describe '#Atributes' do

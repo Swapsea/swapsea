@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe Notice, type: :model do
   before(:all) do
-    @notice = FactoryBot.create(:notice)
+    @notice = create(:notice)
   end
 
   describe '#Atributes' do

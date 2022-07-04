@@ -25,7 +25,7 @@ RSpec.describe SwapsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # EventLogsController. Be sure to keep this updated too.
-  let(:valid_session) { FactoryBot.create(:user) }
+  let(:valid_session) { create(:user) }
 
   before do
     sign_in create :admin

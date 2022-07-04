@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'settings/edit', type: :view do
   before do
-    @setting = assign(:setting, FactoryBot.create(:setting))
+    @setting = assign(:setting, create(:setting))
   end
 
   it 'renders the edit setting form' do

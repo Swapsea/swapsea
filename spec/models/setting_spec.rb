@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe Setting, type: :model do
   before(:all) do
-    @setting = FactoryBot.create(:setting)
+    @setting = create(:setting)
   end
 
   describe '#Atributes' do

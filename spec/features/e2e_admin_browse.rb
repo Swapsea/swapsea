@@ -5,7 +5,7 @@ require 'capybara'
 
 describe 'e2e Happy Path - Admin' do
   before(:all) do
-    @user = FactoryBot.create(:admin)
+    @user = create(:admin)
     Capybara.page.current_window.resize_to(1200, 800)
   end
 

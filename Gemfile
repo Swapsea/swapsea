@@ -16,10 +16,10 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jwt'
 gem 'net-smtp'
-gem 'pg_search'
-gem 'public_activity'
 gem 'pg'
+gem 'pg_search'
 gem 'psych', '< 4' # Stop-gap for bad psych. https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
+gem 'public_activity'
 gem 'puma'
 gem 'rails', '~> 6.0.5'
 gem 'redis-rails'
@@ -44,12 +44,12 @@ group :development do
   gem 'pre-commit', require: false
   gem 'rails_real_favicon'
   gem 'rb-readline'
+  gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'rubocop', require: false
-  gem 'spring-watcher-listen'
   gem 'spring'
+  gem 'spring-watcher-listen'
   gem 'sqlite3'	# Use sqlite3 as the database for Active Record
   gem 'web-console'  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 end

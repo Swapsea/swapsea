@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe Club, type: :model do
   before(:all) do
-    @club = FactoryBot.create(:club)
+    @club = create(:club)
   end
 
   describe '#Atributes' do

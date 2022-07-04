@@ -5,7 +5,7 @@ class PatrolMember < ApplicationRecord
   belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
 
   def rosters
-    Roster.all.where(patrol_name: patrol_name)
+    Roster.all.where(patrol_name:)
   end
 
   def self.upload(file)

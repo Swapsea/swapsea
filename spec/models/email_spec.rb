@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe Email, type: :model do
   before(:all) do
-    @email = FactoryBot.create(:email)
+    @email = create(:email)
   end
 
   describe '#Atributes' do

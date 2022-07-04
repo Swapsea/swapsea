@@ -50,13 +50,13 @@ Swapsea2::Application.configure do
   config.action_mailer.asset_host = 'https://www.swapsea.com.au'
 
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_SERVER'],
-    port: ENV['SMTP_PORT'] || 587,
+    address: ENV.fetch('SMTP_SERVER', nil),
+    port: ENV.fetch('SMTP_PORT', 587),
     enable_starttls_auto: true,
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD'],
+    user_name: ENV.fetch('SMTP_USERNAME', nil),
+    password: ENV.fetch('SMTP_PASSWORD', nil),
     authentication: :plain,
-    domain: ENV['SMTP_DOMAIN'] || 'localhost'
+    domain: ENV.fetch('SMTP_DOMAIN', 'localhost')
   }
 
   config.after_initialize do

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'offers/show', type: :view do
   before do
-    @offer = assign(:offer, FactoryBot.create(:offer))
+    @offer = assign(:offer, create(:offer))
   end
 
   it 'renders attributes in <p>' do

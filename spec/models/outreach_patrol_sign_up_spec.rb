@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe OutreachPatrolSignUp, type: :model do
   before(:all) do
-    @outreach_patrol_sign_up = FactoryBot.create(:outreach_patrol_sign_up)
+    @outreach_patrol_sign_up = create(:outreach_patrol_sign_up)
   end
 
   describe '#Atributes' do

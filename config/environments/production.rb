@@ -79,7 +79,7 @@ Swapsea2::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = :redis_store, ENV['REDIS_URL']
+  config.cache_store = :redis_store, ENV.fetch('REDIS_URL', nil)
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "https://www.swapsea.com.au"
@@ -106,7 +106,7 @@ Swapsea2::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { host: ENV['ACTION_MAILER_HOST'] }
+  config.action_mailer.default_url_options = { host: ENV.fetch('ACTION_MAILER_HOST', nil) }
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = (ENV['ACTION_MAILER_PERFORM_DELIVERIES'] == 'true')
@@ -115,12 +115,12 @@ Swapsea2::Application.configure do
   config.action_mailer.asset_host = 'https://www.swapsea.com.au'
 
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_SERVER'],
-    port: ENV['SMTP_PORT'] || 587,
+    address: ENV.fetch('SMTP_SERVER', nil),
+    port: ENV.fetch('SMTP_PORT', 587),
     enable_starttls_auto: true,
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD'],
+    user_name: ENV.fetch('SMTP_USERNAME', nil),
+    password: ENV.fetch('SMTP_PASSWORD', nil),
     authentication: :plain,
-    domain: ENV['SMTP_DOMAIN'] || 'localhost'
+    domain: ENV.fetch('SMTP_DOMAIN', 'localhost')
   }
 end

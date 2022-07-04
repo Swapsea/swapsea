@@ -5,7 +5,7 @@ require 'capybara'
 
 describe 'e2e Happy Path - User' do
   before(:all) do
-    @user = FactoryBot.create(:member)
+    @user = create(:member)
     Capybara.page.current_window.resize_to(1024, 768)
   end
 
