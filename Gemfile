@@ -19,6 +19,7 @@ gem 'net-smtp'
 gem 'pg_search'
 gem 'public_activity'
 gem 'pg'
+gem 'psych', '< 4' # Stop-gap for bad psych. https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
 gem 'puma'
 gem 'rails', '~> 6.0.5'
 gem 'redis-rails'
