@@ -213,7 +213,6 @@ GEM
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    psych (3.3.2)
     public_activity (2.0.1)
       actionpack (>= 5.0.0)
       activerecord (>= 5.0)
@@ -442,7 +441,6 @@ DEPENDENCIES
   pg
   pg_search
   pre-commit
-  psych (< 4)
   public_activity
   puma
   rails (~> 6.0.5)
