@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Patrol, type: :model do
-  before(:all) do
+  before do
     @patrol = create(:patrol)
   end
 

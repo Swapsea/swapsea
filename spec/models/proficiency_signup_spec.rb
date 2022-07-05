@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe ProficiencySignup, type: :model do
-  before(:all) do
+  before do
     @proficiency_signup = create(:proficiency_signup)
   end
 

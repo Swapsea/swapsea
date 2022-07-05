@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Proficiency, type: :model do
-  before(:all) do
+  before do
     @proficiency = create(:proficiency)
   end
 

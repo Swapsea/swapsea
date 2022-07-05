@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe NoticeAcknowledgement, type: :model do
-  before(:all) do
+  before do
     @notice_acknowledgement = create(:notice_acknowledgement)
   end
 

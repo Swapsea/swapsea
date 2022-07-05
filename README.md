@@ -42,9 +42,9 @@ Then run the Rails application in development:
 rails server
 ```
 
-Run the browser tests with:
+Run just the browser tests with:
 
-`bundle exec rspec spec/features/*.rb`
+`RAILS_ENV=test bundle exec rspec spec/features/*.rb`
 
 ### Pre-commit hooks
 
@@ -80,11 +80,12 @@ Notes:
 - Users will have a 10 digit ID, instead of 8 digits.
 - Rosters are based on club name and roster name, so should not conflict.
 
-## Run Tests
+## Run All Tests
 
 ```bash
-rake db:test:load
-bundle exec rspec
+RAILS_ENV=test bundle exec rake db:test:load
+RAILS_ENV=test bundle exec rake db:seed
+RAILS_ENV=test bundle exec rake
 ```
 
 ---

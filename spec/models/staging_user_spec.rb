@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe StagingUser, type: :model do
-  before(:all) do
+  before do
     @staging_user = create(:staging_user)
   end
 

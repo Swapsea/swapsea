@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Email, type: :model do
-  before(:all) do
+  before do
     @email = create(:email)
   end
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Role, type: :model do
-  before(:all) do
+  before do
     @role = create(:role)
   end
 

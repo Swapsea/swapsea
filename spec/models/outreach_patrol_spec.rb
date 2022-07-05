@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe OutreachPatrol, type: :model do
-  before(:all) do
+  before do
     @outreach_patrol = create(:outreach_patrol)
   end
 

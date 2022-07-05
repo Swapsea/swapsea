@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe StagingAward, type: :model do
-  before(:all) do
+  before do
     @staging_award = create(:staging_award)
   end
 

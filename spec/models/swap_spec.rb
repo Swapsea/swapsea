@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Swap, type: :model do
-  before(:all) do
+  before do
     @swap = create(:swap)
   end
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Club, type: :model do
-  before(:all) do
+  before do
     @club = create(:club)
   end
 

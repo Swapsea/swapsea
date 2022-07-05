@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Setting, type: :model do
-  before(:all) do
+  before do
     @setting = create(:setting)
   end
 

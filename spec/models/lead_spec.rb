@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Lead, type: :model do
-  before(:all) do
+  before do
     @lead = create(:lead)
   end
 

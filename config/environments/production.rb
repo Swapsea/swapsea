@@ -32,7 +32,7 @@ Swapsea2::Application.configure do
   config.assets.compile = false
 
   # Add the fonts path
-  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  config.assets.paths << Rails.root.join('app/assets/fonts')
 
   # Precompile additional assets
   config.assets.precompile += %w[

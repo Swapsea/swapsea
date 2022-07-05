@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Notice, type: :model do
-  before(:all) do
+  before do
     @notice = create(:notice)
   end
 

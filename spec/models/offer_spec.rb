@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe Offer, type: :model do
-  before(:all) do
+  before do
     @offer = create(:offer)
   end
 
