@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Swapsea2::Application.routes.draw do
+Swapsea::Application.routes.draw do
   resources :event_logs
 
   resources :activities

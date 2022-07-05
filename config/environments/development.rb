@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Swapsea2::Application.configure do
+Swapsea::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
