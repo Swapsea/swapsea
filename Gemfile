@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 ruby '3.1.2'
 
-gem 'activerecord', '~> 6.0.5'
+gem 'activerecord', '~> 7.0.3'
 gem 'activerecord-import'
 gem 'bcrypt'
 gem 'cancancan'
@@ -21,7 +21,7 @@ gem 'pg_search'
 gem 'psych', '< 4' # Stop-gap for bad psych. https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
 gem 'public_activity'
 gem 'puma'
-gem 'rails', '~> 6.0.5'
+gem 'rails', '~> 7.0.3'
 gem 'redis-rails'
 gem 'rolify'
 gem 'roo'
