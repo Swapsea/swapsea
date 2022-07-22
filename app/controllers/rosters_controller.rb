@@ -28,7 +28,7 @@ class RostersController < ApplicationController
       @rosters = Roster.includes([:patrol]).where(organisation: selected_user.organisation).sort_by(&:start)
       @rosters_this_year = Roster.includes([:patrol]).where(organisation: selected_user.organisation)
     else
-      finish_time = Time.zone.now - 3.hours
+      finish_time = 3.hours.ago
       @rosters = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
                                                   selected_user.organisation).sort_by(&:start)
       @rosters_this_year = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),

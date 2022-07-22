@@ -5,11 +5,11 @@ Swapsea is a superior, award-winning patrol swap system for Australian Surf Life
 - See CONTRIBUTING.md for instructions on how to contribute to Swapsea.
 - See LICENSE.md for the terms under which Swapsea is Open Source.
 
+---
 
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-
-[![Build Status](https://travis-ci.com/Swapsea/swapsea.svg?branch=staging)](https://travis-ci.com/Swapsea/swapsea)
-
+[![Build Status](https://app.travis-ci.com/Swapsea/swapsea.svg?branch=staging)](https://app.travis-ci.com/Swapsea/swapsea)
 
 ## Frequently Asked Questions
 
@@ -42,9 +42,9 @@ Then run the Rails application in development:
 rails server
 ```
 
-Run the browser tests with:
+Run just the browser tests with:
 
-`bundle exec rspec spec/features/*.rb`
+`RAILS_ENV=test bundle exec rspec spec/features/*.rb`
 
 ### Pre-commit hooks
 
@@ -80,11 +80,12 @@ Notes:
 - Users will have a 10 digit ID, instead of 8 digits.
 - Rosters are based on club name and roster name, so should not conflict.
 
-## Run Tests
+## Run All Tests
 
 ```bash
-rake db:test:load
-bundle exec rspec
+RAILS_ENV=test bundle exec rake db:test:load
+RAILS_ENV=test bundle exec rake db:seed
+RAILS_ENV=test bundle exec rake
 ```
 
 ---

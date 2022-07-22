@@ -8,7 +8,7 @@ RSpec.describe DashboardController, type: :controller do
   render_views
 
   before do
-    sign_in create :administrator
+    sign_in create :admin
   end
 
   let(:valid_attributes) do
@@ -19,7 +19,7 @@ RSpec.describe DashboardController, type: :controller do
     skip('Add a hash of attributes invalid for your model')
   end
 
-  let(:valid_session) { FactoryBot.create(:user) }
+  let(:valid_session) { create(:user) }
 
   describe 'GET #index' do
     it 'returns a success response' do

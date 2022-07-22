@@ -9,7 +9,7 @@ class Offer < ApplicationRecord
 
   # Returns array of offers for the same rostered patrol.
   def requests
-    Offer.where(roster: roster)
+    Offer.where(roster:)
   end
 
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.

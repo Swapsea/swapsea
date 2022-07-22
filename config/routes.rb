@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Swapsea2::Application.routes.draw do
+Swapsea::Application.routes.draw do
   resources :event_logs
 
   resources :activities
@@ -69,7 +69,7 @@ Swapsea2::Application.routes.draw do
 
   # Errors
   %w[400 402 403 404 405 406 408 422 500 502 503 504 505].each do |code|
-    get code, to: 'errors#show', code: code
+    get code, to: 'errors#show', code:
   end
 
   get 'admin', to: 'admin#index', as: 'admin'

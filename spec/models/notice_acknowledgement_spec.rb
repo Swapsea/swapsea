@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe NoticeAcknowledgement, type: :model do
-  before(:all) do
-    @notice_acknowledgement = FactoryBot.create(:notice_acknowledgement)
+  before do
+    @notice_acknowledgement = create(:notice_acknowledgement)
   end
 
   describe '#Atributes' do

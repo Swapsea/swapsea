@@ -31,7 +31,7 @@ RSpec.describe EventLogsController, type: :controller do
   render_views
 
   before do
-    sign_in create :administrator
+    sign_in create :admin
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -48,10 +48,10 @@ RSpec.describe EventLogsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # EventLogsController. Be sure to keep this updated too.
-  let(:valid_session) { FactoryBot.create(:user) }
+  let(:valid_session) { create(:user) }
 
   before do
-    sign_in create :administrator
+    sign_in create :admin
   end
 
   describe 'GET #index' do
@@ -63,7 +63,7 @@ RSpec.describe EventLogsController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
-      event_log = FactoryBot.create(:event_log)
+      event_log = create(:event_log)
       event_log = create :event_log
       get :show, params: { id: event_log.to_param }
       expect(response).to be_successful
@@ -79,7 +79,7 @@ RSpec.describe EventLogsController, type: :controller do
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      event_log = FactoryBot.create(:event_log)
+      event_log = create(:event_log)
       get :edit, params: { id: event_log.to_param }
       expect(response).to be_successful
     end
@@ -104,14 +104,14 @@ RSpec.describe EventLogsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested event_log' do
-      event_log = FactoryBot.create(:event_log)
+      event_log = create(:event_log)
       expect do
         delete :destroy, params: { id: event_log.to_param }
       end.to change(EventLog, :count).by(-1)
     end
 
     it 'redirects to the event_logs list' do
-      event_log = FactoryBot.create(:event_log)
+      event_log = create(:event_log)
       delete :destroy, params: { id: event_log.to_param }
       expect(response).to redirect_to(event_logs_url)
     end

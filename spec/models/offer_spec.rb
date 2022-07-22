@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe Offer, type: :model do
-  before(:all) do
-    @offer = FactoryBot.create(:offer)
+  before do
+    @offer = create(:offer)
   end
 
   describe '#Atributes' do

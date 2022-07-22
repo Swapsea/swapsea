@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'leads/show', type: :view do
   before do
-    @lead = assign(:lead, FactoryBot.create(:lead))
+    @lead = assign(:lead, create(:lead))
   end
 
   it 'renders attributes in <p>' do

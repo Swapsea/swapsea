@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'proficiency_signups/edit', type: :view do
   before do
-    @proficiency_signup = assign(:proficiency_signup, FactoryBot.create(:proficiency_signup))
+    @proficiency_signup = assign(:proficiency_signup, create(:proficiency_signup))
   end
 
   it 'renders the edit proficiency_signup form' do
