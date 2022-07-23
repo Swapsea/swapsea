@@ -452,7 +452,7 @@
     <selectMembershipsDetails_RegSeason>1</selectMembershipsDetails_RegSeason>
     <sortOrder_RegSeason />
     <columnHeader_RegSeason />
-    <RegSeason>2021</RegSeason>
+    <RegSeason>2022</RegSeason>
     <sortOrder_RegistrationDate />
     <columnHeader_RegistrationDate />
     <RegistrationDate_From />
@@ -1381,7 +1381,7 @@
     <sendEmailAddress>help@swapsea.com.au</sendEmailAddress>
     <recurringTypeID>4</recurringTypeID>
     <recurringInterval>1</recurringInterval>
-    <scheduledRunTime_Date>25/06/2021</scheduledRunTime_Date>
+    <scheduledRunTime_Date>1/7/2022</scheduledRunTime_Date>
     <scheduledRunTime_Times>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>

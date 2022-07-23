@@ -450,7 +450,7 @@
     </Statuss>
     <sortOrder_RegSeason />
     <columnHeader_RegSeason />
-    <RegSeason />
+    <RegSeason>2022</RegSeason>
     <sortOrder_RegistrationDate />
     <columnHeader_RegistrationDate />
     <RegistrationDate_From />
@@ -989,8 +989,8 @@
     <selectPatrolRosters_PatrolRosterDate>1</selectPatrolRosters_PatrolRosterDate>
     <sortOrder_PatrolRosterDate />
     <columnHeader_PatrolRosterDate />
-    <PatrolRosterDate_From>01/07/2021</PatrolRosterDate_From>
-    <PatrolRosterDate_To>30/06/2022</PatrolRosterDate_To>
+    <PatrolRosterDate_From>01/07/2022</PatrolRosterDate_From>
+    <PatrolRosterDate_To>30/06/2023</PatrolRosterDate_To>
     <selectPatrolRosters_PatrolRosterStartTime>1</selectPatrolRosters_PatrolRosterStartTime>
     <sortOrder_PatrolRosterStartTime />
     <columnHeader_PatrolRosterStartTime />
