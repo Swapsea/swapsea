@@ -83,13 +83,17 @@
 			<p>Swapsea makes patrol swaps easy. It does this by using member's personal data from Surfguard. Swapsea needs to be refreshed periodically to include new members, new awards and updated contact information.</p>
 			<h4>SurfGuard Custom Reports</h4>
 			<ol>
-				<li>Download Surfguard custom reports templates (right-click and save-as):
-				<ol type="a">
-					<li><%= link_to 'Awards', 'downloads/custom_report_awards_2021.xml' %></li>
-					<li><%= link_to 'Members', 'downloads/custom_report_members_2021.xml' %></li>
-					<li><%= link_to 'Patrols', 'downloads/custom_report_patrol_teams_2021.xml' %></li>
-					<li><%= link_to 'Roster', 'downloads/custom_report_rosters_2021.xml' %></li>
-					</ol>
+				<li>Download Surfguard custom reports templates:
+					<ol type="a">
+					 <li>Either as a single ZIP bundle: <i class="fa fa-file-archive-o fa-lg"></i> <%= link_to 'swapsea_custom_reports.zip', 'downloads/swapsea_custom_reports.zip' %> </li>
+					<li>Or individual files
+					<ol type="i">
+						<li><%= link_to 'Awards', 'downloads/custom_report_awards_2022.xml' %></li>
+						<li><%= link_to 'Members', 'downloads/custom_report_members_2022.xml' %></li>
+						<li><%= link_to 'Patrols', 'downloads/custom_report_patrol_teams_2022.xml' %></li>
+						<li><%= link_to 'Roster', 'downloads/custom_report_rosters_2022.xml' %></li>
+						</ol>
+						</ol>
 				</li>
 				<li>Log in to Surfguard:<br/>
 				<%= link_to 'https://surfguard.slsa.asn.au/SLSA_Admin/modules/login/newLogin.php', 'https://surfguard.slsa.asn.au/SLSA_Admin/modules/login/newLogin.php' %></li>
