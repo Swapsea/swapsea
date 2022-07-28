@@ -14,6 +14,8 @@
     <BloodType_SelectedValue />
     <HepBVaccination_SelectedValue />
     <IsInjured_SelectedValue />
+    <CovidVaccination_SelectedValue />
+    <CovidIsApproved_SelectedValue />
     <ClothingSizeID_0_SelectedValue />
     <ClothingType_0>Lycra Vest</ClothingType_0>
     <ClothingTypeID_0>3</ClothingTypeID_0>
@@ -164,7 +166,6 @@
     <OrganisationBeachKey_SelectedValue />
     <OrganisationPhysicalCountry_SelectedValue />
     <OrganisationPostalCountry_SelectedValue />
-    <OrganisationBankAccountIsDefault_SelectedValue />
     <TransactionNational_hidden />
     <TransactionState_hidden />
     <TransactionBranch_hidden />
@@ -336,12 +337,20 @@
     <sortOrder_HepBVaccination />
     <columnHeader_HepBVaccination />
     <HepBVaccination>-1</HepBVaccination>
-    <sortOrder_HepBVaccinationNotes />
-    <columnHeader_HepBVaccinationNotes />
-    <HepBVaccinationNotes />
     <sortOrder_IsInjured />
     <columnHeader_IsInjured />
     <IsInjured>-1</IsInjured>
+    <sortOrder_CovidVaccination />
+    <columnHeader_CovidVaccination />
+    <CovidVaccinations>
+        <CovidVaccination isMulti="1">-1</CovidVaccination>
+    </CovidVaccinations>
+    <sortOrder_HepBVaccinationNotes />
+    <columnHeader_HepBVaccinationNotes />
+    <HepBVaccinationNotes />
+    <sortOrder_CovidIsApproved />
+    <columnHeader_CovidIsApproved />
+    <CovidIsApproved>-1</CovidIsApproved>
     <sortOrder_ClothingSizeID_0 />
     <columnHeader_ClothingSizeID_0 />
     <ClothingSizeID_0>-1</ClothingSizeID_0>
@@ -1074,9 +1083,6 @@
     <LatestMemberProficiencyDate_To />
     <sortOrder_PatrolLogName />
     <columnHeader_PatrolLogName />
-    <PatrolLogNames>
-        <PatrolLogName isMulti="1">-1</PatrolLogName>
-    </PatrolLogNames>
     <sortOrder_PatrolLogDate />
     <columnHeader_PatrolLogDate />
     <PatrolLogDate_From />
@@ -1332,21 +1338,6 @@
     <sortOrder_OrganisationContactMobile />
     <columnHeader_OrganisationContactMobile />
     <OrganisationContactMobile />
-    <sortOrder_OrganisationBankBSBNumber />
-    <columnHeader_OrganisationBankBSBNumber />
-    <OrganisationBankBSBNumber />
-    <sortOrder_OrganisationBankAccountNumber />
-    <columnHeader_OrganisationBankAccountNumber />
-    <OrganisationBankAccountNumber />
-    <sortOrder_OrganisationBankAccountName />
-    <columnHeader_OrganisationBankAccountName />
-    <OrganisationBankAccountName />
-    <sortOrder_OrganisationBankAccountIsDefault />
-    <columnHeader_OrganisationBankAccountIsDefault />
-    <OrganisationBankAccountIsDefault>-1</OrganisationBankAccountIsDefault>
-    <sortOrder_OrganisationBankAccountEmailAddress />
-    <columnHeader_OrganisationBankAccountEmailAddress />
-    <OrganisationBankAccountEmailAddress />
     <sortOrder_OrganisationRTOABN />
     <columnHeader_OrganisationRTOABN />
     <OrganisationRTOABN />
