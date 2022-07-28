@@ -34,8 +34,7 @@ describe 'e2e Happy Path - User' do
     expect(page).to have_text('NOTICE BOARD')
 
     visit '/dashboard'
-    expect(page).to have_text('help@swapsea.com.au')
-    expect(page).to have_text('Swapsea')
+    expect(page).to have_text('NOTICE BOARD')
 
     visit '/swaps'
     expect(page).to have_text('SWAP REQUESTS')

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><%= title %></title>
+		<title><%= content_for?(:title) ? title_tag : "Swapsea" %></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Swapsea" %>">
-		<meta name="keywords" content="Swapsea - online patrol swaps">
+		<meta name="keywords" content="Swapsea">
 		<%= stylesheet_link_tag "application", :media => "all" %>
 		<%= render 'application/favicon' %>
 		<%= csrf_meta_tags %>
