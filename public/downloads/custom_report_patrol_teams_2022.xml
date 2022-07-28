@@ -14,6 +14,8 @@
     <BloodType_SelectedValue />
     <HepBVaccination_SelectedValue />
     <IsInjured_SelectedValue />
+    <CovidVaccination_SelectedValue />
+    <CovidIsApproved_SelectedValue />
     <ClothingSizeID_0_SelectedValue />
     <ClothingType_0>Lycra Vest</ClothingType_0>
     <ClothingTypeID_0>3</ClothingTypeID_0>
@@ -30,6 +32,7 @@
     <DriversLicenseType_SelectedValue />
     <IsNoEmailCommunications_SelectedValue />
     <IsNoSmsCommunications_SelectedValue />
+    <isDonations_SelectedValue />
     <Disabilities_SelectedValue />
     <CountryBorn_SelectedValue />
     <CountryOfCitizenship_SelectedValue />
@@ -46,11 +49,13 @@
     <State_hidden />
     <Branch_hidden />
     <Club_hidden />
+    <HighLevelCategory_SelectedValue />
     <MembershipType_SelectedValue />
     <ArchivedInAllOrgs_SelectedValue />
     <Status_SelectedValue>Active</Status_SelectedValue>
     <AgeCategory_SelectedValue />
     <Competitor_SelectedValue />
+    <PatrolHourExemption_SelectedValue />
     <HasClubKeys_SelectedValue />
     <SignedMembershipDeclaration_SelectedValue />
     <SignedLiabilityDeclaration_SelectedValue />
@@ -130,6 +135,15 @@
     <PatrolLogDuration_Toi_SelectedValue />
     <PatrolLogStatus_SelectedValue />
     <PatrolLogType_SelectedValue />
+    <OtherServiceLogDate_SelectedValue />
+    <OtherServiceLogStartTime_FromH_SelectedValue />
+    <OtherServiceLogStartTime_Fromi_SelectedValue />
+    <OtherServiceLogStartTime_ToH_SelectedValue />
+    <OtherServiceLogStartTime_Toi_SelectedValue />
+    <OtherServiceLogFinishTime_FromH_SelectedValue />
+    <OtherServiceLogFinishTime_Fromi_SelectedValue />
+    <OtherServiceLogFinishTime_ToH_SelectedValue />
+    <OtherServiceLogFinishTime_Toi_SelectedValue />
     <PatrolMemberPosition_SelectedValue />
     <PatrolMemberPatrolType_SelectedValue />
     <PatrolMemberStartTime_FromH_SelectedValue />
@@ -152,7 +166,6 @@
     <OrganisationBeachKey_SelectedValue />
     <OrganisationPhysicalCountry_SelectedValue />
     <OrganisationPostalCountry_SelectedValue />
-    <OrganisationBankAccountIsDefault_SelectedValue />
     <TransactionNational_hidden />
     <TransactionState_hidden />
     <TransactionBranch_hidden />
@@ -166,7 +179,7 @@
     <sendEmailAddressUser>help@swapsea.com.au</sendEmailAddressUser>
     <maxEmailRecipients>0</maxEmailRecipients>
     <_qf_default>report:submit</_qf_default>
-    <reportTitle>swapsea_awards</reportTitle>
+    <reportTitle>swapsea_patrols</reportTitle>
     <selectMemberGeneralDetails_MemberID>1</selectMemberGeneralDetails_MemberID>
     <sortOrder_MemberID />
     <columnHeader_MemberID />
@@ -316,12 +329,20 @@
     <sortOrder_HepBVaccination />
     <columnHeader_HepBVaccination />
     <HepBVaccination>-1</HepBVaccination>
-    <sortOrder_HepBVaccinationNotes />
-    <columnHeader_HepBVaccinationNotes />
-    <HepBVaccinationNotes />
     <sortOrder_IsInjured />
     <columnHeader_IsInjured />
     <IsInjured>-1</IsInjured>
+    <sortOrder_CovidVaccination />
+    <columnHeader_CovidVaccination />
+    <CovidVaccinations>
+        <CovidVaccination isMulti="1">-1</CovidVaccination>
+    </CovidVaccinations>
+    <sortOrder_HepBVaccinationNotes />
+    <columnHeader_HepBVaccinationNotes />
+    <HepBVaccinationNotes />
+    <sortOrder_CovidIsApproved />
+    <columnHeader_CovidIsApproved />
+    <CovidIsApproved>-1</CovidIsApproved>
     <sortOrder_ClothingSizeID_0 />
     <columnHeader_ClothingSizeID_0 />
     <ClothingSizeID_0>-1</ClothingSizeID_0>
@@ -360,6 +381,9 @@
     <sortOrder_IsNoSmsCommunications />
     <columnHeader_IsNoSmsCommunications />
     <IsNoSmsCommunications>-1</IsNoSmsCommunications>
+    <sortOrder_isDonations />
+    <columnHeader_isDonations />
+    <isDonations>-1</isDonations>
     <sortOrder_Disabilities />
     <columnHeader_Disabilities />
     <Disabilitiess>
@@ -428,6 +452,11 @@
     <EnrollmentSourceTypes>
         <EnrollmentSourceType isMulti="1">-1</EnrollmentSourceType>
     </EnrollmentSourceTypes>
+    <sortOrder_HighLevelCategory />
+    <columnHeader_HighLevelCategory />
+    <HighLevelCategorys>
+        <HighLevelCategory isMulti="1">-1</HighLevelCategory>
+    </HighLevelCategorys>
     <sortOrder_MembershipType />
     <columnHeader_MembershipType />
     <MembershipTypes>
@@ -444,6 +473,7 @@
     <sortOrder_ArchivedInAllOrgs />
     <columnHeader_ArchivedInAllOrgs />
     <ArchivedInAllOrgs>-1</ArchivedInAllOrgs>
+    <selectMembershipsDetails_Status>1</selectMembershipsDetails_Status>
     <sortOrder_Status />
     <columnHeader_Status />
     <Statuss>
@@ -452,7 +482,7 @@
     <selectMembershipsDetails_RegSeason>1</selectMembershipsDetails_RegSeason>
     <sortOrder_RegSeason />
     <columnHeader_RegSeason />
-    <RegSeason>2021</RegSeason>
+    <RegSeason>2022</RegSeason>
     <sortOrder_RegistrationDate />
     <columnHeader_RegistrationDate />
     <RegistrationDate_From />
@@ -468,6 +498,9 @@
     <sortOrder_Competitor />
     <columnHeader_Competitor />
     <Competitor>-1</Competitor>
+    <sortOrder_PatrolHourExemption />
+    <columnHeader_PatrolHourExemption />
+    <PatrolHourExemption>-1</PatrolHourExemption>
     <sortOrder_LockerNo />
     <columnHeader_LockerNo />
     <LockerNo />
@@ -728,7 +761,6 @@
     <AwardTypess>
         <AwardTypes isMulti="1">-1</AwardTypes>
     </AwardTypess>
-    <selectAwards_Awards>1</selectAwards_Awards>
     <sortOrder_Awards />
     <columnHeader_Awards />
     <Awardss>
@@ -737,17 +769,14 @@
     <sortOrder_AwardCode />
     <columnHeader_AwardCode />
     <AwardCode />
-    <selectAwards_AwardDate>1</selectAwards_AwardDate>
     <sortOrder_AwardDate />
     <columnHeader_AwardDate />
     <AwardDate_From />
     <AwardDate_To />
-    <selectAwards_ProficiencyDate>1</selectAwards_ProficiencyDate>
     <sortOrder_ProficiencyDate />
     <columnHeader_ProficiencyDate />
     <ProficiencyDate_From />
     <ProficiencyDate_To />
-    <selectAwards_AwardExpiryDate>1</selectAwards_AwardExpiryDate>
     <sortOrder_AwardExpiryDate />
     <columnHeader_AwardExpiryDate />
     <AwardExpiryDate_From />
@@ -760,7 +789,6 @@
     <columnHeader_ProfAllocationDate />
     <ProfAllocationDate_From />
     <ProfAllocationDate_To />
-    <selectAwards_AwardNumber>1</selectAwards_AwardNumber>
     <sortOrder_AwardNumber />
     <columnHeader_AwardNumber />
     <AwardNumber />
@@ -813,7 +841,6 @@
     <ActivityTime_HoursTo />
     <ActivityTime_MinsTo />
     <ActivityTime_SecsTo />
-    <selectAwards_AwardOriginatingOrganisation>1</selectAwards_AwardOriginatingOrganisation>
     <sortOrder_AwardOriginatingOrganisation />
     <columnHeader_AwardOriginatingOrganisation />
     <AwardOriginatingOrganisations>
@@ -978,11 +1005,14 @@
     <sortOrder_ServiceCourse />
     <columnHeader_ServiceCourse />
     <ServiceCourse>-1</ServiceCourse>
+    <selectPatrolTeams>1</selectPatrolTeams>
+    <selectPatrolTeams_PatrolTeam>1</selectPatrolTeams_PatrolTeam>
     <sortOrder_PatrolTeam />
     <columnHeader_PatrolTeam />
     <PatrolTeams>
         <PatrolTeam isMulti="1">-1</PatrolTeam>
     </PatrolTeams>
+    <selectPatrolTeams_PatrolTeamPosition>1</selectPatrolTeams_PatrolTeamPosition>
     <sortOrder_PatrolTeamPosition />
     <columnHeader_PatrolTeamPosition />
     <PatrolTeamPositions>
@@ -1037,9 +1067,6 @@
     <LatestMemberProficiencyDate_To />
     <sortOrder_PatrolLogName />
     <columnHeader_PatrolLogName />
-    <PatrolLogNames>
-        <PatrolLogName isMulti="1">-1</PatrolLogName>
-    </PatrolLogNames>
     <sortOrder_PatrolLogDate />
     <columnHeader_PatrolLogDate />
     <PatrolLogDate_From />
@@ -1076,6 +1103,22 @@
     <PatrolLogTypes>
         <PatrolLogType isMulti="1">-1</PatrolLogType>
     </PatrolLogTypes>
+    <sortOrder_OtherServiceLogDate />
+    <columnHeader_OtherServiceLogDate />
+    <OtherServiceLogDate_From />
+    <OtherServiceLogDate_To />
+    <sortOrder_OtherServiceLogStartTime />
+    <columnHeader_OtherServiceLogStartTime />
+    <OtherServiceLogStartTime_FromH>-1</OtherServiceLogStartTime_FromH>
+    <OtherServiceLogStartTime_Fromi>-1</OtherServiceLogStartTime_Fromi>
+    <OtherServiceLogStartTime_ToH>-1</OtherServiceLogStartTime_ToH>
+    <OtherServiceLogStartTime_Toi>-1</OtherServiceLogStartTime_Toi>
+    <sortOrder_OtherServiceLogFinishTime />
+    <columnHeader_OtherServiceLogFinishTime />
+    <OtherServiceLogFinishTime_FromH>-1</OtherServiceLogFinishTime_FromH>
+    <OtherServiceLogFinishTime_Fromi>-1</OtherServiceLogFinishTime_Fromi>
+    <OtherServiceLogFinishTime_ToH>-1</OtherServiceLogFinishTime_ToH>
+    <OtherServiceLogFinishTime_Toi>-1</OtherServiceLogFinishTime_Toi>
     <sortOrder_PatrolMemberPosition />
     <columnHeader_PatrolMemberPosition />
     <PatrolMemberPositions>
@@ -1168,6 +1211,7 @@
     <OrganisationTypes>
         <OrganisationType isMulti="1">-1</OrganisationType>
     </OrganisationTypes>
+    <selectOrganisationGeneralDetails_OrganisationDisplayName>1</selectOrganisationGeneralDetails_OrganisationDisplayName>
     <sortOrder_OrganisationDisplayName />
     <columnHeader_OrganisationDisplayName />
     <OrganisationDisplayName_From />
@@ -1278,21 +1322,6 @@
     <sortOrder_OrganisationContactMobile />
     <columnHeader_OrganisationContactMobile />
     <OrganisationContactMobile />
-    <sortOrder_OrganisationBankBSBNumber />
-    <columnHeader_OrganisationBankBSBNumber />
-    <OrganisationBankBSBNumber />
-    <sortOrder_OrganisationBankAccountNumber />
-    <columnHeader_OrganisationBankAccountNumber />
-    <OrganisationBankAccountNumber />
-    <sortOrder_OrganisationBankAccountName />
-    <columnHeader_OrganisationBankAccountName />
-    <OrganisationBankAccountName />
-    <sortOrder_OrganisationBankAccountIsDefault />
-    <columnHeader_OrganisationBankAccountIsDefault />
-    <OrganisationBankAccountIsDefault>-1</OrganisationBankAccountIsDefault>
-    <sortOrder_OrganisationBankAccountEmailAddress />
-    <columnHeader_OrganisationBankAccountEmailAddress />
-    <OrganisationBankAccountEmailAddress />
     <sortOrder_OrganisationRTOABN />
     <columnHeader_OrganisationRTOABN />
     <OrganisationRTOABN />
@@ -1383,10 +1412,10 @@
     <sendEmailAddress>help@swapsea.com.au</sendEmailAddress>
     <recurringTypeID>4</recurringTypeID>
     <recurringInterval>1</recurringInterval>
-    <scheduledRunTime_Date>25/06/2021</scheduledRunTime_Date>
+    <scheduledRunTime_Date>1/7/2022</scheduledRunTime_Date>
     <scheduledRunTime_Times>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
     </scheduledRunTime_Times>
-    <customReportName>swapsea_awards</customReportName>
+    <customReportName>swapsea_patrol_teams_2022</customReportName>
 </report>
