@@ -9,9 +9,21 @@ describe 'e2e Happy Path - User' do
     Capybara.page.current_window.resize_to(1024, 768)
   end
 
-  it 'visit home page' do
+  it 'visit public pages' do
     visit '/'
     expect(page).to have_text('Welcome to Swapsea')
+
+    visit '/faq'
+    expect(page).to have_text('Frequently Asked Questions')
+
+    visit '/setup'
+    expect(page).to have_text('Setup Guide')
+
+    visit '/contact-us'
+    expect(page).to have_text('Contact Us')
+
+    visit '/terms-of-use'
+    expect(page).to have_text('Terms of Use')
   end
 
   it 'signs users in and clicks around', js: true do

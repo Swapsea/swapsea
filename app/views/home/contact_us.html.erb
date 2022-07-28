@@ -1,0 +1,93 @@
+<% content_for(:title){ "Contact Us" } %>
+
+<!-- Navbar -->
+<div class="navbar navbar-default navbar-fixed-top landing">
+  <div class="container page-scroll">
+    <a class="main-logo navbar-left" href="/#home"><h1>Swapsea</h1></a>
+    <p class="navbar-text navbar-right">
+      <% if ENV['ALLOW_LOGIN'] == 'true' %>
+        <% if user_signed_in? %>
+          <%= link_to dashboard_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+          <span class="hidden-xs">
+            <%= link_to 'Dashboard', dashboard_path, :class => "btn btn-default" %>
+          </span>
+        <% else %>
+          <%= link_to login_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+            <span class="hidden-xs">
+              <%= link_to 'Login', login_path, :class => "btn btn-default" %>
+            </span>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div> <!-- End navbar -->
+
+
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="row">
+      <div class="col-sm-12">
+        <h1><%= content_for(:title) %></h1>
+      </div>
+    </div> <!-- End intro -->
+
+  </div>
+</div> <!-- End Jumbotron -->
+
+<div id="faq">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Club Members</h3>
+        <ul class="link-list">
+        <li><i class="fa fa-bell fa-lg"></i> Click the <b>Ask Swapsea</b> doorbell widget below. <i class="fa fa-arrow-down"></i></li>
+        <li><i class="fa fa-life-ring fa-lg"></i> Email <%= mail_to("feedback-6873-bK7yMGSOfxnWFdjZH2LyOyJwYY20WLel@feedback.doorbell.io", 'Member Help') %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Club Administrators</h3>
+        <ul class="link-list">
+        <li><i class="fa fa-envelope-square fa-lg"></i> Email <%= mail_to("help@swapsea.com.au?subject=[#{current_user.organisation}] Admin Help", 'Club Administrator Help') %></li>
+        <li><i class="fa fa-book fa-lg"></i> <%= link_to 'Setup Guide', setup_path %> </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Help Us</h3>
+        <ul class="link-list">
+          <li><i class="fa fa-github-square fa-lg"></i> <a href="https://github.com/Swapsea/swapsea/">Swapsea on GitHub</a></li>
+        </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+        <h3>Connect with Us</h3>
+          <ul class="link-list">
+          <li><a href="https://au.linkedin.com/in/markhudson"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn - Mark</a></li>
+          <li><a href="https://au.linkedin.com/in/xandercarroll"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn - Alex</a></li>
+          <li><a href="https://au.linkedin.com/in/ariellfriedman"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn - Ariell</a></li>
+          <li><a href="https://au.linkedin.com/in/michaelbamford"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn - Michael</a></li>
+        </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= image_tag('swapsea-logo-col-blk.png', :class => "footer-logo") %>
+          <p>
+            We love the beach, the surf club and we love solving the patrol swap problem with a bit of technology. <br/>
+            Swapsea is made with love by current lifesavers and friends. Cheers!
+          </p>
+        </div>
+    </div>
+  </div> <!-- container -->
