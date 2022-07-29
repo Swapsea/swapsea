@@ -15,6 +15,7 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jwt'
+gem 'net-imap', require: false # Added with Rails 6 for Heroku
 gem 'net-pop', require: false # Added with Rails 6 for Heroku
 gem 'net-smtp', require: false
 gem 'pg'
