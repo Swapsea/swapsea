@@ -93,12 +93,14 @@
 						<li><%= link_to 'Patrols', 'downloads/custom_report_patrol_teams_2022.xml' %></li>
 						<li><%= link_to 'Roster', 'downloads/custom_report_rosters_2022.xml' %></li>
 						</ol>
-						</ol>
+					</ol>
 				</li>
 				<li>Log in to Surfguard:<br/>
 				<%= link_to 'https://surfguard.slsa.asn.au/SLSA_Admin/modules/login/newLogin.php', 'https://surfguard.slsa.asn.au/SLSA_Admin/modules/login/newLogin.php' %></li>
-				<li>Under the <b>Reports</b> menu, choose <b>Custom Reports</b></li>
-				<li>Load each saved template file, and press Go</li>
+				<li>Under the <b>Reports</b> menu, choose <b>Custom Reports</b>
+				<%= image_tag('surfguard-custom-1', width: "90%") %></li>
+				<li>Load each saved template file, and press Go
+				<%= image_tag('surfguard-custom-2', width: "90%") %></li>
 				<li>Choose the options at the bottom
 				<ol type="a">
 					<li><b>Send Report Via Email</b>: help@swapsea.com.au</li>
@@ -106,14 +108,16 @@
 					Swapsea up-to-date. Nb. The Rosters report <u>must not</u> be recurring. If you have a roster
 					change after launch, contact us by email.</li>
 					<li><b>Display Type</b>: Downloadable CSV (Excel Format) IMPORTANT!</li>
+					<li><b>Create Template</b>: Untick.</li>
 				</ol>
+				<%= image_tag('surfguard-custom-3', width: "90%") %>
+				<div class="panel panel-warning">
+				<div class="panel-heading">PRIVACY NOTE</div>
+				<div class="panel-body">To maintain the privacy and security of member information, please do not email the reports to
+				Swapsea yourself. Just let Surfguard send the reports directly and we'll let you know when it's arrived.</div>
+			</div>
 			</ol>
 
-			<p>
-			<b>PRIVACY NOTE</b>
-			To maintain the privacy and security of member information, please do not email the reports to
-			Swapsea yourself. Just let Surfguard send the reports directly and we'll let you know when it's arrived.
-			</p>
 
 			<h4>Information for PC/VCs &amp; Member</h4>
 			<p>Contact <%= mail_to "help@swapsea.com.au", "help@swapsea.com.au", subject: "Information for Clubs" %> and request information for Clubs.</p>
@@ -129,18 +133,21 @@
 			<h2>End of Season</h2>
 			<p>At the end of the season, please stop the Scheduled Background Reports.
 			<ol>
-			<li>From Surfguard home, go to <b>Maintenance > Background Reports > Scheduled
-		   Background Reports</b></li>
-		   <li>Click Delete beside each Swapsea report, called:
-		   <ul>
-		  <li>swapsea_awards</li>
-		  <li>swapsea_members</li>
-		  <li>swapsea_patrols</li>
-		  </ul>
-		  <li>Click <b>Delete</b> again, and click the link to return.</li>
-		  </ul>
-		  </p>
-
+				<li>From Surfguard home, go to <b>Maintenance > Background Reports > Scheduled
+		   		Background Reports</b>
+				   <%= image_tag('surfguard-custom-4', width: "90%") %>
+				</li>
+		   		<li>Click Delete beside each Swapsea report, called:
+					<ul>
+						<li>swapsea_awards</li>
+						<li>swapsea_members</li>
+						<li>swapsea_patrols</li>
+					</ul>
+		  		<li>Click <b>Delete</b> again, and click the link to return.
+				  <%= image_tag('surfguard-custom-5', width: "90%") %>
+				</li>
+		  	</ol>
+			</p>
 	   	</div>
 	</div>
 </div>
