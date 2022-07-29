@@ -15,7 +15,7 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jwt'
-gem 'net-smtp'
+gem 'net-smtp', require: false
 gem 'pg'
 gem 'pg_search'
 gem 'psych', '< 4' # Stop-gap for bad psych. https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
