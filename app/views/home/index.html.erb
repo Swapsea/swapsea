@@ -85,8 +85,9 @@
   <div class="container">
     <div class="row section-header" style="cellpadding:30">
       <div class="col-sm-10 col-sm-offset-1">
-        <h2>Clubs love Swapsea!</h2>
-        <p class="sub-heading-text">Want Swapsea for your club? <%= link_to 'Request a free trial', 'https://goo.gl/forms/XpcUJyVIGBdns9v23' %>.</p>
+        <h2>Clubs Love Swapsea!</h2>
+        <p class="sub-heading-text">Want Swapsea for your club? <%= link_to 'See the Setup Guide', setup_path %>.
+        </p>
       </div>
     </div> <!-- End section header -->
     <div class="row">
@@ -256,75 +257,31 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-        <div class="text-center">
-          <%= link_to 'Get Started', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' %>
-        </div>
-      </div>
-    </div>
   </div>
 </div> <!--/.pricing -->
 
-<%# <!-- Signup area (main call-to-action) -->
+<!-- Signup area (main call-to-action) -->
 <div id="signup">
   <div class="container">
     <!-- Section header -->
     <div class="row section-header">
       <div class="col-sm-10 col-sm-offset-1">
-        <h2>Want Swapsea for your club?</h2>
-        <p class="lead">Great! Please complete our registration form ASAP and we'll get back to you.</p>
+        <h2>Ready for Swapsea?</h2>
+        <p class="sub-heading-text">Want Swapsea for your club? <%= link_to 'See the Setup Guide', setup_path %>.
+
       </div>
     </div> <!-- End section header -->
     <!-- Signup panel area -->
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
           <div class="text-center">
-            <%= link_to 'Register for a Free Trial', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' % >
+          <%= link_to 'Setup Guide', setup_path, :class => 'btn btn-success btn-lg' %>
           </div>
       </div>
     </div> <!-- End signup panel area -->
   </div> <!-- container -->
 </div> <!-- End signup area -->
 <hr/>
-%>
-<div id="faq">
-  <div class="container">
-    <!-- Section header -->
-    <div class="row section-header">
-      <div class="col-sm-10 col-sm-offset-1">
-        <h2>Frequently Asked Questions</h2>
-      </div>
-    </div> <!-- End section header -->
-    <!-- Signup panel area -->
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-          <div class="asset">
-        <ol>
-          <li><strong>How does it work?</strong>:<br/>
-          It takes two people to make a <i>swap</i> in Swapsea. The requestor advertises the patrol they need a swap for. Someone else makes an <i>offer</i> in exchange for another rostered patrol. If suitable, the requestor then confirms the offer and the deal is on. Each party is notified by email and receives a reminder ahead of their new patrol.</li>
-          <li><strong>Why does it work?</strong>:<br/>
-          Swapsea works because the Club honours a Swapsea swap as a handshake deal. Patrollers cannot go back on their word. Also, by having a reciprocal swap, two people are committed to the change and patrols remain fully manned.</li>
-          <li><strong>Why use Swapsea?</strong>:<br/>
-          Fewer no-shows means adequately resourced patrols, happier members and safer beaches. </li>
-          </li>
-          <li><strong>Where is the data coming from?</strong>:<br/>Each Club is responsible for keeping Swapsea up to date using “Custom reports” from the SLSA Surfguard system. Detailed instructions are provided to Clubs.
-          </li>
-          <li><strong>What about Privacy?</strong>:<br/>Swapsea abides by the same Australian Privacy Principles as SLSA and takes privacy extremely seriously. We are professional developers who have our own personal data on this system too, and take all necessary precautions to keep that data secure and private. See our <%= link_to 'Terms of Use', terms_of_use_path() %>.</li>
-          <li><strong>Do other clubs use Swapsea?</strong>:<br/>Yes. Swapsea launched in 2012/13 and has evolved to support clubs in multiple states with special requirements.
-          </li>
-          <li><strong>How much does it cost?</strong>:<br/>Clubs pay for Swapsea per season to cover hosting and support. To avoid the pre-season rush, there is early bird pricing.
-          </li>
-          <li><strong>Who developed Swapsea?</strong>:<br/>Swapsea launched in 2013 when some guys from North Bondi Surf Club couldn’t believe nobody had done this before. Two years later SLSA built Substitutes into Members Area which we think is an inferior imitation and that Swapsea remains the best - and keeps getting better.
-        </ol>
-          </div>
-      </div>
-        <div class="text-center">
-            <%= link_to 'Request a Trial', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' %>
-          </div>
-    </div> <!-- End signup panel area -->
-  </div> <!-- container -->
-</div> <!-- End signup area -->
 
 <div class="section-grey">
 <%= render 'footer_large' %>

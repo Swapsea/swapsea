@@ -138,7 +138,7 @@ class Ability
       can %i[read ics], User
       cannot %i[index show], User
       can :activate, User
-      can %i[index privacy_policy terms_of_use thanks contact_us], :home
+      can %i[index privacy_policy terms_of_use thanks contact_us setup faq], :home
     end
   end
 end

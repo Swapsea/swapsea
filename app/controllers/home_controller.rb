@@ -8,19 +8,27 @@ class HomeController < ApplicationController
     render layout: 'application'
   end
 
+  def setup
+    render layout: 'blank'
+  end
+
+  def faq
+    render layout: 'blank'
+  end
+
+  def contact_us
+    render layout: 'blank'
+  end
+
+  def terms_of_use
+    render layout: 'blank'
+  end
+
   def thanks
     render layout: 'basic'
   end
 
   def privacy_policy
-    render layout: 'basic'
-  end
-
-  def about_us
-    render layout: 'basic'
-  end
-
-  def terms_of_use
     render layout: 'basic'
   end
 end
