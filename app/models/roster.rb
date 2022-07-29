@@ -44,22 +44,22 @@ class Roster < ApplicationRecord
     if bbm < patrol.need_bbm || irbd < patrol.need_irbd || irbc < patrol.need_irbc || artc < patrol.need_artc || bronze < patrol.need_bronze || src < patrol.need_src
       {
         result: false,
-        bbm: bbm,
-        irbd: irbd,
-        irbc: irbc,
-        artc: artc,
-        bronze: bronze,
-        src: src
+        bbm:,
+        irbd:,
+        irbc:,
+        artc:,
+        bronze:,
+        src:
       }
     else
       {
         result: true,
-        bbm: bbm,
-        irbd: irbd,
-        irbc: irbc,
-        artc: artc,
-        bronze: bronze,
-        src: src
+        bbm:,
+        irbd:,
+        irbc:,
+        artc:,
+        bronze:,
+        src:
       }
     end
   end
@@ -104,22 +104,22 @@ class Roster < ApplicationRecord
     if bbm < patrol.need_bbm || irbd < patrol.need_irbd || irbc < patrol.need_irbc || artc < patrol.need_artc || bronze < patrol.need_bronze || src < patrol.need_src
       {
         result: false,
-        bbm: bbm,
-        irbd: irbd,
-        irbc: irbc,
-        artc: artc,
-        bronze: bronze,
-        src: src
+        bbm:,
+        irbd:,
+        irbc:,
+        artc:,
+        bronze:,
+        src:
       }
     else
       {
         result: true,
-        bbm: bbm,
-        irbd: irbd,
-        irbc: irbc,
-        artc: artc,
-        bronze: bronze,
-        src: src
+        bbm:,
+        irbd:,
+        irbc:,
+        artc:,
+        bronze:,
+        src:
       }
     end
   end
@@ -134,22 +134,22 @@ class Roster < ApplicationRecord
     if bbm < patrol.need_bbm || irbd < patrol.need_irbd || irbc < patrol.need_irbc || artc < patrol.need_artc || bronze < patrol.need_bronze || src < patrol.need_src
       {
         result: false,
-        bbm: bbm,
-        irbd: irbd,
-        irbc: irbc,
-        artc: artc,
-        bronze: bronze,
-        src: src
+        bbm:,
+        irbd:,
+        irbc:,
+        artc:,
+        bronze:,
+        src:
       }
     else
       {
         result: true,
-        bbm: bbm,
-        irbd: irbd,
-        irbc: irbc,
-        artc: artc,
-        bronze: bronze,
-        src: src
+        bbm:,
+        irbd:,
+        irbc:,
+        artc:,
+        bronze:,
+        src:
       }
     end
   end
@@ -190,12 +190,12 @@ class Roster < ApplicationRecord
       (n.award_name == 'Surf Rescue Certificate') || (n.award_name == 'Surf Rescue Certificate (CPR Endorsed)')
     end
     {
-      bronze: bronze,
-      bbm: bbm,
-      artc: artc,
-      irbd: irbd,
-      irbc: irbc,
-      src: src
+      bronze:,
+      bbm:,
+      artc:,
+      irbd:,
+      irbc:,
+      src:
     }
   end
 

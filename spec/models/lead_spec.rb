@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe Lead, type: :model do
-  before(:all) do
-    @lead = FactoryBot.create(:lead)
+  before do
+    @lead = create(:lead)
   end
 
   describe '#Atributes' do

@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.7.4'
+ruby '3.1.2'
 
-gem 'activerecord', '>= 5.2.4.5'
+gem 'activerecord', '>= 6.0.5.1'
 gem 'activerecord-import'
 gem 'bcrypt'
-gem 'bigdecimal', '1.3.5'
 gem 'cancancan'
 gem 'coffee-rails'
 gem 'delayed_job_active_record'
@@ -16,11 +15,15 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jwt'
+gem 'net-imap', require: false # Added with Rails 6 for Heroku
+gem 'net-pop', require: false # Added with Rails 6 for Heroku
+gem 'net-smtp', require: false
 gem 'pg'
 gem 'pg_search'
+gem 'psych', '< 4' # Stop-gap for bad psych. https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
 gem 'public_activity'
 gem 'puma'
-gem 'rails', '~> 5.2.4'
+gem 'rails', '~> 6.0.5.1'
 gem 'redis-rails'
 gem 'rolify'
 gem 'roo'
@@ -65,8 +68,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
-  gem 'shoulda', '~> 3.5'
+  gem 'shoulda'
   gem 'shoulda-callback-matchers'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers', '~> 4.0'
 end

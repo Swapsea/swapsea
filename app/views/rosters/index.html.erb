@@ -1,4 +1,6 @@
-<h1>Rosters</h1>
+<% content_for(:title){ "Rosters" } %>
+
+<h2><%= content_for(:title) %></h2>
 <% if @patrols.empty? %>
   <div class="box-info">
     <p>Rosters are not available as there are no patrols loaded into Swapsea yet. Please check again later or contact your Club.</p>

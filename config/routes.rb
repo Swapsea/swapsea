@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Swapsea2::Application.routes.draw do
+Swapsea::Application.routes.draw do
   resources :event_logs
 
   resources :activities
@@ -69,7 +69,7 @@ Swapsea2::Application.routes.draw do
 
   # Errors
   %w[400 402 403 404 405 406 408 422 500 502 503 504 505].each do |code|
-    get code, to: 'errors#show', code: code
+    get code, to: 'errors#show', code:
   end
 
   get 'admin', to: 'admin#index', as: 'admin'
@@ -156,9 +156,11 @@ Swapsea2::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
   get 'thanks', to: 'home#thanks'
+  get 'setup', to: 'home#setup', as: 'setup'
+  get 'contact-us', to: 'home#contact_us', as: 'contact_us'
+  get 'faq', to: 'home#faq', as: 'faq'
   get 'privacy-policy', to: 'home#privacy_policy', as: 'privacy_policy'
   get 'terms-of-use', to: 'home#terms_of_use', as: 'terms_of_use'
-  get 'about', to: 'home#about_us', as: 'about_us'
 
   resources :users do
     collection do

@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe Request, type: :model do
-  before(:all) do
-    @request = FactoryBot.create(:request)
+  before do
+    @request = create(:request)
   end
 
   describe '#Atributes' do

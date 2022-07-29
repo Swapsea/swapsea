@@ -1,9 +1,6 @@
-default: &default
+test:
   adapter: postgresql
-  encoding: unicode
+  database: swapsea_test
   template: template0
   pool: 5
-
-test:
-  <<: *default
-  database: swapsea_test
+  timeout: 500

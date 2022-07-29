@@ -8,7 +8,7 @@ RSpec.describe AwardsController, type: :controller do
   render_views
 
   before do
-    sign_in create :administrator
+    sign_in create :admin
   end
 
   it 'gets "admin"' do
@@ -45,7 +45,7 @@ RSpec.describe AwardsController, type: :controller do
     award = create :award
     params = { id: award.id, award: { expiry_date: today } }
     expect(award.expiry_date).to be_nil
-    expect { patch :update, params: params }.to change { award.reload.expiry_date }.from(nil).to(today)
+    expect { patch :update, params: }.to change { award.reload.expiry_date }.from(nil).to(today)
     expect(response).to redirect_to award_path assigns :award
   end
 

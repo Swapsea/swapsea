@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'clubs/show', type: :view do
   before do
-    @club = assign(:club, FactoryBot.create(:club))
+    @club = assign(:club, create(:club))
   end
 
   it 'renders attributes in <p>' do

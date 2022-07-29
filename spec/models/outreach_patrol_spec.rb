@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe OutreachPatrol, type: :model do
-  before(:all) do
-    @outreach_patrol = FactoryBot.create(:outreach_patrol)
+  before do
+    @outreach_patrol = create(:outreach_patrol)
   end
 
   describe '#Atributes' do

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'leads/edit', type: :view do
   before do
-    @lead = assign(:lead, FactoryBot.create(:lead))
+    @lead = assign(:lead, create(:lead))
   end
 
   it 'renders the edit lead form' do

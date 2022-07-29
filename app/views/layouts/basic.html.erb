@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><%= content_for?(:title) ? yield(:title) : "Swapsea" %></title>
+		<title><%= content_for?(:title) ? title_tag : "Swapsea" %></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
 
 			<%= yield %>
 
-			<%= render 'home/footer_large' %>
+			<%= render 'home/footer_small' %>
 			<%= javascript_include_tag "basic-layout" %>
 			<%= yield :scripts %>
 			<script type="text/javascript">

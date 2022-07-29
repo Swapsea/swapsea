@@ -1,5 +1,5 @@
-  <div class="row">
-
+<% content_for(:title){ "Confirmed Swaps" } %>
+<div class="row">
     <div class="col-sm-12">
       <ul class="nav nav-pills nav-justified">
         <li class="col-xs-12"><%= link_to 'Open Requests', swaps_path %></li>
@@ -16,7 +16,7 @@
         <% if @swaps %>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h2>Confirmed Swaps</h2>
+            <h2><%= content_for(:title) %></h2>
           </div>
           <div class="panel-body">
             <div class="swap-requests">

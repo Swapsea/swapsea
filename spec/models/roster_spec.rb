@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe Roster, type: :model do
-  before(:all) do
-    @roster = FactoryBot.create(:roster)
+  before do
+    @roster = create(:roster)
   end
 
   describe '#Atributes' do
