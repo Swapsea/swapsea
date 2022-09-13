@@ -132,7 +132,7 @@ class SwapseaMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    mail subject: 'Activate your Swapsea account for 2021/22',
+    mail subject: 'Activate your Swapsea account for 2022/23',
          to: user.email,
          from: 'Swapsea <help@swapsea.com.au>'
   end
