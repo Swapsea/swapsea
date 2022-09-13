@@ -10,7 +10,7 @@ class SwapseaMailer < ApplicationMailer
   end
 
   # Sent to all users with a patrol in the next 7 days.
-  def weekly_rosters(user, next_roster, following_roster, subject)
+  def weekly_roster_reminder(user, next_roster, following_roster, subject)
     @user = user
     @subject = subject
     @next_roster = next_roster
@@ -23,7 +23,7 @@ class SwapseaMailer < ApplicationMailer
   ## To be generalised
 
   # Sent to all users with a proficiency in the next 7 days.
-  def north_bondi_weekly_proficiencies(user, proficiency)
+  def proficiency_reminder(user, proficiency)
     @user = user
     @proficiency = proficiency
     mail subject: 'Upcoming Skills Maintenance',

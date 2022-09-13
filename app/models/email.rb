@@ -24,26 +24,26 @@ class Email < ApplicationRecord
           if user_roster.second.present?
             following_roster = user_roster.second
             if user.club.is_active && user.club.enable_reminders_email
-              SwapseaMailer.weekly_rosters(user, next_roster, following_roster, subject).deliver
+              SwapseaMailer.weekly_roster_reminder(user, next_roster, following_roster, subject).deliver
               emails_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
             if user.club.is_active && user.club.enable_reminders_sms
-              SwapseaSms.weekly_roster(user, next_roster).deliver
+              SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
             end
           elsif user_roster.first.present?
             if user.club.is_active && user.club.enable_reminders_email
-              SwapseaMailer.weekly_rosters(user, next_roster, nil, subject).deliver
+              SwapseaMailer.weekly_roster_reminder(user, next_roster, nil, subject).deliver
               emails_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
             if user.club.is_active && user.club.enable_reminders_sms
-              SwapseaSms.weekly_roster(user, next_roster).deliver
+              SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
@@ -70,7 +70,7 @@ class Email < ApplicationRecord
     proficiencies.map do |proficiency|
       proficiency.users.map do |user|
         if user.club.is_active && user.club.enable_reminders_email && user.club.show_skills_maintenance
-          SwapseaMailer.north_bondi_weekly_proficiencies(user, proficiency).deliver
+          SwapseaMailer.proficiency_reminder(user, proficiency).deliver
           emails_sent += 1
         else
           Rails.logger.warn "Skipped sending skills maintenance email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email} and show_skills_maintenance=#{user.club.show_skills_maintenance}"
