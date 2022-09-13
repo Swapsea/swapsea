@@ -8,10 +8,8 @@ class PatrolsController < ApplicationController
   def index
     @clubs = if selected_user.has_role?(:admin)
                Club.includes(:patrols).show_patrols
-
              else
-               Club.find_by(is_active: true).includes(:patrols).show_patrols.where(name: selected_user.organisation)
-
+               Club.where(is_active: true).includes(:patrols).show_patrols.where(name: selected_user.organisation)
              end
   end
 
