@@ -15,7 +15,7 @@ class RostersController < ApplicationController
   end
 
   def admin
-    @rosters = Roster.all
+    @rosters = Roster.all.includes([:patrol])
     render layout: 'admin'
   end
 
