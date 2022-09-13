@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
 class SwapseaMailer < ApplicationMailer
-  def test
-    @user = User.find(4_739_300)
-    @url = 'https://www.swapsea.com.au'
-    mail subject: 'Test Runner from Swapsea',
-         to: 'alex@nerdx.com.au',
-         from: 'Swapsea <noreply@swapsea.com.au>'
-  end
-
   # Sent to all users with a patrol in the next 7 days.
   def weekly_roster_reminder(user, next_roster, following_roster, subject)
     @user = user
