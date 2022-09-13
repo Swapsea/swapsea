@@ -18,25 +18,19 @@
   <tr>
     <td>Active:</td>
     <td>
-      <%= @club.active %>
+      <%= @club.is_active %>
     </td>
   </tr>
   <tr>
     <td>Patrol Reminders via Email:</td>
     <td>
-      <%= @club.enable_patrol_reminders_email %>
+      <%= @club.enable_reminders_email %>
     </td>
   </tr>
   <tr>
     <td>Patrol Reminders via SMS:</td>
     <td>
-      <%= @club.enable_patrol_reminders_sms %>
-    </td>
-  </tr>
-  <tr>
-    <td>Skills Maintenance Reminders via Email:</td>
-    <td>
-      <%= @club.enable_proficiency_reminders_email %>
+      <%= @club.enable_reminders_sms %>
     </td>
   </tr>
   <tr>

@@ -10,9 +10,8 @@
 						<th>Name</th>
 						<th>Short name</th>
 						<th>Is Active?</th>
-						<th>Email Patrol Reminders</th>
-						<th>SMS Patrol Reminders</th>
-						<th>Email Skills Maintenance Reminders</th>
+						<th>Email Reminders</th>
+						<th>SMS Reminders</th>
 						<th>Show Patrols</th>
 						<th>Show Rosters</th>
 						<th>Show Swaps</th>
@@ -40,13 +39,10 @@
 								<%= club.is_active %>
 							</td>
 							<td>
-								<%= club.enable_patrol_reminders_email %>
+								<%= club.enable_reminders_email %>
 							</td>
 							<td>
-								<%= club.enable_patrol_reminders_sms %>
-							</td>
-							<td>
-								<%= club.enable_proficiency_reminders_email %>
+								<%= club.enable_reminders_sms %>
 							</td>
 							<td>
 								<%= club.show_patrols %>

@@ -69,10 +69,9 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.datetime "updated_at"
     t.float "lat", default: 0.0, null: false
     t.float "lon", default: 0.0, null: false
-    t.boolean "is_active"
-    t.boolean "enable_patrol_reminders_email"
-    t.boolean "enable_patrol_reminders_sms"
-    t.boolean "enable_proficiency_reminders_email"
+    t.boolean "is_active", default: false
+    t.boolean "enable_reminders_email", default: true
+    t.boolean "enable_reminders_sms", default: false
     t.index ["name"], name: "index_clubs_on_name"
   end
 
