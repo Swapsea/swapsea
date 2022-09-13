@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'notices/show', type: :view do
   before do
-    @notice = assign(:notice, FactoryBot.create(:notice))
+    @notice = assign(:notice, create(:notice))
   end
 
   it 'renders attributes in <p>' do

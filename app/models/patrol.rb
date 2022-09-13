@@ -28,12 +28,12 @@ class Patrol < ApplicationRecord
     irbd = awards.where(award_name: 'Silver Medallion IRB Driver').count
     src = awards.where({ award_name: 'Surf Rescue Certificate' } || { award_name: 'Surf Rescue Certificate (CPR Endorsed)' }).count
     {
-      bbm: bbm,
-      irbd: irbd,
-      irbc: irbc,
-      artc: artc,
-      bronze: bronze,
-      src: src
+      bbm:,
+      irbd:,
+      irbc:,
+      artc:,
+      bronze:,
+      src:
     }
   end
 

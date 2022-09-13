@@ -1,0 +1,80 @@
+<% content_for(:title){ "Frequently Asked Questions (FAQs)" } %>
+
+<!-- Navbar -->
+<div class="navbar navbar-default navbar-fixed-top landing">
+  <div class="container page-scroll">
+    <a class="main-logo navbar-left" href="/#home"><h1>Swapsea</h1></a>
+    <p class="navbar-text navbar-right">
+      <% if ENV['ALLOW_LOGIN'] == 'true' %>
+        <% if user_signed_in? %>
+          <%= link_to dashboard_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+          <span class="hidden-xs">
+            <%= link_to 'Dashboard', dashboard_path, :class => "btn btn-default" %>
+          </span>
+        <% else %>
+          <%= link_to login_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+            <span class="hidden-xs">
+              <%= link_to 'Login', login_path, :class => "btn btn-default" %>
+            </span>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div> <!-- End navbar -->
+
+
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="row">
+      <div class="col-sm-12">
+        <h1><%= content_for(:title) %></h1>
+      </div>
+    </div> <!-- End intro -->
+
+  </div>
+</div> <!-- End Jumbotron -->
+
+
+<div id="faq">
+  <div class="container">
+    <!-- Signup panel area -->
+    <div class="row">
+      <div class="col-sm-12">
+          <div class="asset">
+        <ol>
+          <li><strong>How does it work?</strong>:<br/>
+          It takes two people to make a <i>swap</i> in Swapsea. The requestor advertises the patrol they need a swap for. Someone else makes an <i>offer</i> in exchange for another rostered patrol. If suitable, the requestor then confirms the offer and the deal is on. Each party is notified by email and receives a reminder ahead of their new patrol.</li>
+          <li><strong>Why does it work?</strong>:<br/>
+          Swapsea works because the Club honours a Swapsea swap as a handshake deal. Patrollers cannot go back on their word. Also, by having a reciprocal swap, two people are committed to the change and patrols remain fully manned.</li>
+          <li><strong>Why use Swapsea?</strong>:<br/>
+          Fewer no-shows means adequately resourced patrols, happier members and safer beaches. </li>
+          </li>
+          <li><strong>Where is the data coming from?</strong>:<br/>Each Club is responsible for keeping Swapsea up to date using "Custom reports" from the SLSA Surfguard system. Detailed instructions are provided to Clubs.
+          </li>
+          <li><strong>Where is Swapsea hosted?</strong>:<br/>Swapsea is hosted on Heroku which is owned by SalesForce. The data centre is in the United States of America.
+          </li>
+          <li><strong>What about Privacy?</strong>:<br/>Swapsea abides by the same Australian Privacy Principles as SLSA and takes privacy extremely seriously. We are professional developers who have our own personal data on this system too, and take all necessary precautions to keep that data secure and private. See our <%= link_to 'Terms of Use', terms_of_use_path() %>.</li>
+          <li><strong>Do other clubs use Swapsea?</strong>:<br/>Yes. Swapsea launched in 2012/13 and has evolved to support clubs in multiple states with special requirements.
+          </li>
+          <li><strong>How much does it cost?</strong>:<br/>Larger Clubs pay for Swapsea per season to cover hosting and support. Swapsea is free^ for smaller clubs. ^Conditions apply.
+          </li>
+          <li><strong>Who developed Swapsea?</strong>:<br/>Swapsea launched in 2013 when some guys from North Bondi Surf Club couldn't believe nobody had done this before. Since then Swapsea has facilitated thousands of swaps between hunreds of members.</li>
+          <li><strong>Why is Swapsea better?</strong><br/>
+          Many Clubs use Facebook or Google Sheets for posting Swaps which just doesn't work, and probably isn't great for privacy of personal data. <br/>
+          Also, the SLSA Substitutes system permits cancelling a swap which Swapsea does not (just swap back if you want!).<br/>
+          Finally, Swapsea is <%= link_to 'Open Source on GitHub', 'https://github.com/Swapsea/swapsea/' %> so you can make it just the way you want it!</li>
+          <li><strong>Why Swapsea?</strong><br/>Who doesn't want <%= link_to 'swapsies','https://en.wiktionary.org/wiki/swapsies' %> by the sea?</li>
+        </ol>
+          </div>
+      </div>
+    </div> <!-- End signup panel area -->
+  </div> <!-- container -->
+</div> <!-- End signup area -->

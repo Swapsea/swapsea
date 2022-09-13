@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'awards/index', type: :view do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   before do
     assign(:awards, [

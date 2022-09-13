@@ -126,7 +126,7 @@ class User < ApplicationRecord
   end
 
   def has_multiple_emails?
-    User.where(email: email).count >= 2
+    User.where(email:).count >= 2
   end
 
   def qualifications
@@ -137,12 +137,12 @@ class User < ApplicationRecord
     irbc = awards.where(award_name: 'IRB Crew Certificate').count
     src = awards.where({ award_name: 'Surf Rescue Certificate' } || { award_name: 'Surf Rescue Certificate (CPR Endorsed)' }).count
     {
-      bronze: bronze,
-      bbm: bbm,
-      artc: artc,
-      irbd: irbd,
-      irbc: irbc,
-      src: src
+      bronze:,
+      bbm:,
+      artc:,
+      irbd:,
+      irbc:,
+      src:
     }
   end
 

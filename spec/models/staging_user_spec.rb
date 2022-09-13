@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe StagingUser, type: :model do
-  before(:all) do
-    @staging_user = FactoryBot.create(:staging_user)
+  before do
+    @staging_user = create(:staging_user)
   end
 
   describe '#Atributes' do

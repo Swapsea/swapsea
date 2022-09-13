@@ -85,22 +85,22 @@ namespace :demo_club do
           email: Faker::Internet.email,
           password: 'password',
           mobile_phone: '0401222333',
-          dob: Time.zone.at((date2.to_f - date1.to_f) * rand + date1.to_f).strftime('%y-%m-%d'),
+          dob: Time.zone.at(((date2.to_f - date1.to_f) * rand) + date1.to_f).strftime('%y-%m-%d'),
           date_joined_organisation: today.strftime('%y-%m-%d'),
           category: 'Active (18yrs and over)',
           status: 'Active',
           season: "#{this_year}/#{next_yr}",
           organisation: club_name,
           patrol_name: patrol.name,
-          default_position: default_position,
-          bbm: bbm,
-          irbd: irbd,
-          irbc: irbc,
-          artc: artc,
-          spinal: spinal,
-          firstaid: firstaid,
-          bronze: bronze,
-          src: src
+          default_position:,
+          bbm:,
+          irbd:,
+          irbc:,
+          artc:,
+          spinal:,
+          firstaid:,
+          bronze:,
+          src:
         )
 
         user = User.find(user_id)
@@ -108,8 +108,8 @@ namespace :demo_club do
         puts "   #{user.name} - #{user.default_position}"
 
         PatrolMember.create(
-          user_id: user_id,
-          default_position: default_position,
+          user_id:,
+          default_position:,
           patrol_name: patrol.name,
           organisation: club_name
         )
@@ -119,8 +119,8 @@ namespace :demo_club do
           award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
-            user_id: user_id,
-            award_number: award_number,
+            user_id:,
+            award_number:,
             award_name: 'Silver Medallion Beach Management',
             award_date: award_date.strftime('%Y-%m-%d'),
             proficiency_date: (award_date + 1.year).strftime('%Y-%m-%d'),
@@ -131,8 +131,8 @@ namespace :demo_club do
           award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
-            user_id: user_id,
-            award_number: award_number,
+            user_id:,
+            award_number:,
             award_name: 'Silver Medallion IRB Driver',
             award_date: award_date.strftime('%Y-%m-%d'),
             proficiency_date: (award_date + 1.year).strftime('%Y-%m-%d'),
@@ -143,8 +143,8 @@ namespace :demo_club do
           award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
-            user_id: user_id,
-            award_number: award_number,
+            user_id:,
+            award_number:,
             award_name: 'IRB Crew Certificate',
             award_date: award_date.strftime('%Y-%m-%d'),
             proficiency_date: (award_date + 1.year).strftime('%Y-%m-%d'),
@@ -155,8 +155,8 @@ namespace :demo_club do
           award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
-            user_id: user_id,
-            award_number: award_number,
+            user_id:,
+            award_number:,
             award_name: 'Advanced Resuscitation Techniques Certificate',
             award_date: award_date.strftime('%Y-%m-%d'),
             proficiency_date: (award_date + 1.year).strftime('%Y-%m-%d'),
@@ -167,8 +167,8 @@ namespace :demo_club do
           award_number = "DNS#{rand.to_s[2..10]}"
           award_date = Date.today - 6.months
           Award.create(
-            user_id: user_id,
-            award_number: award_number,
+            user_id:,
+            award_number:,
             award_name: 'Bronze Medallion',
             award_date: award_date.strftime('%Y-%m-%d'),
             proficiency_date: (award_date + 1.year).strftime('%Y-%m-%d'),

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'swaps/show', type: :view do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   before do
     @swap = assign(:swap, Swap.create!(

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-Swapsea2::Application.configure do
+Swapsea::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
@@ -44,12 +44,12 @@ Swapsea2::Application.configure do
   config.action_mailer.default_url_options = { host: 'https://www.swapsea.com.au' }
 
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_SERVER'],
-    port: ENV['SMTP_PORT'] || 587,
+    address: ENV.fetch('SMTP_SERVER', nil),
+    port: ENV.fetch('SMTP_PORT', 587),
     enable_starttls_auto: true,
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD'],
+    user_name: ENV.fetch('SMTP_USERNAME', nil),
+    password: ENV.fetch('SMTP_PASSWORD', nil),
     authentication: :plain,
-    domain: ENV['SMTP_DOMAIN'] || 'localhost'
+    domain: ENV.fetch('SMTP_DOMAIN', 'localhost')
   }
 end

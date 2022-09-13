@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'notice_acknowledgements/edit', type: :view do
   before do
-    @notice_acknowledgement = assign(:notice_acknowledgement, FactoryBot.create(:notice_acknowledgement))
+    @notice_acknowledgement = assign(:notice_acknowledgement, create(:notice_acknowledgement))
   end
 
   it 'renders the edit notice_acknowledgement form' do

@@ -8,7 +8,7 @@ class Request < ApplicationRecord
   has_many :offers
 
   def offer_already_exists?(roster, user)
-    offers.where(user: user, roster: roster, status: 'pending').present?
+    offers.where(user:, roster:, status: 'pending').present?
   end
 
   def accepted_offer

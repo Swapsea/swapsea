@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'clubs/edit', type: :view do
   before do
-    @club = assign(:club, FactoryBot.create(:club))
+    @club = assign(:club, create(:club))
   end
 
   it 'renders the edit club form' do

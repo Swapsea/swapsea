@@ -1,0 +1,153 @@
+<% content_for(:title){ "Setup Guide" } %>
+
+<!-- Navbar -->
+<div class="navbar navbar-default navbar-fixed-top landing">
+  <div class="container page-scroll">
+    <a class="main-logo navbar-left" href="/#home"><h1>Swapsea</h1></a>
+    <p class="navbar-text navbar-right">
+      <% if ENV['ALLOW_LOGIN'] == 'true' %>
+        <% if user_signed_in? %>
+          <%= link_to dashboard_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+          <span class="hidden-xs">
+            <%= link_to 'Dashboard', dashboard_path, :class => "btn btn-default" %>
+          </span>
+        <% else %>
+          <%= link_to login_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+            <span class="hidden-xs">
+              <%= link_to 'Login', login_path, :class => "btn btn-default" %>
+            </span>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div> <!-- End navbar -->
+
+
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="row">
+      <div class="col-sm-12">
+        <h1><%= content_for(:title) %></h1>
+        <p class="heading">
+		<p>Updated for <strong>2022/23</strong> season</p>
+      </div>
+    </div> <!-- End intro -->
+
+  </div>
+</div> <!-- End Jumbotron -->
+
+
+
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<div class="terms-of-use">
+		    <h2>Introduction</h2>
+			<p>This setup guide is provided to assist getting your Club setup on Swapsea.
+			Please follow these instructions each season, even if your Club has used Swapsea in previous seasons. Just like annual skills maintenance, there may be changes from year to year.</p>
+			<p>This guide is divided into sections:</p>
+			<ul>
+			<li><b>Registration</b> - every Club, every season.</li>
+			<li><b>Pre Season</b> - Surfguard reports, information for PCs, VCs and patrolling members.</li>
+			<li><b>Mid Season</b> - Support</li>
+			<li><b>End of Season</b> - Stopping Surfguard reports and obtaining usage.</li>
+			</ul>
+			<p>If you have questions, please contact <%= mail_to "help@swapsea.com.au", "help@swapsea.com.au" %>.</p>
+
+			<hr/>
+
+			<h2>Registration</h2>
+			<p>Each season, Clubs wishing to use Swapsea need to let us know:</p>
+			<ol>
+			<li><b>Primary Contact</b> - Nominate who will be responsible for Swapsea at your Club. This is normally the Club Captain or Head of Lifesaving.</li>
+			<li><b>Skills Maintenance</b> - all Clubs, every season.</li>
+			<li><b>Outreach Patrols</b> - Surfguard reports, information for PCs, VCs and patrolling members.</li>
+			<li><b>Managers</b> - Nominate other members who can maintain the Skills Maintenance Sign ups. Note: Cancelling a confirmed Swap is not possible.</li>
+			</ol>
+			<p>Contact <%= mail_to "help@swapsea.com.au", "help@swapsea.com.au", subject: "Club Registration" %> and await further instructions.</p>
+
+			<p>Clubs wishing to use Swapsea for the first time must complete the Registration form and await further instructions.</p>
+			<%= link_to 'Register Your Club', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' %>
+			</p>
+
+			<hr/>
+
+			<h2>Pre-Season</h2>
+			<p>Swapsea makes patrol swaps easy. It does this by using member's personal data from Surfguard. Swapsea needs to be refreshed periodically to include new members, new awards and updated contact information.</p>
+			<h4>SurfGuard Custom Reports</h4>
+			<ol>
+				<li>Download Surfguard custom reports templates:
+					<ol type="a">
+					 <li>Either as a single ZIP bundle: <i class="fa fa-file-archive-o fa-lg"></i> <%= link_to 'swapsea_custom_reports.zip', 'downloads/swapsea_custom_reports.zip' %> </li>
+					<li>Or individual files
+					<ol type="i">
+						<li><%= link_to 'Awards', 'downloads/custom_report_awards_2022.xml' %></li>
+						<li><%= link_to 'Members', 'downloads/custom_report_members_2022.xml' %></li>
+						<li><%= link_to 'Patrols', 'downloads/custom_report_patrol_teams_2022.xml' %></li>
+						<li><%= link_to 'Roster', 'downloads/custom_report_rosters_2022.xml' %></li>
+						</ol>
+					</ol>
+				</li>
+				<li>Log in to Surfguard:<br/>
+				<%= link_to 'https://surfguard.slsa.asn.au/SLSA_Admin/modules/login/newLogin.php', 'https://surfguard.slsa.asn.au/SLSA_Admin/modules/login/newLogin.php' %></li>
+				<li>Under the <b>Reports</b> menu, choose <b>Custom Reports</b>
+				<%= image_tag('surfguard-custom-1.png', width: "90%") %></li>
+				<li>Load each saved template file, and press Go
+				<%= image_tag('surfguard-custom-2.png', width: "90%") %></li>
+				<li>Choose the options at the bottom
+				<ol type="a">
+					<li><b>Send Report Via Email</b>: help@swapsea.com.au</li>
+					<li><b>Recurring Type</b>: Choose Weekly ONLY for awards, members & patrols reports to keep
+					Swapsea up-to-date. Nb. The Rosters report <u>must not</u> be recurring. If you have a roster
+					change after launch, contact us by email.</li>
+					<li><b>Display Type</b>: Downloadable CSV (Excel Format) IMPORTANT!</li>
+					<li><b>Create Template</b>: Untick.</li>
+				</ol>
+				<%= image_tag('surfguard-custom-3.png', width: "90%") %>
+				<div class="panel panel-warning">
+				<div class="panel-heading">PRIVACY NOTE</div>
+				<div class="panel-body">To maintain the privacy and security of member information, please do not email the reports to
+				Swapsea yourself. Just let Surfguard send the reports directly and we'll let you know when it's arrived.</div>
+			</div>
+			</ol>
+
+
+			<h4>Information for PC/VCs &amp; Member</h4>
+			<p>Contact <%= mail_to "help@swapsea.com.au", "help@swapsea.com.au", subject: "Information for Clubs" %> and request information for Clubs.</p>
+
+			<hr/>
+			<h2>Mid-Season</h2>
+			<p>We encourage you to send members regular reminders about Swapsea. For example:
+
+			<b>Need a Swap? <%= link_to 'Swap it on Swapsea','https://www.swapsea.com.au' %></b>.</p>
+			<p>Also, if the number of Swap Requests is higher than the number of Swap Offers, remind patrollers that they must make an Offer to get a swap. Nobody will get a Swap if nobody makes an Offer. </p>
+			<hr/>
+
+			<h2>End of Season</h2>
+			<p>At the end of the season, please stop the Scheduled Background Reports.
+			<ol>
+				<li>From Surfguard home, go to <b>Maintenance > Background Reports > Scheduled
+		   		Background Reports</b>
+				   <%= image_tag('surfguard-custom-4.png', width: "90%") %>
+				</li>
+		   		<li>Click Delete beside each Swapsea report, called:
+					<ul>
+						<li>swapsea_awards</li>
+						<li>swapsea_members</li>
+						<li>swapsea_patrols</li>
+					</ul>
+		  		<li>Click <b>Delete</b> again, and click the link to return.
+				  <%= image_tag('surfguard-custom-5.png', width: "90%") %>
+				</li>
+		  	</ol>
+			</p>
+	   	</div>
+	</div>
+</div>

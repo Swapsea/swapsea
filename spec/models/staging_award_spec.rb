@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe StagingAward, type: :model do
-  before(:all) do
-    @staging_award = FactoryBot.create(:staging_award)
+  before do
+    @staging_award = create(:staging_award)
   end
 
   describe '#Atributes' do

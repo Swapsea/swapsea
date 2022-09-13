@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'event_logs/show', type: :view do
   before do
-    @event_log = assign(:event_log, FactoryBot.create(:event_log))
+    @event_log = assign(:event_log, create(:event_log))
   end
 
   it 'renders attributes in <p>' do

@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 RSpec.describe Role, type: :model do
-  before(:all) do
-    @role = FactoryBot.create(:role)
+  before do
+    @role = create(:role)
   end
 
   describe '#Atributes' do

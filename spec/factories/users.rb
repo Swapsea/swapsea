@@ -24,7 +24,7 @@ FactoryBot.define do
     end
   end
 
-  factory :admin_user, parent: :user, aliases: [:administrator] do
+  factory :admin_user, parent: :user, aliases: [:admin] do
     after(:create) do |user, _evaluator|
       user.add_role :admin
     end

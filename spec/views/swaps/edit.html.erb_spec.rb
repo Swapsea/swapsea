@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'swaps/edit', type: :view do
   before do
-    @swap = assign(:swap, FactoryBot.create(:swap))
+    @swap = assign(:swap, create(:swap))
   end
 
   it 'renders the edit swap form' do

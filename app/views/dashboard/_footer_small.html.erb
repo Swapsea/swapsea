@@ -1,12 +1,13 @@
 <div class="footer">
   <div class="row">
-    <div class="col-sm-5">
+    <div class="col-xs-12 text-center">
       <p class="copyright">
-        &copy; 2013 Swapsea
-        |
-        <%= link_to "Terms of Use", terms_of_use_path %>
-        |
-        <%= link_to('help@swapsea.com.au', "mailto:help@swapsea.com.au?subject=[#{current_user.organisation}] Help please") %>
+      <%= link_to 'Dashboard', dashboard_path %> |
+      <%= link_to 'Contact Us', contact_us_path %> |
+      <%= link_to 'Terms of Use', terms_of_use_path %> |
+      <%= link_to 'Swapsea on GitHub', 'https://github.com/Swapsea/swapsea/', target: '_blank' %>
+      <br/>
+        &copy; <%= Date.current.year %> Swapsea
       </p>
     </div>
   </div>
