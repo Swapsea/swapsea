@@ -1,16 +1,8 @@
 # frozen_string_literal: true
 
 class SwapseaMailer < ApplicationMailer
-  def test
-    @user = User.find(4_739_300)
-    @url = 'https://www.swapsea.com.au'
-    mail subject: 'Test Runner from Swapsea',
-         to: 'alex@nerdx.com.au',
-         from: 'Swapsea <noreply@swapsea.com.au>'
-  end
-
   # Sent to all users with a patrol in the next 7 days.
-  def weekly_rosters(user, next_roster, following_roster, subject)
+  def weekly_roster_reminder(user, next_roster, following_roster, subject)
     @user = user
     @subject = subject
     @next_roster = next_roster
@@ -23,7 +15,7 @@ class SwapseaMailer < ApplicationMailer
   ## To be generalised
 
   # Sent to all users with a proficiency in the next 7 days.
-  def north_bondi_weekly_proficiencies(user, proficiency)
+  def proficiency_reminder(user, proficiency)
     @user = user
     @proficiency = proficiency
     mail subject: 'Upcoming Skills Maintenance',
@@ -132,7 +124,7 @@ class SwapseaMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    mail subject: 'Activate your Swapsea account for 2021/22',
+    mail subject: 'Activate your Swapsea account for 2022/23',
          to: user.email,
          from: 'Swapsea <help@swapsea.com.au>'
   end

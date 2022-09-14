@@ -1,20 +1,59 @@
 <%= simple_form_for(@club) do |f| %>
   <%= f.error_notification %>
-
-    <%= f.input :name %>
-    <%= f.input :short_name %>
-    <%= f.label :show_patrols %>
-    <%= f.input_field :show_patrols, as: :boolean, boolean_style: :inline %><br/>
-    <%= f.label :show_rosters %>
-    <%= f.input_field :show_rosters, as: :boolean, boolean_style: :inline %><br/>
-    <%= f.label :show_swaps %>
-    <%= f.input_field :show_swaps, as: :boolean, boolean_style: :inline %><br/>
-    <%= f.label :show_outreach %>
-    <%= f.input_field :show_outreach, as: :boolean, boolean_style: :inline %><br/>
-    <%= f.label :show_skills_maintenance %>
-    <%= f.input_field :show_skills_maintenance, as: :boolean, boolean_style: :inline %><br/>
-    <%= f.input :lat %>
-    <%= f.input :lon %>
-    <%= f.button :submit %>
+<table class="table" style="width:auto">
+<tr>
+  <td colspan="2"><%= f.input :name %></td>
+</tr>
+<tr>
+  <td colspan="2"><%= f.input :short_name %></td>
+</tr>
+<tr>
+  <td><%= f.label :is_active %></td>
+  <td><%= f.input_field :is_active, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <th colspan="2">Comms</th>
+</tr>
+<tr>
+  <td><%= f.label :enable_reminders_email %></td>
+  <td><%= f.input_field :enable_reminders_email, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <td><%= f.label :enable_reminders_sms %></td>
+  <td><%= f.input_field :enable_reminders_sms, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <th colspan="2">Features</th>
+</tr>
+<tr>
+  <td><%= f.label :show_patrols %></td>
+  <td><%= f.input_field :show_patrols, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <td><%= f.label :show_rosters %></td>
+  <td><%= f.input_field :show_rosters, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <td><%= f.label :show_swaps %></td>
+  <td><%= f.input_field :show_swaps, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <td><%= f.label :show_outreach %></td>
+  <td><%= f.input_field :show_outreach, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <td><%= f.label :show_skills_maintenance %></td>
+  <td><%= f.input_field :show_skills_maintenance, as: :boolean, boolean_style: :inline %></td>
+</tr>
+<tr>
+  <td colspan="2"><%= f.input :lat %></td>
+</tr>
+<tr>
+  <td colspan="2"><%= f.input :lon %></td>
+</tr>
+<tr>
+  <td colspan="2"><%= f.button :submit %></td>
+</tr>
+</table>
 
 <% end %>

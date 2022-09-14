@@ -1,55 +1,99 @@
-<h1><%= @club.name %></h1>
+<h1>
+  <%= @club.name %>
+</h1>
 
-<table class="table">
-<tr>
-  <td>Name:</td>
-  <td><%= @club.name %></td>
-</tr>
-<tr>
-  <td>Short name:</td>
-  <td><%= @club.short_name %></td>
-</tr>
-<tr>
-  <td>Members:</td>
-  <td><%= @club.users.count %></td>
-</tr>
-<tr>
-  <td>Patrols:</td>
-  <td><%= @club.patrols.count %></td>
-</tr>
-<tr>
-  <td>Rosters:</td>
-  <td><%= @club.rosters.count %></td>
-</tr>
-<tr>
-  <td>Requests:</td>
-  <td><%= @club.requests.count %></td>
-</tr>
-<tr>
-  <td>Show Patrols:</td>
-  <td><%= @club.show_patrols %></td>
-</tr>
-<tr>
-  <td>Show Rosters:</td>
-  <td><%= @club.show_rosters %></td>
-</tr>
-<tr>
-  <td>Show Swaps:</td>
-  <td><%= @club.show_swaps %></td>
-</tr>
-<tr>
-  <td>Show Extra Patrols:</td>
-  <td><%= @club.show_outreach %></td>
-</tr>
-<tr>
-  <td>Skills maintenance:</td>
-  <td><%= @club.show_skills_maintenance %></td>
-</tr>
-<tr>
-  <td>Lat/Lon</td>
-  <td><%= @club.lat %>/<%= @club.lon %></td>
-</tr>
+<table class="table" style="width:auto">
+  <tr>
+    <td>Name:</td>
+    <td>
+      <%= @club.name %>
+    </td>
+  </tr>
+  <tr>
+    <td>Short name:</td>
+    <td>
+      <%= @club.short_name %>
+    </td>
+  </tr>
+  <tr>
+    <td>Active:</td>
+    <td>
+      <%= @club.is_active %>
+    </td>
+  </tr>
+  <tr>
+    <td>Patrol Reminders via Email:</td>
+    <td>
+      <%= @club.enable_reminders_email %>
+    </td>
+  </tr>
+  <tr>
+    <td>Patrol Reminders via SMS:</td>
+    <td>
+      <%= @club.enable_reminders_sms %>
+    </td>
+  </tr>
+  <tr>
+    <td>Show Patrols:</td>
+    <td>
+      <%= @club.show_patrols %>
+    </td>
+  </tr>
+  <tr>
+    <td>Show Rosters:</td>
+    <td>
+      <%= @club.show_rosters %>
+    </td>
+  </tr>
+  <tr>
+    <td>Show Swaps:</td>
+    <td>
+      <%= @club.show_swaps %>
+    </td>
+  </tr>
+  <tr>
+    <td>Show Extra Patrols:</td>
+    <td>
+      <%= @club.show_outreach %>
+    </td>
+  </tr>
+  <tr>
+    <td>Show Skills maintenance:</td>
+    <td>
+      <%= @club.show_skills_maintenance %>
+    </td>
+  </tr>
+  <tr>
+    <td>Lat/Lon</td>
+    <td>
+      <%= @club.lat %>/<%= @club.lon %>
+    </td>
+  </tr>
+  <tr>
+    <td>Members:</td>
+    <td>
+      <%= @club.users.count %>
+    </td>
+  </tr>
+  <tr>
+    <td>Patrols:</td>
+    <td>
+      <%= @club.patrols.count %>
+    </td>
+  </tr>
+  <tr>
+    <td>Rosters:</td>
+    <td>
+      <%= @club.rosters.count %>
+    </td>
+  </tr>
+  <tr>
+    <td>Requests:</td>
+    <td>
+      <%= @club.requests.count %>
+    </td>
+  </tr>
 </table>
 
-<%= link_to 'Edit', edit_club_path(@club) %> |
-<%= link_to 'Back', admin_clubs_path %>
+<%= link_to 'Edit' , edit_club_path(@club) %> |
+  <%= link_to 'Back to Clubs' , admin_clubs_path %>

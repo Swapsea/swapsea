@@ -29,7 +29,7 @@ RSpec.describe HomeController, type: :routing do
     end
 
     it 'routes to #contact_us' do
-    expect(get: '/contact-us').to route_to('home#contact_us')
-  end
+      expect(get: '/contact-us').to route_to('home#contact_us')
+    end
   end
 end
