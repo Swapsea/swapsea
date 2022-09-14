@@ -97,7 +97,7 @@
   <body>
     <div class="container">
       <div class="title">
-        <%= image_tag('main-logo.png', :alt => "Swapsea" :class => "logo") %>
+        <%= image_tag('main-logo.png', size: "150x31", alt: "Swapsea", class: "logo") %>
         <h2>Upcoming Patrol</h2>
       </div>
       <div class="content">
@@ -105,7 +105,7 @@
           G'day <%= @user.first_name %>,
         </p>
         <p>
-          You have a patrol coming up this week.
+          You have a patrol coming up soon.
         </p>
         <p>
           <strong>Upcoming patrol</strong><br/>
@@ -126,8 +126,7 @@
         </p>
         <p>
           Check the weather conditions before your patrol.<br/>
-          <a href="http://www.seabreeze.com.au/weather/nsw/sydney">Seabreeze - Sydney</a><br/>
-          <a href="http://swell.willyweather.com.au/nsw/sydney/bronte-beach.html">Willy Weather - Bronte Beach</a>
+          <a href="https://swell.willyweather.com.au/">Willy Weather</a>
         </p>
         <p>
           Have a great weekend!

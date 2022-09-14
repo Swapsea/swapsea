@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_074840) do
+ActiveRecord::Schema.define(version: 2022_02_08_103703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -69,6 +69,9 @@ ActiveRecord::Schema.define(version: 2018_12_18_074840) do
     t.datetime "updated_at"
     t.float "lat", default: 0.0, null: false
     t.float "lon", default: 0.0, null: false
+    t.boolean "is_active", default: false
+    t.boolean "enable_reminders_email", default: true
+    t.boolean "enable_reminders_sms", default: false
     t.index ["name"], name: "index_clubs_on_name"
   end
 
