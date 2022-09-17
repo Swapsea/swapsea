@@ -7,6 +7,11 @@ class Request < ApplicationRecord
   belongs_to :user
   has_many :offers
 
+  scope :with_status_open, lambda { |organisation|
+                             includes(:roster, :user, :offers, roster: [:patrol]).where('rosters.start > ? AND requests.status = ? AND rosters.organisation = ?',
+                                                                                        DateTime.now - 3.hours, 'open', organisation).order('rosters.start')
+                           }
+
   def offer_already_exists?(roster, user)
     offers.where(user:, roster:, status: 'pending').present?
   end

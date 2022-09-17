@@ -7,9 +7,7 @@ class SwapsController < ApplicationController
 
   # GET /swaps
   def index
-    @swaps = Request.includes(:roster, :user, :offers, roster: [:patrol]).where(
-      'rosters.start > ? AND requests.status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation
-    ).references(:roster).order('rosters.start')
+    @swaps = Request.with_status_open(selected_user.organisation)
   end
 
   def my_offers
