@@ -82,17 +82,6 @@ class Email < ApplicationRecord
     "Sent #{emails_sent} skills maintenance emails."
   end
 
-  def self.north_bondi_not_yet_proficient
-    ProficiencySignup.unsigned.each do |user_id|
-      user = User.find(user_id)
-      if user.club.is_active?
-        SwapseaMailer.north_bondi_not_yet_proficient(user).deliver
-      else
-        Rails.logger.warn "Skipped sending not yet proficient email because #{user.organisation} is_active=#{user.club.is_active}"
-      end
-    end
-  end
-
   def self.welcome_email(organisation)
     emails_sent = 0
     PatrolMember.where(organisation:).map do |pm|
@@ -118,8 +107,20 @@ class Email < ApplicationRecord
   end
 
   ###############################################################################
-  # => To consolidate
+  # => To refactor
   ###############################################################################
+
+  def self.north_bondi_not_yet_proficient
+    ProficiencySignup.unsigned.each do |user_id|
+      user = User.find(user_id)
+      if user.club.is_active?
+        SwapseaMailer.north_bondi_not_yet_proficient(user).deliver
+      else
+        Rails.logger.warn "Skipped sending not yet proficient email because #{user.organisation} is_active=#{user.club.is_active}"
+      end
+    end
+  end
+
   def self.north_bondi_patrol_reports
     reports_sent = 0
     rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.day,

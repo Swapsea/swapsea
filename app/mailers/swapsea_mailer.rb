@@ -12,20 +12,11 @@ class SwapseaMailer < ApplicationMailer
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
-  ## To be generalised
-
   # Sent to all users with a proficiency in the next 7 days.
   def proficiency_reminder(user, proficiency)
     @user = user
     @proficiency = proficiency
     mail subject: 'Upcoming Skills Maintenance',
-         to: @user.email,
-         from: 'Swapsea <noreply@swapsea.com.au>'
-  end
-
-  def north_bondi_not_yet_proficient(user)
-    @user = user
-    mail subject: 'Sign Up for Skills Maintenance',
          to: @user.email,
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
@@ -140,6 +131,14 @@ class SwapseaMailer < ApplicationMailer
   ###############################################################################
   # => To consolidate
   ###############################################################################
+
+  def north_bondi_not_yet_proficient(user)
+    @user = user
+    mail subject: 'Sign Up for Skills Maintenance',
+         to: @user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
+  end
+
   def north_bondi_patrol_report(roster)
     @roster = roster
     # Collect PC and VC Emails
