@@ -12,6 +12,8 @@ class Request < ApplicationRecord
                                                                                         DateTime.now - 3.hours, 'open', organisation).order('rosters.start')
                            }
 
+  attr_readonly :nudge_email_opt_out_date
+
   def offer_already_exists?(roster, user)
     offers.where(user:, roster:, status: 'pending').present?
   end
@@ -47,5 +49,10 @@ class Request < ApplicationRecord
 
   def offers_that_match_request
     Offer.where('roster_id = ? AND user_id =? AND status = ?', roster_id, user_id, 'pending')
+  end
+
+  def nudge_email_opt_out=(opt_out)
+    self.nudge_email_opt_out_date = (DateTime.now if opt_out)
+    save!
   end
 end

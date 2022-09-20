@@ -93,6 +93,15 @@ class SwapseaMailer < ApplicationMailer
          reply_to: request.accepted_offer.user.email
   end
 
+  def request_nudge_offers(request, other_request_dates)
+    @request = request
+    @user = request.user
+    @other_request_dates = other_request_dates
+    mail subject: 'Make an offer',
+         to: request.user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
+  end
+
   # Sent to each offer user to notify them that the request was cancelled
   def request_cancelled(offer)
     @request = offer.request

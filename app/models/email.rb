@@ -82,6 +82,42 @@ class Email < ApplicationRecord
     "Sent #{emails_sent} skills maintenance emails."
   end
 
+  # Nudge open requestors to make an offer
+  def self.weekly_nudge_offers(organisation = nil)
+    emails_sent = 0
+
+    # All open requests.
+    clubs = if organisation
+              Club.with_reminder_emails_enabled.where(name: organisation)
+            else
+              Club.with_reminder_emails_enabled
+            end
+
+    clubs.map do |club|
+      open_requests = Request.with_status_open(club.name)
+      open_requests.map do |open_request|
+        # Open requests not by this user or for this roster.
+        other_requests = Request.with_status_open(club.name)
+                                .where.not(user_id: open_request.user_id)
+                                .where.not(roster_id: open_request.roster_id)
+
+        other_request_dates = Set.new
+        other_requests.map do |other_request|
+          other_request_dates.add(other_request.roster.start.strftime('%A %d %B %Y'))
+        end
+
+        if other_request_dates.length.positive?
+          SwapseaMailer.request_nudge_offers(open_request, other_request_dates).deliver
+          emails_sent += 1
+        end
+      rescue Exception => e
+        Rails.logger.error "Error sending request nudge email: #{e}"
+      end
+
+      "Sent #{emails_sent} request nudge emails for #{club.name}"
+    end
+  end
+
   def self.welcome_email(organisation)
     emails_sent = 0
     PatrolMember.where(organisation:).map do |pm|

@@ -77,6 +77,21 @@
 				</div>
 			</div>
 			<hr/>
+			<% end
+
+			if @request.user_id = session[:selected_user_id] %>
+			<div class="row">
+				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Nudge me?</strong></label>
+				<div class="col-xs-8 col-sm-7">
+					<div class="visible-xs"><strong>Nudge me?</strong></div>
+					<% if @request.nudge_email_opt_out %>
+						No, please don't nudge me to make offers
+					<% else %>
+						Yes, please nudge me to make offers
+					<% end %>
+				</div>
+			</div>
+			<hr/>
 			<% end %>
 			<div class="buttons">
 				<%= link_to 'Edit Request', edit_request_path(@request), :class => "btn btn-primary" if selected_user == @request.user && @request.status == 'open' %>

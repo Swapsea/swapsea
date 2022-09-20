@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_103703) do
+ActiveRecord::Schema.define(version: 2022_09_17_131536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -227,6 +227,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "nudge_email_opt_out", default: false
+    t.datetime "nudge_email_opt_out_date"
     t.index ["roster_id"], name: "index_requests_on_roster_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end

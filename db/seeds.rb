@@ -9,7 +9,7 @@ ActiveRecord::Base.transaction do
   Role.create(name: 'admin')
 
   Club.create(name: 'Swapsea SLSC', short_name: 'Swapsea', is_active: true, show_patrols: true, show_rosters: true,
-              show_swaps: true, show_skills_maintenance: true, show_outreach: false, lat: 0, lon: 0)
+              show_swaps: true, show_skills_maintenance: true, show_outreach: false, lat: 0, lon: 0, enable_reminders_email: true, enable_reminders_sms: false)
   Patrol.create(organisation: 'Swapsea SLSC', name: 'Patrol 01', short_name:  'P01', need_bbm: 1, need_irbd: 1,
                 need_irbc: 1, need_artc: 1, need_firstaid: 0, need_bronze: 3, need_src: 0)
   Patrol.create(organisation: 'Swapsea SLSC', name: 'Patrol 02', short_name:  'P02', need_bbm: 1, need_irbd: 1,

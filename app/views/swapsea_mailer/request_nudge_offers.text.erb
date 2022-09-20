@@ -1,0 +1,21 @@
+Swapsea - Make an Offer
+========================
+
+G'day <%= @user.first_name %>,
+
+Make the first move!
+
+Make offers to others for your Swap Request on <%= @request.roster.start.strftime("%A %d %B %Y") %>.
+
+Can you make any of these dates instead?
+
+<% @other_request_dates.map do |other_request_date| %>
+* <%= other_request_date %>
+<% end %>
+
+Make an offer now at <%= swaps_url %>
+
+We'll remind you once a week unless you opt out at <%= edit_request_url(@request) %>
+
+Much Love,
+Swapsea
