@@ -8,12 +8,12 @@ class Email < ApplicationRecord
     sms_sent = 0
 
     # Who is on patrol in the next week.
-    if organisation
-      rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.week,
-                           organisation)
-    else
-      rosters = Roster.where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.week)
-    end
+    rosters = if organisation
+                Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.week,
+                             organisation)
+              else
+                Roster.where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.week)
+              end
     rosters.map do |roster|
       roster.current.each do |user|
         subject = "Upcoming Patrol - #{user.organisation}"
@@ -23,35 +23,35 @@ class Email < ApplicationRecord
           next_roster = user_roster.first
           if user_roster.second.present?
             following_roster = user_roster.second
-            if user.club.is_active && user.club.enable_reminders_email
+            if user.club.with_reminder_emails_enabled
               SwapseaMailer.weekly_roster_reminder(user, next_roster, following_roster, subject).deliver
               emails_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
+              Rails.logger.info "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
-            if user.club.is_active && user.club.enable_reminders_sms
+            if user.club.with_reminder_sms_enabled
               SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
+              Rails.logger.info "Skipped sending patrol roster SMS because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
             end
           elsif user_roster.first.present?
-            if user.club.is_active && user.club.enable_reminders_email
+            if user.club.with_reminder_emails_enabled
               SwapseaMailer.weekly_roster_reminder(user, next_roster, nil, subject).deliver
               emails_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
+              Rails.logger.info "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
-            if user.club.is_active && user.club.enable_reminders_sms
+            if user.club.with_reminder_sms_enabled
               SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
+              Rails.logger.info "Skipped sending patrol roster SMS because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
             end
           end
         end
       rescue Exception => e
-        Rails.logger.warn "Skipped sending patrol roster email because user:#{user.id} has no email."
+        Rails.logger.warn "Skipped sending patrol roster email because user:#{user.id} has no email. #{e}"
       end
     end
     "Sent #{emails_sent} patrol roster emails and #{sms_sent} SMS."
@@ -60,23 +60,23 @@ class Email < ApplicationRecord
   def self.weekly_skills_maintenance(organisation = nil)
     emails_sent = 0
     # Who has skills maintenance this week.
-    if organisation
-        proficiencies = Proficiency.where('start >= ? AND start <=? AND organisation = ?', DateTime.now,
-                        DateTime.now + 1.week, organisation)
-    else
-      proficiencies = Proficiency.where('start >= ? AND start <=?', DateTime.now,
-                      DateTime.now + 1.week)
-    end
+    proficiencies = if organisation
+                      Proficiency.where('start >= ? AND start <=? AND organisation = ?', DateTime.now,
+                                        DateTime.now + 1.week, organisation)
+                    else
+                      Proficiency.where('start >= ? AND start <=?', DateTime.now,
+                                        DateTime.now + 1.week)
+                    end
     proficiencies.map do |proficiency|
       proficiency.users.map do |user|
-        if user.club.is_active && user.club.enable_reminders_email && user.club.show_skills_maintenance
+        if user.club.with_reminder_emails_enabled && user.club.show_skills_maintenance
           SwapseaMailer.proficiency_reminder(user, proficiency).deliver
           emails_sent += 1
         else
           Rails.logger.warn "Skipped sending skills maintenance email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email} and show_skills_maintenance=#{user.club.show_skills_maintenance}"
         end
       rescue Exception => e
-        Rails.logger.warn "Skipped sending skills maintenance email because user:#{user.id} has no email."
+        Rails.logger.warn "Skipped sending skills maintenance email because user:#{user.id} has no email. #{e}"
       end
     end
     "Sent #{emails_sent} skills maintenance emails."
