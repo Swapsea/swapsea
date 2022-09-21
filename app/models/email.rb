@@ -8,12 +8,12 @@ class Email < ApplicationRecord
     sms_sent = 0
 
     # Who is on patrol in the next week.
-    if organisation
-      rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.week,
-                           organisation)
-    else
-      rosters = Roster.where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.week)
-    end
+    rosters = if organisation
+                Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.week,
+                             organisation)
+              else
+                Roster.where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.week)
+              end
     rosters.map do |roster|
       roster.current.each do |user|
         subject = "Upcoming Patrol - #{user.organisation}"
@@ -60,13 +60,13 @@ class Email < ApplicationRecord
   def self.weekly_skills_maintenance(organisation = nil)
     emails_sent = 0
     # Who has skills maintenance this week.
-    if organisation
-        proficiencies = Proficiency.where('start >= ? AND start <=? AND organisation = ?', DateTime.now,
-                        DateTime.now + 1.week, organisation)
-    else
-      proficiencies = Proficiency.where('start >= ? AND start <=?', DateTime.now,
-                      DateTime.now + 1.week)
-    end
+    proficiencies = if organisation
+                      Proficiency.where('start >= ? AND start <=? AND organisation = ?', DateTime.now,
+                                        DateTime.now + 1.week, organisation)
+                    else
+                      Proficiency.where('start >= ? AND start <=?', DateTime.now,
+                                        DateTime.now + 1.week)
+                    end
     proficiencies.map do |proficiency|
       proficiency.users.map do |user|
         if user.club.is_active && user.club.enable_reminders_email && user.club.show_skills_maintenance

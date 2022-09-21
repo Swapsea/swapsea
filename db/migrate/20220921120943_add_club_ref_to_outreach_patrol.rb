@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class AddClubRefToOutreachPatrol < ActiveRecord::Migration[6.0]
   def change
     add_reference :outreach_patrols, :club, foreign_key: true
-    execute <<-SQL
+    execute <<-SQL.squish
       UPDATE outreach_patrols op
       SET club_id = c.id
       FROM clubs c

@@ -12,5 +12,4 @@ class Club < ApplicationRecord
   has_many :requests, through: :rosters
 
   scope :with_show_patrols, -> { where(is_active: true, show_patrols: true) }
-
 end

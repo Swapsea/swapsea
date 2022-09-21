@@ -18,11 +18,11 @@ class PatrolMembersController < ApplicationController
   # GET /patrol_members.json
   def index
     @patrol_members = PatrolMember.joins(patrol: :club).where(name: selected_user.organisation).paginate(page: params[:page],
-                                                                                            per_page: 30)
+                                                                                                         per_page: 30)
   end
 
   def admin
-    @patrol_members = PatrolMember.all.joins(patrol: :club).includes([:user, :patrol])
+    @patrol_members = PatrolMember.all.joins(patrol: :club).includes(%i[user patrol])
     render layout: 'admin'
   end
 

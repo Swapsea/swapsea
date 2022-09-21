@@ -12,10 +12,10 @@ class ProficienciesController < ApplicationController
                        Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where(name: selected_user.organisation).order(:start)
                      elsif selected_user.has_role?(:manager)
                        Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 10.days,
-                                                                                        selected_user.organisation)
+                                                                                                     selected_user.organisation)
                      else
                        Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 10.minutes,
-                                                                                        selected_user.organisation)
+                                                                                                     selected_user.organisation)
                      end
 
     @proficiencies_sorted = @proficiencies.sort_by(&:start)
@@ -28,7 +28,7 @@ class ProficienciesController < ApplicationController
                        Proficiency.all.includes([:proficiency_signups], [:users]).order(:start)
                      elsif selected_user.has_role?(:manager)
                        Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 3.hours,
-                                                                                        selected_user.organisation)
+                                                                                                     selected_user.organisation)
                      end
 
     render layout: 'admin'
