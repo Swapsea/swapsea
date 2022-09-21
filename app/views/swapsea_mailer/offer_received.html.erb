@@ -122,7 +122,7 @@
           <strong>Your swap request</strong><br/>
           <%= @request.roster.start.strftime("%A %d %B %Y") %>,
           <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
-          <%= @request.roster.patrol_name %><br/>
+          <%= @request.roster.patrol.name %><br/>
         </p>
         <p>
           <strong>Current offers</strong><br/>
@@ -130,7 +130,7 @@
           <div class="offer<%= ' offer-new' if offer.id == @offer.id %>">
           <%= raw('<strong>NEW</strong><br/>') if offer.id == @offer.id %>
             <div class="roster"><%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %></div>
-            <div class="patrol"><%= offer.roster.patrol_name %></div>
+            <div class="patrol"><%= offer.roster.patrol.name %></div>
             <div class="member"><%= offer.user.first_name %> <%= offer.user.last_name %></div>
             <div class="comment"><%= offer.comment %></div>
           </div>

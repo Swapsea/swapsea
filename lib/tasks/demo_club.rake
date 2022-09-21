@@ -196,7 +196,7 @@ namespace :demo_club do
         secret: Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
       )
       roster = Roster.last
-      puts "#{roster.patrol_name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
+      puts "#{roster.patrol.name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
       Roster.create(
         start: Time.zone.parse("#{formatted_date} 12:45:00").utc.iso8601,
         finish: Time.zone.parse("#{formatted_date} 18:00:00").utc.iso8601,
@@ -205,7 +205,7 @@ namespace :demo_club do
         secret: Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
       )
       roster = Roster.last
-      puts "#{roster.patrol_name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
+      puts "#{roster.patrol.name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
     end
 
     Roster.where(organisation: club.name).each(&:awards_count)

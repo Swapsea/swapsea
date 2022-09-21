@@ -16,7 +16,7 @@ UID:<%= @user.ics %>.<%= roster.id %>@swapsea.com.au
 CREATED:<%= roster.created_at.utc.strftime('%Y%m%dT%H%M%SZ') %>
 LAST-MODIFIED:<%= roster.updated_at.utc.strftime('%Y%m%dT%H%M%SZ') %>
 SUMMARY:Surf Patrol
-DESCRIPTION:<%= roster.organisation %>\n<%= roster.patrol_name %>
+DESCRIPTION:<%= roster.organisation %>\n<%= roster.patrol.name %>
 METHOD:PUBLISH
 ORGANIZER:<%= roster.organisation %>
 END:VEVENT

@@ -112,14 +112,14 @@
         </p>
         <p>
           <strong>Your swap request</strong><br/>
-          <%= @request.roster.patrol_name %><br/>
+          <%= @request.roster.patrol.name %><br/>
           <%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
           <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
           Status: <%= @request.status.capitalize %>
         </p>
         <p>
           <strong>The offer that was cancelled</strong><br/>
-          <%= @offer.roster.patrol_name %><br/>
+          <%= @offer.roster.patrol.name %><br/>
           <%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
           <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
           Status: <%= @offer.status.capitalize %><br/>
