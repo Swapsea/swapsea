@@ -15,24 +15,24 @@ class RostersController < ApplicationController
   end
 
   def admin
-    @rosters = Roster.all.includes([:patrol])
+    @rosters = Roster.all.joins(patrol: :club).includes([:patrol])
     render layout: 'admin'
   end
 
   # GET /rosters
   # GET /rosters.json
   def index
-    @patrols = Patrol.joins(:users).where(organisation: selected_user.organisation)
+    @patrols = Patrol.joins(:club).where('clubs.name = ?', selected_user.organisation).includes([:patrol])
 
     if params[:view] == 'all'
-      @rosters = Roster.includes([:patrol]).where(organisation: selected_user.organisation).sort_by(&:start)
-      @rosters_this_year = Roster.includes([:patrol]).where(organisation: selected_user.organisation)
+      @rosters = Roster.joins(patrol: :club).where(organisation: selected_user.organisation).includes([:patrol]).sort_by(&:start)
+      @rosters_this_year = Roster.includes(patrol: :club).where(organisation: selected_user.organisation).includes([:patrol])
     else
       finish_time = 3.hours.ago
-      @rosters = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
-                                                  selected_user.organisation).sort_by(&:start)
-      @rosters_this_year = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
-                                                            selected_user.organisation)
+      @rosters = Roster.joins(patrol: :club).where('finish >= ? AND clubs.name = ?', finish_time.to_s(:db),
+                                                  selected_user.organisation).includes([:patrol]).sort_by(&:start)
+      @rosters_this_year = Roster.joins(patrol: :club).where('finish >= ? AND clubs.name = ?', finish_time.to_s(:db),
+                                                            selected_user.organisation).includes([:patrol])
     end
 
     @rosters_this_year_sorted = @rosters_this_year.sort_by(&:start)
@@ -44,9 +44,9 @@ class RostersController < ApplicationController
     @my_offers = Offer.where(user: selected_user,
                              status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
                                       'deleted']).joins(:roster).order('rosters.start desc')
-    @requests = Request.joins(:roster).where('start > ? AND status = ? AND rosters.organisation = ?',
+    @requests = Request.joins(:user, :roster).where('start > ? AND status = ? AND users.organisation = ?',
                                              DateTime.now - 3.hours, 'open', selected_user.organisation).order('rosters.start')
-    @confirmed_offers = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted',
+    @confirmed_offers = Offer.joins(:user, :roster).where('status = ? AND users.organisation = ?', 'accepted',
                                                    selected_user.organisation).order(updated_at: :desc)
   end
 

@@ -37,7 +37,7 @@
         <tbody>
           <% @rosters.each do |roster| %>
             <tr>
-              <td><%= roster.patrol.organisation if roster.patrol.present? %></td>
+              <td><%= roster.patrol.club.name if roster.patrol.present? %></td>
               <td><%= roster.id %></td>
               <td><%= roster.patrol.name if roster.patrol.present? %></td>
               <td><%= roster.start.strftime('%a %d %b %y') %></td>

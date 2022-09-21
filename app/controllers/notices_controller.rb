@@ -7,7 +7,7 @@ class NoticesController < ApplicationController
   layout 'admin'
 
   def admin
-    @notices = Notice.all
+    @notices = Notice.all.includes([:club])
     @notices_preview = Notice.visible
   end
 

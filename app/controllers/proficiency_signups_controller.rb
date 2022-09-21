@@ -31,7 +31,7 @@ class ProficiencySignupsController < ApplicationController
 
     respond_to do |format|
       # Check member hasn't already signed up to proficiency.
-      if ProficiencySignup.joins(:proficiency).where('user_id = ? AND start >= ? AND name = ?', selected_user.id,
+      if ProficiencySignup.joins(:proficiency).where('user_id = ? AND start >= ? AND clubs.name = ?', selected_user.id,
                                                      DateTime.now, @proficiency_signup.proficiency.name).present?
         format.html do
           redirect_to proficiencies_path, alert: 'You are already signed up to this type of Skills Maintenance session.'

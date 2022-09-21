@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Patrol < ApplicationRecord
-  belongs_to :club, foreign_key: 'organisation', primary_key: 'name'
-  has_many :patrol_members, foreign_key: 'patrol_name', primary_key: 'name'
+  belongs_to :club
+  has_many :patrol_members
   has_many :users, through: :patrol_members
-  has_many :rosters, foreign_key: 'patrol_name', primary_key: 'name'
+  has_many :rosters
   has_many :awards, through: :users
 
   # Returns array of patrol requirements

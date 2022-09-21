@@ -9,12 +9,12 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies.json
   def index
     @proficiencies = if selected_user.has_role?(:admin)
-                       Proficiency.all.includes([:proficiency_signups], [:users]).where(organisation: selected_user.organisation).order(:start)
+                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where(name: selected_user.organisation).order(:start)
                      elsif selected_user.has_role?(:manager)
-                       Proficiency.all.includes([:proficiency_signups], [:users]).where('start >= ? AND organisation = ?', DateTime.now - 10.days,
+                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 10.days,
                                                                                         selected_user.organisation)
                      else
-                       Proficiency.all.includes([:proficiency_signups], [:users]).where('start >= ? AND organisation = ?', DateTime.now - 10.minutes,
+                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 10.minutes,
                                                                                         selected_user.organisation)
                      end
 
@@ -27,7 +27,7 @@ class ProficienciesController < ApplicationController
     @proficiencies = if selected_user.has_role?(:admin)
                        Proficiency.all.includes([:proficiency_signups], [:users]).order(:start)
                      elsif selected_user.has_role?(:manager)
-                       Proficiency.all.includes([:proficiency_signups], [:users]).where('start >= ? AND organisation = ?', DateTime.now - 3.hours,
+                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 3.hours,
                                                                                         selected_user.organisation)
                      end
 

@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
 
     @activities = PublicActivity::Activity.order('created_at desc').limit(10)
 
-    @confirmed_offers = Offer.includes(:user, :roster, request: %i[user roster]).joins(:roster).where('offers.status = ? AND rosters.organisation = ?', 'accepted',
+    @confirmed_offers = Offer.includes(:user, :roster, request: %i[user roster]).joins(:roster).where('offers.status = ? AND users.organisation = ?', 'accepted',
                                                                                                       selected_user.organisation).order(updated_at: :desc).limit(3)
 
     render layout: 'dashboard'

@@ -2,7 +2,7 @@
 
 class PatrolMember < ApplicationRecord
   belongs_to :user
-  belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
+  belongs_to :patrol
 
   def rosters
     Roster.all.where(patrol_name:)
