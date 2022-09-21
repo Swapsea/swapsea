@@ -27,7 +27,6 @@ class PatrolMember < ApplicationRecord
       patrol_member = find_by(user_id: row['Member ID']) || new
       user = User.find_by(id: row['Member ID'])
       if user.present?
-        user.patrol_name = row['Team Name']
         user.default_position = row['Team Position']
         user.default_position = 'Member' if user.default_position == 'Award Member'
         user.save
