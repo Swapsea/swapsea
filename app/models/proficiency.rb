@@ -5,5 +5,5 @@ class Proficiency < ApplicationRecord
   has_many :proficiency_signups
   has_many :users, through: :proficiency_signups
 
-  scope :with_club, ->(club_id) { where(club_id:) }
+  scope :with_club, ->(club_id) { where(club_id:).includes(:proficiency_signups, :users) }
 end

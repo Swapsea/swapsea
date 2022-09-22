@@ -6,6 +6,7 @@ class PatrolMember < ApplicationRecord
 
   scope :with_user, ->(user_id) { where(user_id:).includes(:user, :patrol) }
   scope :with_patrol, ->(patrol_id) { where(patrol_id:).includes(:patrol, :user) }
+  scope :with_club, ->(club_id) { joins(:patrol).where(patrols: { club_id: }).includes(:patrol, :user) }
 
   def rosters
     Roster.all.where(patrol_name:)
