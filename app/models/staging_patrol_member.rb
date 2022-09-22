@@ -33,7 +33,7 @@ class StagingPatrolMember < ApplicationRecord
 
     PatrolMember.transaction do
       staged_patrol_members.each do |staged_patrol_member|
-        next unless Patrol.find_by(name: staged_patrol_member.patrol_name,
+        next unless Patrol.find_by(name: staged_patrol_member.patrol.name,
                                    organisation: staged_patrol_member.organisation)
 
         patrol_member = PatrolMember.find_or_initialize_by(user_id: staged_patrol_member.user_id)
@@ -41,14 +41,14 @@ class StagingPatrolMember < ApplicationRecord
         user = User.find_by(id: staged_patrol_member.user_id)
 
         if user.present?
-          user.patrol_name = staged_patrol_member.patrol_name
+          user.patrol.name = staged_patrol_member.patrol.name
           user.default_position = staged_patrol_member.default_position
           user.default_position = 'Member' if user.default_position == 'Award Member'
           user.save!
         end
 
         patrol_member.user_id = staged_patrol_member.user_id
-        patrol_member.patrol_name = staged_patrol_member.patrol_name
+        patrol_member.patrol.name = staged_patrol_member.patrol.name
         patrol_member.default_position = staged_patrol_member.default_position
         patrol_member.organisation = staged_patrol_member.organisation
 

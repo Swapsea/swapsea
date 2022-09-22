@@ -6,6 +6,8 @@ class Roster < ApplicationRecord
   has_many :swaps
   has_many :offers
 
+  scope :with_club, ->(club_id) { joins(:patrol).where(patrols: { club_id: }).includes(:patrol) }
+
   include PgSearch::Model
   pg_search_scope :search, against: %i[patrol_name organisation],
                            using: { tsearch: { dictionary: 'english' } }

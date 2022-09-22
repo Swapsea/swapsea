@@ -7,6 +7,8 @@ class Patrol < ApplicationRecord
   has_many :rosters
   has_many :awards, through: :users
 
+  scope :with_club, ->(club_id) { where(club_id:).includes(:club) }
+
   # Returns array of patrol requirements
   def requirements
     {

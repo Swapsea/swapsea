@@ -12,7 +12,7 @@ class NoticesController < ApplicationController
   end
 
   def index
-    @notices = Notice.visible.where('(organisation = ? OR system_wide=1)', selected_user.organisation)
+    @notices = Notice.with_club(selected_user.club).with_visible
     render layout: 'dashboard'
   end
 

@@ -333,7 +333,6 @@ ActiveRecord::Schema.define(version: 2022_09_21_124134) do
     t.string "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "organisation", null: false
     t.string "last_name"
     t.string "first_name"
     t.string "preferred_name"
@@ -356,6 +355,8 @@ ActiveRecord::Schema.define(version: 2022_09_21_124134) do
     t.boolean "bronze"
     t.boolean "src"
     t.boolean "smsable", default: false
+    t.bigint "club_id"
+    t.index ["club_id"], name: "index_users_on_club_id"
     t.index ["id"], name: "index_users_on_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -372,4 +373,5 @@ ActiveRecord::Schema.define(version: 2022_09_21_124134) do
   add_foreign_key "patrols", "clubs"
   add_foreign_key "proficiencies", "clubs"
   add_foreign_key "rosters", "patrols"
+  add_foreign_key "users", "clubs"
 end

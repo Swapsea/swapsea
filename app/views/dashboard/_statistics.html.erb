@@ -11,33 +11,33 @@
         <div class="stats">
           <div class="stat">
             <span class="number confirmed-swaps">
-              <%= Request.joins(:user).where('users.organisation = ? AND requests.status = ?', selected_user.organisation, 'successful').count %>
+              <%= Request.with_club(selected_user.club_id).with_successful_status.count %>
             </span>
             <span class="title">Confirmed Swaps</span>
           </div>
           <div class="stat">
             <span class="number offers-pending">
-              <%= Offer.joins(:user).where('users.organisation = ? AND offers.status = ?', selected_user.organisation, 'pending').count %>
+              <%= Offer.with_club(selected_user.club_id).with_pending_status.count %>
             </span>
             <span class="title">Offers Pending</span>
           </div>
           <div class="stat">
             <span class="number requests-open">
-              <%= Request.joins(:user).where('users.organisation = ? AND requests.status = ?', selected_user.organisation, 'open').count %>
+              <%= Request.with_club(selected_user.club_id).with_open_status.count %>
             </span>
             <span class="title">Requests Open</span>
           </div>
-          <% if ((selected_user.organisation.present?) && (selected_user.club.show_skills_maintenance)) %>
+          <% if (selected_user.club.show_skills_maintenance) %>
             <div class="stat">
               <span class="number proficiency-signups">
-                <%= ProficiencySignup.all.count %>
+              <%= ProficiencySignup.with_club(selected_user.club_id).all.count %>
               </span>
               <span class="title">Skills Maintenance Signups</span>
             </div>
           <% end %>
           <div class="stat">
             <span class="number proficiency-signups">
-              <%= User.where(:organisation => selected_user.organisation).sum(:sign_in_count) %>
+              <%= User.with_club(selected_user.club_id).sum(:sign_in_count) %>
             </span>
             <span class="title">Member Logins</span>
           </div>
