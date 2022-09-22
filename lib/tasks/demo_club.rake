@@ -7,17 +7,28 @@ namespace :demo_club do
 
     # Create club
     Club.create(name: club_name, short_name: club_name, show_patrols: true, show_rosters: true, show_swaps: true,
-                show_skills_maintenance: false, show_outreach: false, lat: -33.89051, lon: 151.280002)
+                show_skills_maintenance: false, show_outreach: false, lat: -33.89051, lon: 151.280002,
+                enable_reminders_email: true ,enable_reminders_sms: false)
     club = Club.find_by(name: club_name)
 
     puts club.name
 
     # Create patrols
     (1..14).map do |count|
-      Patrol.create(name: "Demo Patrol #{count}", special_event: false, need_bbm: 1, need_irbd: 1, need_irbc: 2,
-                    need_artc: 0, need_firstaid: 0, need_spinal: 0, need_bronze: 5, need_src: 0, organisation: club.name, short_name: club.short_name)
+      Patrol.create(club: club,
+                    name: "Demo Patrol #{count}",
+                    short_name: "P#{count}",
+                    special_event: false,
+                    need_bbm: 1,
+                    need_irbd: 1,
+                    need_irbc: 2,
+                    need_artc: 0,
+                    need_firstaid: 0,
+                    need_spinal: 0,
+                    need_bronze: 5,
+                    need_src: 0)
     end
-    patrols = Patrol.where(organisation: club.name)
+    patrols = Patrol.where(club:)
 
     today = Date.today
     this_year = today.strftime('%Y')
@@ -90,8 +101,7 @@ namespace :demo_club do
           category: 'Active (18yrs and over)',
           status: 'Active',
           season: "#{this_year}/#{next_yr}",
-          organisation: club_name,
-          patrol_name: patrol.name,
+          club: club,
           default_position:,
           bbm:,
           irbd:,
@@ -108,10 +118,9 @@ namespace :demo_club do
         puts "   #{user.name} - #{user.default_position}"
 
         PatrolMember.create(
+          patrol: patrol,
           user_id:,
-          default_position:,
-          patrol_name: patrol.name,
-          organisation: club_name
+          default_position:
         )
 
         # Create awards
@@ -188,40 +197,49 @@ namespace :demo_club do
       formatted_date = date.strftime('%Y-%m-%d')
       next unless date.saturday? || date.sunday?
 
-      Roster.create(
+      roster = Roster.create(
         start: Time.zone.parse("#{formatted_date} 07:45:00").utc.iso8601,
         finish: Time.zone.parse("#{formatted_date} 13:00:00").utc.iso8601,
-        organisation: club.name,
-        patrol_name: Patrol.where(organisation: club.name).sample.name,
+        patrol: Patrol.with_club(club).sample,
         secret: Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
       )
-      roster = Roster.last
+
       puts "#{roster.patrol.name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
-      Roster.create(
+
+      roster = Roster.create(
+        patrol: Patrol.with_club(club).sample,
         start: Time.zone.parse("#{formatted_date} 12:45:00").utc.iso8601,
         finish: Time.zone.parse("#{formatted_date} 18:00:00").utc.iso8601,
-        organisation: club.name,
-        patrol_name: Patrol.where(organisation: club.name).sample.name,
         secret: Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
       )
-      roster = Roster.last
+
       puts "#{roster.patrol.name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
     end
 
-    Roster.where(organisation: club.name).each(&:awards_count)
+    Roster.with_club(club).each(&:awards_count)
   end
 
-  desc "Destroy all records related to the fake club and it's members."
+  desc "Destroy all records related to the demo club and its members."
   task :destroy, [:club_name] => :environment do |_task, args|
     club_name = args[:club_name]
 
-    Club.where(name: club_name).destroy_all
-    PatrolMember.where(organisation: club_name).destroy_all
-    Patrol.where(organisation: club_name).destroy_all
-    User.where(organisation: club_name).each do |user|
-      Award.where(user_id: user.id).destroy_all
-      user.destroy
+    club = Club.find_by_name(club_name)
+
+    if club
+      puts "Deleting #{club.name}..."
+      # Destroy in reverse order as we don't have cascading delete (for safety)
+      User.with_club(club).each do |user|
+        puts "   Deleting #{user.name}..."
+        Award.with_user(user).destroy_all
+        PatrolMember.with_user(user).destroy_all
+        user.destroy
+      end
+      Roster.with_club(club).destroy_all
+      Patrol.with_club(club).destroy_all
+      Club.find(club.id).destroy
+      puts "Deleted #{club.name}"
+    else
+      puts "Club not found: #{club_name}"
     end
-    Roster.where(organisation: club_name).destroy_all
   end
 end
