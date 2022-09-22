@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AddClubRefToPatrol < ActiveRecord::Migration[6.0]
-  def change
+  def up
     add_reference :patrols, :club, foreign_key: true
     execute <<-SQL.squish
       UPDATE patrols p

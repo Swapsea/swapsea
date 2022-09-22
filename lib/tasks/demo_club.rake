@@ -8,14 +8,14 @@ namespace :demo_club do
     # Create club
     Club.create(name: club_name, short_name: club_name, show_patrols: true, show_rosters: true, show_swaps: true,
                 show_skills_maintenance: false, show_outreach: false, lat: -33.89051, lon: 151.280002,
-                enable_reminders_email: true ,enable_reminders_sms: false)
+                enable_reminders_email: true, enable_reminders_sms: false)
     club = Club.find_by(name: club_name)
 
     puts club.name
 
     # Create patrols
     (1..14).map do |count|
-      Patrol.create(club: club,
+      Patrol.create(club:,
                     name: "Demo Patrol #{count}",
                     short_name: "P#{count}",
                     special_event: false,
@@ -101,7 +101,7 @@ namespace :demo_club do
           category: 'Active (18yrs and over)',
           status: 'Active',
           season: "#{this_year}/#{next_yr}",
-          club: club,
+          club:,
           default_position:,
           bbm:,
           irbd:,
@@ -118,7 +118,7 @@ namespace :demo_club do
         puts "   #{user.name} - #{user.default_position}"
 
         PatrolMember.create(
-          patrol: patrol,
+          patrol:,
           user_id:,
           default_position:
         )
@@ -219,11 +219,11 @@ namespace :demo_club do
     Roster.with_club(club).each(&:awards_count)
   end
 
-  desc "Destroy all records related to the demo club and its members."
+  desc 'Destroy all records related to the demo club and its members.'
   task :destroy, [:club_name] => :environment do |_task, args|
     club_name = args[:club_name]
 
-    club = Club.find_by_name(club_name)
+    club = Club.find_by(name: club_name)
 
     if club
       puts "Deleting #{club.name}..."

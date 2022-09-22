@@ -5,24 +5,24 @@ require 'rails_helper'
 RSpec.describe 'patrol_members/index', type: :view do
   before do
     @clubs = assign(:clubs, [
-      Club.create!(
-        name: 'Swapsea SLSC',
-        short_name: 'ClubShortName'
-      )
-    ])
+                      Club.create!(
+                        name: 'Swapsea SLSC',
+                        short_name: 'ClubShortName'
+                      )
+                    ])
     @patrols = assign(:patrols, [
-      Patrol.create!(
-        name: 'PatrolName',
-        club: @clubs.first,
-        need_bbm: 1,
-        need_irbd: 1,
-        need_irbc: 1,
-        need_artc: 1,
-        need_firstaid: 0,
-        need_bronze: 3,
-        need_src: 0
-      )
-    ])
+                        Patrol.create!(
+                          name: 'PatrolName',
+                          club: @clubs.first,
+                          need_bbm: 1,
+                          need_irbd: 1,
+                          need_irbc: 1,
+                          need_artc: 1,
+                          need_firstaid: 0,
+                          need_bronze: 3,
+                          need_src: 0
+                        )
+                      ])
     assign(:patrol_members, [
              PatrolMember.create!(
                user_id: '1',

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AddClubRefToNotice < ActiveRecord::Migration[6.0]
-  def change
+  def up
     add_reference :notices, :club, foreign_key: true
     execute <<-SQL.squish
       UPDATE notices n

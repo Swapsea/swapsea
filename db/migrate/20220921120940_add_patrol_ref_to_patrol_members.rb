@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AddPatrolRefToPatrolMembers < ActiveRecord::Migration[6.0]
-  def change
+  def up
     add_reference :patrol_members, :patrol, foreign_key: true
     execute <<-SQL.squish
       UPDATE patrol_members pm
