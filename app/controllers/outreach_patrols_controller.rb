@@ -8,10 +8,9 @@ class OutreachPatrolsController < ApplicationController
   # GET /outreach_patrols
   # GET /outreach_patrols.json
   def index
-    @outreach_patrols = OutreachPatrol.joins(:club).all.where('finish >= ? AND clubs.name = ?', DateTime.now,
-                                                              selected_user.organisation)
-    @routreach_patrols_sorted = @outreach_patrols.sort_by(&:start)
-    @uniq_outreach_patrol_dates = @routreach_patrols_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
+    @outreach_patrols = OutreachPatrol.with_club(selected_user.club).where('finish >= ?', DateTime.now)
+    @outreach_patrols_sorted = @outreach_patrols.sort_by(&:start)
+    @uniq_outreach_patrol_dates = @outreach_patrols_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
     @outreach_patrol_sign_up = OutreachPatrolSignUp.new
   end
 

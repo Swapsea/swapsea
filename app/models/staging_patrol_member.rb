@@ -38,20 +38,9 @@ class StagingPatrolMember < ApplicationRecord
 
         patrol_member = PatrolMember.find_or_initialize_by(user_id: staged_patrol_member.user_id)
 
-        user = User.find_by(id: staged_patrol_member.user_id)
-
-        if user.present?
-          user.patrol.name = staged_patrol_member.patrol.name
-          user.default_position = staged_patrol_member.default_position
-          user.default_position = 'Member' if user.default_position == 'Award Member'
-          user.save!
-        end
-
         patrol_member.user_id = staged_patrol_member.user_id
         patrol_member.patrol.name = staged_patrol_member.patrol.name
         patrol_member.default_position = staged_patrol_member.default_position
-        patrol_member.organisation = staged_patrol_member.organisation
-
         patrol_member.default_position = 'Member' if patrol_member.default_position == 'Award Member'
 
         patrol_member.save

@@ -7,9 +7,9 @@ class PatrolsController < ApplicationController
 
   def index
     @clubs = if selected_user.has_role?(:admin)
-               Club.with_show_patrols.includes(:patrols)
+               Club.with_show_patrols.includes(:patrols).all
              else
-               Club.with_show_patrols.includes(:patrols).where(name: selected_user.organisation)
+               Club.with_show_patrols.includes(:patrols).where(name: selected_user.club.name)
              end
   end
 
@@ -17,7 +17,7 @@ class PatrolsController < ApplicationController
     @patrols = if current_user.has_role?(:admin)
                  Patrol.all.joins(:club).includes([:club])
                elsif current_user.has_role?(:manager)
-                 Patrol.all.joins(:club).where(organisation: current_user.organisation)
+                 Patrol.with_club(current_user.club).all
                end
 
     render layout: 'admin'
@@ -28,7 +28,7 @@ class PatrolsController < ApplicationController
       @patrol = Patrol.find(params[:id])
       @club = @patrol.club
     else
-      @club = Club.find_by!(name: selected_user.organisation, is_active: true)
+      @club = Club.with_show_patrols.find_by!(name: selected_user.club.name)
       @patrol = @club.patrols.find(params[:id])
     end
   end

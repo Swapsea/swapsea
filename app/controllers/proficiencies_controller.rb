@@ -9,13 +9,11 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies.json
   def index
     @proficiencies = if selected_user.has_role?(:admin)
-                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where(name: selected_user.organisation).order(:start)
+                       Proficiency.with_club(selected_user.club).all
                      elsif selected_user.has_role?(:manager)
-                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 10.days,
-                                                                                                     selected_user.organisation)
+                       Proficiency.with_club(selected_user.club).all.where('start >= ?', DateTime.now - 10.days)
                      else
-                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 10.minutes,
-                                                                                                     selected_user.organisation)
+                       Proficiency.with_club(selected_user.club).all.where('start >= ?', DateTime.now - 10.minutes)
                      end
 
     @proficiencies_sorted = @proficiencies.sort_by(&:start)
@@ -27,8 +25,7 @@ class ProficienciesController < ApplicationController
     @proficiencies = if selected_user.has_role?(:admin)
                        Proficiency.all.includes([:proficiency_signups], [:users]).order(:start)
                      elsif selected_user.has_role?(:manager)
-                       Proficiency.all.joins(:club).includes([:proficiency_signups], [:users]).where('start >= ? AND clubs.name = ?', DateTime.now - 3.hours,
-                                                                                                     selected_user.organisation)
+                       Proficiency.with_club(selected_user.club).all.where('start >= ?', DateTime.now - 12.hours)
                      end
 
     render layout: 'admin'

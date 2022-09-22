@@ -8,7 +8,7 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all.where(organisation = "'", selected_user.organisation)
+    @requests = Request.with_club(selected_user.club)
   end
 
   # GET /requests/1

@@ -8,15 +8,18 @@ class Email < ApplicationRecord
     sms_sent = 0
 
     # Who is on patrol in the next week.
-    rosters = if organisation
-                Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.week,
-                             organisation)
+    if organisation
+      # Look up club id
+      club_id = Club.find_by!(name: organisation)
+    end
+    rosters = if club_id
+                Roster.with_club(club_id).where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.week).includes(:patrol, patrol: :club)
               else
-                Roster.where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.week)
+                Roster.where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.week).includes(:patrol, patrol: :club)
               end
     rosters.map do |roster|
       roster.current.each do |user|
-        subject = "Upcoming Patrol - #{user.organisation}"
+        subject = "Upcoming Patrol - #{user.club.name}"
         user_roster = user.custom_roster.sort_by(&:start)
 
         if user_roster.first.present?
@@ -27,26 +30,26 @@ class Email < ApplicationRecord
               SwapseaMailer.weekly_roster_reminder(user, next_roster, following_roster, subject).deliver
               emails_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
+              Rails.logger.warn "Skipped sending patrol roster email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
             if user.club.is_active && user.club.enable_reminders_sms
               SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
+              Rails.logger.warn "Skipped sending patrol roster SMS because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
             end
           elsif user_roster.first.present?
             if user.club.is_active && user.club.enable_reminders_email
               SwapseaMailer.weekly_roster_reminder(user, next_roster, nil, subject).deliver
               emails_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
+              Rails.logger.warn "Skipped sending patrol roster email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
             if user.club.is_active && user.club.enable_reminders_sms
               SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
-              Rails.logger.warn "Skipped sending patrol roster email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
+              Rails.logger.warn "Skipped sending patrol roster SMS because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
             end
           end
         end
@@ -60,9 +63,13 @@ class Email < ApplicationRecord
   def self.weekly_skills_maintenance(organisation = nil)
     emails_sent = 0
     # Who has skills maintenance this week.
-    proficiencies = if organisation
-                      Proficiency.where('start >= ? AND start <=? AND organisation = ?', DateTime.now,
-                                        DateTime.now + 1.week, organisation)
+    if organisation
+      # Look up club id
+      club_id = Club.find_by!(name: organisation)
+    end
+    proficiencies = if club_id
+                      Proficiency.with_club(club_id).where('start >= ? AND start <=?', DateTime.now,
+                                                           DateTime.now + 1.week)
                     else
                       Proficiency.where('start >= ? AND start <=?', DateTime.now,
                                         DateTime.now + 1.week)
@@ -73,7 +80,7 @@ class Email < ApplicationRecord
           SwapseaMailer.proficiency_reminder(user, proficiency).deliver
           emails_sent += 1
         else
-          Rails.logger.warn "Skipped sending skills maintenance email because #{user.organisation} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email} and show_skills_maintenance=#{user.club.show_skills_maintenance}"
+          Rails.logger.warn "Skipped sending skills maintenance email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email} and show_skills_maintenance=#{user.club.show_skills_maintenance}"
         end
       rescue Exception => e
         Rails.logger.warn "Skipped sending skills maintenance email because user:#{user.id} has no email."
@@ -88,20 +95,22 @@ class Email < ApplicationRecord
       if user.club.is_active?
         SwapseaMailer.north_bondi_not_yet_proficient(user).deliver
       else
-        Rails.logger.warn "Skipped sending not yet proficient email because #{user.organisation} is_active=#{user.club.is_active}"
+        Rails.logger.warn "Skipped sending not yet proficient email because #{user.club.name} is_active=#{user.club.is_active}"
       end
     end
   end
 
   def self.welcome_email(organisation)
     emails_sent = 0
-    PatrolMember.where(organisation:).map do |pm|
+    # Look up club id
+    club_id = Club.find_by!(name: organisation)
+    PatrolMember.with_club(club_id).map do |pm|
       if pm.user.present? && pm.user.email.present?
         if pm.user.club.is_active?
           SwapseaMailer.welcome_email(pm.user).deliver
           emails_sent += 1
         else
-          Rails.logger.warn "Skipped sending welcome email because #{pm.user.organisation} is_active=#{pm.user.club.is_active}"
+          Rails.logger.warn "Skipped sending welcome email because #{pm.user.club.name} is_active=#{pm.user.club.is_active}"
         end
       end
     end
@@ -109,11 +118,11 @@ class Email < ApplicationRecord
   end
 
   def self.welcome_email_test(email)
-    u = User.find_by(email:)
-    if u.club.is_active?
-      SwapseaMailer.welcome_email(u).deliver
+    user = User.find_by(email:)
+    if user.club.is_active?
+      SwapseaMailer.welcome_email(user).deliver
     else
-      Rails.logger.warn "Skipped sending welcome email test because #{u.organisation} is_active=#{u.club.is_active}"
+      Rails.logger.warn "Skipped sending welcome email test because #{user.club.name} is_active=#{user.club.is_active}"
     end
   end
 
