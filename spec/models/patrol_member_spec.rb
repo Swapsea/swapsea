@@ -14,6 +14,6 @@ RSpec.describe PatrolMember, type: :model do
 
   describe PatrolMember, 'association' do
     it { is_expected.to belong_to(:user) }
-    it { is_expected.to belong_to(:patrol).with_foreign_key('patrol_name').with_primary_key('name') }
+    it { is_expected.to belong_to(:patrol) }
   end
 end

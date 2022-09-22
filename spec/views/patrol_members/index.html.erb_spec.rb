@@ -8,19 +8,17 @@ RSpec.describe 'patrol_members/index', type: :view do
              PatrolMember.create!(
                user_id: '1',
                default_position: 'DefaultPosition',
-               organisation: 'Organisation',
-               patrol_name: 'PatrolName'
+               patrol.name: 'PatrolName'
              ),
              PatrolMember.create!(
                user_id: '1',
                default_position: 'DefaultPosition',
-               organisation: 'Organisation',
-               patrol_name: 'PatrolName'
+               patrol.name: 'PatrolName'
              )
            ])
   end
 
-  it 'renders a list of patrol_memeber' do
+  it 'renders a list of patrol_member' do
     allow(view).to receive_messages(will_paginate: nil)
     render
     assert_select 'tr>td', text: '1'.to_s, count: 2

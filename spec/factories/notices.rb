@@ -10,7 +10,7 @@ FactoryBot.define do
     visible_from { '2018-10-07 19:53:09' }
     visible_to { '2018-10-07 19:53:09' }
     visible { true }
-    organisation { 'MyString' }
+    club.name { 'Swapsea SLSC' }
     image { 'MyString' }
     video { 'MyString' }
   end
