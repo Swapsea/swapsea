@@ -6,19 +6,19 @@
     <%= f.input :name %>
     <%= f.input :short_name %>
     <%= f.label :need_bbm %>
-    <%= f.input_field :need_bbm, collection: 0..5  %><br/>
+    <%= f.input_field :need_bbm, collection: 0..5, include_blank: false %><br/>
     <%= f.label :need_irbd %>
-    <%= f.input_field :need_irbd, collection: 0..5 %><br/>
+    <%= f.input_field :need_irbd, collection: 0..5, include_blank: false %><br/>
     <%= f.label :need_irbc %>
-    <%= f.input_field :need_irbc, collection: 0..5 %><br/>
+    <%= f.input_field :need_irbc, collection: 0..5, include_blank: false %><br/>
     <%= f.label :need_artc %>
-    <%= f.input_field :need_artc, collection: 0..5 %><br/>
+    <%= f.input_field :need_artc, collection: 0..5, include_blank: false %><br/>
     <%= f.label :need_firstaid %>
-    <%= f.input_field :need_firstaid, collection: 0..5 %><br/>
+    <%= f.input_field :need_firstaid, collection: 0..5, include_blank: false %><br/>
     <%= f.label :need_bronze %>
-    <%= f.input_field :need_bronze, collection: 0..5 %><br/>
+    <%= f.input_field :need_bronze, collection: 0..5, include_blank: false %><br/>
     <%= f.label :need_src %>
-    <%= f.input_field :need_src, collection: 0..5 %><br/>
+    <%= f.input_field :need_src, collection: 0..5, include_blank: false %><br/>
     <%= f.label :special_event %>
     <%= f.input_field :special_event, as: :boolean, boolean_style: :inline %>
   </div>
