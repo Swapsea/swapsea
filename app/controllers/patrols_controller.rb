@@ -93,7 +93,7 @@ class PatrolsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def patrol_params
-    params.require(:patrol).permit(:organisation, :name, :short_name, :key, :special_event, :need_bbm, :need_irbd,
+    params.require(:patrol).permit(:club_id, :name, :short_name, :key, :special_event, :need_bbm, :need_irbd,
                                    :need_irbc, :need_artc, :need_firstaid, :need_bronze, :need_src)
   end
 end

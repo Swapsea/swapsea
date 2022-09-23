@@ -57,7 +57,7 @@ class User < ApplicationRecord
 
   # Legacy use in CanCanCan (ability.rb)
   def organisation
-    Club.find_by(id:)
+    club.name
   end
 
   def assign_default_role

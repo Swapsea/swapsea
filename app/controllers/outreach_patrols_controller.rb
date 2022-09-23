@@ -15,7 +15,7 @@ class OutreachPatrolsController < ApplicationController
   end
 
   def admin
-    @outreach_patrols = OutreachPatrol.all.joins(:club)
+    @outreach_patrols = OutreachPatrol.all.joins(:club).includes(:club)
     render layout: 'admin'
   end
 
@@ -85,6 +85,6 @@ class OutreachPatrolsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def outreach_patrol_params
-    params.require(:outreach_patrol).permit(:location, :start, :finish, :organisation)
+    params.require(:outreach_patrol).permit(:location, :start, :finish, :club_id)
   end
 end

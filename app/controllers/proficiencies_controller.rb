@@ -23,9 +23,9 @@ class ProficienciesController < ApplicationController
 
   def admin
     @proficiencies = if selected_user.has_role?(:admin)
-                       Proficiency.all.includes([:proficiency_signups], [:users]).order(:start)
+                       Proficiency.all.includes(:proficiency_signups, :users, :club).order(:start)
                      elsif selected_user.has_role?(:manager)
-                       Proficiency.with_club(selected_user.club).all.where('start >= ?', DateTime.now - 12.hours)
+                       Proficiency.with_club(selected_user.club).all.includes(:proficiency_signups, :users, :club).where('start >= ?', DateTime.now - 12.hours)
                      end
 
     render layout: 'admin'
@@ -100,6 +100,6 @@ class ProficienciesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def proficiency_params
-    params.require(:proficiency).permit(:name, :start, :finish, :max_signup, :max_online_signup, :organisation)
+    params.require(:proficiency).permit(:name, :start, :finish, :max_signup, :max_online_signup, :club_id)
   end
 end

@@ -2,10 +2,10 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Swapsea //NONSGML Patrol ICS//EN
 URL:<%= request.original_url %>
-NAME:<%= @user.organisation %>
-X-WR-CALNAME:<%= @user.organisation %>
-DESCRIPTION:Patrol roster for <%= @user.organisation %>
-X-WR-CALDESC:Patrol roster for <%= @user.organisation %>
+NAME:<%= @user.club.name %>
+X-WR-CALNAME:<%= @user.club.name %>
+DESCRIPTION:Patrol roster for <%= @user.club.name %>
+X-WR-CALDESC:Patrol roster for <%= @user.club.name %>
 UID:<%= @user.id %>
 <% @user.custom_roster.each do |roster| %>
 BEGIN:VEVENT
@@ -15,10 +15,10 @@ DTSTAMP:<%= DateTime.now.utc.strftime('%Y%m%dT%H%M%SZ') %>
 UID:<%= @user.ics %>.<%= roster.id %>@swapsea.com.au
 CREATED:<%= roster.created_at.utc.strftime('%Y%m%dT%H%M%SZ') %>
 LAST-MODIFIED:<%= roster.updated_at.utc.strftime('%Y%m%dT%H%M%SZ') %>
-SUMMARY:Surf Patrol
-DESCRIPTION:<%= roster.organisation %>\n<%= roster.patrol.name %>
+SUMMARY:Surf Club Patrol
+DESCRIPTION:<%= @user.club.name %>\n<%= roster.patrol.name %>
 METHOD:PUBLISH
-ORGANIZER:<%= roster.organisation %>
+ORGANIZER:<%= @user.club.name %>
 END:VEVENT
 <% end %>
 END:VCALENDAR

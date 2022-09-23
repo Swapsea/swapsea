@@ -15,7 +15,7 @@ class RostersController < ApplicationController
   end
 
   def admin
-    @rosters = Roster.all.joins(patrol: :club).includes([:patrol])
+    @rosters = Roster.all.joins(patrol: :club).includes(:patrol)
     render layout: 'admin'
   end
 
@@ -146,6 +146,6 @@ class RostersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def roster_params
-    params.require(:roster).permit(:organisation, :patrol, :start, :finish)
+    params.require(:roster).permit(:patrol, :start, :finish)
   end
 end

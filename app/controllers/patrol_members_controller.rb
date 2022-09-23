@@ -21,7 +21,7 @@ class PatrolMembersController < ApplicationController
   end
 
   def admin
-    @patrol_members = PatrolMember.all.joins(patrol: :club).includes(%i[user patrol])
+    @patrol_members = PatrolMember.all.joins(patrol: :club).includes(:user, :patrol, patrol: :club)
     render layout: 'admin'
   end
 

@@ -41,7 +41,7 @@ class SwapseaSms
 
   def message_body
     [
-      "Upcoming patrol #{@user.organisation} \"#{@next_roster.patrol.name}\"",
+      "Upcoming patrol #{@user.club.name} \"#{@next_roster.patrol.name}\"",
       "on #{@next_roster.start.strftime('%a %d %b %y')},",
       "#{@next_roster.start.strftime('%H:%M')} -",
       "#{@next_roster.finish.strftime('%H:%M')}.",

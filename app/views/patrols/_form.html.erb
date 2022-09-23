@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-group">
-    <%= f.association :club, label_method: :name, value_method: :name, include_blank: false %>
+    <%= f.association :club, label_method: :name, value_method: :id, include_blank: false %>
     <%= f.input :name %>
     <%= f.input :short_name %>
     <%= f.label :need_bbm %>
