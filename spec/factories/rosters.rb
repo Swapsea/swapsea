@@ -2,8 +2,7 @@
 
 FactoryBot.define do
   factory :roster do
-    organisation { 'MyString' }
-    patrol_name { 'MyString' }
+    patrol.name { 'Patrol 1' }
     start { '2018-10-07 19:53:09' }
     finish { '2018-10-07 19:53:09' }
     bbm { 1 }

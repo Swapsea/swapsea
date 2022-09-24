@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class Roster < ApplicationRecord
-  belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
+  belongs_to :patrol
   has_many :requests
   has_many :swaps
   has_many :offers
+
+  scope :with_club, ->(club_id) { joins(:patrol).where(patrols: { club_id: }).includes(:patrol) }
 
   include PgSearch::Model
   pg_search_scope :search, against: %i[patrol_name organisation],

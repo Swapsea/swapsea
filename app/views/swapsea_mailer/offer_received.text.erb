@@ -8,20 +8,20 @@ View it now at <%= request_url(@request) %>.
 
 New offer
 ---------
-<%= @offer.roster.patrol_name %>
+<%= @offer.roster.patrol.name %>
 <%= @offer.roster.start.strftime("%A %d %B %Y") %>, <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
 From: <%= @offer.user.first_name %> <%= @offer.user.last_name %>
 Comment: <%= @offer.comment %>
 
 Your swap request
 -----------------
-<%= @request.roster.patrol_name %>
+<%= @request.roster.patrol.name %>
 <%= @request.roster.start.strftime("%A %d %B %Y") %>, <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
 
 Current offers
 --------------
 <% @request.offers.where(:status => 'pending').each do |offer| %>
-<%= offer.roster.patrol_name %>
+<%= offer.roster.patrol.name %>
 <%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
 From: <%= offer.user.first_name %> <%= offer.user.last_name %>
 Comment: <%= @offer.comment %>

@@ -30,7 +30,7 @@
       <tbody>
         <% @notices.each do |notice| %>
           <tr>
-            <td><%= notice.organisation %></td>
+            <td><%= notice.club.name if notice.club.present? %></td>
             <td><%= notice.system_wide %></td>
             <td><%= notice.title %></td>
             <td><%= notice.desc %></td>

@@ -2,7 +2,11 @@
 
 class PatrolMember < ApplicationRecord
   belongs_to :user
-  belongs_to :patrol, primary_key: 'name', foreign_key: 'patrol_name'
+  belongs_to :patrol
+
+  scope :with_user, ->(user_id) { where(user_id:).includes(:user, :patrol) }
+  scope :with_patrol, ->(patrol_id) { where(patrol_id:).includes(:patrol, :user) }
+  scope :with_club, ->(club_id) { joins(:patrol).where(patrols: { club_id: }).includes(:patrol, :user) }
 
   def rosters
     Roster.all.where(patrol_name:)
@@ -27,7 +31,6 @@ class PatrolMember < ApplicationRecord
       patrol_member = find_by(user_id: row['Member ID']) || new
       user = User.find_by(id: row['Member ID'])
       if user.present?
-        user.patrol_name = row['Team Name']
         user.default_position = row['Team Position']
         user.default_position = 'Member' if user.default_position == 'Award Member'
         user.save

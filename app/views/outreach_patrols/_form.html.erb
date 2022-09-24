@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <% if selected_user.has_role?(:admin)  %>
-      <%= f.association :club, label_method: :name, value_method: :name, include_blank: false %>
+      <%= f.association :club, label_method: :name, value_method: :id, include_blank: false %>
     <% end %>
     <%= f.input :location %><br/>
     <%= f.input :start %><br/>

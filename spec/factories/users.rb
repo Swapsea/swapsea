@@ -5,10 +5,9 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password { 'swapsea' }
-    organisation { 'Swapsea SLSC' }
+    club.name { 'Swapsea SLSC' }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
-    patrol_name { Faker::Name.name }
     gender { 'male' }
   end
 

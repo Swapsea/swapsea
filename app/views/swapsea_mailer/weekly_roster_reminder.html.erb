@@ -109,14 +109,14 @@
         </p>
         <p>
           <strong>Upcoming patrol</strong><br/>
-          <%= @next_roster.patrol_name %><br/>
+          <%= @next_roster.patrol.name %><br/>
           <%= @next_roster.start.strftime("%A %d %B %Y") %><br/>
           <%= @next_roster.start.strftime("%H:%M") %> - <%= @next_roster.finish.strftime("%H:%M") %>
         </p>
         <% if @following_roster != nil %>
         <p>
           <strong>Following patrol</strong><br/>
-          <%= @following_roster.patrol_name %><br/>
+          <%= @following_roster.patrol.name %><br/>
           <%= @following_roster.start.strftime("%A %d %B %Y") %><br/>
           <%= @following_roster.start.strftime("%H:%M") %> - <%= @following_roster.finish.strftime("%H:%M") %><br/>
         </p>

@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  belongs_to :club
   has_many :awards
   has_many :tokens
   has_many :requests
@@ -22,6 +23,8 @@ class User < ApplicationRecord
   has_many :swaps
   has_many :notices
   has_many :notice_acknowledgements
+
+  scope :with_club, ->(club_id) { where(club_id:) }
 
   include PgSearch::Model
   pg_search_scope :search, against: %i[first_name last_name],
@@ -52,8 +55,9 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def club
-    Club.find_by(name: organisation)
+  # Legacy use in CanCanCan (ability.rb)
+  def organisation
+    club.name
   end
 
   def assign_default_role

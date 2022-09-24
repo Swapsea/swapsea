@@ -54,7 +54,6 @@ Lint/UselessAssignment:
     - 'spec/controllers/event_logs_controller_spec.rb'
     - 'spec/controllers/leads_controller_spec.rb'
     - 'spec/controllers/proficiency_signups_controller_spec.rb'
-    - 'spec/controllers/settings_controller_spec.rb'
 
 # Offense count: 35
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.

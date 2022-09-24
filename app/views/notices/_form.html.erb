@@ -3,8 +3,8 @@
 
   <div class="form-group">
     <% if selected_user.has_role?(:admin)  %>
-      <%= f.association :club, label_method: :name, value_method: :name, include_blank: true %>
-      <%= f.input :system_wide %>
+      <%= f.association :club, label_method: :name, value_method: :id, include_blank: false %>
+      <%= f.input :system_wide, label: 'All Clubs' %>
     <% end %>
     <%= f.input :title %>
     <%= f.input :desc %>

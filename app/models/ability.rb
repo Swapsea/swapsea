@@ -34,12 +34,11 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :manager
-      can :set, SelectedUser
       can :read, Patrol do |patrol|
-        patrol.organisation == user.organisation
+        patrol.club.name == user.organisation
       end
       can [:read, :swaps, :patrol, :member, :patrol_report], Roster do |roster|
-        roster.organisation == user.organisation
+        roster.patrol.club.name == user.organisation
       end
       can [:index, :my_offers, :my_requests, :confirmed], Swap do |swap|
         swap.user.organisation == user.organisation
@@ -85,14 +84,14 @@ class Ability
       can [:index], :dashboard
       can %i[index set], :selected_user
       can [:report, :patrol_report], Roster do |roster|
-        roster.organisation == user.organisation
+        roster.patrol.club.name == user.organisation
       end
     elsif user.has_role? :member
       can :read, Patrol do |patrol|
-        patrol.organisation == user.organisation
+        patrol.club.name == user.organisation
       end
       can [:read, :swaps, :patrol, :member, :patrol_report], Roster do |roster|
-        roster.organisation == user.organisation
+        roster.patrol.club.name == user.organisation
       end
       can [:index, :my_offers, :my_requests, :confirmed], Swap do |swap|
         swap.user.organisation == user.organisation

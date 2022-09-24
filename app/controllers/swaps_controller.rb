@@ -7,25 +7,25 @@ class SwapsController < ApplicationController
 
   # GET /swaps
   def index
-    @swaps = Request.includes(:roster, :user, :offers, roster: [:patrol]).where(
-      'rosters.start > ? AND requests.status = ? AND rosters.organisation = ?', DateTime.now - 3.hours, 'open', selected_user.organisation
+    @swaps = Request.with_club(selected_user.club_id).with_open_status.where(
+      'rosters.start > ?', DateTime.now - 3.hours
     ).references(:roster).order('rosters.start')
   end
 
   def my_offers
-    @swaps = Offer.where(user: selected_user,
-                         status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
-                                  'deleted']).joins(:roster).order('rosters.start desc')
+    @swaps = Offer.with_club(selected_user.club_id).with_made_by(selected_user).where(
+      status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
+               'deleted']
+    ).order('rosters.start desc')
   end
 
   def my_requests
-    @swaps = Request.joins(:roster).where(user: selected_user, status: 'open').order('rosters.start')
+    @swaps = Request.with_club(selected_user.club_id).with_requested_by(selected_user).with_open_status.order('rosters.start')
   end
 
   def confirmed
-    @swaps = Offer.includes(:user, :request, :roster, roster: [:patrol], user: [:patrol], request: [:user, { roster: [:patrol] }]).where(
-      'offers.status = ? AND rosters.organisation = ?', 'accepted', selected_user.organisation
-    ).references(:rosters).order(updated_at: :desc)
+    @swaps = Offer.with_club(selected_user.club_id).with_accepted_status
+                  .includes(:user, :request, :roster, roster: [:patrol], user: [:patrol], request: [:user, { roster: [:patrol] }]).references(:rosters).order(updated_at: :desc)
   end
 
   # GET /swaps/1

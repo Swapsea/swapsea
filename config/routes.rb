@@ -51,8 +51,6 @@ Swapsea::Application.routes.draw do
 
   get 'skills-maintenance', to: 'proficiencies#index'
 
-  resources :settings
-
   resources :proficiency_signups
 
   resources :proficiencies do
