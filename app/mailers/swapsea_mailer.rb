@@ -97,7 +97,7 @@ class SwapseaMailer < ApplicationMailer
     @request = request
     @user = request.user
     @other_request_dates = other_request_dates
-    mail subject: 'Make an offer',
+    mail subject: 'Make an offer for ' + request.roster.start.strftime('%A, %d %B'),
          to: request.user.email,
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
