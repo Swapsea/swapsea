@@ -108,6 +108,7 @@ class Email < ApplicationRecord
                                 .where.not(user_id: open_request.user_id) # same user
                                 .where.not(roster_id: open_request.roster_id) # same roster
                                 .order(:start)
+                                .limit(20) # this includes duplicates, so make larger than you think
 
         other_request_dates = Set.new
         other_requests.map do |other_request|
