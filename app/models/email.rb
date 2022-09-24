@@ -108,8 +108,9 @@ class Email < ApplicationRecord
       open_requests.map do |open_request|
         # Open requests not by this user or for this roster.
         other_requests = Request.with_club(club.id).with_open_status
-                                .where.not(user_id: open_request.user_id)
-                                .where.not(roster_id: open_request.roster_id)
+                                .where.not(user_id: open_request.user_id)   # same user
+                                .where.not(roster_id: open_request.roster_id) # same roster
+                                .order(:start)
 
         other_request_dates = Set.new
         other_requests.map do |other_request|
@@ -124,7 +125,7 @@ class Email < ApplicationRecord
         Rails.logger.error "Error sending request nudge email: #{e}"
       end
 
-      "Sent #{emails_sent} request nudge emails for #{organisation}."
+      "Sent #{emails_sent} request nudge emails for #{club.name}."
     end
   end
 
