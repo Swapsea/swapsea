@@ -86,25 +86,28 @@ class Email < ApplicationRecord
         Rails.logger.warn "Skipped sending skills maintenance email because user:#{user.id} has no email. #{e}"
       end
     end
-    "Sent #{emails_sent} skills maintenance emails."
+    "Sent #{emails_sent} skills maintenance emails for #{organisation}."
   end
 
   # Nudge open requestors to make an offer
   def self.weekly_nudge_offers(organisation = nil)
-    emails_sent = 0
+    if organisation
+      # Look up club id
+      club_id = Club.find_by!(name: organisation)
+    end
 
-    # All open requests.
-    clubs = if organisation
-              Club.with_reminder_emails_enabled.where(name: organisation)
+    clubs = if club_id
+              Club.with_club(club_id).with_reminder_emails_enabled
             else
               Club.with_reminder_emails_enabled
             end
-
     clubs.map do |club|
-      open_requests = Request.with_status_open(club.name)
+      emails_sent = 0
+      # All open requests.
+      open_requests = Request.with_club(club.id).with_open_status
       open_requests.map do |open_request|
         # Open requests not by this user or for this roster.
-        other_requests = Request.with_status_open(club.name)
+        other_requests = Request.with_club(club.id).with_open_status
                                 .where.not(user_id: open_request.user_id)
                                 .where.not(roster_id: open_request.roster_id)
 
@@ -121,7 +124,7 @@ class Email < ApplicationRecord
         Rails.logger.error "Error sending request nudge email: #{e}"
       end
 
-      "Sent #{emails_sent} request nudge emails for #{club.name}"
+      "Sent #{emails_sent} request nudge emails for #{organisation}."
     end
   end
 
