@@ -91,16 +91,13 @@ class Email < ApplicationRecord
 
   # Nudge open requestors to make an offer
   def self.weekly_nudge_offers(organisation = nil)
-    if organisation
-      # Look up club id
-      club_id = Club.find_by!(name: organisation)
-    end
-
-    clubs = if club_id
-              Club.with_club(club_id).with_reminder_emails_enabled
+    clubs = if organisation
+              # Look up club id
+              Club.with_reminder_emails_enabled.where(name: organisation)
             else
               Club.with_reminder_emails_enabled
             end
+
     clubs.map do |club|
       emails_sent = 0
       # All open requests.
@@ -108,7 +105,7 @@ class Email < ApplicationRecord
       open_requests.map do |open_request|
         # Open requests not by this user or for this roster.
         other_requests = Request.with_club(club.id).with_open_status
-                                .where.not(user_id: open_request.user_id)   # same user
+                                .where.not(user_id: open_request.user_id) # same user
                                 .where.not(roster_id: open_request.roster_id) # same roster
                                 .order(:start)
 
