@@ -31,6 +31,7 @@ class StagingPatrolMember < ApplicationRecord
         club_id = Club.find_by(name: staged_patrol_member.organisation).id
         patrol = Patrol.find_by(club_id:, name: staged_patrol_member.patrol_name)
         next unless patrol
+
         patrol_member = PatrolMember.find_or_initialize_by(user_id: staged_patrol_member.user_id)
         patrol_member.user_id = staged_patrol_member.user_id
         patrol_member.patrol_id = patrol.id

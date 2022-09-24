@@ -34,7 +34,6 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :manager
-      can :set, SelectedUser
       can :read, Patrol do |patrol|
         patrol.club.name == user.organisation
       end
