@@ -8,7 +8,7 @@ class SwapseaSms
   TWILIO_PHONE_NUMBER  = ENV.fetch('TWILIO_PHONE_NUMBER', nil)
   TESTING_PHONE_NUMBER = ENV.fetch('TESTING_PHONE_NUMBER', nil)
 
-  def self.weekly_roster_reminder(*args)
+  def self.roster_reminder(*args)
     new(*args)
   end
 

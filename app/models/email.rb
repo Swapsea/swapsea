@@ -27,26 +27,26 @@ class Email < ApplicationRecord
           if user_roster.second.present?
             following_roster = user_roster.second
             if user.club.with_reminder_emails_enabled
-              SwapseaMailer.weekly_roster_reminder(user, next_roster, following_roster, subject).deliver
+              SwapseaMailer.roster_reminder(user, next_roster, following_roster, subject).deliver
               emails_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
             if user.club.with_reminder_sms_enabled
-              SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
+              SwapseaSms.roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster SMS because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
             end
           elsif user_roster.first.present?
             if user.club.with_reminder_emails_enabled
-              SwapseaMailer.weekly_roster_reminder(user, next_roster, nil, subject).deliver
+              SwapseaMailer.roster_reminder(user, next_roster, nil, subject).deliver
               emails_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
             if user.club.with_reminder_sms_enabled
-              SwapseaSms.weekly_roster_reminder(user, next_roster).deliver
+              SwapseaSms.roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster SMS because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"

@@ -2,7 +2,7 @@
 
 class SwapseaMailer < ApplicationMailer
   # Sent to all users with a patrol in the next 7 days.
-  def weekly_roster_reminder(user, next_roster, following_roster, subject)
+  def roster_reminder(user, next_roster, following_roster, subject)
     @user = user
     @subject = subject
     @next_roster = next_roster
