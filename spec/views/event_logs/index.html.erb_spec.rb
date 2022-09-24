@@ -17,6 +17,7 @@ RSpec.describe 'event_logs/index', type: :view do
   end
 
   it 'renders a list of event_logs' do
+    allow(view).to receive_messages(will_paginate: nil)
     render
     assert_select 'tr>td', text: 'Subject'.to_s, count: 2
     assert_select 'tr>td', text: 'Desc'.to_s, count: 2

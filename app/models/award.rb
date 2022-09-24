@@ -3,6 +3,8 @@
 class Award < ApplicationRecord
   belongs_to :user
 
+  scope :with_user, ->(user_id) { where(user_id:).includes(:user) }
+
   # Allow duplicate award numbers if same member belongs to two clubs simultaneously.
   # self.primary_key = 'award_number'
 

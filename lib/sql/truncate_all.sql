@@ -8,7 +8,6 @@ TRUNCATE table activities;
 TRUNCATE table ar_internal_metadata;
 TRUNCATE table awards;
 -- clubs
-TRUNCATE table delayed_jobs;
 TRUNCATE table emails;
 TRUNCATE table leads;
 TRUNCATE table notice_acknowledgements;
@@ -28,7 +27,6 @@ TRUNCATE table requests;
 -- roles
 TRUNCATE table rosters;
 -- schema_migrations
--- settings
 TRUNCATE table staging_awards;
 TRUNCATE table staging_patrol_members;
 TRUNCATE table staging_users;

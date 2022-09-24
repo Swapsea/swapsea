@@ -23,7 +23,7 @@
   <tbody>
     <% @proficiencies.each do |proficiency| %>
       <tr>
-        <td><%= proficiency.organisation %></td>
+        <td><%= proficiency.club.name %></td>
         <td><%= proficiency.name %></td>
         <td><%= proficiency.start.strftime('%a %d %b %y') %></td>
         <td><%= proficiency.start.strftime('%H:%M') %></td>

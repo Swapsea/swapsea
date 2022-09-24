@@ -8,7 +8,6 @@ gem 'activerecord-import'
 gem 'bcrypt'
 gem 'cancancan'
 gem 'coffee-rails'
-gem 'delayed_job_active_record'
 gem 'devise'
 gem 'exception_notification'
 gem 'jbuilder'
@@ -53,7 +52,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'sqlite3'	# Use sqlite3 as the database for Active Record
-  gem 'web-console'  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'web-console' # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 end
 
 group :development, :test do

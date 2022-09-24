@@ -8,25 +8,20 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
-					<th>DOB</th>
 					<th>Club</th>
 					<th>Signed In</th>
 				</tr>
 			</thead>
 			<tbody>
-
 				<% @users.each do |user| %>
-
 				<tr>
 					<td><%= user.id %></td>
 					<td><%= user.first_name %></td>
 					<td><%= user.last_name %></td>
 					<td><%= user.email %></td>
-					<td><%= user.dob %></td>
-					<td><%= user.organisation %></td>
+					<td><%= user.club.name %></td>
 					<td><%= user.sign_in_count %></td>
 				</tr>
-
 				<% end %>
 
 			</tbody>

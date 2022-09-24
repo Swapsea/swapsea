@@ -24,7 +24,7 @@
         <tbody>
           <% @patrols.each do |patrol| %>
             <tr>
-              <td><%= patrol.organisation %></td>
+              <td><%= patrol.club.name %></td>
               <td><%= patrol.name %></td>
               <td><%= patrol.need_bbm %></td>
               <td><%= patrol.need_irbd %></td>

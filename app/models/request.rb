@@ -7,11 +7,10 @@ class Request < ApplicationRecord
   belongs_to :user
   has_many :offers
 
-  scope :with_status_open, lambda { |organisation|
-                             includes(:roster, :user, :offers, roster: [:patrol]).where('rosters.start > ? AND requests.status = ? AND rosters.organisation = ?',
-                                                                                        DateTime.now - 3.hours, 'open', organisation).order('rosters.start')
-                           }
-
+  scope :with_club, ->(club_id) { joins(:roster, :user).where(users: { club_id: }).includes(:roster, :user, :offers, roster: [:patrol]) }
+  scope :with_requested_by, ->(user_id) { where(user_id:) }
+  scope :with_successful_status, -> { where(status: 'successful') }
+  scope :with_open_status, -> { where(status: 'open') }
   attr_readonly :nudge_email_opt_out_date
 
   def offer_already_exists?(roster, user)

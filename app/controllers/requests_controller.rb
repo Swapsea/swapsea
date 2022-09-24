@@ -8,14 +8,14 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all.where(organisation = "'", selected_user.organisation)
+    @requests = Request.with_club(selected_user.club)
   end
 
   # GET /requests/1
   # GET /requests/1.json
   def show
     @offer = Offer.new
-    @offers = @request.offers.includes(%i[user roster]).where(status: 'pending').sort_by(&:id)
+    @offers = @request.offers.with_pending_status.joins(roster: :patrol, user: :awards).includes(:user, :roster, roster: :patrol, user: :awards).sort_by(&:id)
     @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
     @awards = @request.user.awards.map(&:award_name)
   end

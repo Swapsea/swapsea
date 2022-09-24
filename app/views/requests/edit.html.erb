@@ -13,7 +13,7 @@
           <%= f.hidden_field :roster_id, :value => @roster.id %>
           <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
           <%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
-          <%= @request.roster.patrol_name %>
+          <%= @request.roster.patrol.name %>
         </div>
       </div>
       <hr/>

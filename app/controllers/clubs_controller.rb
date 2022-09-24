@@ -12,7 +12,7 @@ class ClubsController < ApplicationController
   end
 
   def admin
-    @clubs = Club.all
+    @clubs = Club.all.order(name: :asc)
     render layout: 'admin'
   end
 

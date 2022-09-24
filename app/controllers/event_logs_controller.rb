@@ -8,7 +8,7 @@ class EventLogsController < ApplicationController
   # GET /event_logs
   # GET /event_logs.json
   def index
-    @event_logs = EventLog.all.order('created_at DESC')
+    @event_logs = EventLog.all.order(created_at: :desc).paginate(page: params[:page], per_page: 20)
   end
 
   # GET /event_logs/1

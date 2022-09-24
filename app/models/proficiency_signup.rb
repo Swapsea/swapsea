@@ -6,6 +6,8 @@ class ProficiencySignup < ApplicationRecord
   belongs_to :proficiency
   belongs_to :user
 
+  scope :with_club, ->(club_id) { joins(:user).where(users: { club_id: }) }
+
   # Returns User IDs for users that have signed up for a Proficiency.
   def self.signed
     ProficiencySignup.pluck(:user_id)

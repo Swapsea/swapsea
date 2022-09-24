@@ -10,15 +10,13 @@
 		<tbody>
 		<% @switch_users.each do |user| %>
 			<% if user.first_name? || user.last_name? %>
-
 				<tr>
 					<td class="visible-xs"><%= link_to 'Switch', selected_user_path(:uid => user.id, :referrer => @referrer), :method => :post, :class => "btn btn-success btn-sm pull-right" %></td>
-					<td class="hidden-xs"><%= user.organisation %></td>
-					<td><%= user.name %> <i><%= truncate user.patrol_name, :length => 15 %></i></td>
+					<td class="hidden-xs"><%= user.club.name %></td>
+					<td><%= user.name %> <i><%= truncate user.patrol.name, :length => 15 %></i></td>
 					<td class="hidden-xs"><%= user.id %></td>
 					<td class="hidden-xs"><%= link_to 'Switch', selected_user_path(:uid => user.id, :referrer => @referrer), :method => :post, :class => "btn btn-success btn-sm pull-right" %></td>
 				</tr>
-
 			<% end %>
 		<% end %>
 		</tbody>

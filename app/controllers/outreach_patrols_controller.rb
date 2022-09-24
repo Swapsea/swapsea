@@ -8,15 +8,14 @@ class OutreachPatrolsController < ApplicationController
   # GET /outreach_patrols
   # GET /outreach_patrols.json
   def index
-    @outreach_patrols = OutreachPatrol.all.where('finish >= ? AND organisation = ?', DateTime.now,
-                                                 selected_user.organisation)
-    @routreach_patrols_sorted = @outreach_patrols.sort_by(&:start)
-    @uniq_outreach_patrol_dates = @routreach_patrols_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
+    @outreach_patrols = OutreachPatrol.with_club(selected_user.club).where('finish >= ?', DateTime.now)
+    @outreach_patrols_sorted = @outreach_patrols.sort_by(&:start)
+    @uniq_outreach_patrol_dates = @outreach_patrols_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
     @outreach_patrol_sign_up = OutreachPatrolSignUp.new
   end
 
   def admin
-    @outreach_patrols = OutreachPatrol.all
+    @outreach_patrols = OutreachPatrol.all.joins(:club).includes(:club)
     render layout: 'admin'
   end
 
@@ -86,6 +85,6 @@ class OutreachPatrolsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def outreach_patrol_params
-    params.require(:outreach_patrol).permit(:location, :start, :finish, :organisation)
+    params.require(:outreach_patrol).permit(:location, :start, :finish, :club_id)
   end
 end

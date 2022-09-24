@@ -1,7 +1,7 @@
 <div class="patrol row">
   <div class="col-sm-9">
     <% if (selected_user.has_role? :admin) %>
-      <strong><%= p.organisation %></strong><br />
+      <strong><%= p.club.name %></strong><br />
     <% end %>
     <strong>
       <% if p.patrol.present? %>
