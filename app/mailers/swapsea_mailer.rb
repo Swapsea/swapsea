@@ -82,6 +82,15 @@ class SwapseaMailer < ApplicationMailer
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
+  # Sent to request user to confirm swap request created.
+  def request_created(request)
+    @request = request
+    @user = request.user
+    mail subject: 'Request created',
+         to: request.user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
+  end
+
   # Sent to request user to confirm swap details.
   def request_successful(request)
     @request = request

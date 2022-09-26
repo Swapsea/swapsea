@@ -1,0 +1,22 @@
+Swapsea - Request Created
+========================
+
+G'day <%= @user.first_name %>,
+
+Your swap request has been created!
+
+Details
+-------
+<%= @request.roster.patrol.name %>
+<%= @request.roster.start.strftime("%A %d %B %Y") %>
+<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
+
+Fill your swap request by making an offer to someone else's request.
+Make an offer now at <%= swaps_url %>
+
+We'll remind you to make offers unless you opt out at <%= edit_request_url(@request) %>
+
+Have a great weekend!
+
+Much Love,
+Swapsea

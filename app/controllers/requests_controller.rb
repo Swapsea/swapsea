@@ -60,6 +60,7 @@ class RequestsController < ApplicationController
       respond_to do |format|
         if @request.save
           @request.create_activity :create, owner: selected_user
+          SwapseaMailer.request_created(@request).deliver
           format.html { redirect_to @request, notice: 'Request was successfully created.' }
           format.json { render action: 'show', status: :created, location: @request }
         else

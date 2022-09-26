@@ -50,8 +50,8 @@ class Request < ApplicationRecord
     Offer.where('roster_id = ? AND user_id =? AND status = ?', roster_id, user_id, 'pending')
   end
 
-  def nudge_email_opt_out=(opt_out)
-    self.nudge_email_opt_out_date = (DateTime.now if opt_out)
+  def self.nudge_email_opt_out=(opt_out)
+    nudge_email_opt_out_date = (DateTime.now if opt_out)
     save!
   end
 end
