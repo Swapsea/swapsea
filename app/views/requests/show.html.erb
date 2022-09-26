@@ -9,8 +9,8 @@
 				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Patrol</strong></label>
 				<div class="col-xs-8 col-sm-7">
 					<div class="visible-xs"><strong>Patrol</strong></div>
-					<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
 					<%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
+					<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
 					<%= @request.roster.patrol.name %>
 				</div>
 			</div>
@@ -32,6 +32,7 @@
 					<%= @request.status.capitalize %>
 				</div>
 			</div>
+			<% if @request.status == 'open' %>
 			<hr/>
 			<div class="row">
 				<div class="col-xs-4 col-sm-2 hidden-xs"><strong>Member Awards</strong></div>
@@ -67,8 +68,9 @@
 					<% end %>
 				</div>
 			</div>
-			<hr/>
+			<% end %>
 			<% if @request.comment.present? %>
+			<hr/>
 			<div class="row">
 				<div class="col-xs-4 col-sm-2 hidden-xs"><strong>Comments</strong></div>
 				<div class="col-xs-8 col-sm-7">
@@ -76,10 +78,10 @@
 						<%= @request.comment %>
 				</div>
 			</div>
-			<hr/>
 			<% end
 
-			if @request.user_id = session[:selected_user_id] %>
+			if selected_user == @request.user && @request.status == 'open' %>
+			<hr/>
 			<div class="row">
 				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Nudge me?</strong></label>
 				<div class="col-xs-8 col-sm-7">
@@ -91,17 +93,63 @@
 					<% end %>
 				</div>
 			</div>
-			<hr/>
-			<% end %>
+			<% end
+
+			if selected_user == @request.user && @request.status == 'open'
+				%>
 			<div class="buttons">
-				<%= link_to 'Edit Request', edit_request_path(@request), :class => "btn btn-primary" if selected_user == @request.user && @request.status == 'open' %>
-				<%= link_to 'Cancel Request', confirm_cancel_request_path(@request), :class => "btn btn-danger btn-right" if selected_user == @request.user && @request.status == 'open' %>
-			</div>
+				<%= link_to 'Cancel Request', confirm_cancel_request_path(@request), :class => "btn btn-danger" %>
+				<%= link_to 'Edit Request', edit_request_path(@request), :class => "btn btn-primary btn-right" %>
+				</div>
+				<% end %>
 		</div><!--/.request-details -->
 	</div><!--/.panel-body -->
 </div><!--/.panel -->
 
 <% if @request.status == 'open' %>
+<% if @request.user != selected_user %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>Make Offer</h2>
+		</div>
+		<div class="panel-body">
+			<% if !@rosters_available.empty? %>
+				<%= form_for @offer, url: offers_path do |f| %>
+					<%= hidden_field_tag(:request_id, @request.id) %>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Patrol</strong></label>
+						<div class="col-xs-8 col-sm-7">
+							<select name="roster_id" class="form-control">
+								<% @rosters_available.each do |r| %>
+									<option value="<%= r.id %>"><%= r.start.strftime("%a %d %b") %> <%= r.start.strftime("%H:%M") %> - <%= r.finish.strftime("%H:%M") %> (<%= r.patrol.name %>)</option>
+								<% end %>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Email</strong></label>
+						<div class="col-xs-8 col-sm-7"><%= f.text_field :email, :value => selected_user.email, :class => "form-control" %></div>
+					</div>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Mobile</strong></label>
+						<div class="col-xs-8 col-sm-7"><%= f.text_field :mobile, :value => selected_user.mobile_phone, :class => "form-control" %></div>
+					</div>
+					<div class="row">
+						<label class="col-xs-4 col-sm-2"><strong>Comment</strong></label>
+						<div class="col-xs-8 col-sm-7"><%= f.text_area :comment, :class => "textbox form-control" %></div>
+					</div>
+					<div class="form-actions">
+						<%= f.button 'Make Offer', :class => "btn btn-success pull-right", data: { disable_with: "Please wait..." } %>
+					</div>
+
+				<% end %>
+			<% else %>
+				<p> You have no patrols to offer. </p>
+			<% end %>
+		</div><!--/.panel-body -->
+	</div><!--/.panel -->
+<% end %>
+
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h2>Offers</h2>
@@ -119,7 +167,7 @@
 									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
 									<%= offer.roster.patrol.name %><br/>
 									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong><br/>
-
+									<span class="comment"><%= offer.comment %></span><br />
 										<% awards = offer.user.awards.map { |n| n.award_name } %>
 										<%= 'SRC ' if awards.include?('Surf Rescue Certificate') %>
 										<%= 'SRC (CPR) ' if awards.include?('Surf Rescue Certificate (CPR Endorsed)') %>
@@ -131,15 +179,13 @@
 										<%= 'IRB-D ' if awards.include?('Silver Medallion IRB Driver') %>
 										<%= 'BBM ' if awards.include?('Silver Medallion Beach Management') %>
 										<%= 'ATV ' if awards.include?('ATV Operator Certificate') %>
-
-									<br/>
 									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user) %>
+									<br/>
 									<% if check_offer[:result] == true %>
-										<span class="meets-requirements">Meets Requirements</span><br/>
+										<span class="meets-requirements">Meets award equirements.</span>
 									<% else %>
-										<span class="doesnt-meet-requirements">Doesn't Meet Requirements</span><br/>
+										<span class="doesnt-meet-requirements">May not meet award requirements.</span>
 									<% end %>
-									<span class="comment"><%= offer.comment %></span>
 								</div>
 
 									<% if selected_user == @request.user %>
@@ -176,59 +222,17 @@
 	</div><!--/.panel-body -->
 </div><!--/.panel-->
 
-<% if @request.user != selected_user %>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h2>Make Offer</h2>
-		</div>
-		<div class="panel-body">
-			<% if !@rosters_available.empty? %>
-				<%= form_for @offer, url: offers_path do |f| %>
-					<%= hidden_field_tag(:request_id, @request.id) %>
-					<div class="row">
-						<label class="col-xs-4 col-sm-2"><strong>Patrol</strong></label>
-						<div class="col-xs-8 col-sm-7">
-							<select name="roster_id" class="form-control">
-								<% @rosters_available.each do |r| %>
-									<option value="<%= r.id %>"><%= r.patrol.name %>, <%= r.start.strftime("%a %d %b") %> <%= r.start.strftime("%H:%M") %> - <%= r.finish.strftime("%H:%M") %></option>
-								<% end %>
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<label class="col-xs-4 col-sm-2"><strong>Email</strong></label>
-						<div class="col-xs-8 col-sm-7"><%= f.text_field :email, :value => selected_user.email, :class => "form-control" %></div>
-					</div>
-					<div class="row">
-						<label class="col-xs-4 col-sm-2"><strong>Mobile</strong></label>
-						<div class="col-xs-8 col-sm-7"><%= f.text_field :mobile, :value => selected_user.mobile_phone, :class => "form-control" %></div>
-					</div>
-					<div class="row">
-						<label class="col-xs-4 col-sm-2"><strong>Comment</strong></label>
-						<div class="col-xs-8 col-sm-7"><%= f.text_area :comment, :class => "textbox form-control" %></div>
-					</div>
-					<div class="form-actions">
-						<%= f.button 'Make Offer', :class => "btn btn-success pull-right", data: { disable_with: "Please wait..." } %>
-					</div>
-
-				<% end %>
-			<% else %>
-				<p> You have no patrols to offer. </p>
-			<% end %>
-		</div><!--/.panel-body -->
-	</div><!--/.panel -->
-<% end %>
-
 <% else %>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>Accepted Offer</h2>
 		</div>
 		<div class="panel-body">
-			<%= @request.accepted_offer.roster.patrol.name %><br/>
 			<strong><%= @request.accepted_offer.roster.start.strftime("%a %d %b %Y") %></strong><br/>
 			<%= @request.accepted_offer.roster.start.strftime("%H:%M") %> - <%= @request.accepted_offer.roster.finish.strftime("%H:%M") %><br/>
+			<%= @request.accepted_offer.roster.patrol.name %><br/>
 			<%= @request.accepted_offer.user.name %><br/>
+			<span class="comment"><%=  @request.accepted_offer.comment %></span>
 		</div>
 	</div>
 <% end %>
