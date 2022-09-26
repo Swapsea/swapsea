@@ -51,7 +51,7 @@ class Request < ApplicationRecord
   end
 
   def self.nudge_email_opt_out=(opt_out)
-    nudge_email_opt_out_date = (DateTime.now if opt_out)
+    self.nudge_email_opt_out_date = (DateTime.now if opt_out)
     save!
   end
 end
