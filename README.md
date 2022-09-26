@@ -83,8 +83,8 @@ Notes:
 ## Run All Tests
 
 ```bash
-RAILS_ENV=test rails db:test:load
-RAILS_ENV=test rake
+RAILS_ENV=test bundle exec rake db:test:load
+RAILS_ENV=test bundle exec rake
 ```
 
 ---
