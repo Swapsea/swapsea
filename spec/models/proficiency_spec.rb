@@ -13,7 +13,7 @@ RSpec.describe Proficiency, type: :model do
   end
 
   describe Proficiency, 'association' do
-    it { is_expected.to belong_to(:club).with_foreign_key('organisation').with_primary_key('name') }
+    it { is_expected.to belong_to(:club) }
     it { is_expected.to have_many(:proficiency_signups) }
     it { is_expected.to have_many(:users).through(:proficiency_signups) }
   end

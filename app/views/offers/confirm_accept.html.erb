@@ -15,7 +15,7 @@
 		<% if @after_swap_request_patrol[:result] %>
 
 			<div class="alert alert-success">
-				<p><strong><%= @offer.request.roster.patrol_name %> - <%= @offer.request.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
+				<p><strong><%= @offer.request.roster.patrol.name %> - <%= @offer.request.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
 			</div><!--/.alert -->
 			<div class="table-success">
 				<%= render 'request_requirements_table' %>
@@ -24,7 +24,7 @@
 		<% else %>
 
 			<div class="alert alert-danger">
-				<p><strong><%= @offer.request.roster.patrol_name %> - <%= @offer.request.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements</strong></p>
+				<p><strong><%= @offer.request.roster.patrol.name %> - <%= @offer.request.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements</strong></p>
 			</div><!--/.alert -->
 			<div class="table-danger">
 				<%= render 'request_requirements_table' %>
@@ -34,7 +34,7 @@
 		<% if @after_swap_offer_patrol[:result] %>
 
 			<div class="alert alert-success">
-				<p><strong><%= @offer.roster.patrol_name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
+				<p><strong><%= @offer.roster.patrol.name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
 			</div><!--/.alert -->
 			<div class="table-success">
 				<%= render 'offer_requirements_table' %>
@@ -43,7 +43,7 @@
 		<% else %>
 
 			<div class="alert alert-danger">
-				<p><strong><%= @offer.roster.patrol_name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements.</strong></p>
+				<p><strong><%= @offer.roster.patrol.name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will <u>not</u> meet minimum requirements.</strong></p>
 			</div><!--/.alert -->
 			<div class="table-danger">
 				<%= render 'offer_requirements_table' %>

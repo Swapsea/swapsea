@@ -61,7 +61,7 @@
 					Send welcome email to all patrollers in a Club. <b>Be careful not to send duplicates</b>.
 				</p>
 				<p>
-					<%= select_tag :organisation, options_for_select(Club.where(:show_patrols => true).map { |c| [c.name] }) %>
+					<%= select_tag :organisation, options_for_select(Club.with_show_patrols.map { |c| [c.name] }) %>
 				</p>
 				<p>
 					<%= submit_tag 'Send Welcome Email to this Club', :class => 'btn btn-sm btn-success' %>
@@ -80,7 +80,7 @@
 				Send upcoming patrol reminders. <b>Be careful not to send duplicates</b>.
 			</p>
 			<p>
-				<%= select_tag :organisation, options_for_select(Club.where(:show_rosters => true).map { |c| [c.name] }) %>
+				<%= select_tag :organisation, options_for_select(Club.with_show_rosters.map { |c| [c.name] }) %>
 			</p>
 			<p>
 			  	<%= submit_tag 'Send Patrol Roster Reminder', :class => 'btn btn-sm btn-success' %>
@@ -99,7 +99,7 @@
 				Send upcoming skills maintenance reminders. <b>Be careful not to send duplicates</b>.
 			</p>
 			<p>
-				<%= select_tag :organisation, options_for_select(Club.where(:show_skills_maintenance => true).map { |c| [c.name] }) %>
+				<%= select_tag :organisation, options_for_select(Club.with_show_skills_maintenance.map { |c| [c.name] }) %>
 			</p>
 			<p>
 			  	<%= submit_tag 'Send Skills Maintenance Reminder', :class => 'btn btn-sm btn-success' %>

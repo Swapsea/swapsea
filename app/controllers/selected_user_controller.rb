@@ -8,11 +8,11 @@ class SelectedUserController < ApplicationController
     @referrer = request.referer
 
     @switch_users = if selected_user.has_role? :admin
-                      User.all.order(:last_name)
-                    elsif (selected_user.has_role? :manager) && selected_user.organisation.present?
-                      User.where(organisation: selected_user.organisation).order(:last_name)
+                      User.all.joins(patrol_member: :patrol).includes(:patrol, :club).order(:last_name)
+                    elsif (selected_user.has_role? :manager) && selected_user.club.present?
+                      User.with_club(selected_user.club).joins(patrol_member: :patrol).includes(:patrol, :club).order(:last_name)
                     else
-                      User.where(email: selected_user.email).order(:last_name)
+                      User.where(email: selected_user.email).joins(patrol_member: :patrol).includes(:patrol, :club).order(:last_name)
                     end
   end
 

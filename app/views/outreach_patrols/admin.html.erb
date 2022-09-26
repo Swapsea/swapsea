@@ -19,7 +19,7 @@
     <tbody>
       <% @outreach_patrols.each do |outreach_patrol| %>
         <tr>
-          <td><%= outreach_patrol.organisation %></td>
+          <td><%= outreach_patrol.club.name %></td>
           <td><%= outreach_patrol.location %></td>
           <td><%= outreach_patrol.start.strftime('%a %d %b %y') %></td>
           <td><%= outreach_patrol.start.strftime('%H:%M') %></td>

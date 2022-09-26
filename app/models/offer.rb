@@ -7,6 +7,11 @@ class Offer < ApplicationRecord
   belongs_to :user
   belongs_to :roster
 
+  scope :with_club, ->(club_id) { joins(:request, :user, :roster).where(users: { club_id: }) }
+  scope :with_made_by, ->(user_id) { where(id: user_id) }
+  scope :with_pending_status, -> { where(status: 'pending') }
+  scope :with_accepted_status, -> { where(status: 'accepted') }
+
   # Returns array of offers for the same rostered patrol.
   def requests
     Offer.where(roster:)

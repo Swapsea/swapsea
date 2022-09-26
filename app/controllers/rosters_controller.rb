@@ -15,24 +15,22 @@ class RostersController < ApplicationController
   end
 
   def admin
-    @rosters = Roster.all.includes([:patrol])
+    @rosters = Roster.all.joins(patrol: :club).includes(:patrol)
     render layout: 'admin'
   end
 
   # GET /rosters
   # GET /rosters.json
   def index
-    @patrols = Patrol.joins(:users).where(organisation: selected_user.organisation)
+    @patrols = Patrol.with_club(selected_user.club)
 
     if params[:view] == 'all'
-      @rosters = Roster.includes([:patrol]).where(organisation: selected_user.organisation).sort_by(&:start)
-      @rosters_this_year = Roster.includes([:patrol]).where(organisation: selected_user.organisation)
+      @rosters = Roster.with_club(selected_user.club).sort_by(&:start)
+      @rosters_this_year = Roster.with_club(selected_user.club)
     else
       finish_time = 3.hours.ago
-      @rosters = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
-                                                  selected_user.organisation).sort_by(&:start)
-      @rosters_this_year = Roster.includes([:patrol]).where('finish >= ? AND organisation = ?', finish_time.to_s(:db),
-                                                            selected_user.organisation)
+      @rosters = Roster.with_club(selected_user.club).where('finish >= ?', finish_time.to_s(:db)).sort_by(&:start)
+      @rosters_this_year = Roster.with_club(selected_user.club).where('finish >= ?', finish_time.to_s(:db))
     end
 
     @rosters_this_year_sorted = @rosters_this_year.sort_by(&:start)
@@ -40,14 +38,11 @@ class RostersController < ApplicationController
   end
 
   def swaps
-    @my_requests = Request.joins(:roster).where(user: selected_user, status: 'open').order('rosters.start')
-    @my_offers = Offer.where(user: selected_user,
-                             status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
-                                      'deleted']).joins(:roster).order('rosters.start desc')
-    @requests = Request.joins(:roster).where('start > ? AND status = ? AND rosters.organisation = ?',
-                                             DateTime.now - 3.hours, 'open', selected_user.organisation).order('rosters.start')
-    @confirmed_offers = Offer.joins(:roster).where('status = ? AND rosters.organisation = ?', 'accepted',
-                                                   selected_user.organisation).order(updated_at: :desc)
+    @my_requests = Request.with_club(selected_user.club).with_open_status.order('rosters.start')
+    @my_offers = Offer.with_made_by(selected_user).where(status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
+                                                                  'deleted']).joins(:roster).order('rosters.start desc')
+    @requests = Request.with_club(selected_user.club).with_open_status.where('start > ?', DateTime.now - 3.hours).order('rosters.start')
+    @confirmed_offers = Offer.with_club(selected_user.club).with_accepted_status.order(updated_at: :desc)
   end
 
   def patrol
@@ -151,6 +146,6 @@ class RostersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def roster_params
-    params.require(:roster).permit(:organisation, :patrol, :start, :finish)
+    params.require(:roster).permit(:patrol, :start, :finish)
   end
 end
