@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   before_action :init_session_selected_user
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # This needs to be added otherwise CanCan throughs a spanner in the works, re: forbidden attributes, etc.
+  # This needs to be added otherwise CanCan throws a spanner in the works, re: forbidden attributes, etc.
   before_action do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"

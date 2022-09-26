@@ -233,9 +233,9 @@ class OffersController < ApplicationController
     if @offer.save
       @offer.create_activity :destroy, owner: selected_user
       # SwapseaMailer.offer_cancelled(@offer).deliver
-      redirect_to @offer.request, notice: 'Offer was successfully cancelled.'
+      redirect_to @offer.request, notice: 'Offer was successfully withdrawn.'
     else
-      redirect_to @offer.request, notice: 'Error whilst cancelling offer.'
+      redirect_to @offer.request, notice: 'Error whilst withdrawing offer.'
     end
   end
 
