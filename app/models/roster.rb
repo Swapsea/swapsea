@@ -232,7 +232,7 @@ class Roster < ApplicationRecord
   end
 
   def self.upload(file)
-    # Roster.delete_all #delete all data in table before import
+
     allowed_attributes = [
       'Rostered Team Name',
       'Patrol Roster Date',
@@ -243,10 +243,17 @@ class Roster < ApplicationRecord
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
+    club = nil
     (6..spreadsheet.last_row).each do |i|
       row = [header, spreadsheet.row(i)].transpose.to_h
+
+      if !club
+        # Look up club once.
+        club = Club.find_by!(name: row['Organisation Display Name'])
+      end
+
       roster = Roster.new
-      roster.patrol_name = row['Rostered Team Name']
+      roster.patrol = Patrol.find_by(name: row['Rostered Team Name'], club_id: club.id)
       date = row['Patrol Roster Date'].split('/')
       year = date[0].to_s
       month = date[1].to_s
@@ -254,7 +261,6 @@ class Roster < ApplicationRecord
       formatted_date = "#{year}-#{month}-#{day}"
       roster.start = Time.zone.parse("#{formatted_date} #{row['Patrol Roster Start Time']}:00").utc.iso8601
       roster.finish = Time.zone.parse("#{formatted_date} #{row['Patrol Roster Finish Time']}:00").utc.iso8601
-      roster.organisation = row['Organisation Display Name']
       roster.generate_secret
       roster.save!
     end

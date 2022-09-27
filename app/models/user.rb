@@ -157,23 +157,29 @@ class User < ApplicationRecord
   def self.upload(file)
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
+    club = nil
     (6..spreadsheet.last_row).each do |i|
       row = [header, spreadsheet.row(i)].transpose.to_h
-      user = find_by(id: row['Member ID']) || new
-      user.id = row['Member ID']
+
+      if !club
+        # Look up club once per import file.
+        club = Club.find_by!(name: row['Organisation Display Name'])
+      end
+
+      user = find_or_initialize_by(id: row['Member ID'])
+      user.club_id = club.id
       user.first_name = row['First Name']
       user.last_name = row['Last Name']
       user.preferred_name = row['Preferred Name']
       user.gender = row['Gender']
       user.dob = row['Date of Birth']
       user.mobile_phone = row['Mobile Phone'].split('\'')[1] if row['Mobile Phone'].present?
-      # user.home_phone = row["Home Phone"].split('\'')[1] if row["Home Phone"].present?
       user.email = row['Email Address 1']
       user.category = row['Membership Category']
       user.date_joined_organisation = row['Date Joined'] || DateTime.iso8601('1900-01-01')
       user.status = row['Status']
       user.season = row['Season']
-      user.organisation = row['Organisation Display Name']
+
       user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.sample(64).join) if user.ics.blank?
 
       user.save!

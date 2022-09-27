@@ -15,7 +15,7 @@ class RostersController < ApplicationController
   end
 
   def admin
-    @rosters = Roster.all.joins(patrol: :club).includes(:patrol)
+    @rosters = Roster.all.joins(patrol: :club).includes(:patrol, patrol: :club)
     render layout: 'admin'
   end
 

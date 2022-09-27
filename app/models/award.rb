@@ -5,25 +5,9 @@ class Award < ApplicationRecord
 
   scope :with_user, ->(user_id) { where(user_id:).includes(:user) }
 
-  # Allow duplicate award numbers if same member belongs to two clubs simultaneously.
-  # self.primary_key = 'award_number'
-
   validates :award_number, uniqueness: true
 
   def self.upload(file)
-    # Award.joins(:user).where("users.organisation" => club).readonly(false).delete_all
-
-    # allowed_attributes = [
-    # 	"Member ID",
-    # 	"Award Name",
-    # 	"Award Number",
-    # 	"Award Date",
-    # 	"Proficiency Date",
-    # 	"Award Expiry Date",
-    # 	"Award Allocation Date",
-    # 	"Proficiency Allocation Date",
-    # 	"Award Originating Organisation"
-    # ]
 
     values = []
 
@@ -61,7 +45,7 @@ class Award < ApplicationRecord
       values << award
     end
 
-    Award.import columns, values, validate: true
+    Award.import columns, values, validate: true, on_duplicate_key_ignore: true
   end
 
   def self.open_spreadsheet(file)
