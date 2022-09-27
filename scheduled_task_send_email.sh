@@ -1,6 +1,12 @@
 day=$(date +"%u")
 
-if ((day == 3)); then
+if ((day == 1)); then
+   echo "Yay, it's MONDAY! Let's send those nudge emails..."
+
+   # SEND OFFER NUDGE EMAILS
+   rails runner "Email.weekly_nudge_offers()"
+
+elif ((day == 3)); then
    echo "Yay, it's WEDNESDAY! Let's send those email reminders..."
 
    # SEND PATROL EMAILS
@@ -9,8 +15,6 @@ if ((day == 3)); then
    # SEND SKILLS MAINTENANCE EMAILS
    rails runner "Email.weekly_skills_maintenance()"
 
-   # SEND OFFER NUDGE EMAILS
-   rails runner "Email.weekly_nudge_offers()"
 else
-   echo "It's not Wednesday so nothing to do today."
+   echo "Nothing to do today."
 fi
