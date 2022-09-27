@@ -13,7 +13,6 @@ class PatrolMember < ApplicationRecord
   end
 
   def self.upload(file)
-    # PatrolMember.delete_all #destory all data in table before import
 
     allowed_attributes = [
       'Member ID',
@@ -24,25 +23,23 @@ class PatrolMember < ApplicationRecord
 
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(5)
+    club = nil
     (6..spreadsheet.last_row).each do |i|
       row = [header, spreadsheet.row(i)].transpose.to_h
-      next unless Patrol.find_by(name: row['Team Name'], organisation: row['Organisation Display Name'])
 
-      patrol_member = find_by(user_id: row['Member ID']) || new
-      user = User.find_by(id: row['Member ID'])
-      if user.present?
-        user.default_position = row['Team Position']
-        user.default_position = 'Member' if user.default_position == 'Award Member'
-        user.save
+      if !club
+        # Look up club once.
+        club = Club.find_by!(name: row['Organisation Display Name'])
       end
-      patrol_member.user_id = row['Member ID']
-      patrol_member.patrol_name = row['Team Name']
+
+      # Skip patrols that aren't setup in Swapsea, but crash if there are none
+      patrols = Patrol.where(club_id: club.id)
+      patrol = patrols.find_by(name: row['Team Name'])
+      next unless patrol
+
+      patrol_member = find_or_initialize_by(user_id: row['Member ID'])
+      patrol_member.patrol_id = patrol.id
       patrol_member.default_position = row['Team Position']
-      patrol_member.organisation = row['Organisation Display Name']
-
-      # modify default position nameing for palm beach
-      patrol_member.default_position = 'Member' if patrol_member.default_position == 'Award Member'
-
       patrol_member.save
     end
   end
