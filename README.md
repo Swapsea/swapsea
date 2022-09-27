@@ -84,7 +84,6 @@ Notes:
 
 ```bash
 RAILS_ENV=test bundle exec rake db:test:load
-RAILS_ENV=test bundle exec rake db:seed
 RAILS_ENV=test bundle exec rake
 ```
 

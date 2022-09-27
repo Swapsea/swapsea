@@ -20,6 +20,11 @@ class EmailsController < ApplicationController
     redirect_to admin_emails_path
   end
 
+  def send_weekly_nudge_offers
+    Email.weekly_nudge_offers(params[:organisation])
+    redirect_to admin_emails_path
+  end
+
   def send_welcome_email_test
     Email.welcome_email_test(params[:email])
     redirect_to admin_emails_path, notice: "Sent welcome email to #{params[:email]}"

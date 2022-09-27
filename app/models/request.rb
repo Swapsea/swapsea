@@ -11,6 +11,7 @@ class Request < ApplicationRecord
   scope :with_requested_by, ->(user_id) { where(user_id:) }
   scope :with_successful_status, -> { where(status: 'successful') }
   scope :with_open_status, -> { where(status: 'open') }
+  attr_readonly :nudge_email_opt_out_date
 
   def offer_already_exists?(roster, user)
     offers.where(user:, roster:, status: 'pending').present?
@@ -47,5 +48,10 @@ class Request < ApplicationRecord
 
   def offers_that_match_request
     Offer.where('roster_id = ? AND user_id =? AND status = ?', roster_id, user_id, 'pending')
+  end
+
+  def self.nudge_email_opt_out=(opt_out)
+    self.nudge_email_opt_out_date = (DateTime.now if opt_out)
+    save!
   end
 end

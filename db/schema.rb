@@ -214,6 +214,8 @@ ActiveRecord::Schema.define(version: 2022_09_24_060417) do
     t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "nudge_email_opt_out", default: false
+    t.datetime "nudge_email_opt_out_date"
     t.index ["roster_id"], name: "index_requests_on_roster_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end

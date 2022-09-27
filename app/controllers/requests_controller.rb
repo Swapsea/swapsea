@@ -15,7 +15,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @offer = Offer.new
-    @offers = @request.offers.with_pending_status.joins(roster: :patrol, user: :awards).includes(:user, :roster, roster: :patrol, user: :awards).sort_by(&:id)
+    @offers = @request.offers.with_pending_status.joins(roster: :patrol).left_outer_joins(user: :awards).includes(:user, :roster, roster: :patrol, user: :awards).order(:start)
     @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
     @awards = @request.user.awards.map(&:award_name)
   end
@@ -60,6 +60,7 @@ class RequestsController < ApplicationController
       respond_to do |format|
         if @request.save
           @request.create_activity :create, owner: selected_user
+          SwapseaMailer.request_created(@request).deliver
           format.html { redirect_to @request, notice: 'Request was successfully created.' }
           format.json { render action: 'show', status: :created, location: @request }
         else
@@ -110,6 +111,6 @@ class RequestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def request_params
-    params.require(:request).permit(:roster_id, :user_id, :comment, :mobile, :email, :status)
+    params.require(:request).permit(:roster_id, :user_id, :comment, :mobile, :email, :status, :nudge_email_opt_out)
   end
 end

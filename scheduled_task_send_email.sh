@@ -8,6 +8,9 @@ if ((day == 3)); then
 
    # SEND SKILLS MAINTENANCE EMAILS
    rails runner "Email.weekly_skills_maintenance()"
+
+   # SEND OFFER NUDGE EMAILS
+   rails runner "Email.weekly_nudge_offers()"
 else
    echo "It's not Wednesday so nothing to do today."
 fi

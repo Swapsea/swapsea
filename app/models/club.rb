@@ -17,4 +17,6 @@ class Club < ApplicationRecord
   scope :with_show_swaps, -> { where(is_active: true, show_swaps: true) }
   scope :with_show_outreach, -> { where(is_active: true, show_outreach: true) }
   scope :with_show_skills_maintenance, -> { where(is_active: true, show_skills_maintenance: true) }
+  scope :with_reminder_emails_enabled, -> { where(is_active: true, enable_reminders_email: true) }
+  scope :with_reminder_sms_enabled, -> { where(is_active: true, enable_reminders_sms: true) }
 end
