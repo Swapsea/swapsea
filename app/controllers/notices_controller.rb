@@ -7,12 +7,12 @@ class NoticesController < ApplicationController
   layout 'admin'
 
   def admin
-    @notices = Notice.all
+    @notices = Notice.all.includes([:club])
     @notices_preview = Notice.visible
   end
 
   def index
-    @notices = Notice.visible.where('(organisation = ? OR system_wide=1)', selected_user.organisation)
+    @notices = Notice.with_club(selected_user.club).with_visible
     render layout: 'dashboard'
   end
 
@@ -51,6 +51,6 @@ class NoticesController < ApplicationController
 
   def notice_params
     params.require(:notice).permit(:title, :desc, :link, :link_desc, :image, :video, :user_id, :on_behalf,
-                                   :visible_from, :visible_to, :visible, :organisation, :system_wide)
+                                   :visible_from, :visible_to, :visible, :club_id, :system_wide)
   end
 end

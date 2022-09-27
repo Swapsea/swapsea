@@ -38,7 +38,6 @@ class StagingUser < ApplicationRecord
 
     staged_users.each do |staged_user|
       user = User.find_or_initialize_by(id: staged_user.user_id)
-
       user.id = staged_user.user_id
       user.first_name = staged_user.first_name
       user.last_name = staged_user.last_name
@@ -50,13 +49,13 @@ class StagingUser < ApplicationRecord
       user.date_joined_organisation = staged_user.date_joined_organisation
       user.status = staged_user.status
       user.season = staged_user.season
-      user.organisation = staged_user.organisation
+      user.club = Club.find_by(name: staged_user.organisation)
       user.ics = Digest::SHA512.hexdigest(('a'..'z').to_a.sample(64).join) if user.ics.blank?
 
       user.save
     end
 
-    # StagingUser.delete_all
+    StagingUser.delete_all
   end
 
   def self.open_spreadsheet(file)

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def admin
-    @users = User.all.includes(:roles).order(last_name: :asc)
+    @users = User.all.includes(:roles, :club).order(last_name: :asc)
     render layout: 'admin'
   end
 

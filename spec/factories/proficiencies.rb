@@ -7,6 +7,6 @@ FactoryBot.define do
     finish { '2018-10-07 19:53:09' }
     max_signup { 60 }
     max_online_signup { 50 }
-    organisation { 'MyString' }
+    club.name { 'Swapsea SLSC' }
   end
 end

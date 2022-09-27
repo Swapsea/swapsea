@@ -9,9 +9,9 @@
 				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Patrol</strong></label>
 				<div class="col-xs-8 col-sm-7">
 					<div class="visible-xs"><strong>Patrol</strong></div>
-					<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
 					<%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
-					<%= @request.roster.patrol_name %>
+					<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
+					<%= @request.roster.patrol.name %>
 				</div>
 			</div>
 			<hr/>
@@ -32,6 +32,7 @@
 					<%= @request.status.capitalize %>
 				</div>
 			</div>
+			<% if @request.status == 'open' %>
 			<hr/>
 			<div class="row">
 				<div class="col-xs-4 col-sm-2 hidden-xs"><strong>Member Awards</strong></div>
@@ -67,8 +68,9 @@
 					<% end %>
 				</div>
 			</div>
-			<hr/>
+			<% end %>
 			<% if @request.comment.present? %>
+			<hr/>
 			<div class="row">
 				<div class="col-xs-4 col-sm-2 hidden-xs"><strong>Comments</strong></div>
 				<div class="col-xs-8 col-sm-7">
@@ -76,91 +78,35 @@
 						<%= @request.comment %>
 				</div>
 			</div>
+			<% end
+
+			if selected_user == @request.user && @request.status == 'open' %>
 			<hr/>
-			<% end %>
-			<div class="buttons">
-				<%= link_to 'Edit Request', edit_request_path(@request), :class => "btn btn-primary" if selected_user == @request.user && @request.status == 'open' %>
-				<%= link_to 'Cancel Request', confirm_cancel_request_path(@request), :class => "btn btn-danger btn-right" if selected_user == @request.user && @request.status == 'open' %>
+			<div class="row">
+				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Nudge me?</strong></label>
+				<div class="col-xs-8 col-sm-7">
+					<div class="visible-xs"><strong>Nudge me?</strong></div>
+					<% if @request.nudge_email_opt_out %>
+						No, please don't nudge me to make offers
+					<% else %>
+						Yes, please nudge me to make offers
+					<% end %>
+				</div>
 			</div>
+			<% end
+
+			if selected_user == @request.user && @request.status == 'open'
+				%>
+			<div class="buttons">
+				<%= link_to 'Cancel Request', confirm_cancel_request_path(@request), :class => "btn btn-danger" %>
+				<%= link_to 'Edit Request', edit_request_path(@request), :class => "btn btn-primary btn-right" %>
+				</div>
+				<% end %>
 		</div><!--/.request-details -->
 	</div><!--/.panel-body -->
 </div><!--/.panel -->
 
 <% if @request.status == 'open' %>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h2>Offers</h2>
-	</div><!--/.panel-heading -->
-	<div class="panel-body">
-		<ul class="offers">
-
-			<% if @offers.present? %>
-
-					<% @offers.each do |offer| %>
-
-						<li class="offer">
-								<div class="details col-xs-12 col-sm-9">
-									<strong><%= offer.roster.start.strftime('%a %d %b') %></strong><br/>
-									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
-									<%= offer.roster.patrol.name %><br/>
-									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong><br/>
-
-										<% awards = offer.user.awards.map { |n| n.award_name } %>
-										<%= 'SRC ' if awards.include?('Surf Rescue Certificate') %>
-										<%= 'SRC (CPR) ' if awards.include?('Surf Rescue Certificate (CPR Endorsed)') %>
-										<%= 'BM ' if awards.include?('Bronze Medallion') %>
-										<%= 'GM ' if awards.include?('Gold Medallion (Advanced Lifesaving)') %>
-										<%= 'ART ' if awards.include?('Advanced Resuscitation Techniques Certificate') %>
-										<%= 'ART ' if awards.include?('Advanced Resuscitation Techniques [AID]') %>
-										<%= 'IRB-C ' if awards.include?('IRB Crew Certificate') %>
-										<%= 'IRB-D ' if awards.include?('Silver Medallion IRB Driver') %>
-										<%= 'BBM ' if awards.include?('Silver Medallion Beach Management') %>
-										<%= 'ATV ' if awards.include?('ATV Operator Certificate') %>
-
-									<br/>
-									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user) %>
-									<% if check_offer[:result] == true %>
-										<span class="meets-requirements">Meets Requirements</span><br/>
-									<% else %>
-										<span class="doesnt-meet-requirements">Doesn't Meet Requirements</span><br/>
-									<% end %>
-									<span class="comment"><%= offer.comment %></span>
-								</div>
-
-									<% if selected_user == @request.user %>
-									<div class="buttons col-xs-12 col-sm-3">
-										<%= link_to confirm_decline_offer_path(offer), :class => "btn btn-danger" do %>
-												<i class="fa fa-thumbs-down"></i><br/>
-												Decline
-										<% end %>
-										<%= link_to confirm_accept_offer_path(offer), :class => "btn btn-success pull-right" do %>
-												<i class="fa fa-thumbs-up"></i><br/>
-												Accept
-										<% end %>
-									</div>
-									<% elsif selected_user == offer.user %>
-									<div class="buttons col-xs-12 col-sm-3">
-										<%= link_to confirm_cancel_offer_path(offer), :class => "btn btn-danger pull-right" do %>
-												<i class="fa fa-times"></i><br/>
-												Cancel
-										<% end %>
-									</div>
-									<% end %>
-
-								<div class="clear"></div>
-						</li><!--/.offer-->
-
-					<% end %><!--/offers.each-->
-
-			<% else %>
-				<div class="panel-info">
-					<p>There are currently no offers.</p>
-				</div>
-			<% end %>
-		</ul><!--/.offers-->
-	</div><!--/.panel-body -->
-</div><!--/.panel-->
-
 <% if @request.user != selected_user %>
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -175,7 +121,7 @@
 						<div class="col-xs-8 col-sm-7">
 							<select name="roster_id" class="form-control">
 								<% @rosters_available.each do |r| %>
-									<option value="<%= r.id %>"><%= r.patrol_name %>, <%= r.start.strftime("%a %d %b") %> <%= r.start.strftime("%H:%M") %> - <%= r.finish.strftime("%H:%M") %></option>
+									<option value="<%= r.id %>"><%= r.start.strftime("%a %d %b") %> <%= r.start.strftime("%H:%M") %> - <%= r.finish.strftime("%H:%M") %> (<%= r.patrol.name %>)</option>
 								<% end %>
 							</select>
 						</div>
@@ -204,16 +150,89 @@
 	</div><!--/.panel -->
 <% end %>
 
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Offers</h2>
+	</div><!--/.panel-heading -->
+	<div class="panel-body">
+		<ul class="offers">
+
+			<% if @offers.present? %>
+
+					<% @offers.each do |offer| %>
+
+						<li class="offer">
+								<div class="details col-xs-12 col-sm-9">
+									<strong><%= offer.roster.start.strftime('%a %d %b') %></strong><br/>
+									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
+									<%= offer.roster.patrol.name %><br/>
+									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong><br/>
+									<span class="comment"><%= offer.comment %></span><br />
+										<% awards = offer.user.awards.map { |n| n.award_name } %>
+										<%= 'SRC ' if awards.include?('Surf Rescue Certificate') %>
+										<%= 'SRC (CPR) ' if awards.include?('Surf Rescue Certificate (CPR Endorsed)') %>
+										<%= 'BM ' if awards.include?('Bronze Medallion') %>
+										<%= 'GM ' if awards.include?('Gold Medallion (Advanced Lifesaving)') %>
+										<%= 'ART ' if awards.include?('Advanced Resuscitation Techniques Certificate') %>
+										<%= 'ART ' if awards.include?('Advanced Resuscitation Techniques [AID]') %>
+										<%= 'IRB-C ' if awards.include?('IRB Crew Certificate') %>
+										<%= 'IRB-D ' if awards.include?('Silver Medallion IRB Driver') %>
+										<%= 'BBM ' if awards.include?('Silver Medallion Beach Management') %>
+										<%= 'ATV ' if awards.include?('ATV Operator Certificate') %>
+									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user) %>
+									<br/>
+									<% if check_offer[:result] == true %>
+										<span class="meets-requirements">Meets award equirements.</span>
+									<% else %>
+										<span class="doesnt-meet-requirements">May not meet award requirements.</span>
+									<% end %>
+								</div>
+
+									<% if selected_user == @request.user %>
+									<div class="buttons col-xs-12 col-sm-3">
+										<%= link_to confirm_decline_offer_path(offer), :class => "btn btn-danger" do %>
+												<i class="fa fa-thumbs-down"></i><br/>
+												Decline
+										<% end %>
+										<%= link_to confirm_accept_offer_path(offer), :class => "btn btn-success pull-right" do %>
+												<i class="fa fa-thumbs-up"></i><br/>
+												Accept
+										<% end %>
+									</div>
+									<% elsif selected_user == offer.user %>
+									<div class="buttons col-xs-12 col-sm-3">
+										<%= link_to confirm_cancel_offer_path(offer), :class => "btn btn-danger pull-right" do %>
+												<i class="fa fa-times"></i><br/>
+												Withdraw Offer
+										<% end %>
+									</div>
+									<% end %>
+
+								<div class="clear"></div>
+						</li><!--/.offer-->
+
+					<% end %><!--/offers.each-->
+
+			<% else %>
+				<div class="panel-info">
+					<p>There are currently no offers.</p>
+				</div>
+			<% end %>
+		</ul><!--/.offers-->
+	</div><!--/.panel-body -->
+</div><!--/.panel-->
+
 <% else %>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>Accepted Offer</h2>
 		</div>
 		<div class="panel-body">
-			<%= @request.accepted_offer.roster.patrol_name %><br/>
 			<strong><%= @request.accepted_offer.roster.start.strftime("%a %d %b %Y") %></strong><br/>
 			<%= @request.accepted_offer.roster.start.strftime("%H:%M") %> - <%= @request.accepted_offer.roster.finish.strftime("%H:%M") %><br/>
+			<%= @request.accepted_offer.roster.patrol.name %><br/>
 			<%= @request.accepted_offer.user.name %><br/>
+			<span class="comment"><%=  @request.accepted_offer.comment %></span>
 		</div>
 	</div>
 <% end %>

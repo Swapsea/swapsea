@@ -17,11 +17,9 @@ Swapsea::Application.routes.draw do
   post 'api/v1/import/members', to: 'api#upload_members'
   post 'api/v1/import/awards', to: 'api#upload_awards'
   post 'api/v1/import/patrol-members', to: 'api#upload_patrol_members'
-  # post 'api/v1/import/rosters', to: 'api#import_rosters'
   get 'api/v1/transfer/members', to: 'api#transfer_members'
   get 'api/v1/transfer/awards', to: 'api#transfer_awards'
   get 'api/v1/transfer/patrol-members', to: 'api#transfer_patrol_members'
-  # get 'api/v1/transfer', to: 'api#transfer'
 
   get 'ics/:key', to: 'users#ics', as: 'ics'
 
@@ -34,6 +32,7 @@ Swapsea::Application.routes.draw do
   resources :emails do
     collection do
       post 'send_weekly_patrol_rosters'
+      post 'send_weekly_nudge_offers'
       post 'send_weekly_skills_maintenance'
       post 'send_welcome_email_test'
       post 'send_welcome_email'
@@ -50,8 +49,6 @@ Swapsea::Application.routes.draw do
   end
 
   get 'skills-maintenance', to: 'proficiencies#index'
-
-  resources :settings
 
   resources :proficiency_signups
 

@@ -7,17 +7,17 @@ class PatrolsController < ApplicationController
 
   def index
     @clubs = if selected_user.has_role?(:admin)
-               Club.includes(:patrols).show_patrols
+               Club.with_show_patrols.includes(:patrols).all
              else
-               Club.where(is_active: true).includes(:patrols).show_patrols.where(name: selected_user.organisation)
+               Club.with_show_patrols.includes(:patrols).where(name: selected_user.club.name)
              end
   end
 
   def admin
     @patrols = if current_user.has_role?(:admin)
-                 Patrol.all
+                 Patrol.all.joins(:club).includes([:club])
                elsif current_user.has_role?(:manager)
-                 Patrol.all.where(organisation: current_user.organisation)
+                 Patrol.with_club(current_user.club).all
                end
 
     render layout: 'admin'
@@ -28,7 +28,7 @@ class PatrolsController < ApplicationController
       @patrol = Patrol.find(params[:id])
       @club = @patrol.club
     else
-      @club = Club.find_by!(name: selected_user.organisation, is_active: true)
+      @club = Club.with_show_patrols.find_by!(name: selected_user.club.name)
       @patrol = @club.patrols.find(params[:id])
     end
   end
@@ -93,7 +93,7 @@ class PatrolsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def patrol_params
-    params.require(:patrol).permit(:organisation, :name, :short_name, :key, :special_event, :need_bbm, :need_irbd,
+    params.require(:patrol).permit(:club_id, :name, :short_name, :key, :special_event, :need_bbm, :need_irbd,
                                    :need_irbc, :need_artc, :need_firstaid, :need_bronze, :need_src)
   end
 end

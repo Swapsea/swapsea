@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_103703) do
+ActiveRecord::Schema.define(version: 2022_09_24_060417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -75,21 +75,6 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.index ["name"], name: "index_clubs_on_name"
   end
 
-  create_table "delayed_jobs", id: :serial, force: :cascade do |t|
-    t.integer "priority", default: 0, null: false
-    t.integer "attempts", default: 0, null: false
-    t.text "handler", null: false
-    t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
-  end
-
   create_table "emails", id: :serial, force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -136,7 +121,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.boolean "visible"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "organisation"
+    t.bigint "club_id"
+    t.index ["club_id"], name: "index_notices_on_club_id"
   end
 
   create_table "offers", id: :serial, force: :cascade do |t|
@@ -168,17 +154,17 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.datetime "finish"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "organisation"
+    t.bigint "club_id"
+    t.index ["club_id"], name: "index_outreach_patrols_on_club_id"
   end
 
   create_table "patrol_members", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "default_position"
-    t.string "organisation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "patrol_name"
-    t.index ["organisation"], name: "index_patrol_members_on_organisation"
+    t.bigint "patrol_id"
+    t.index ["patrol_id"], name: "index_patrol_members_on_patrol_id"
     t.index ["user_id"], name: "index_patrol_members_on_user_id"
   end
 
@@ -195,9 +181,9 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "need_src", null: false
-    t.string "organisation"
     t.string "short_name"
-    t.index ["organisation", "name"], name: "index_patrols_on_organisation_and_name"
+    t.bigint "club_id"
+    t.index ["club_id"], name: "index_patrols_on_club_id"
   end
 
   create_table "proficiencies", id: :serial, force: :cascade do |t|
@@ -208,7 +194,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.integer "max_online_signup"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "organisation", null: false
+    t.bigint "club_id"
+    t.index ["club_id"], name: "index_proficiencies_on_club_id"
   end
 
   create_table "proficiency_signups", id: :serial, force: :cascade do |t|
@@ -227,6 +214,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "nudge_email_opt_out", default: false
+    t.datetime "nudge_email_opt_out_date"
     t.index ["roster_id"], name: "index_requests_on_roster_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
@@ -242,8 +231,6 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
   end
 
   create_table "rosters", id: :serial, force: :cascade do |t|
-    t.string "organisation"
-    t.string "patrol_name"
     t.datetime "start"
     t.datetime "finish"
     t.datetime "created_at"
@@ -257,14 +244,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.integer "bronze"
     t.integer "src"
     t.string "secret"
-    t.index ["organisation", "patrol_name"], name: "index_rosters_on_organisation_and_patrol_name"
-  end
-
-  create_table "settings", id: :serial, force: :cascade do |t|
-    t.string "key"
-    t.string "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.bigint "patrol_id"
+    t.index ["patrol_id"], name: "index_rosters_on_patrol_id"
   end
 
   create_table "staging_awards", id: :serial, force: :cascade do |t|
@@ -332,7 +313,6 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.string "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "organisation", null: false
     t.string "last_name"
     t.string "first_name"
     t.string "preferred_name"
@@ -344,7 +324,6 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.string "season"
     t.string "gender"
     t.boolean "account"
-    t.string "patrol_name"
     t.string "default_position"
     t.string "ics"
     t.boolean "bbm"
@@ -356,6 +335,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.boolean "bronze"
     t.boolean "src"
     t.boolean "smsable", default: false
+    t.bigint "club_id"
+    t.index ["club_id"], name: "index_users_on_club_id"
     t.index ["id"], name: "index_users_on_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -366,4 +347,11 @@ ActiveRecord::Schema.define(version: 2022_02_08_103703) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
   end
 
+  add_foreign_key "notices", "clubs"
+  add_foreign_key "outreach_patrols", "clubs"
+  add_foreign_key "patrol_members", "patrols"
+  add_foreign_key "patrols", "clubs"
+  add_foreign_key "proficiencies", "clubs"
+  add_foreign_key "rosters", "patrols"
+  add_foreign_key "users", "clubs"
 end

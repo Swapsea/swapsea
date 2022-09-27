@@ -15,8 +15,8 @@
       <tbody>
         <% @patrol_members.each do |patrol_member| %>
           <tr>
-            <td><%= patrol_member.organisation if patrol_member.organisation.present? %></td>
-            <td><%= patrol_member.patrol_name if patrol_member.patrol_name.present? %></td>
+            <td><%= patrol_member.patrol.club.name %></td>
+            <td><%= patrol_member.patrol.name %></td>
             <td><%= patrol_member.user_id %></td>
             <td><%= patrol_member.user.first_name if patrol_member.user.present? %> <%= patrol_member.user.last_name if patrol_member.user.present? %></td>
             <td><%= patrol_member.default_position %></td>

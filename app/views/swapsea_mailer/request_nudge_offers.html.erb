@@ -2,7 +2,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <title>Swapsea - Upcoming Patrol</title>
+    <title>Swapsea - Make an offer</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -98,39 +98,27 @@
     <div class="container">
       <div class="title">
         <%= image_tag('main-logo.png', size: "150x31", alt: "Swapsea", class: "logo") %>
-        <h2>Upcoming Patrol</h2>
+        <h2>Make an Offer</h2>
       </div>
       <div class="content">
         <p>
           G'day <%= @user.first_name %>,
         </p>
-        <p>
-          You have a patrol coming up soon.
-        </p>
-        <p>
-          <strong>Upcoming patrol</strong><br/>
-          <%= @next_roster.patrol_name %><br/>
-          <%= @next_roster.start.strftime("%A %d %B %Y") %><br/>
-          <%= @next_roster.start.strftime("%H:%M") %> - <%= @next_roster.finish.strftime("%H:%M") %>
-        </p>
-        <% if @following_roster != nil %>
-        <p>
-          <strong>Following patrol</strong><br/>
-          <%= @following_roster.patrol_name %><br/>
-          <%= @following_roster.start.strftime("%A %d %B %Y") %><br/>
-          <%= @following_roster.start.strftime("%H:%M") %> - <%= @following_roster.finish.strftime("%H:%M") %><br/>
-        </p>
+        <p>Make the first move!</p>
+
+        <p>Fill your swap request on <%= @request.roster.start.strftime("%A %d %B %Y") %> by <b>making an offer</b> to someone else.</p>
+
+        <p>Can you make any of these dates instead?</p>
+
+        <p><ul>
+        <% @other_request_dates.map do |other_request_date| %>
+        <li><%= other_request_date %></li>
         <% end %>
-        <p>
-          If you can't make one of your patrols, <a href="https://www.swapsea.com.au/dashboard">swap it on Swapsea</a>.
-        </p>
-        <p>
-          Check the weather conditions before your patrol.<br/>
-          <a href="https://swell.willyweather.com.au/">Willy Weather</a>
-        </p>
-        <p>
-          Have a great weekend!
-        </p>
+        </ul></p>
+
+        <p>Make an offer now at <%= link_to 'Swapsea', swaps_url %>.
+
+        <p>We'll remind you once a week unless you <%= link_to 'opt out in your request', edit_request_url(@request) %>.</p>
         <p>
           Much Love,<br/>
           Swapsea

@@ -3,7 +3,7 @@
 
 		<%
 			order = ["Patrol Captain", "Patrol Vice Captain", "Vice Captain", "IRB Driver", "IRB Crew", "ART Operator", "ART Member", "First Aid Officer", "First Aid Member", "Bronze Member", "Member", "SRC Member", "SRC"]
-			users = ru.sort_by! { |n| order.index n.default_position }
+			users = ru.sort_by! { |n| order.index n.default_position ? 0 : 1 }
 		%>
 
 		<thead>

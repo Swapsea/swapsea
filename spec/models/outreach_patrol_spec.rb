@@ -13,7 +13,7 @@ RSpec.describe OutreachPatrol, type: :model do
   end
 
   describe OutreachPatrol, 'association' do
-    it { is_expected.to belong_to(:club).with_foreign_key('organisation').with_primary_key('name') }
+    it { is_expected.to belong_to(:club) }
     it { is_expected.to have_many(:outreach_patrol_sign_ups) }
     it { is_expected.to have_many(:users).through(:outreach_patrol_sign_ups) }
   end

@@ -8,7 +8,7 @@ class SwapseaSms
   TWILIO_PHONE_NUMBER  = ENV.fetch('TWILIO_PHONE_NUMBER', nil)
   TESTING_PHONE_NUMBER = ENV.fetch('TESTING_PHONE_NUMBER', nil)
 
-  def self.weekly_roster_reminder(*args)
+  def self.roster_reminder(*args)
     new(*args)
   end
 
@@ -41,7 +41,7 @@ class SwapseaSms
 
   def message_body
     [
-      "Upcoming patrol #{@user.organisation} \"#{@next_roster.patrol_name}\"",
+      "Upcoming patrol #{@user.club.name} \"#{@next_roster.patrol.name}\"",
       "on #{@next_roster.start.strftime('%a %d %b %y')},",
       "#{@next_roster.start.strftime('%H:%M')} -",
       "#{@next_roster.finish.strftime('%H:%M')}.",

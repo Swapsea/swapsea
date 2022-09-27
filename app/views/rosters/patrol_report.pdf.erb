@@ -1,7 +1,7 @@
 <div id="report">
     <%= image_tag('alternate-logo.png', size: "150", alt: "Swapsea", class: "logo") %>
     <div class="patrol">
-      <h1><%= @roster.organisation %></h1>
+      <h1><%= @roster.patrol.club.name %></h1>
       <h2><%= @roster.patrol.name %></h2>
       <div class="details">
         <div class="time"><%= @roster.start.strftime("%H:%M") %> - <%= @roster.finish.strftime("%H:%M") %></div>

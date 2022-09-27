@@ -2,7 +2,7 @@
 
 class SwapseaMailer < ApplicationMailer
   # Sent to all users with a patrol in the next 7 days.
-  def weekly_roster_reminder(user, next_roster, following_roster, subject)
+  def roster_reminder(user, next_roster, following_roster, subject)
     @user = user
     @subject = subject
     @next_roster = next_roster
@@ -12,20 +12,11 @@ class SwapseaMailer < ApplicationMailer
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
-  ## To be generalised
-
   # Sent to all users with a proficiency in the next 7 days.
   def proficiency_reminder(user, proficiency)
     @user = user
     @proficiency = proficiency
     mail subject: 'Upcoming Skills Maintenance',
-         to: @user.email,
-         from: 'Swapsea <noreply@swapsea.com.au>'
-  end
-
-  def north_bondi_not_yet_proficient(user)
-    @user = user
-    mail subject: 'Sign Up for Skills Maintenance',
          to: @user.email,
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
@@ -91,6 +82,15 @@ class SwapseaMailer < ApplicationMailer
          from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
+  # Sent to request user to confirm swap request created.
+  def request_created(request)
+    @request = request
+    @user = request.user
+    mail subject: 'Request created',
+         to: request.user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
+  end
+
   # Sent to request user to confirm swap details.
   def request_successful(request)
     @request = request
@@ -100,6 +100,15 @@ class SwapseaMailer < ApplicationMailer
          to: request.user.email,
          from: 'Swapsea <noreply@swapsea.com.au>',
          reply_to: request.accepted_offer.user.email
+  end
+
+  def request_nudge_offers(request, other_request_dates)
+    @request = request
+    @user = request.user
+    @other_request_dates = other_request_dates
+    mail subject: "Make an offer for #{request.roster.start.strftime('%A, %d %B')}",
+         to: request.user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
   end
 
   # Sent to each offer user to notify them that the request was cancelled
@@ -140,6 +149,14 @@ class SwapseaMailer < ApplicationMailer
   ###############################################################################
   # => To consolidate
   ###############################################################################
+
+  def north_bondi_not_yet_proficient(user)
+    @user = user
+    mail subject: 'Sign Up for Skills Maintenance',
+         to: @user.email,
+         from: 'Swapsea <noreply@swapsea.com.au>'
+  end
+
   def north_bondi_patrol_report(roster)
     @roster = roster
     # Collect PC and VC Emails

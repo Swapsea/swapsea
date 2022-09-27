@@ -13,7 +13,7 @@
           <%= f.hidden_field :roster_id, :value => @roster.id %>
           <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
           <%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
-          <%= @request.roster.patrol_name %>
+          <%= @request.roster.patrol.name %>
         </div>
       </div>
       <hr/>
@@ -88,6 +88,14 @@
         <div class="col-xs-8 col-sm-7">
           <div class="visible-xs"><strong>Comments</strong></div>
             <%= f.input :comment, :as => :text, :label => false, input_html: { class: 'textbox form-control' } %>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <label class="col-xs-4 col-sm-2 hidden-xs"><strong>Nudge me?</strong></label>
+        <div class="col-xs-8 col-sm-7">
+          <div class="visible-xs"><strong>Nudge me?</strong></div>
+          <%= f.input :nudge_email_opt_out, as: :select, collection: [['Yes, please nudge me to make offers',false], ['No, please don''t nudge me to make offers',true]], include_blank: false, :class => "form-control", label: false %>
         </div>
       </div>
       <hr/>
