@@ -26,26 +26,26 @@ class Email < ApplicationRecord
           next_roster = user_roster.first
           if user_roster.second.present?
             following_roster = user_roster.second
-            if user.club.with_reminder_emails_enabled
+            if user.club.enable_reminders_email
               SwapseaMailer.roster_reminder(user, next_roster, following_roster, subject).deliver
               emails_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
-            if user.club.with_reminder_sms_enabled
+            if user.club.enable_reminders_sms
               SwapseaSms.roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster SMS because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_sms=#{user.club.enable_reminders_sms}"
             end
           elsif user_roster.first.present?
-            if user.club.with_reminder_emails_enabled
+            if user.club.enable_reminders_email
               SwapseaMailer.roster_reminder(user, next_roster, nil, subject).deliver
               emails_sent += 1
             else
               Rails.logger.warn "Skipped sending patrol roster email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email}"
             end
-            if user.club.with_reminder_sms_enabled
+            if user.club.enable_reminders_sms
               SwapseaSms.roster_reminder(user, next_roster).deliver
               sms_sent += 1
             else
@@ -76,7 +76,7 @@ class Email < ApplicationRecord
                     end
     proficiencies.map do |proficiency|
       proficiency.users.map do |user|
-        if user.club.with_reminder_emails_enabled && user.club.show_skills_maintenance
+        if user.club.enable_reminders_email && user.club.show_skills_maintenance
           SwapseaMailer.proficiency_reminder(user, proficiency).deliver
           emails_sent += 1
         else
