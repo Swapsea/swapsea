@@ -13,10 +13,10 @@ class SwapsController < ApplicationController
   end
 
   def my_offers
-    @swaps = Offer.with_club(selected_user.club_id).with_made_by(selected_user).where(
-      status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
-               'deleted']
-    ).order('rosters.start desc')
+    # All offers for future swap requests
+    @swaps = Offer.with_offered_by(selected_user)
+                  .where('rosters.finish > ?', DateTime.now)
+                  .order('rosters.start desc')
   end
 
   def my_requests

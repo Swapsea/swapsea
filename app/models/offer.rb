@@ -7,8 +7,8 @@ class Offer < ApplicationRecord
   belongs_to :user
   belongs_to :roster
 
-  scope :with_club, ->(club_id) { joins(:request, :user, :roster).where(users: { club_id: }) }
-  scope :with_made_by, ->(user_id) { where(id: user_id) }
+  scope :with_club, ->(club_id) { joins(:request, :user, :roster).where(users: { club_id: }).includes(:request, :user, :roster) }
+  scope :with_offered_by, ->(user_id) { joins(:request, :user, :roster).where(user_id:).includes(:request, :user, :roster) }
   scope :with_pending_status, -> { where(status: 'pending') }
   scope :with_accepted_status, -> { where(status: 'accepted') }
 
