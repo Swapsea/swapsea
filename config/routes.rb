@@ -95,9 +95,6 @@ Swapsea::Application.routes.draw do
     end
   end
 
-  get 'swaps', to: 'rosters#swaps'
-  get 'swaps/:view', to: 'rosters#swaps'
-
   resources :patrol_members do
     collection do
       post :import
