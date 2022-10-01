@@ -15,7 +15,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @offer = Offer.new
-    @offers = @request.offers.with_pending_status.joins(roster: :patrol).left_outer_joins(user: :awards).includes(:user, :roster, roster: :patrol, user: :awards).order(:start)
+    @offers = @request.offers.with_pending_status.joins(roster: :patrol).includes(:user, :roster, roster: :patrol).order(:start)
     @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
     @awards = @request.user.awards.map(&:award_name)
   end
