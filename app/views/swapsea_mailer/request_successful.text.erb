@@ -1,6 +1,6 @@
 G'day <%= @user.first_name %>,
 
-Congratulations, your swap is now confirmed.
+Congratulations, your swap is now confirmed!
 
 Your new patrol
 <%= @offer.roster.patrol.name %>
@@ -22,10 +22,10 @@ You can contact <%= @offer.user.name %> via the details below.
 <% end %>
 
 Can't make your new patrol?
-You cannot cancel a swap once it has been confirmed. You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it with someone, like you would any normal patrol.
+You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it again. You cannot cancel a swap once it has been confirmed (but you can swap back).
 
 
-Login to Swapsea at <%= login_url %>
+See your updated roster at Swapsea at <%= dashboard_url %>
 
 Have a great weekend!
 

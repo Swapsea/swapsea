@@ -2,7 +2,7 @@
           G'day <%= @user.first_name %>,
         </p>
         <p>
-          You have a new offer - <strong><%= link_to 'View it now', @request %></strong>!
+          You have a new offer - <strong><%= link_to 'View it now', request_url(@request) %></strong>!
         </p>
         <p>
           <strong>Your swap request</strong><br/>
@@ -28,7 +28,7 @@
         </p>
         <br/>
         <p>
-          <%= link_to 'View all offers now', @request %>.
+          <%= link_to 'View all offers now', request_url(@request) %>.
         </p>
         <p>
           Have a great weekend!

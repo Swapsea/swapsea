@@ -2,7 +2,7 @@
           G'day <%= @user.first_name %>,
         </p>
         <p>
-          Congratulations, your offer was accepted.
+          Congratulations, your offer was accepted!
         </p>
         <p>
           <strong>Your new patrol</strong><br/>
@@ -29,11 +29,11 @@
         <% end %>
         <p>
           <strong>Can't make your new patrol?</strong><br/>
-          You cannot cancel a swap once it has been confirmed. You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it with someone like you would any normal patrol.
+          You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it again. You cannot cancel a swap once it has been confirmed (but you can swap back).
         </p>
         <br/>
         <p>
-          <%= link_to 'Login to Swapsea', login_url %>.
+          See your <%= link_to 'updated roster at Swapsea', dashboard_url %>.
         </p>
         <p>
           Have a great weekend!
