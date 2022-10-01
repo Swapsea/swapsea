@@ -5,6 +5,7 @@ ruby '3.1.2'
 
 gem 'activerecord', '>= 6.0.5.1'
 gem 'activerecord-import'
+gem 'barnes'
 gem 'bcrypt'
 gem 'cancancan'
 gem 'coffee-rails'
