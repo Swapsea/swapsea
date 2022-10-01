@@ -163,26 +163,14 @@
 
 						<li class="offer">
 								<div class="details col-xs-12 col-sm-9">
-									<strong><%= offer.roster.start.strftime('%a %d %b') %></strong><br/>
+									<strong><%= offer.roster.start.strftime('%a %e %B') %></strong>
 									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
 									<%= offer.roster.patrol.name %><br/>
-									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong><br/>
+									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong>
 									<span class="comment"><%= offer.comment %></span><br />
-										<% awards = offer.user.awards.map { |n| n.award_name } %>
-										<%= 'SRC ' if awards.include?('Surf Rescue Certificate') %>
-										<%= 'SRC (CPR) ' if awards.include?('Surf Rescue Certificate (CPR Endorsed)') %>
-										<%= 'BM ' if awards.include?('Bronze Medallion') %>
-										<%= 'GM ' if awards.include?('Gold Medallion (Advanced Lifesaving)') %>
-										<%= 'ART ' if awards.include?('Advanced Resuscitation Techniques Certificate') %>
-										<%= 'ART ' if awards.include?('Advanced Resuscitation Techniques [AID]') %>
-										<%= 'IRB-C ' if awards.include?('IRB Crew Certificate') %>
-										<%= 'IRB-D ' if awards.include?('Silver Medallion IRB Driver') %>
-										<%= 'BBM ' if awards.include?('Silver Medallion Beach Management') %>
-										<%= 'ATV ' if awards.include?('ATV Operator Certificate') %>
-									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user) %>
-									<br/>
-									<% if check_offer[:result] == true %>
-										<span class="meets-requirements">Meets award equirements.</span>
+									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user)
+										if check_offer[:result] == true %>
+										<span class="meets-requirements">Meets award requirements.</span>
 									<% else %>
 										<span class="doesnt-meet-requirements">May not meet award requirements.</span>
 									<% end %>
