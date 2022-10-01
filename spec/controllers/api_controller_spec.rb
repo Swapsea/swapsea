@@ -32,7 +32,7 @@ RSpec.describe ApiController, type: :controller do
   #     expect(response).to have_http_status(:success)
   #   end
   # end
-  let(:file_data) { Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/file.csv'))) }
+  let(:file_data) { Rack::Test::UploadedFile.new(File.open(Rails.root.join('spec/fixtures/file.csv'))) }
 
   describe 'POST #upload_members' do
     it 'returns http success' do

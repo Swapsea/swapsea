@@ -149,10 +149,8 @@ class User < ApplicationRecord
     (6..spreadsheet.last_row).each do |i|
       row = [header, spreadsheet.row(i)].transpose.to_h
 
-      if !club
-        # Look up club once per import file.
-        club = Club.find_by!(name: row['Organisation Display Name'])
-      end
+      # Look up club once per import file.
+      club ||= Club.find_by!(name: row['Organisation Display Name'])
 
       user = find_or_initialize_by(id: row['Member ID'])
       user.club_id = club.id
