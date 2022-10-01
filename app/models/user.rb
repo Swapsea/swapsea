@@ -68,14 +68,6 @@ class User < ApplicationRecord
     self[:default_position] || 'Member'
   end
 
-  def email_required?
-    false
-  end
-
-  def password_required?
-    false
-  end
-
   def has_position?(position)
     if patrol_member.present? && patrol_member.default_position.present?
       patrol_member.default_position.parameterize.underscore.to_sym == position
