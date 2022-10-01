@@ -9,20 +9,20 @@
           <%= @request.roster.patrol.name %><br/>
           <%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
           <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
-          <em>You are now a sub for <%= @request.user.first_name %> <%= @request.user.last_name %></em>
+          <em>You are now a sub for <%= @request.user.name %></em>
         </p>
         <p>
           <strong>Your old patrol</strong><br/>
           <%= @offer.roster.patrol.name %><br/>
           <%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
           <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
-          <em><%= @request.user.first_name %> <%= @request.user.last_name %> is now a sub for you.</em>
+          <em><%= @request.user.name %> is now a sub for you.</em>
         </p>
 
         <% if @request.email.present? || @request.mobile.present? %>
         <p>
           <strong>Need to get in contact?</strong><br/>
-          You can contact <%= @request.user.first_name %> <%= @request.user.last_name %> via the details below.<br/>
+          You can contact <%= @request.user.name %> via the details below.<br/>
           <%= @request.email %><br/>
           <%= @request.mobile %>
         </p>

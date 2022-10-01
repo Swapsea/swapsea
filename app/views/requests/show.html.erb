@@ -19,7 +19,7 @@
 				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Member</strong></label>
 				<div class="col-xs-8 col-sm-7">
 					<div class="visible-xs"><strong>Member</strong></div>
-					<%= @request.user.first_name %> <%= @request.user.last_name %><br/>
+					<%= @request.user.name %><br/>
 					<%= @request.email %><br/>
 					<%= @request.mobile %><br/>
 				</div>
@@ -166,7 +166,7 @@
 									<strong><%= offer.roster.start.strftime('%a %e %B') %></strong>
 									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
 									<%= offer.roster.patrol.name %><br/>
-									<strong><%= offer.user.first_name %> <%= offer.user.last_name %></strong>
+									<strong><%= offer.user.name %></strong>
 									<span class="comment"><%= offer.comment %></span><br />
 									<% check_offer = offer.request.roster.swap_meets_requirements(offer.request.user, offer.user)
 										if check_offer[:result] == true %>
