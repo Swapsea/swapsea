@@ -2,11 +2,104 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      body {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        background-color: #F2EEEC;
+        margin: 0;
+      }
+
+      a,
+      a:visited {
+        color: #CC0000;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:focus {
+        color: #990000;
+        text-decoration: none;
+      }
+
+      .container {
+        width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+        -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.175);
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.175);
+      }
+
+      .title {
+        background-color: #F13E0B;
+        color: #FEFEFE;
+        width: auto;
+      }
+
+      .title img {
+        padding: 20px;
+      }
+
+      .title h2 {
+        float: right;
+        padding: 20px;
+        margin: 0;
+      }
+
+      .content {
+        background-color: #FEFEFE;
+        width: auto;
+        padding: 40px 60px 60px 60px;
+      }
+
+      .footer {
+        text-align: center;
+        width: auto;
+        font-size: 0.8em;
+        color: #AAA;
+        margin-top: 20px;
+        margin-bottom: 40px;
+      }
+
+      @media only screen and (max-width: 640px) {
+        body {
+          background-color: #FEFEFE;
+        }
+        .title {
+          text-align: center !important;
+          width: auto;
+        }
+        .title h2 {
+          padding-top: 0;
+          float: none;
+        }
+        .container {
+          width: 100% !important;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+        }
+        .content {
+          padding: 20px;
+        }
+      }
     </style>
   </head>
   <body>
-    <%= yield %>
+    <div class="container">
+      <div class="title">
+        <%= image_tag('main-logo.png', size: "150x31", alt: "Swapsea", class: "logo") %>
+        <h2><%= @subject %></h2>
+      </div>
+      <div class="content">
+      <%= yield %>
+      </div>
+      <div class="footer">This email was sent to <%= @user.email %> as a patrolling member of <%= @user.club.name %>.<br/>
+      If you received this message in error, please contact your club, or help@swapsea.com.au.<br/>
+        &copy; <%= Date.current.year %> Swapsea <br/>
+      </div>
+    </div>
   </body>
 </html>
