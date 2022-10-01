@@ -18,8 +18,8 @@ class User < ApplicationRecord
   has_many :rosters, through: :patrol
   has_many :proficiency_signups
   has_many :proficiencies, through: :proficiency_signups
-  has_many :outreach_patrols_sign_ups
-  has_many :outreach_patrols, through: :outreach_patrols_sign_ups
+  has_many :outreach_patrol_sign_ups
+  has_many :outreach_patrol, through: :outreach_patrol_sign_ups
   has_many :swaps
   has_many :notices
   has_many :notice_acknowledgements
@@ -68,14 +68,6 @@ class User < ApplicationRecord
     self[:default_position] || 'Member'
   end
 
-  def email_required?
-    false
-  end
-
-  def password_required?
-    false
-  end
-
   def has_position?(position)
     if patrol_member.present? && patrol_member.default_position.present?
       patrol_member.default_position.parameterize.underscore.to_sym == position
@@ -85,11 +77,7 @@ class User < ApplicationRecord
   end
 
   def has_patrol?
-    if patrol
-      true
-    else
-      false
-    end
+    patrol.present?
   end
 
   def offers_available_for(request)
