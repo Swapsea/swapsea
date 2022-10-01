@@ -77,11 +77,7 @@ class User < ApplicationRecord
   end
 
   def has_patrol?
-    if patrol
-      true
-    else
-      false
-    end
+    patrol.present?
   end
 
   def offers_available_for(request)
