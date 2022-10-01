@@ -5,10 +5,11 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password { 'swapsea' }
-    club.name { 'Swapsea SLSC' }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     gender { 'male' }
+
+    association :club, factory: :club
   end
 
   factory :member_user, parent: :user, aliases: [:member] do
