@@ -18,8 +18,8 @@ class User < ApplicationRecord
   has_many :rosters, through: :patrol
   has_many :proficiency_signups
   has_many :proficiencies, through: :proficiency_signups
-  has_many :outreach_patrols_sign_ups
-  has_many :outreach_patrols, through: :outreach_patrols_sign_ups
+  has_many :outreach_patrol_sign_ups
+  has_many :outreach_patrol, through: :outreach_patrol_sign_ups
   has_many :swaps
   has_many :notices
   has_many :notice_acknowledgements
