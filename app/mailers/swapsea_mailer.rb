@@ -138,13 +138,6 @@ class SwapseaMailer < ApplicationMailer
          to: email_address_with_name(@user.email, @user.name)
   end
 
-  def activity(subject, message)
-    @subject = subject
-    @message = message
-    mail subject: @subject,
-         to: 'Testing <help@swapsea.com.au>'
-  end
-
   ###############################################################################
   # => To consolidate
   ###############################################################################

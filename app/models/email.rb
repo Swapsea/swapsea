@@ -184,7 +184,6 @@ class Email < ApplicationRecord
       subject = 'No Activity'
       message = 'North Bondi - No reports to send.'
     end
-    SwapseaMailer.activity(subject, message).deliver
   end
 
   def self.bronte_patrol_reports
@@ -202,6 +201,5 @@ class Email < ApplicationRecord
       subject = 'No Activity'
       message = 'Bronte - No reports to send.'
     end
-    SwapseaMailer.activity(subject, message).deliver
   end
 end
