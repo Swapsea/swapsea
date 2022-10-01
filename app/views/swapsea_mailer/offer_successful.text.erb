@@ -7,7 +7,6 @@ G'day <%= @user.first_name %>,
   <%= @request.roster.patrol.name %>
   <%= @request.roster.start.strftime("%A %d %B %Y") %>
   <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
-  Status: <%= @offer.status %>
 
   You are now a sub for <%= @request.user.name %>.
 
