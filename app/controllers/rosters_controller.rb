@@ -37,14 +37,6 @@ class RostersController < ApplicationController
     @uniq_patrol_dates = @rosters_this_year_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
   end
 
-  def swaps
-    @my_requests = Request.with_club(selected_user.club).with_open_status.order('rosters.start')
-    @my_offers = Offer.with_made_by(selected_user).where(status: ['pending', 'cancelled', 'closed', 'accepted', 'withdrawn', 'not accepted', 'declined', 'unsuccessful',
-                                                                  'deleted']).joins(:roster).order('rosters.start desc')
-    @requests = Request.with_club(selected_user.club).with_open_status.where('start > ?', DateTime.now - 3.hours).order('rosters.start')
-    @confirmed_offers = Offer.with_club(selected_user.club).with_accepted_status.order(updated_at: :desc)
-  end
-
   def patrol
     @roster = Roster.find(params[:id])
   end
