@@ -71,7 +71,7 @@ RSpec.describe User, type: :model do
         let(:patrol) { create(:patrol) }
 
         before do
-          create(:patrol_member, user: user, patrol: patrol)
+          create(:patrol_member, user:, patrol:)
         end
 
         it { is_expected.to be(true) }

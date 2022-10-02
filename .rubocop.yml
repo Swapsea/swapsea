@@ -16,7 +16,7 @@ AllCops:
   DisplayStyleGuide: true
   ExtraDetails: false
   TargetRubyVersion: 3.1.2
-  TargetRailsVersion: 6.0.5.1
+  TargetRailsVersion: 6.1.7
   NewCops: enable
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
@@ -63,7 +63,7 @@ Lint/UnmodifiedReduceAccumulator: # (new in 1.1)
 Naming/InclusiveLanguage: # (new in 1.18)
   Enabled: true
 Metrics/BlockLength:
-  IgnoredMethods: ["describe", "context"]
+  AllowedMethods: ["describe", "context"]
 
 Style/ArgumentsForwarding: # (new in 1.1)
   Enabled: true

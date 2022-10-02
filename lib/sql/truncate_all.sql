@@ -2,7 +2,7 @@ BREAK;
 
 /* END OF SEASON CLEANUP */
 
--- Conforms to Australian Privacy Principals, removing PII data not needed.
+-- Conforms to Australian Privacy Principles, removing PII data not needed.
 
 TRUNCATE table activities;
 TRUNCATE table ar_internal_metadata;
@@ -23,7 +23,6 @@ DELETE FROM patrol_members WHERE user_id > 100;
 TRUNCATE table proficiencies;
 TRUNCATE table proficiency_signups;
 TRUNCATE table requests;
--- UPDATE requests SET mobile='', email='', comment='';
 -- roles
 TRUNCATE table rosters;
 -- schema_migrations
