@@ -107,6 +107,7 @@ class Email < ApplicationRecord
         other_requests = Request.with_club(club.id).with_open_status
                                 .where.not(user_id: open_request.user_id) # same user
                                 .where.not(roster_id: open_request.roster_id) # same roster
+                                .where('start > ?', DateTime.now)
                                 .order(:start)
                                 .limit(20) # this includes duplicates, so make larger than you think
 
@@ -184,7 +185,6 @@ class Email < ApplicationRecord
       subject = 'No Activity'
       message = 'North Bondi - No reports to send.'
     end
-    SwapseaMailer.activity(subject, message).deliver
   end
 
   def self.bronte_patrol_reports
@@ -202,6 +202,5 @@ class Email < ApplicationRecord
       subject = 'No Activity'
       message = 'Bronte - No reports to send.'
     end
-    SwapseaMailer.activity(subject, message).deliver
   end
 end

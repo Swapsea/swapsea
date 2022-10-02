@@ -1,34 +1,31 @@
-Swapsea - Swap Confirmed
-========================
-
 G'day <%= @user.first_name %>,
 
-Congratulations, your swap is now confirmed.
+Congratulations, your swap is now confirmed!
 
 Your new patrol
 <%= @offer.roster.patrol.name %>
 <%= @offer.roster.start.strftime("%A %d %B %Y") %>
 <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
-You are now a sub for <%= @offer.user.first_name %> <%= @offer.user.last_name %>
+You are now a sub for <%= @offer.user.name %>
 
 Your old patrol
 <%= @request.roster.patrol.name %>
 <%= @request.roster.start.strftime("%A %d %B %Y") %>
 <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
-<%= @offer.user.first_name %> <%= @offer.user.last_name %> is now a sub for you.
+<%= @offer.user.name %> is now a sub for you.
 
 <% if @offer.mobile.present? || @offer.email.present? %>
 Need to get in contact?
-You can contact <%= @offer.user.first_name %> <%= @offer.user.last_name %> via the details below.
+You can contact <%= @offer.user.name %> via the details below.
 <%= @offer.mobile %>
 <%= @offer.email %>
 <% end %>
 
 Can't make your new patrol?
-You cannot cancel a swap once it has been confirmed. You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it with someone, like you would any normal patrol.
+You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it again. You cannot cancel a swap once it has been confirmed (but you can swap back).
 
 
-You can login to Swapsea at www.swapsea.com.au
+See your updated roster at Swapsea at <%= dashboard_url %>
 
 Have a great weekend!
 

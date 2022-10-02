@@ -8,7 +8,6 @@ class Award < ApplicationRecord
   validates :award_number, uniqueness: true
 
   def self.upload(file)
-
     values = []
 
     columns = %i[award_number award_name user_id award_date proficiency_date expiry_date

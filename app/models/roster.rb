@@ -232,7 +232,6 @@ class Roster < ApplicationRecord
   end
 
   def self.upload(file)
-
     allowed_attributes = [
       'Rostered Team Name',
       'Patrol Roster Date',
@@ -247,10 +246,7 @@ class Roster < ApplicationRecord
     (6..spreadsheet.last_row).each do |i|
       row = [header, spreadsheet.row(i)].transpose.to_h
 
-      if !club
-        # Look up club once.
-        club = Club.find_by!(name: row['Organisation Display Name'])
-      end
+      club ||= Club.find_by!(name: row['Organisation Display Name'])
 
       roster = Roster.new
       roster.patrol = Patrol.find_by(name: row['Rostered Team Name'], club_id: club.id)
