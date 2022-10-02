@@ -1,7 +1,4 @@
-Patrol Report
---------------
-
-G'day,
+G'day <%= @user.first_name %>,
 
 <%= (@roster.patrol.short_name.present? ? @roster.patrol.short_name : @roster.patrol.name) + ' - ' + @roster.start.strftime("%a %d %b %y %H:%M") + '-' + @roster.finish.strftime("%H:%M") %>
 

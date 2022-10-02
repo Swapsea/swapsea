@@ -1,6 +1,3 @@
-Swapsea - Offer Received
-========================
-
 G'day <%= @user.first_name %>,
 
 You have a new offer!
@@ -10,7 +7,7 @@ New offer
 ---------
 <%= @offer.roster.patrol.name %>
 <%= @offer.roster.start.strftime("%A %d %B %Y") %>, <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
-From: <%= @offer.user.first_name %> <%= @offer.user.last_name %>
+From: <%= @offer.user.name %>
 Comment: <%= @offer.comment %>
 
 Your swap request
@@ -23,7 +20,7 @@ Current offers
 <% @request.offers.where(:status => 'pending').each do |offer| %>
 <%= offer.roster.patrol.name %>
 <%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
-From: <%= offer.user.first_name %> <%= offer.user.last_name %>
+From: <%= offer.user.name %>
 Comment: <%= @offer.comment %>
 
 <% end %>
@@ -34,7 +31,6 @@ Offers won't wait for you. Most members make the same offer to multiple people a
 
 
 View all offers at <%= request_url(@request) %>
-
 
 Have a great weekend!
 

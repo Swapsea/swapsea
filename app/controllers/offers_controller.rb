@@ -149,7 +149,7 @@ class OffersController < ApplicationController
             corresponding_request.close # closes off any offers for each request (code 3)
             corresponding_request.status = 'cancelled'
             if corresponding_request.save
-
+              # SwapseaMailer.offer_cancelled(other_offer).deliver
             else
               raise 'Error accepting offer. (Code 3-1)'
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'

@@ -13,7 +13,6 @@ class PatrolMember < ApplicationRecord
   end
 
   def self.upload(file)
-
     allowed_attributes = [
       'Member ID',
       'Team Name',
@@ -27,10 +26,7 @@ class PatrolMember < ApplicationRecord
     (6..spreadsheet.last_row).each do |i|
       row = [header, spreadsheet.row(i)].transpose.to_h
 
-      if !club
-        # Look up club once.
-        club = Club.find_by!(name: row['Organisation Display Name'])
-      end
+      club ||= Club.find_by!(name: row['Organisation Display Name'])
 
       # Skip patrols that aren't setup in Swapsea, but crash if there are none
       patrols = Patrol.where(club_id: club.id)
