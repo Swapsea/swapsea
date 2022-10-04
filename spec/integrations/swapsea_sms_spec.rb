@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'swapsea_sms'
+require 'integrations/swapsea_sms'
 
 RSpec.describe SwapseaSms do
   describe 'constants' do
