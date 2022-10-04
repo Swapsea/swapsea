@@ -1,5 +1,5 @@
 <tr class="member">
-	<td class="name"><%= u.first_name %> <%= u.last_name %></td>
+	<td class="name"><%= u.name %></td>
 	<td class="position"><%= u.patrol_member.default_position %></td>
 
 		<% awards = u.awards.map { |n| n.award_name } %>
