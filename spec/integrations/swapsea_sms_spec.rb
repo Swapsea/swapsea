@@ -37,7 +37,7 @@ RSpec.describe SwapseaSms do
 
   describe 'instance methods' do
     describe 'deliver' do
-      subject { instance.deliver }
+      subject(:deliver) { instance.deliver }
 
       let(:instance) { described_class.new(user, next_roster) }
       let(:user) { create(:user) }
@@ -61,7 +61,7 @@ RSpec.describe SwapseaSms do
         after { ENV['TESTING_PHONE_NUMBER'] = nil }
 
         it do
-          subject
+          deliver
           expect(a_request(:post, twilio_endpoint)).to have_been_made.once
         end
       end
