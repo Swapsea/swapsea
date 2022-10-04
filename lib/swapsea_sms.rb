@@ -38,12 +38,10 @@ class SwapseaSms
 
   def message_body
     [
-      "Upcoming patrol #{@user.club.name} \"#{@next_roster.patrol.name}\"",
-      "on #{@next_roster.start.strftime('%a %d %b %y')},",
-      "#{@next_roster.start.strftime('%H:%M')} -",
-      "#{@next_roster.finish.strftime('%H:%M')}.",
-      "Can't make it? Swap at www.swapsea.com.au.",
-      'Reply STOP to unsubscribe.'
+      "Upcoming patrol #{@user.club.name.truncate(26)} (#{@next_roster.patrol.name.truncate(27)})",
+      "on #{@next_roster.start.strftime('%a %d %b %y')}",
+      "#{@next_roster.start.strftime('%H:%M')}-#{@next_roster.finish.strftime('%H:%M')}.",
+      "Can't make it? Swap at swapsea.com.au Reply STOP 2 unsub."
     ].join(' ')
   end
 end
