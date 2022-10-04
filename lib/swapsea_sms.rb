@@ -5,8 +5,7 @@ require 'twilio-ruby'
 class SwapseaSms
   ACCOUNT_SID = ENV.fetch('TWILIO_ACCOUNT_SID', nil)
   AUTH_TOKEN  = ENV.fetch('TWILIO_AUTH_TOKEN', nil)
-  TWILIO_PHONE_NUMBER  = ENV.fetch('TWILIO_PHONE_NUMBER', nil)
-  TESTING_PHONE_NUMBER = ENV.fetch('TESTING_PHONE_NUMBER', nil)
+  TWILIO_PHONE_NUMBER = ENV.fetch('TWILIO_PHONE_NUMBER', nil)
 
   def self.roster_reminder(*args)
     new(*args)
@@ -27,8 +26,8 @@ class SwapseaSms
   end
 
   def recipient_number
-    if TESTING_PHONE_NUMBER
-      TESTING_PHONE_NUMBER
+    if ENV['TESTING_PHONE_NUMBER']
+      ENV['TESTING_PHONE_NUMBER']
     elsif Rails.env.development?
       Rails.logger.warn 'SwapseaSms: No number defined for TESTING_PHONE_NUMBER'
       nil
