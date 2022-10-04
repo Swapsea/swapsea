@@ -17,16 +17,14 @@ class SwapseaSms
   end
 
   def deliver
-    if recipient_number
-      @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
-      message = @client.messages.create \
-        body: message_body,
-        to: recipient_number,
-        from: TWILIO_PHONE_NUMBER
-    end
-  end
+    return unless recipient_number
 
-  private
+    @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
+    message = @client.messages.create \
+      body: message_body,
+      to: recipient_number,
+      from: TWILIO_PHONE_NUMBER
+  end
 
   def recipient_number
     if TESTING_PHONE_NUMBER
