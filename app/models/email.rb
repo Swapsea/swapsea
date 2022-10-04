@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'swapsea_sms'
+require 'integrations/swapsea_sms'
 
 class Email < ApplicationRecord
   def self.weekly_patrol_rosters(organisation = nil)
