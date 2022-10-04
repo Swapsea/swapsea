@@ -251,4 +251,3 @@ Style/GuardClause:
   Exclude:
     - 'app/controllers/requests_controller.rb'
     - 'app/models/request.rb'
-    - 'lib/integrations/swapsea_sms.rb'
