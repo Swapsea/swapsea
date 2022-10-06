@@ -1,6 +1,12 @@
 <tr class="member">
+	<% if openreq.detect {|f| f["user_id"] == u.id }.present? %>
+	<td class="name open"><%= link_to request_url(openreq.detect {|f| f["user_id"] == u.id }.id) do %>
+	<%= u.name %><br/>(swap requested <%= time_ago_in_words(openreq.detect {|f| f["user_id"] == u.id }.created_at) %> ago)
+	<% end %></td>
+	<% else %>
 	<td class="name"><%= u.name %></td>
-	<td class="position"><%= u.patrol_member.default_position %></td>
+	<% end %>
+		<td class="position"><%= u.patrol_member.default_position %></td>
 
 		<% awards = u.awards.map { |n| n.award_name } %>
 

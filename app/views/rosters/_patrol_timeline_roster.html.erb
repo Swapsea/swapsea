@@ -1,14 +1,11 @@
 <div class="patrol row">
   <div class="col-sm-9">
-    <% if (selected_user.has_role? :admin) %>
-      <strong><%= p.club.name %></strong><br />
-    <% end %>
+      <strong><%= p.patrol.club.short_name %></strong><br />
     <strong>
       <% if p.patrol.present? %>
         <%= p.patrol.name %>
       <% end %>
     </strong>
-    <br />
     <%= p.start.strftime("%H:%M") %> - <%= p.finish.strftime("%H:%M") %><br/>
   </div>
   <div class="col-sm-3">
@@ -28,9 +25,9 @@
     </div>
   <% end %>
 
-  <% @open_requests.where(roster_id: p.roster_id).each do |open_req| %>
-    <div class="member row in">
-      <div class="name col-xs-10"><%= open_req.user.name %></div><div class="status col-xs-2">Open for xx days</div>
+  <% @open_requests.where(roster_id: p.id).each do |open_req| %>
+    <div class="member row open">
+      <div class="name col-xs-10"><%= open_req.user.name %> (<%= time_ago_in_words(open_req.created_at) %>)</div><div class="status col-xs-2">Open</div>
     </div>
   <% end %>
 
