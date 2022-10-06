@@ -8,6 +8,7 @@ class Request < ApplicationRecord
   has_many :offers
 
   scope :with_club, ->(club_id) { joins(:roster, :user).where(users: { club_id: }).includes(:roster, :user, :offers, roster: [:patrol]) }
+  scope :with_roster, ->(roster_id) { joins(:roster, :user).where(roster_id:).includes(:roster, :user, :offers, roster: [:patrol]) }
   scope :with_requested_by, ->(user_id) { where(user_id:) }
   scope :with_successful_status, -> { where(status: 'successful') }
   scope :with_open_status, -> { where(status: 'open') }

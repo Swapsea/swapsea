@@ -73,3 +73,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers', '~> 4.0'
 end
+
+group :test do
+  gem 'webmock', require: false
+end

@@ -98,7 +98,6 @@
                 padding: 0;
                 .name {
                     padding: 3px 10px;
-                    height: 24px;
                 }
                 .status {
                     padding: 3px 10px;
@@ -113,6 +112,10 @@
             }
             .out {
                 background-color: #025571 !important;
+                color: #FEFEFE !important;
+            }
+            .open {
+                background-color: rgb(239, 68, 35) !important;
                 color: #FEFEFE !important;
             }
         }
@@ -269,7 +272,10 @@
         }
     }
 }
-
+.name.open {
+    background-color: rgb(239, 68, 35) !important;
+    a {color: #FEFEFE !important;}
+}
 
 /* --------- ---------- */
 

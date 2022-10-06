@@ -11,7 +11,8 @@ FactoryBot.define do
     need_firstaid { 0 }
     need_bronze { 3 }
     need_src { 0 }
-    club.name { 'Swapsea SLSC' }
     short_name { 'P02' }
+
+    association :club, factory: :club
   end
 end
