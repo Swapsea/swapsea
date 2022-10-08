@@ -27,7 +27,7 @@
 
   <% @open_requests.where(roster_id: p.id).each do |open_req| %>
     <div class="member row open">
-      <div class="name col-xs-10"><%= open_req.user.name %> (<%= time_ago_in_words(open_req.created_at) %>)</div><div class="status col-xs-2">Open</div>
+      <div class="name col-xs-10"><%= open_req.user.name %> (<%= time_ago_in_words(open_req.created_at) %> ago)</div><div class="status col-xs-2">Open</div>
     </div>
   <% end %>
 
