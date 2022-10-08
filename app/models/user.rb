@@ -55,11 +55,6 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  # Legacy use in CanCanCan (ability.rb)
-  def organisation
-    club.name
-  end
-
   def assign_default_role
     add_role(:member)
   end
