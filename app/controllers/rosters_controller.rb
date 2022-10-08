@@ -45,7 +45,7 @@ class RostersController < ApplicationController
         format.pdf do
           render pdf: @roster.patrol.name.to_s,
                  layout: 'pdf.html.erb',
-                 show_as_html: params[:debug].present?
+                 show_as_html: params[:html].present?
         end
       end
     else

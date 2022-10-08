@@ -2,13 +2,16 @@
   <div class="col-sm-12">
     <!-- Nav tabs -->
     <ul class="nav nav-pills">
-      <li class="col-xs-6">
-        <%= link_to raw('<i class="fa fa-backward"></i> Back to Rosters'), rosters_path %>
+      <li class="col-xs-4">
+        <%= link_to raw('<i class="fa fa-backward"></i> All Rosters'), rosters_path %>
       </li>
       <% if (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) ||
         (current_user.has_role? :admin) %>
-        <li class="col-xs-6">
-          <%= link_to "Patrol Sign-on Sheet (PDF)" , patrol_report_path(@roster.secret), target: :blank %>
+        <li class="col-xs-4">
+          <%= link_to "Sign-on Sheet", patrol_report_path(@roster.secret, html: :true), target: :blank %>
+        </li>
+        <li class="col-xs-4">
+          <%= link_to "Sign-on Sheet (PDF)", patrol_report_path(@roster.secret), target: :blank %>
         </li>
         <% end %>
     </ul>
