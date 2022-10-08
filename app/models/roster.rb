@@ -24,7 +24,7 @@ class Roster < ApplicationRecord
     patrol.users.includes(%i[awards patrol_member]) - removed + added
   end
 
-  def members
+  def patrol_members
     patrol.users
   end
 
@@ -201,6 +201,7 @@ class Roster < ApplicationRecord
     }
   end
 
+  # Array of members IN
   def added
     added = []
     ids = swaps.select(:user_id).distinct
@@ -211,6 +212,7 @@ class Roster < ApplicationRecord
     added
   end
 
+  # Array of members OUT
   def removed
     removed = []
     ids = swaps.select(:user_id).distinct
@@ -219,6 +221,17 @@ class Roster < ApplicationRecord
       removed << swap.user if (swap.on_off_patrol == false) && patrol.users.where(id: i.user.id).present?
     end
     removed
+  end
+
+  # Array of members OUT matched with IN
+  def swapped
+    swapped = []
+    removed.each do |user|
+      uniq_id = Swap.where(roster: self, user:, on_off_patrol: false).first.uniq_id
+      sub = Swap.where(uniq_id:, on_off_patrol: true).last.user
+      swapped << [user, sub]
+    end
+    swapped
   end
 
   def user_rostered_on(user)

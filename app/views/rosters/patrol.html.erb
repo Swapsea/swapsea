@@ -35,22 +35,14 @@
     <!--/.panel -->
 
     <h3>Final Roster</h3>
-    <p>Including swaps, listed separately below.</p>
-    <%= render partial: 'membership' , locals: {ru: @roster.current, openreq: @open_requests_ary} %>
-
+    <p>Swaps are included and listed separately below.</p>
+    <%= render partial: 'membership' , locals: {roster: @roster, roster_users: @roster.current, openreq: @open_requests_ary} %>
       <%
-      if @roster.removed.present? %>
-        <h3>Out</h3>
-        <p>Original Patrol members swapped out.</p>
-        <%= render partial: 'membership' , locals: {ru: @roster.removed, openreq: [] } %>
+      if @roster.swapped.present? %>
+        <h3>Swaps Confirmed</h3>
+        <p>Original Patrol members and their substitutes.</p>
+        <%= render partial: 'swapped' , locals: {swapped: @roster.swapped} %>
       <%
-      end
-
-      if @roster.added.present? %>
-        <h3>In</h3>
-        <p>New Patrol members swapped in.</p>
-        <%= render partial: 'membership' , locals: {ru: @roster.added, openreq: [] } %>
-        <%
       end
 
       if (current_user.has_role? :admin) || (selected_user.has_role? :manager) ||
