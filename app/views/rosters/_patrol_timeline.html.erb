@@ -1,21 +1,21 @@
 <div class="patrol-timeline col-sm-12">
-  <% @uniq_patrol_dates.each do |uniq_patrol_date| %>
-    <% @uniq_patrol_date_parsed = Date.parse(uniq_patrol_date) %>
-    <% @patrols_for_uniq_date = @rosters_this_year.where(:start => @uniq_patrol_date_parsed.beginning_of_day.to_s(:db)..@uniq_patrol_date_parsed.end_of_day.to_s(:db)) %>
+  <% @uniq_patrol_dates.each do |uniq_patrol_date|
+      @uniq_patrol_date = Date.parse(uniq_patrol_date)
+      @patrols_for_uniq_date = @rosters.where(:start => @uniq_patrol_date.beginning_of_day.to_s(:db)..@uniq_patrol_date.end_of_day.to_s(:db)).order(:start) %>
     <div class="group col-sm-12 col-xs-12">
       <div class="datetime col-sm-2 col-xs-12">
         <div class="day">
-          <%= @uniq_patrol_date_parsed.strftime("%a") %>
+          <%= @uniq_patrol_date.strftime("%a") %>
         </div>
         <div class="date">
-          <%= @uniq_patrol_date_parsed.strftime("%d") %>
+          <%= @uniq_patrol_date.strftime("%d") %>
         </div>
         <div class="month">
-          <%= @uniq_patrol_date_parsed.strftime("%b") %>
+          <%= @uniq_patrol_date.strftime("%b") %>
         </div>
       </div>
       <div class="patrols col-sm-9 col-xs-12">
-        <%= render partial: 'patrol_timeline_roster', collection: @patrols_for_uniq_date.order(:start), as: :p %>
+        <%= render partial: 'patrol_timeline_roster', collection: @patrols_for_uniq_date, as: :p %>
       </div>
     </div>
   <% end %>

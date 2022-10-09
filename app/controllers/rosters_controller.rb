@@ -23,22 +23,19 @@ class RostersController < ApplicationController
   # GET /rosters.json
   def index
     @patrols = Patrol.with_club(selected_user.club)
-
     if params[:view] == 'all'
-      @rosters = Roster.with_club(selected_user.club).sort_by(&:start)
-      @rosters_this_year = Roster.with_club(selected_user.club)
+      @rosters = Roster.with_club(selected_user.club).includes(:patrol, patrol: :club)
     else
       finish_time = 3.hours.ago
-      @rosters = Roster.with_club(selected_user.club).where('finish >= ?', finish_time.to_s(:db)).sort_by(&:start)
-      @rosters_this_year = Roster.with_club(selected_user.club).where('finish >= ?', finish_time.to_s(:db))
+      @rosters = Roster.with_club(selected_user.club).includes(:patrol, patrol: :club).where('finish >= ?', finish_time.to_s(:db))
     end
-
-    @rosters_this_year_sorted = @rosters_this_year.sort_by(&:start)
-    @uniq_patrol_dates = @rosters_this_year_sorted.map { |d| d.start.strftime('%d %b %y') }.uniq
+    @open_requests = Request.with_club(selected_user.club).with_open_status.order(:created_at)
+    @uniq_patrol_dates = @rosters.sort_by(&:start).map { |d| d.start.strftime('%d %b %y') }.uniq
   end
 
   def patrol
     @roster = Roster.find(params[:id])
+    @open_requests_ary = Request.with_roster(params[:id]).with_open_status.order(:created_at).to_ary
   end
 
   def report

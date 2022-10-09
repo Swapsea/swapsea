@@ -43,7 +43,7 @@ Lint/UselessAssignment:
     - 'app/models/patrol_member.rb'
     - 'app/models/roster.rb'
     - 'db/seeds.rb'
-    - 'lib/swapsea_sms.rb'
+    - 'lib/integrations/swapsea_sms.rb'
     - 'spec/controllers/event_logs_controller_spec.rb'
     - 'spec/controllers/leads_controller_spec.rb'
     - 'spec/controllers/proficiency_signups_controller_spec.rb'
@@ -251,4 +251,3 @@ Style/GuardClause:
   Exclude:
     - 'app/controllers/requests_controller.rb'
     - 'app/models/request.rb'
-    - 'lib/swapsea_sms.rb'
