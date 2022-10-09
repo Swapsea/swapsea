@@ -55,6 +55,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def email_exists_on_multiple_users?
+    User.where(email:).count > 1
+  end
+
   def assign_default_role
     add_role(:member)
   end
