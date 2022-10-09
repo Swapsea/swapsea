@@ -108,13 +108,5 @@ RSpec.describe User, type: :model do
 
       it { is_expected.to eq("#{user.first_name} #{user.last_name}") }
     end
-
-    describe 'organisation' do
-      subject { user.organisation }
-
-      let(:user) { create(:user) }
-
-      it { is_expected.to eq(user.club.name) }
-    end
   end
 end
