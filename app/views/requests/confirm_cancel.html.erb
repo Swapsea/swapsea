@@ -1,9 +1,39 @@
+<% content_for(:title){ "Cancel Request #" + @request.id.to_s } %>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h2>Confirm</h2>
+		<h2><%= content_for(:title) %></h2>
 	</div>
 	<div class="panel-body">
 		<p>Are you sure you want to <strong>cancel</strong> this request?</p>
+		<div class="request-details">
+			<div class="row">
+				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Patrol</strong></label>
+				<div class="col-xs-8 col-sm-7">
+					<div class="visible-xs"><strong>Patrol</strong></div>
+					<%= @request.roster.start.strftime("%A %d %B %Y") %><br/>
+					<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %><br/>
+					<%= @request.roster.patrol.name %>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Member</strong></label>
+				<div class="col-xs-8 col-sm-7">
+					<div class="visible-xs"><strong>Member</strong></div>
+					<%= @request.user.name %><br/>
+					<%= @request.email %><br/>
+					<%= @request.mobile %><br/>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Status</strong></label>
+				<div class="col-xs-8 col-sm-7">
+					<div class="visible-xs"><strong>Status</strong></div>
+					<%= @request.status.capitalize %>
+				</div>
+			</div>
+		</div>
 		<div class="buttons">
 			<%= link_to @request do %>
 				<button class="btn btn-danger"><span class="fa fa-times"></span><br/>Go back</button>
