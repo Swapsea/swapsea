@@ -58,6 +58,29 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe 'email_exists_on_multiple_users?' do
+      subject { user.email_exists_on_multiple_users? }
+
+      let(:email) { Faker::Internet.email }
+      let(:user) { create(:user, email: email) }
+      let(:user_two) { create(:user, email: email) }
+
+      context 'when there is only one user with the email address' do
+        before { user }
+
+        it { is_expected.to be_falsey }
+      end
+
+      context 'when there are multiple users with the email address' do
+        before do
+          user
+          user_two
+        end
+
+        it { is_expected.to be_truthy }
+      end
+    end
+
     describe 'has_patrol?' do
       subject { user.has_patrol? }
 
@@ -84,14 +107,6 @@ RSpec.describe User, type: :model do
       let(:user) { create(:user) }
 
       it { is_expected.to eq("#{user.first_name} #{user.last_name}") }
-    end
-
-    describe 'organisation' do
-      subject { user.organisation }
-
-      let(:user) { create(:user) }
-
-      it { is_expected.to eq(user.club.name) }
     end
   end
 end

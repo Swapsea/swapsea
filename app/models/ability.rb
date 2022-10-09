@@ -33,19 +33,20 @@ class Ability
 
     if user.has_role? :admin
       can :manage, :all
+    # Manager
     elsif user.has_role? :manager
       can :read, Patrol do |patrol|
-        patrol.club.name == user.organisation
+        patrol.club_id == user.club_id
       end
       can [:read, :swaps, :patrol, :member, :patrol_report], Roster do |roster|
-        roster.patrol.club.name == user.organisation
+        roster.patrol.club_id == user.club_id
       end
       can [:index, :my_offers, :my_requests, :confirmed], Swap do |swap|
-        swap.user.organisation == user.organisation
+        swap.user.club_id == user.club_id
       end
       can [:create], Request
       can [:read], Request do |request|
-        request.user.organisation == user.organisation
+        request.user.club_id == user.club_id
       end
       can %i[update destroy confirm_cancel], Request, user: user
       cannot [:update], Request do |request|
@@ -54,51 +55,52 @@ class Ability
       cannot :index, Request
       can [:create], Offer
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
-        offer.user.organisation == user.organisation
+        offer.user.club_id == user.club_id
       end
       can %i[update destroy confirm_cancel], Offer, user: user
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
       can :read, Proficiency do |prof|
-        prof.organisation == user.organisation
+        prof.club_id == user.club_id
       end
       can [:update, :destroy], Proficiency do |prof|
-        prof.organisation == user.organisation
+        prof.club_id == user.club_id
       end
       can :admin, Proficiency do |prof|
-        prof.organisation == user.organisation
+        prof.club_id == user.club_id
       end
       can [:create], ProficiencySignup
       can [:read, :destroy], ProficiencySignup do |prof_signup|
-        prof_signup.user.organisation == user.organisation
+        prof_signup.user.club_id == user.club_id
       end
       can %i[read index], OutreachPatrol
       can %i[read create], OutreachPatrolSignUp
       can :destroy, OutreachPatrolSignUp
       can [:read, :ics], User do |u|
-        u.organisation == user.organisation
+        u.club_id == user.club_id
       end
       can %i[index privacy_policy terms_of_use thanks contact_us], :home
       cannot :index, User
       can [:index], :dashboard
       can %i[index set], :selected_user
-      can [:report, :patrol_report], Roster do |roster|
-        roster.patrol.club.name == user.organisation
+      can [:patrol_report], Roster do |roster|
+        roster.patrol.club_id == user.club_id
       end
+    # Club Member
     elsif user.has_role? :member
       can :read, Patrol do |patrol|
-        patrol.club.name == user.organisation
+        patrol.club_id == user.club_id
       end
       can [:read, :swaps, :patrol, :member, :patrol_report], Roster do |roster|
-        roster.patrol.club.name == user.organisation
+        roster.patrol.club_id == user.club_id
       end
       can [:index, :my_offers, :my_requests, :confirmed], Swap do |swap|
-        swap.user.organisation == user.organisation
+        swap.user.club_id == user.club_id
       end
       can [:create], Request
       can [:read], Request do |request|
-        request.user.organisation == user.organisation
+        request.user.club_id == user.club_id
       end
       can %i[update destroy confirm_cancel], Request, user: user
       cannot [:update], Request do |request|
@@ -107,25 +109,25 @@ class Ability
       cannot :index, Request
       can [:create], Offer
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
-        offer.user.organisation == user.organisation
+        offer.user.club_id == user.club_id
       end
       can %i[update destroy confirm_cancel], Offer, user: user
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
       can :read, Proficiency do |prof|
-        prof.organisation == user.organisation
+        prof.club_id == user.club_id
       end
       can [:create], ProficiencySignup
       can [:read], ProficiencySignup do |prof_signup|
-        prof_signup.user.organisation == user.organisation
+        prof_signup.user.club_id == user.club_id
       end
       can :destroy, ProficiencySignup, user: user
       can %i[read index], OutreachPatrol
       can %i[read create], OutreachPatrolSignUp
       can :destroy, OutreachPatrolSignUp, user: user
       can [:read, :ics], User do |u|
-        u.organisation == user.organisation
+        u.club_id == user.club_id
       end
       can %i[index privacy_policy terms_of_use thanks contact_us], :home
       cannot :index, User
