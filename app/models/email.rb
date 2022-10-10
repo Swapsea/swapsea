@@ -54,7 +54,7 @@ class Email < ApplicationRecord
           end
         end
       rescue Exception => e
-        Rails.logger.warn "Skipped sending patrol roster email because user:#{user.id} has no email. #{e}"
+        Rails.logger.warn "Skipped sending patrol roster email to user #{user.id}: #{e}"
       end
     end
     "Sent #{emails_sent} patrol roster emails and #{sms_sent} SMS."
@@ -83,7 +83,7 @@ class Email < ApplicationRecord
           Rails.logger.warn "Skipped sending skills maintenance email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email} and show_skills_maintenance=#{user.club.show_skills_maintenance}"
         end
       rescue Exception => e
-        Rails.logger.warn "Skipped sending skills maintenance email because user:#{user.id} has no email. #{e}"
+        Rails.logger.warn "Skipped sending skills maintenance email because to user #{user.id}: #{e}"
       end
     end
     "Sent #{emails_sent} skills maintenance emails for #{organisation}."
@@ -154,6 +154,43 @@ class Email < ApplicationRecord
     end
   end
 
+  def self.patrol_reports(organisation = nil)
+    reports_sent = 0
+    emails_sent = 0
+    sms_sent = 0
+
+    # Who is on patrol in the next week.
+    if organisation
+      # Look up club id
+      club_id = Club.find_by!(name: organisation)
+    end
+    rosters = if club_id
+                Roster.with_club(club_id).where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.day).includes(:patrol, patrol: :club)
+              else
+                Roster.where('start >= ? AND start <= ?', DateTime.now, DateTime.now + 1.day).includes(:patrol, patrol: :club)
+              end
+
+    rosters.map do |roster|
+      # Collect PC and VC Emails
+      roster.patrol.patrol_captains&.each do |pc|
+        SwapseaMailer.patrol_report(pc, roster).deliver
+        reports_sent += 1
+      end
+      roster.patrol.vice_captains&.each do |vc|
+        SwapseaMailer.patrol_report(vc, roster).deliver
+        reports_sent += 1
+      end
+    end
+    if reports_sent >= 1
+      subject = 'Activity'
+      message = "Reports Sent: #{reports_sent}"
+
+    else
+      subject = 'No Activity'
+      message = 'No reports to send.'
+    end
+  end
+
   ###############################################################################
   # => To refactor
   ###############################################################################
@@ -166,41 +203,6 @@ class Email < ApplicationRecord
       else
         Rails.logger.warn "Skipped sending not yet proficient email because #{user.organisation} is_active=#{user.club.is_active}"
       end
-    end
-  end
-
-  def self.north_bondi_patrol_reports
-    reports_sent = 0
-    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.day,
-                           'North Bondi SLSC')
-    rosters.map do |roster|
-      SwapseaMailer.north_bondi_patrol_report(roster).deliver
-      reports_sent += 1
-    end
-    if reports_sent >= 1
-      subject = 'Activity'
-      message = "North Bondi - Reports Sent: #{reports_sent}"
-
-    else
-      subject = 'No Activity'
-      message = 'North Bondi - No reports to send.'
-    end
-  end
-
-  def self.bronte_patrol_reports
-    reports_sent = 0
-    rosters = Roster.where('start >= ? AND start <= ? AND organisation = ?', DateTime.now, DateTime.now + 1.day,
-                           'Bronte SLSC')
-    rosters.map do |roster|
-      SwapseaMailer.bronte_patrol_report(roster).deliver
-      reports_sent += 1
-    end
-    if reports_sent >= 1
-      subject = 'Activity'
-      message = "Bronte - Reports Sent: #{reports_sent}"
-    else
-      subject = 'No Activity'
-      message = 'Bronte - No reports to send.'
     end
   end
 end

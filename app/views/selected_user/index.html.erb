@@ -1,23 +1,26 @@
+<% content_for(:title){ "Switch Member" } %>
+
+<div class="panel-heading">
+<h2><%= content_for(:title) %></h2>
+<p>You can <b>switch to another member</b> with the same email address. <br />
+You can switch anytime from the top right hand menu and switch back by pressing Cancel.</p>
+</div>
 <div class="table-responsive">
 	<table id="switch-user-table" class="table table-striped dataTable row-border no-footer nowrap" cellspacing="0" width="100%" data-table="true">
 		<thead>
-			<th class="visible-xs"></th>
-			<th class="hidden-xs">Club</th>
 			<th>Name</th>
-			<th class="hidden-xs">Member ID</th>
-			<th class="hidden-xs"></th>
+			<th class="hidden-xs">Club</th>
+			<th>Patrol</th>
+			<th></th>
 		</thead>
 		<tbody>
 		<% @switch_users.each do |user| %>
-			<% if user.first_name? || user.last_name? %>
-				<tr>
-					<td class="visible-xs"><%= link_to 'Switch', selected_user_path(:uid => user.id, :referrer => @referrer), :method => :post, :class => "btn btn-success btn-sm pull-right" %></td>
-					<td class="hidden-xs"><%= user.club.name %></td>
-					<td><%= user.name %> <i><%= truncate user.patrol.name, :length => 15 %></i></td>
-					<td class="hidden-xs"><%= user.id %></td>
-					<td class="hidden-xs"><%= link_to 'Switch', selected_user_path(:uid => user.id, :referrer => @referrer), :method => :post, :class => "btn btn-success btn-sm pull-right" %></td>
-				</tr>
-			<% end %>
+			<tr>
+				<td><%= user.name %> <i></i></td>
+				<td class="hidden-xs"><%= user.club.name %></td>
+				<td><%= truncate user.patrol.name, :length => 15 %></td>
+				<td><%= if (user != selected_user) then link_to 'Switch', selected_user_path(:uid => user.id, :referrer => @referrer), :method => :post, :class => "btn btn-success btn-sm pull-right" end %></td>
+			</tr>
 		<% end %>
 		</tbody>
 	</table>
