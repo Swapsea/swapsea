@@ -5,7 +5,6 @@ ruby '3.1.2'
 
 gem 'activerecord', '>= 6.1.7'
 gem 'activerecord-import'
-gem 'barnes'
 gem 'bcrypt'
 gem 'cancancan'
 gem 'coffee-rails'
@@ -31,11 +30,17 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'twilio-ruby'
 gem 'uglifier'
+gem 'wicked_pdf'
 gem 'will_paginate'
 
 group :production do
   gem 'newrelic_rpm'
   gem 'scout_apm'
+end
+
+group :staging, :production do
+  gem 'barnes'
+  gem 'wkhtmltopdf-heroku'
 end
 
 group :development do
@@ -72,6 +77,7 @@ group :development, :test do
   gem 'shoulda-callback-matchers'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers', '~> 4.0'
+  gem 'wkhtmltopdf-binary-edge'
 end
 
 group :test do

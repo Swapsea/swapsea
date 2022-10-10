@@ -138,6 +138,16 @@ class SwapseaMailer < ApplicationMailer
          to: email_address_with_name(@user.email, @user.name)
   end
 
+  # Email a link to PDF of next roster
+  def patrol_report(user, next_roster)
+    @user = user
+    @roster = next_roster
+    @subject = "#{next_roster.patrol.short_name.presence || next_roster.patrol.name} - #{next_roster.start.strftime('%a %d %b %y %H:%M')}-#{next_roster.finish.strftime('%H:%M')}"
+    # Send Email
+    mail subject: @subject,
+         to: email_address_with_name(@user.email, @user.name)
+  end
+
   ###############################################################################
   # => To consolidate
   ###############################################################################
@@ -146,38 +156,5 @@ class SwapseaMailer < ApplicationMailer
     @user = user
     mail subject: 'Sign Up for Skills Maintenance',
          to: email_address_with_name(@user.email, @user.name)
-  end
-
-  def north_bondi_patrol_report(roster)
-    @roster = roster
-    # Collect PC and VC Emails
-    to = []
-    roster.patrol.patrol_captains&.each do |pc|
-      to << pc
-    end
-    roster.patrol.vice_captains&.each do |vc|
-      to << vc
-    end
-
-    # Send Email
-    mail subject: "#{roster.patrol.short_name.presence || roster.patrol.name} - #{roster.start.strftime('%a %d %b %y %H:%M')}-#{roster.finish.strftime('%H:%M')}",
-         to: to.collect(&:email).join(','),
-         cc: 'office@northbondisurfclub.com, captain@northbondisurfclub.com, vicecaptain@northbondisurfclub.com, alex@swapsea.com.au'
-  end
-
-  def bronte_patrol_report(roster)
-    @roster = roster
-    # Collect PC and VC Emails
-    to = []
-    roster.patrol.patrol_captains&.each do |pc|
-      to << pc
-    end
-    roster.patrol.vice_captains&.each do |vc|
-      to << vc
-    end
-
-    # Send Email
-    mail subject: "#{roster.patrol.short_name.presence || roster.patrol.name} - #{roster.start.strftime('%a %d %b %y %H:%M')}-#{roster.finish.strftime('%H:%M')}",
-         to: to.collect(&:email).join(',')
   end
 end

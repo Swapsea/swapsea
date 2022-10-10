@@ -26,11 +26,15 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(_resource)
-    dashboard_path
+    if current_user.email_exists_on_multiple_users?
+      switch_user_path
+    else
+      dashboard_path
+    end
   end
 
   def after_sign_out_path_for(_resource_or_scope)
-    root_path
+    login_path
   end
 
   def selected_user

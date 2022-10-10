@@ -1,17 +1,28 @@
+<% content_for(:title){ "Accept Offer?" } %>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h2>Confirm</h2>
+		<h2><%= content_for(:title) %></h2>
 	</div>
 	<div class="panel-body">
-
-		<p>Are you sure you want to <strong>accept</strong> this offer?</p>
-
 		<% if @after_swap_request_patrol[:result] && @after_swap_offer_patrol[:result]%>
 			<h3>AWESOME!</h3>
+			<p>If you accept this offer, both patrols will still meet the minimum award requirements.</p>
 		<% else %>
 			<h3>ACHTUNG!</h3>
+			<p>If you accept this offer, both patrols may not meet the minimum award requirements. You can still Accept the offer, but you should check with the Patrol Captain to make sure first.</p>
 		<% end %>
 
+		<div class="offer-details">
+		<div class="row">
+			<label class="col-xs-4 col-sm-4 hidden-xs">Are you sure you want to <strong>accept</strong> this offer?</label>
+			<div class="col-xs-8 col-sm-8">
+				<div class="visible-xs"><strong><strong>Accept</strong> this offer?</strong></div>
+				<%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
+				<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
+				<%= @offer.roster.patrol.name %>
+			</div>
+		</div>
+		<hr />
 		<% if @after_swap_request_patrol[:result] %>
 
 			<div class="alert alert-success">

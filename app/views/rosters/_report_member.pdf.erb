@@ -1,34 +1,29 @@
-
-<% if !r.user_rostered_on(u) # if not rostered on %>
-	<% uniq_id = Swap.where(roster: r, user: u, on_off_patrol: false).first.uniq_id %>
-	<% sub = Swap.where(uniq_id: uniq_id, on_off_patrol: true).last.user %>
-<tr>
-
-	<td><%= u.default_position %></td>
-	<td><%= u.name %></td>
-	<td><%= sub.first_name %> <%= sub.last_name %></td>
-
-	<td></td><!-- blank for start time -->
-	<td></td><!-- blank for finish time -->
-	<td></td><!-- blank for total hours -->
-	<td></td><!-- blank for signature -->
-
-</tr>
-
-<% else %>
-
 	<tr>
-	<td><%= u.default_position %></td>
-	<td><%= u.name %></td>
-	<td></td>
-
-	<td></td><!-- blank for start time -->
-	<td></td><!-- blank for finish time -->
-	<td></td><!-- blank for total hours -->
-	<td></td><!-- blank for signature -->
-
-</tr>
-
-
-
-<% end %>
+		<td>
+			<%= u.default_position %>
+		</td>
+		<td>
+			<%= u.name %>
+		</td>
+		<td>
+			<% if !r.user_rostered_on(u) # if not rostered on
+			uniq_id = Swap.where(roster: r, user: u, on_off_patrol: false).first.uniq_id
+			sub = Swap.where(uniq_id: uniq_id, on_off_patrol: true).last.user %>
+			<%= sub.name %>
+			<% else %>
+			<!-- sub -->
+			<% end %>
+		</td>
+		<td>
+			<!-- start time -->
+		</td>
+		<td>
+			<!-- finish time -->
+		</td>
+		<td>
+			<!-- total hours -->
+		</td>
+		<td>
+			<!-- signature -->
+		</td>
+	</tr>

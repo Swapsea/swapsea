@@ -16,6 +16,9 @@
           <% if (selected_user.club.show_swaps) %>
             <li><%= link_to raw(' <i class="fa fa-random"></i> Swaps'), swaps_path %></li>
           <% end %>
+          <% if (selected_user.club.show_rosters) %>
+          <li><%= link_to raw('<i class="fa fa-list"></i> Rosters'), rosters_path %></li>
+          <% end %>
           <% if (selected_user.club.show_patrols) %>
             <li>
               <% if selected_user.patrol.present? %>
@@ -24,9 +27,6 @@
                 <%= link_to raw('<i class="fa fa-flag"></i> Patrols'), patrols_path %>
               <% end %>
             </li>
-          <% end %>
-          <% if (selected_user.club.show_rosters) %>
-            <li><%= link_to raw('<i class="fa fa-list"></i> Rosters'), rosters_path %></li>
           <% end %>
           <% if (selected_user.club.show_skills_maintenance) %>
             <li><%= link_to raw('<i class="fa fa-list"></i> Skills Maintenance'), proficiencies_path %></li>

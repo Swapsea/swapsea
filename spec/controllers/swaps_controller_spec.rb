@@ -31,20 +31,6 @@ RSpec.describe SwapsController, type: :controller do
     sign_in create :admin
   end
 
-  describe 'GET #index' do
-    it 'returns a success response' do
-      get :index
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET #new' do
-    it 'returns a success response' do
-      get :new
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET #my_offers' do
     it 'returns a success response' do
       get :my_offers

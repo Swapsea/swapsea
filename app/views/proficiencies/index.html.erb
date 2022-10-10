@@ -2,11 +2,11 @@
 
 <h2><%= content_for(:title) %></h2>
   <% if @proficiencies.empty? %>
-
     <div class="box-info">
       <p>There are no timeslots listed yet. Please check again later or contact your Club.</p>
     </div>
   <% else %>
+  <p>Select a session and choose <b>Sign Up!</b>.</p>
 <div class="proficiencies col-sm-12">
   <% @uniq_proficiency_dates.each do |uniq_proficiency_date| %>
 
@@ -23,14 +23,12 @@
 		  	<div class="events col-sm-9 col-xs-12">
 
 		  		<% @proficiencies_for_uniq_date.sort_by(&:start).each do |p| %>
-
 						<div class="event">
-
-					  		<% if p.name == 'Bronze' %>
-					  			<div class="name col-sm-2 col-xs-12 bronze">Bronze</div>
-					  		<% elsif p.name == 'ART' %>
-					  			<div class="name col-sm-2 col-xs-12 artc">ART</div>
-					  		<% elsif p.name == 'SRC' %>
+					  		<% if p.name.include? 'Bronze' %>
+					  			<div class="name col-sm-2 col-xs-12 bronze"><%= p.name %></div>
+					  		<% elsif p.name.include? 'ART' %>
+					  			<div class="name col-sm-2 col-xs-12 artc"><%= p.name %></div>
+					  		<% elsif p.name.include? 'SRC' %>
 					  			<div class="name col-sm-2 col-xs-12 src"><%= p.name %></div>
 					  		<% else %>
 					  			<div class="name col-sm-2 col-xs-12 default"><%= p.name %></div>
@@ -46,7 +44,7 @@
 							  		<span><%= raw('<small>Includes Bronze</small>') if p.name == 'ART' %></span>
 							  		<span class="positions">
 							  		<% if p.max_online_signup - p.proficiency_signups.count >= 1 %>
-						  				<%= p.max_online_signup - p.proficiency_signups.count %> <% if p.max_online_signup - p.proficiency_signups.count >= 2 %> Places Left <% else %> Place Left <% end %>
+						  				<%= p.max_online_signup - p.proficiency_signups.count %> <% if p.max_online_signup - p.proficiency_signups.count >= 2 %> places left <% else %> Place Left <% end %>
 						  			<% end %>
 							  		</span><!--/.positions -->
 								</div><!--/.info -->
@@ -71,9 +69,9 @@
 							</div><!--/.details -->
 
 							<% if (p.max_online_signup - p.proficiency_signups.count >= 1) || ( (p.max_signup - p.proficiency_signups.count >= 1) && ((selected_user.has_role? :admin) || (selected_user.has_role? :manager)) ) %>
-								<%= simple_form_for(@proficiency_signup) do |f| %>
+								<%= simple_form_for(@proficiency_signup, html: { id: 'proficiency_signup_' + p.id.to_s }) do |f| %>
 								 	<div class="signup col-sm-2 col-xs-12">
-								  		<%= f.input :proficiency_id, :as => :hidden, :input_html => { :value => p.id } %>
+								  		<%= f.input :proficiency_id, :as => :hidden, :input_html => { value: p.id, id: 'proficiency_id_' + p.id.to_s } %>
 								    	<%= f.submit :submit, :value => "Sign Up!", :class => "btn-signup" %>
 								  	</div>
 								<% end %>
