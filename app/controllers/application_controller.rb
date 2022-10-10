@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(_resource_or_scope)
-    root_path
+    login_path
   end
 
   def selected_user
