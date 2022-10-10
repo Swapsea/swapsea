@@ -14,20 +14,17 @@
 </div><!--/.patrol -->
 
 <div class="members">
-  <% p.removed.sort_by(&:last_name).each do |u| %>
-    <div class="member row out">
-      <div class="name col-xs-10"><%= u.name %></div><div class="status col-xs-2">Out</div>
+  <% p.swapped.each do |u| %>
+    <div class="member row">
+      <div class="name col-xs-6 out"><%= u[0].name %></div>
+      <div class="name col-xs-6 in"><%= u[1].name %></div>
     </div>
   <% end %>
-  <% p.added.sort_by(&:last_name).each do |u| %>
-    <div class="member row in">
-      <div class="name col-xs-10"><%= u.name %></div><div class="status col-xs-2">In</div>
-    </div>
-  <% end %>
-
   <% @open_requests.where(roster_id: p.id).each do |open_req| %>
     <div class="member row open">
-      <div class="name col-xs-10"><%= open_req.user.name %> (<%= time_ago_in_words(open_req.created_at) %>)</div><div class="status col-xs-2">Open</div>
+      <div class="name col-xs-6"><%= open_req.user.name %></div>
+      <div class="name col-xs-6">(<%= time_ago_in_words(open_req.created_at) %> ago)</div>
+
     </div>
   <% end %>
 

@@ -1,0 +1,18 @@
+<div class="table-responsive">
+	<table class="patrol-members-table member-list table table-striped dataTable row-border" cellspacing="0"
+		width="100%" data-table="true">
+		<tbody>
+			<% swapped.each do |swap| %>
+				<tr class="member">
+					<td class="out">
+						<%= swap[0].name %>
+						(<%= swap[0].default_position %>)
+					</td>
+					<td class="int">
+						<%= swap[1].name %>
+					</td>
+				</tr>
+				<% end %>
+		</tbody>
+	</table>
+</div>

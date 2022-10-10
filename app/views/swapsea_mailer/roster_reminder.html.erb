@@ -22,8 +22,11 @@
           If you can't make one of your patrols, <%= link_to 'swap it on Swapsea', login_url %>.
         </p>
         <p>
-          Check the weather conditions before your patrol.<br/>
-          <a href="https://swell.willyweather.com.au/">Willy Weather</a>
+        You can also:
+        <ul>
+        <li>See <%= link_to 'who else will be there', patrol_roster_url(@next_roster) %></li>
+        <li>Check <%= link_to 'the weather conditions', "https://swell.willyweather.com.au/" %></li>
+        </ul>
         </p>
         <p>
           Have a great weekend!

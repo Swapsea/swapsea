@@ -38,17 +38,6 @@ class RostersController < ApplicationController
     @open_requests_ary = Request.with_roster(params[:id]).with_open_status.order(:created_at).to_ary
   end
 
-  def report
-    @roster = Roster.find(params[:id])
-    respond_to do |format|
-      format.pdf do
-        render  pdf: @roster.patrol.name.to_s,
-                layout: 'pdf.html.erb',
-                show_as_html: params[:debug].present?
-      end
-    end
-  end
-
   def patrol_report
     @roster = Roster.find_by(secret: params[:token])
     if @roster.present?
@@ -56,7 +45,7 @@ class RostersController < ApplicationController
         format.pdf do
           render pdf: @roster.patrol.name.to_s,
                  layout: 'pdf.html.erb',
-                 show_as_html: params[:debug].present?
+                 show_as_html: params[:html].present?
         end
       end
     else

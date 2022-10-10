@@ -62,6 +62,9 @@
                 <% if (selected_user.club.show_swaps) %>
                   <li><%= link_to raw(' <i class="fa fa-random"></i> Swaps'), swaps_path %></li>
                 <% end %>
+                <% if (selected_user.club.show_rosters) %>
+                  <li><%= link_to raw('<i class="fa fa-list"></i> Rosters'), rosters_path %></li>
+                <% end %>
                 <% if (selected_user.club.show_patrols) %>
                   <li>
                     <% if selected_user.patrol.present? %>
@@ -70,9 +73,6 @@
                       <%= link_to raw('<i class="fa fa-flag"></i> Patrols'), patrols_path %>
                     <% end %>
                   </li>
-                <% end %>
-                <% if (selected_user.club.show_rosters) %>
-                  <li><%= link_to raw('<i class="fa fa-list"></i> Rosters'), rosters_path %></li>
                 <% end %>
                 <% if (selected_user.club.show_skills_maintenance) %>
                   <li><%= link_to raw('<i class="fa fa-list"></i> Skills Maintenance'), proficiencies_path %></li>
@@ -117,7 +117,7 @@
 
               <% if selected_user.has_patrol? && selected_user.next_roster.present? %>
                 <ul class="nav navbar-nav visible-md visible-lg">
-                  <p class="navbar-text"><strong>Next Patrol:</strong> <%= selected_user.next_roster.start.strftime("%H:%M %A %e %B %Y") %></p>
+                  <p class="navbar-text"><strong>Next Patrol:</strong> <%= link_to selected_user.next_roster.start.strftime("%H:%M %A %e %B %Y"), patrol_roster_path(selected_user.next_roster) %></p>
                 </ul>
               <% end %>
 
