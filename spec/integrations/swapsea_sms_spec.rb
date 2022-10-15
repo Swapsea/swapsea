@@ -8,19 +8,19 @@ RSpec.describe SwapseaSms do
     describe 'ACCOUNT_SID' do
       subject { described_class::ACCOUNT_SID }
 
-      it { is_expected.to eq(ENV['TWILIO_ACCOUNT_SID']) }
+      it { is_expected.to eq(ENV.fetch('TWILIO_ACCOUNT_SID', nil)) }
     end
 
     describe 'AUTH_TOKEN' do
       subject { described_class::AUTH_TOKEN }
 
-      it { is_expected.to eq(ENV['TWILIO_AUTH_TOKEN']) }
+      it { is_expected.to eq(ENV.fetch('TWILIO_AUTH_TOKEN', nil)) }
     end
 
     describe 'TWILIO_PHONE_NUMBER' do
       subject { described_class::TWILIO_PHONE_NUMBER }
 
-      it { is_expected.to eq(ENV['TWILIO_PHONE_NUMBER']) }
+      it { is_expected.to eq(ENV.fetch('TWILIO_PHONE_NUMBER', nil)) }
     end
   end
 
@@ -79,12 +79,12 @@ RSpec.describe SwapseaSms do
     describe 'message_body' do
       subject(:message_body) { described_class.new(user, roster).message_body }
 
-      let(:user) { create(:user, club: club) }
+      let(:user) { create(:user, club:) }
       let(:club) { create(:club, name: long_club_name) }
       let(:long_club_name) { 'North Bondi SLSC XXXXXXXXX with an extra long name that will be truncated' }
       let(:long_patrol_name) { 'Patrol 7 XXXX with an extra long name that will be truncated' }
       let(:patrol) { create(:patrol, name: long_patrol_name) }
-      let(:roster) { create(:roster, patrol: patrol) }
+      let(:roster) { create(:roster, patrol:) }
 
       it { expect(message_body.size).to be <= 160 }
     end
