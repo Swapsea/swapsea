@@ -11,9 +11,13 @@
 				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Offer</strong></label>
 				<div class="col-xs-8 col-sm-7">
 					<div class="visible-xs"><strong>Patrol</strong></div>
+					<% if @offer.roster.present? %>
 					<%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
 					<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
 					<%= @offer.roster.patrol.name %>
+					<% else %>
+					GOOD SAMARITAN
+					<% end %>
 				</div>
 			</div>
 		</div>

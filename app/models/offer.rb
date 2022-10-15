@@ -57,7 +57,11 @@ class Offer < ApplicationRecord
 
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.
   def same_offer_for_other_requests
-    Offer.where('roster_id = ? AND user_id = ? AND id != ? AND status = ?', roster.id, user.id, id, 'pending')
+    if roster.present?
+      Offer.with_pending_status.with_offered_by(user.id).with_roster(roster.id).where.not(id:)
+    else
+      []
+    end
   end
 
   # Returns array of other offers for the same request as this offer.

@@ -15,7 +15,7 @@ class Request < ApplicationRecord
   attr_readonly :nudge_email_opt_out_date
 
   def offer_already_exists?(roster, user)
-    offers.where(user:, roster:, status: 'pending').present?
+    offers.with_pending_status.with_offered_by(user).where(roster:).present?
   end
 
   def accepted_offer
@@ -48,7 +48,11 @@ class Request < ApplicationRecord
   end
 
   def offers_that_match_request
-    Offer.where('roster_id = ? AND user_id =? AND status = ?', roster_id, user_id, 'pending')
+    if roster_id?
+      Offer.with_pending_status.with_offered_by(user_id).where(roster_id:)
+    else
+      []
+    end
   end
 
   def self.nudge_email_opt_out=(opt_out)

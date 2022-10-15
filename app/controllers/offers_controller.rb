@@ -30,9 +30,13 @@ class OffersController < ApplicationController
       @after_swap_request_patrol = @offer.request.roster.swap_meets_requirements(@offer.request.user, @offer.user)
       @before_swap_request_patrol = @offer.request.roster.qualifications
       @required_request_patrol = @offer.request.roster.patrol.requirements
-      @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
-      @before_swap_offer_patrol = @offer.roster.qualifications
-      @required_offer_patrol = @offer.roster.patrol.requirements
+      if @offer.roster.present?
+        @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
+        @before_swap_offer_patrol = @offer.roster.qualifications
+        @required_offer_patrol = @offer.roster.patrol.requirements
+      else
+        @after_swap_offer_patrol = { result: true }
+      end
     else
       redirect_to swaps_path, alert: 'This request or offer no longer exists.'
     end
@@ -50,7 +54,7 @@ class OffersController < ApplicationController
   # should only by accessable be either requestor or admin
   def accept
     @offer = Offer.find(params[:id])
-    if @offer.request.status == 'open' && @offer.status == 'pending' && @offer.roster.start > DateTime.now
+    if @offer.request.status == 'open' && @offer.status == 'pending' && (@offer.roster.blank? || @offer.roster.start > DateTime.now)
       @request = @offer.request
       trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
 
@@ -69,26 +73,30 @@ class OffersController < ApplicationController
       @swap_requestor_off.on_off_patrol = false
       # @swap_requestor_off.save
 
-      # Remove offerer from old roster
-      @swap_offerer_off = Swap.new
-      @offerer_uniq_id = Swap.where(user_id: @offer.user.id, roster_id: @offer.roster.id).first
-      @offerer_uniq_id = if @offerer_uniq_id.present?
-                           @offerer_uniq_id.uniq_id
-                         else
-                           Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
-                         end
-      @swap_offerer_off.trans_id = trans_id
-      @swap_offerer_off.uniq_id = @offerer_uniq_id
-      @swap_offerer_off.roster_id = @offer.roster.id
-      @swap_offerer_off.user_id = @offer.user.id
-      @swap_offerer_off.on_off_patrol = false
-      # @swap_offerer_off.save
+      # Remove offerer from their old roster (if applicable)
+      if @offer.roster.present?
+        @swap_offerer_off = Swap.new
+        @offerer_uniq_id = Swap.where(user_id: @offer.user.id, roster_id: @offer.roster.id).first
+        @offerer_uniq_id = if @offerer_uniq_id.present?
+                             @offerer_uniq_id.uniq_id
+                           else
+                             Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
+                           end
+        @swap_offerer_off.trans_id = trans_id
+        @swap_offerer_off.uniq_id = @offerer_uniq_id
+        @swap_offerer_off.roster_id = @offer.roster.id
+        @swap_offerer_off.user_id = @offer.user.id
+        @swap_offerer_off.on_off_patrol = false
+        # @swap_offerer_off.save
+      else
+        @offerer_uniq_id = nil
+      end
 
       # Add requestor to new roster
       @swap_requestor_on = Swap.new
       @swap_requestor_on.trans_id = trans_id
       @swap_requestor_on.uniq_id = @offerer_uniq_id
-      @swap_requestor_on.roster_id = @offer.roster.id
+      @swap_requestor_on.roster_id = @offer.roster&.id
       @swap_requestor_on.user_id = @request.user.id
       @swap_requestor_on.on_off_patrol = true
       # @swap_requestor_on.save
@@ -111,13 +119,13 @@ class OffersController < ApplicationController
       begin
         ActiveRecord::Base.transaction do
           @swap_requestor_off.save!
-          @swap_offerer_off.save!
+          @swap_offerer_off.save! if @offer.roster.present?
           @swap_requestor_on.save!
           @swap_offerer_on.save!
           @offer.save!
           @request.save!
           @request.roster.awards_count
-          @offer.roster.awards_count
+          @offer.roster.awards_count if @offer.roster.present?
 
           @offer.create_activity :confirm, owner: selected_user
 
