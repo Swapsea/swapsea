@@ -25,5 +25,10 @@ module Swapsea
 
     # Custom exceptions
     config.exceptions_app = routes
+
+    config.to_prepare do
+      # Configure mailer layout for Devise same as rest of app
+      Devise::Mailer.layout 'mailer'
+    end
   end
 end
