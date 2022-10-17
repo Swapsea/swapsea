@@ -62,8 +62,8 @@ RSpec.describe User, type: :model do
       subject { user.email_exists_on_multiple_users? }
 
       let(:email) { Faker::Internet.email }
-      let(:user) { create(:user, email: email) }
-      let(:user_two) { create(:user, email: email) }
+      let(:user) { create(:user, email:) }
+      let(:user_two) { create(:user, email:) }
 
       context 'when there is only one user with the email address' do
         before { user }
