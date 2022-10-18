@@ -11,7 +11,7 @@ class Request < ApplicationRecord
   scope :with_roster, ->(roster_id) { joins(:roster, :user).where(roster_id:).includes(:roster, :user, :offers, roster: [:patrol]) }
   scope :with_requested_by, ->(user_id) { where(user_id:) }
   scope :with_successful_status, -> { where(status: 'successful') }
-  scope :with_open_status, -> { where(status: 'open') }
+  scope :with_open_status, -> { joins(:roster).where(status: 'open').where('finish > ?', DateTime.now) }
   attr_readonly :nudge_email_opt_out_date
 
   def offer_already_exists?(roster, user)
