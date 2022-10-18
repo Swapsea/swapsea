@@ -38,7 +38,7 @@ class Ability
       can :read, Patrol do |patrol|
         patrol.club_id == user.club_id
       end
-      can [:read, :swaps, :patrol, :member, :patrol_report], Roster do |roster|
+      can [:read, :swaps, :patrol, :member, :sign_on_report], Roster do |roster|
         roster.patrol.club_id == user.club_id
       end
       can [:index, :my_offers, :my_requests, :confirmed], Swap do |swap|
@@ -84,7 +84,7 @@ class Ability
       cannot :index, User
       can [:index], :dashboard
       can %i[index set], :selected_user
-      can [:patrol_report], Roster do |roster|
+      can [:sign_on_report], Roster do |roster|
         roster.patrol.club_id == user.club_id
       end
     # Club Member
@@ -92,7 +92,7 @@ class Ability
       can :read, Patrol do |patrol|
         patrol.club_id == user.club_id
       end
-      can [:read, :swaps, :patrol, :member, :patrol_report], Roster do |roster|
+      can [:read, :swaps, :patrol, :member, :sign_on_report], Roster do |roster|
         roster.patrol.club_id == user.club_id
       end
       can [:index, :my_offers, :my_requests, :confirmed], Swap do |swap|
@@ -134,7 +134,7 @@ class Ability
       can [:index], :dashboard
       can %i[index set], :selected_user
     else
-      can :patrol_report, Roster
+      can :sign_on_report, Roster
       can :create, Lead
       can %i[read ics], User
       cannot %i[index show], User
