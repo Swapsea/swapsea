@@ -39,7 +39,7 @@ class RostersController < ApplicationController
   end
 
   def sign_on_report
-    @roster = Roster.find_by(secret: params[:token])
+    @roster = Roster.with_secret(params[:token])
     if @roster.present?
       respond_to do |format|
         format.pdf do
