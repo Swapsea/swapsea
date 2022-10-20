@@ -40,7 +40,7 @@ end
 
 group :staging, :production do
   gem 'barnes'
-  gem 'wkhtmltopdf-heroku'
+  gem 'wkhtmltopdf-heroku', '2.12.6.1.pre.jammy' # Experimental version for Heroku-22
 end
 
 group :development do
