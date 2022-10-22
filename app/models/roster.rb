@@ -7,7 +7,7 @@ class Roster < ApplicationRecord
   has_many :offers
 
   scope :with_club, ->(club_id) { joins(:patrol).where(patrols: { club_id: }).includes(:patrol) }
-  scope :with_secret, ->(secret) { joins(:patrol, patrol: :users).left_joins(patrol: { users: :awards }).includes(patrol: { users: :awards }).find_by(secret:) }
+  scope :with_secret, ->(secret) { joins(:patrol, patrol: :users).find_by(secret:) }
 
   include PgSearch::Model
   pg_search_scope :search, against: %i[patrol_name organisation],
