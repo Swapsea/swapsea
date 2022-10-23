@@ -133,7 +133,7 @@ class OffersController < ApplicationController
           @offer.same_offer_for_other_requests.map do |other_offer|
             unless other_offer.withdraw
               raise 'Error accepting offer. (Code 1)'
-              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 1)'
+              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 1)'
             end
           end
 
@@ -141,7 +141,7 @@ class OffersController < ApplicationController
           @offer.other_offers_for_the_same_request.map do |other_offer|
             unless other_offer.unsuccessful
               raise 'Error accepting offer. (Code 2)'
-              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 2)'
+              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 2)'
             end
           end
 
@@ -153,7 +153,7 @@ class OffersController < ApplicationController
               # SwapseaMailer.offer_cancelled(other_offer).deliver
             else
               raise 'Error accepting offer. (Code 3)'
-              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 3)'
+              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 3)'
             end
           end
 
@@ -161,7 +161,7 @@ class OffersController < ApplicationController
           @request.offers_that_match_request.map do |corresponding_offer|
             unless corresponding_offer.withdraw
               raise 'Error accepting offer. (Code 4)'
-              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
+              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 4)'
             end
           end
         end
@@ -171,7 +171,7 @@ class OffersController < ApplicationController
         redirect_to request_path(@offer.request),
                     notice: 'Offer accepted! The swap is confirmed and you will both receive a confirmation email.'
       rescue ActiveRecord::RecordNotSaved
-        redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 5)'
+        redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 5)'
       end
     else
       redirect_to request_path(@offer.request),
@@ -189,7 +189,7 @@ class OffersController < ApplicationController
       SwapseaMailer.offer_declined(@offer, offer_params[:decline_remark]).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was declined.'
     else
-      redirect_to request_path(@offer.request), notice: 'Error trying to decline offer.'
+      redirect_to request_path(@offer.request), alert: 'Error trying to decline offer.'
     end
   end
 
@@ -205,7 +205,7 @@ class OffersController < ApplicationController
       SwapseaMailer.offer_received(@offer).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.'
     else
-      redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.'
+      redirect_to request_path(@offer.request), alert: 'Error creating offer.'
     end
   end
 
@@ -228,7 +228,7 @@ class OffersController < ApplicationController
       # SwapseaMailer.offer_cancelled(@offer).deliver
       redirect_to @offer.request, notice: 'Offer was successfully withdrawn.'
     else
-      redirect_to @offer.request, notice: 'Error whilst withdrawing offer.'
+      redirect_to @offer.request, alert: 'Error whilst withdrawing offer.'
     end
   end
 
