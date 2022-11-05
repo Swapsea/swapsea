@@ -9,7 +9,7 @@ class Offer < ApplicationRecord
 
   scope :with_club, ->(club_id) { joins(:request, :user, :roster).where(users: { club_id: }).includes(:request, :user, :roster) }
   scope :with_offered_by, ->(user_id) { joins(:request, :user, :roster, roster: :patrol).where(user_id:).includes(:request, :user, :roster, roster: :patrol) }
-  scope :with_pending_status, -> { where(status: 'pending') }
+  scope :with_pending_status, -> { left_joins(:roster).where(status: :pending).where('finish > ? OR finish IS NULL', DateTime.now) }
   scope :with_accepted_status, -> { where(status: 'accepted') }
 
   after_initialize :set_defaults
