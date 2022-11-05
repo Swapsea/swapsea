@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_02_054653) do
+ActiveRecord::Schema.define(version: 2022_11_05_094444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 2022_10_02_054653) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "roster_id"
+    t.string "decline_remark"
     t.index ["request_id"], name: "index_offers_on_request_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end

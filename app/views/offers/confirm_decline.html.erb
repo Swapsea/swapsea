@@ -1,28 +1,38 @@
 <% content_for(:title){ "Decline Offer?" } %>
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<h2><%= content_for(:title) %></h2>
-	</div>
-	<div class="panel-body">
-		<p>Are you sure you want to <strong>decline</strong> this offer?</p>
-		<div class="offer-details">
-		<div class="row">
-			<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Offer</strong></label>
-			<div class="col-xs-8 col-sm-7">
-				<div class="visible-xs"><strong>Patrol</strong></div>
-				<%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
-				<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
-				<%= @offer.roster.patrol.name %>
-			</div>
-		</div>
-	</div>
-		<div class="buttons">
-			<%= link_to @offer.request do %>
-				<button class="btn btn-danger"><span class="fa fa-times"></span><br/>Go back</button>
-			<% end %>
-			<%= link_to decline_offer_path(@offer) do %>
-				<button class="btn btn-success pull-right"><span class="fa fa-check"></span><br/>Decline Offer</button>
-			<% end %>
-		</div>
-	</div>
+    <div class="panel-heading">
+        <h2><%= content_for(:title) %></h2>
+    </div>
+    <div class="panel-body">
+    <%= simple_form_for(@offer, url: decline_offer_path, method: :post) do |f| %>
+        <%= f.error_notification %>
+        <p>Are you sure you want to decline this offer from <b><%= @offer.user.name %></b>?</p>
+        <div class="offer-details">
+        <div class="row">
+            <label class="col-xs-4 col-sm-2 hidden-xs"><strong>Offer</strong></label>
+            <div class="col-xs-8 col-sm-7">
+                <div class="visible-xs"><strong>Offer</strong></div>
+                <%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
+                <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
+                <%= @offer.roster.patrol.name %>
+            </div>
+        </div>
+        <div class="row">
+        <label class="col-xs-4 col-sm-2 hidden-xs"><strong>Decline Remarks</strong></label>
+        <div class="col-xs-8 col-sm-7">
+            <div class="visible-xs"><strong>Decline Remarks</strong></div>
+            <%= f.input :decline_remark, :as => :text, :label => false, input_html: { class: 'textbox form-control', placeholder: 'Thank them and maybe tell them why.' } %>
+        </div>
+    </div>
+    <div class="buttons">
+        <div class="col-xs-12 col-sm-12">
+            <%= link_to @offer.request do %>
+                <button class="btn btn-danger"><span class="fa fa-backward"></span><br/>Cancel</button>
+            <% end %>
+            <%= f.button :button, :class => "btn btn-success pull-right", :disable_with => "Please wait ..." do %>
+                <span class="fa fa-thumbs-down"></span><br/>Decline Offer
+            <% end %>
+        </div>
+    </div>
+    <% end %>
 </div>

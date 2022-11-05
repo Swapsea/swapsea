@@ -43,10 +43,11 @@ class SwapseaMailer < ApplicationMailer
   end
 
   # Sent to offer user to notify them that their offer was declined.
-  def offer_declined(offer)
+  def offer_declined(offer, decline_remark)
     @offer = offer
     @user = offer.user
     @request = offer.request
+    @decline_remark = decline_remark
     @subject = 'Offer declined'
     mail subject: @subject,
          to: email_address_with_name(@user.email, @user.name)

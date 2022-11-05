@@ -17,6 +17,12 @@ class Offer < ApplicationRecord
     Offer.where(roster:)
   end
 
+  def decline(remark)
+    self.status = :declined
+    self.decline_remark = remark
+    save
+  end
+
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.
   def same_offer_for_other_requests
     Offer.where('roster_id = ? AND user_id = ? AND id != ? AND status = ?', roster.id, user.id, id, 'pending')

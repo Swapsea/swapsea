@@ -41,7 +41,7 @@ RSpec.describe OffersController, type: :routing do
     end
 
     it 'routes to #decline' do
-      expect(get: '/offers/1/decline').to route_to('offers#decline', id: '1')
+      expect(post: '/offers/1/decline').to route_to('offers#decline', id: '1')
     end
 
     it 'routes to #confirm_accept' do
