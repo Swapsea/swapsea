@@ -85,7 +85,7 @@ Swapsea::Application.routes.draw do
       post 'decline'
       get 'confirm-accept', to: 'offers#confirm_accept', as: 'confirm_accept'
       get 'confirm-decline', to: 'offers#confirm_decline', as: 'confirm_decline'
-      get 'confirm-cancel', to: 'offers#confirm_cancel', as: 'confirm_cancel'
+      get 'confirm-withdraw', to: 'offers#confirm_withdraw', as: 'confirm_withdraw'
     end
   end
 

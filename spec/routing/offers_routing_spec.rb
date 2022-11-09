@@ -52,8 +52,8 @@ RSpec.describe OffersController, type: :routing do
       expect(get: '/offers/1/confirm-decline').to route_to('offers#confirm_decline', id: '1')
     end
 
-    it 'routes to #confirm_cancel' do
-      expect(get: '/offers/1/confirm-cancel').to route_to('offers#confirm_cancel', id: '1')
+    it 'routes to #confirm_withdraw' do
+      expect(get: '/offers/1/confirm-withdraw').to route_to('offers#confirm_withdraw', id: '1')
     end
   end
 end

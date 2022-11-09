@@ -23,6 +23,21 @@ class Offer < ApplicationRecord
     save
   end
 
+  def withdraw
+    self.status = :withdrawn
+    save
+  end
+
+  def cancel
+    self.status = :cancelled
+    save
+  end
+
+  def unsuccessful
+    self.status = :unsuccessful
+    save
+  end
+
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.
   def same_offer_for_other_requests
     Offer.where('roster_id = ? AND user_id = ? AND id != ? AND status = ?', roster.id, user.id, id, 'pending')
