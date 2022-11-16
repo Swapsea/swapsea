@@ -95,6 +95,7 @@ class RequestsController < ApplicationController
       @request.offers.each do |offer|
         if offer.cancel
           offer.create_activity :destroy, owner: selected_user
+          # SwapseaMailer.request_cancelled(offer).deliver
         end
       end
       redirect_to swaps_path
