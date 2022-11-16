@@ -42,7 +42,7 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
   end
 
-  def confirm_cancel
+  def confirm_withdraw
     @offer = Offer.find(params[:id])
   end
 
@@ -123,10 +123,7 @@ class OffersController < ApplicationController
 
           # Close same offer made to other requests.
           @offer.same_offer_for_other_requests.map do |other_offer|
-            other_offer.status = 'withdrawn'
-            if other_offer.save
-              # SwapseaMailer.offer_closed(other_offer).deliver
-            else
+            unless other_offer.withdraw
               raise 'Error accepting offer. (Code 1)'
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 1)'
             end
@@ -134,10 +131,7 @@ class OffersController < ApplicationController
 
           # swap status of unsuccessful offers.
           @offer.other_offers_for_the_same_request.map do |other_offer|
-            other_offer.status = 'unsuccessful'
-            if other_offer.save
-              # SwapseaMailer.offer_unsuccessful(other_offer).deliver
-            else
+            unless other_offer.unsuccessful
               raise 'Error accepting offer. (Code 2)'
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 2)'
             end
@@ -150,17 +144,14 @@ class OffersController < ApplicationController
             if corresponding_request.save
               # SwapseaMailer.offer_cancelled(other_offer).deliver
             else
-              raise 'Error accepting offer. (Code 3-1)'
-              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
+              raise 'Error accepting offer. (Code 3)'
+              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 3)'
             end
           end
 
           # Close offers that match successful Request
           @request.offers_that_match_request.map do |corresponding_offer|
-            corresponding_offer.status = 'withdrawn'
-            if corresponding_offer.save
-              # SwapseaMailer.offer_closed(corresponding_offer).deliver
-            else
+            unless corresponding_offer.withdraw
               raise 'Error accepting offer. (Code 4)'
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
             end
@@ -225,8 +216,7 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   # DELETE /offers/1.json
   def destroy
-    @offer.status = 'cancelled'
-    if @offer.save
+    if @offer.cancel
       @offer.create_activity :destroy, owner: selected_user
       # SwapseaMailer.offer_cancelled(@offer).deliver
       redirect_to @offer.request, notice: 'Offer was successfully withdrawn.'

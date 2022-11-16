@@ -57,7 +57,7 @@ class Ability
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
         offer.user.club_id == user.club_id
       end
-      can %i[update destroy confirm_cancel], Offer, user: user
+      can %i[update destroy confirm_withdraw], Offer, user: user
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
@@ -111,7 +111,7 @@ class Ability
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
         offer.user.club_id == user.club_id
       end
-      can %i[update destroy confirm_cancel], Offer, user: user
+      can %i[update destroy confirm_withdraw], Offer, user: user
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
