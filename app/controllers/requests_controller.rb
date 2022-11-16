@@ -93,8 +93,9 @@ class RequestsController < ApplicationController
     if @request.save
       @request.create_activity :close, owner: selected_user
       @request.offers.each do |offer|
-        offer.create_activity :destroy, owner: selected_user
-        offer.cancel
+        if offer.cancel
+          offer.create_activity :destroy, owner: selected_user
+        end
       end
       redirect_to swaps_path
     end
