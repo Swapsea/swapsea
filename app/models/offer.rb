@@ -12,9 +12,47 @@ class Offer < ApplicationRecord
   scope :with_pending_status, -> { where(status: 'pending') }
   scope :with_accepted_status, -> { where(status: 'accepted') }
 
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.status = :pending
+  end
+
   # Returns array of offers for the same rostered patrol.
   def requests
     Offer.where(roster:)
+  end
+
+  def decline(remark)
+    self.status = :declined
+    self.decline_remark = remark
+    save
+  end
+
+  def withdraw
+    case status
+    when 'withdrawn'
+      # Already withdrawn
+      true
+    when 'pending'
+      self.status = :withdrawn
+      save
+    else
+      message = "Cannot withdraw offer '#{id}' with status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      false
+    end
+  end
+
+  def cancel
+    self.status = :cancelled
+    save
+  end
+
+  def unsuccessful
+    self.status = :unsuccessful
+    save
   end
 
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.

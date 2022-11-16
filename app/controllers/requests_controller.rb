@@ -93,10 +93,10 @@ class RequestsController < ApplicationController
     if @request.save
       @request.create_activity :close, owner: selected_user
       @request.offers.each do |offer|
-        offer.create_activity :destroy, owner: selected_user
-        offer.status = 'deleted'
-        offer.save
-        # SwapseaMailer.request_cancelled(offer).deliver
+        if offer.cancel
+          offer.create_activity :destroy, owner: selected_user
+          # SwapseaMailer.request_cancelled(offer).deliver
+        end
       end
       redirect_to swaps_path
     end

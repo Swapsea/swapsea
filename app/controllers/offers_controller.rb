@@ -40,10 +40,9 @@ class OffersController < ApplicationController
 
   def confirm_decline
     @offer = Offer.find(params[:id])
-    @minimum_requirement = @offer.request.roster.swap_meets_requirements(@offer.request.user, @offer.user)
   end
 
-  def confirm_cancel
+  def confirm_withdraw
     @offer = Offer.find(params[:id])
   end
 
@@ -124,10 +123,7 @@ class OffersController < ApplicationController
 
           # Close same offer made to other requests.
           @offer.same_offer_for_other_requests.map do |other_offer|
-            other_offer.status = 'withdrawn'
-            if other_offer.save
-              # SwapseaMailer.offer_closed(other_offer).deliver
-            else
+            unless other_offer.withdraw
               raise 'Error accepting offer. (Code 1)'
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 1)'
             end
@@ -135,10 +131,7 @@ class OffersController < ApplicationController
 
           # swap status of unsuccessful offers.
           @offer.other_offers_for_the_same_request.map do |other_offer|
-            other_offer.status = 'unsuccessful'
-            if other_offer.save
-              # SwapseaMailer.offer_unsuccessful(other_offer).deliver
-            else
+            unless other_offer.unsuccessful
               raise 'Error accepting offer. (Code 2)'
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 2)'
             end
@@ -151,17 +144,14 @@ class OffersController < ApplicationController
             if corresponding_request.save
               # SwapseaMailer.offer_cancelled(other_offer).deliver
             else
-              raise 'Error accepting offer. (Code 3-1)'
-              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
+              raise 'Error accepting offer. (Code 3)'
+              redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 3)'
             end
           end
 
           # Close offers that match successful Request
           @request.offers_that_match_request.map do |corresponding_offer|
-            corresponding_offer.status = 'withdrawn'
-            if corresponding_offer.save
-              # SwapseaMailer.offer_closed(corresponding_offer).deliver
-            else
+            unless corresponding_offer.withdraw
               raise 'Error accepting offer. (Code 4)'
               redirect_to request_path(@offer.request), notice: 'There was an error when accepting the offer. (Code 4)'
             end
@@ -181,17 +171,14 @@ class OffersController < ApplicationController
     end
   end
 
-  # GET /offers/1/decline
+  # POST /offers/1/decline
   # should only by accessable be either requestor or admin
   def decline
     @offer = Offer.find(params[:id])
-    @offer.status = 'declined'
 
-    # send email to offerer
-
-    if @offer.save
+    if @offer.decline(offer_params[:decline_remark])
       @offer.create_activity :decline, owner: selected_user
-      # SwapseaMailer.offer_declined(@offer).deliver
+      SwapseaMailer.offer_declined(@offer, offer_params[:decline_remark]).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was declined.'
     else
       redirect_to request_path(@offer.request), notice: 'Error trying to decline offer.'
@@ -204,7 +191,6 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @offer.request_id = params[:request_id]
     @offer.roster_id = params[:roster_id]
-    @offer.status = 'pending'
     @offer.user_id = selected_user.id
     if @offer.save
       @offer.create_activity :create, owner: selected_user
@@ -229,8 +215,7 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   # DELETE /offers/1.json
   def destroy
-    @offer.status = 'cancelled'
-    if @offer.save
+    if @offer.cancel
       @offer.create_activity :destroy, owner: selected_user
       # SwapseaMailer.offer_cancelled(@offer).deliver
       redirect_to @offer.request, notice: 'Offer was successfully withdrawn.'
@@ -248,6 +233,6 @@ class OffersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def offer_params
-    params.require(:offer).permit(:request_id, :roster_id, :user_id, :comment, :mobile, :email, :status)
+    params.require(:offer).permit(:request_id, :roster_id, :user_id, :comment, :mobile, :email, :status, :decline_remark)
   end
 end
