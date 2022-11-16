@@ -12,6 +12,12 @@ class Offer < ApplicationRecord
   scope :with_pending_status, -> { where(status: 'pending') }
   scope :with_accepted_status, -> { where(status: 'accepted') }
 
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.status = :pending
+  end
+
   # Returns array of offers for the same rostered patrol.
   def requests
     Offer.where(roster:)

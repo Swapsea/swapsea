@@ -191,7 +191,6 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @offer.request_id = params[:request_id]
     @offer.roster_id = params[:roster_id]
-    @offer.status = 'pending'
     @offer.user_id = selected_user.id
     if @offer.save
       @offer.create_activity :create, owner: selected_user

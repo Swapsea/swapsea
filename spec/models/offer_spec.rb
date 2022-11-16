@@ -10,6 +10,10 @@ RSpec.describe Offer, type: :model do
     it 'is valid with valid attributes' do
       expect(@offer).to be_valid
     end
+
+    it 'has default status pending' do
+      expect(@offer).to have_attributes(status: 'pending')
+    end
   end
 
   describe Offer, 'association' do
