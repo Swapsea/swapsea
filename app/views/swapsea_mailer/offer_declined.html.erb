@@ -2,8 +2,13 @@
           G'day <%= @user.first_name %>,
         </p>
         <p>
-          Your offer has been politely declined.
+          Your offer of <%= @offer.roster.start.strftime("%A %d %B %Y") %> was declined.
         </p>
+        <% if @decline_remark %>
+        <p>
+        <%= @request.user.name %> said: <br/><i><%= @decline_remark %></i>
+        </p>
+        <% end %>
         <p>
           Below are the details of the offer for your reference.
         </p>

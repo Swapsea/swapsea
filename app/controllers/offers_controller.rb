@@ -40,7 +40,6 @@ class OffersController < ApplicationController
 
   def confirm_decline
     @offer = Offer.find(params[:id])
-    @minimum_requirement = @offer.request.roster.swap_meets_requirements(@offer.request.user, @offer.user)
   end
 
   def confirm_cancel
@@ -181,17 +180,14 @@ class OffersController < ApplicationController
     end
   end
 
-  # GET /offers/1/decline
+  # POST /offers/1/decline
   # should only by accessable be either requestor or admin
   def decline
     @offer = Offer.find(params[:id])
-    @offer.status = 'declined'
 
-    # send email to offerer
-
-    if @offer.save
+    if @offer.decline(offer_params[:decline_remark])
       @offer.create_activity :decline, owner: selected_user
-      # SwapseaMailer.offer_declined(@offer).deliver
+      SwapseaMailer.offer_declined(@offer, offer_params[:decline_remark]).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was declined.'
     else
       redirect_to request_path(@offer.request), notice: 'Error trying to decline offer.'
@@ -248,6 +244,6 @@ class OffersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the allowlist through.
   def offer_params
-    params.require(:offer).permit(:request_id, :roster_id, :user_id, :comment, :mobile, :email, :status)
+    params.require(:offer).permit(:request_id, :roster_id, :user_id, :comment, :mobile, :email, :status, :decline_remark)
   end
 end
