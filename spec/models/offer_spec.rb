@@ -10,6 +10,10 @@ RSpec.describe Offer, type: :model do
     it 'is valid with valid attributes' do
       expect(@offer).to be_valid
     end
+
+    it 'has default status pending' do
+      expect(@offer).to have_attributes(status: 'pending')
+    end
   end
 
   describe Offer, 'association' do
@@ -35,22 +39,37 @@ RSpec.describe Offer, type: :model do
     end
 
     describe 'withdraw' do
-      it 'status withdrawn' do
-        @offer.withdraw
+      it 'from status pending' do
+        expect(@offer.withdraw).to be_truthy
         expect(@offer.status).to eq('withdrawn')
+      end
+
+      it 'from status withdrawn' do
+        @offer.withdraw
+        expect(@offer.withdraw).to be_truthy
+      end
+
+      it 'from status unsuccessful' do
+        @offer.unsuccessful
+        expect(@offer.withdraw).to be_falsey
+      end
+
+      it 'from status cancelled' do
+        @offer.cancel
+        expect(@offer.withdraw).to be_falsey
       end
     end
 
     describe 'cancel' do
       it 'status cancelled' do
-        @offer.cancel
+        expect(@offer.cancel).to be_truthy
         expect(@offer.status).to eq('cancelled')
       end
     end
 
     describe 'unsuccessful' do
       it 'status unsuccessful' do
-        @offer.unsuccessful
+        expect(@offer.unsuccessful).to be_truthy
         expect(@offer.status).to eq('unsuccessful')
       end
     end

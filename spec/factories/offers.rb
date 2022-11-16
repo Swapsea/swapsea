@@ -8,7 +8,6 @@ FactoryBot.define do
     comment { 'MyString' }
     mobile { 'MyString' }
     email { Faker::Internet.email }
-    status { 'MyString' }
     roster_id { 1 }
   end
 end
