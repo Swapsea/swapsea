@@ -30,8 +30,19 @@ class Offer < ApplicationRecord
   end
 
   def withdraw
-    self.status = :withdrawn
-    save
+    case status
+    when 'withdrawn'
+      # Already withdrawn
+      true
+    when 'pending'
+      self.status = :withdrawn
+      save
+    else
+      message = "Cannot withdraw offer '#{id}' with status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      false
+    end
   end
 
   def cancel
