@@ -18,12 +18,32 @@ class Offer < ApplicationRecord
     self.status = :pending
   end
 
+  def accepted?
+    status == 'accepted'
+  end
+
+  def cancelled?
+    status == 'cancelled'
+  end
+
+  def declined?
+    status == 'declined'
+  end
+
+  def deleted?
+    status == 'deleted'
+  end
+
   def pending?
-    if valid?
-      status == 'pending' && roster.start > DateTime.now
-    else
-      false
-    end
+    status == 'pending' && roster.start > DateTime.now
+  end
+
+  def unsuccessful?
+    status == 'unsuccessful'
+  end
+
+  def withdrawn?
+    status == 'withdrawn'
   end
 
   # Returns array of offers for the same rostered patrol.
@@ -31,7 +51,7 @@ class Offer < ApplicationRecord
     Offer.where(roster:)
   end
 
-  def decline(remark)
+  def decline(remark = nil)
     self.status = :declined
     self.decline_remark = remark
     save

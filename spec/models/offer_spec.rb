@@ -23,6 +23,28 @@ RSpec.describe Offer, type: :model do
   end
 
   describe 'status' do
+    describe 'accepted?' do
+      it 'true for accepted' do
+        # @offer.accept
+        @offer.status = 'accepted'
+        expect(@offer).to be_accepted
+      end
+    end
+
+    describe 'cancelled?' do
+      it 'true for cancelled' do
+        @offer.cancel
+        expect(@offer).to be_cancelled
+      end
+    end
+
+    describe 'declined?' do
+      it 'true for declined' do
+        @offer.decline
+        expect(@offer).to be_declined
+      end
+    end
+
     describe 'pending?' do
       it 'true for pending in future' do
         expect(@offer).to be_pending
@@ -36,6 +58,20 @@ RSpec.describe Offer, type: :model do
       it 'false for not pending in future' do
         @offer.withdraw
         expect(@offer).not_to be_pending
+      end
+    end
+
+    describe 'unsuccessful?' do
+      it 'true for unsuccessful' do
+        @offer.unsuccessful
+        expect(@offer).to be_unsuccessful
+      end
+    end
+
+    describe 'withdrawn?' do
+      it 'true for withdrawn' do
+        @offer.withdraw
+        expect(@offer).to be_withdrawn
       end
     end
   end
