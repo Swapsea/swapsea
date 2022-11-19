@@ -9,7 +9,7 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     gender { 'male' }
 
-    association :club, factory: :club
+    association :club
   end
 
   factory :member_user, parent: :user, aliases: [:member] do
