@@ -22,6 +22,24 @@ RSpec.describe Offer, type: :model do
     it { is_expected.to belong_to(:roster) }
   end
 
+  describe 'status' do
+    describe 'pending?' do
+      it 'true for pending in future' do
+        expect(@offer).to be_pending
+      end
+
+      it 'false for pending in past' do
+        offer_past = create(:offer, :past_dated_roster)
+        expect(offer_past).not_to be_pending
+      end
+
+      it 'false for not pending in future' do
+        @offer.withdraw
+        expect(@offer).not_to be_pending
+      end
+    end
+  end
+
   describe 'instance methods' do
     describe 'decline' do
       it 'status declined without remark' do

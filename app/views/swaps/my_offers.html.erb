@@ -40,7 +40,7 @@
                 <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
                 <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
               </div>
-              <% if offer.status == 'pending' %>
+              <% if offer.pending? %>
               <%= link_to offer.request, :class => 'offer offer-view col-xs-2' do %>
               View
               <% end %>
