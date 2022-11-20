@@ -56,7 +56,7 @@
               <%= link_to offer.request, :class => 'offer offer-disabled col-xs-2' do %>
               <%= offer.status.capitalize! %>
               <% end %>
-              <% elsif offer.deleted? || offer.cancelled? %>
+              <% elsif offer.cancelled? %>
               <div class='offer offer-not-accepted-no-link col-xs-2'>
                 Request Cancelled
               </div>

@@ -30,10 +30,6 @@ class Offer < ApplicationRecord
     status == 'declined'
   end
 
-  def deleted?
-    status == 'deleted'
-  end
-
   def pending?
     status == 'pending' && roster.start > DateTime.now
   end
