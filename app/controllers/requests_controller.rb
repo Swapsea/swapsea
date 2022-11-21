@@ -55,8 +55,6 @@ class RequestsController < ApplicationController
     else
       @request = Request.new(request_params)
 
-      @request.status = 'open'
-
       respond_to do |format|
         if @request.save
           @request.create_activity :create, owner: selected_user
@@ -89,15 +87,8 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
-    @request.status = 'cancelled'
-    if @request.save
+    if @request.cancel
       @request.create_activity :close, owner: selected_user
-      @request.offers.each do |offer|
-        if offer.cancel
-          offer.create_activity :destroy, owner: selected_user
-          # SwapseaMailer.request_cancelled(offer).deliver
-        end
-      end
       redirect_to swaps_path
     end
   end

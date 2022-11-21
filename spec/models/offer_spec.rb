@@ -77,55 +77,52 @@ RSpec.describe Offer, type: :model do
   end
 
   describe 'instance methods' do
-    describe 'decline' do
-      it 'status declined without remark' do
-        @offer.decline(nil)
-        expect(@offer.status).to eq('declined')
-        expect(@offer.decline_remark).to be_nil
-      end
-
-      it 'status declined with remark' do
-        remark = 'sorry mate'
-        @offer.decline(remark)
-        expect(@offer.status).to eq('declined')
-        expect(@offer.decline_remark).to eq(remark)
-      end
+    it 'decline without remark' do
+      @offer.decline(nil)
+      expect(@offer.status).to eq('declined')
+      expect(@offer.decline_remark).to be_nil
+      expect(@offer.decline(nil)).to be_truthy
+      # Negative tests
+      expect(@offer.cancel).to be_falsey
+      expect(@offer.unsuccessful).to be_falsey
+      expect(@offer.withdraw).to be_falsey
     end
 
-    describe 'withdraw' do
-      it 'from status pending' do
-        expect(@offer.withdraw).to be_truthy
-        expect(@offer.status).to eq('withdrawn')
-      end
-
-      it 'from status withdrawn' do
-        @offer.withdraw
-        expect(@offer.withdraw).to be_truthy
-      end
-
-      it 'from status unsuccessful' do
-        @offer.unsuccessful
-        expect(@offer.withdraw).to be_falsey
-      end
-
-      it 'from status cancelled' do
-        @offer.cancel
-        expect(@offer.withdraw).to be_falsey
-      end
+    it 'decline with remark' do
+      remark = 'sorry mate'
+      @offer.decline(remark)
+      expect(@offer.status).to eq('declined')
+      expect(@offer.decline_remark).to eq(remark)
     end
 
-    describe 'cancel' do
-      it 'status cancelled' do
-        expect(@offer.cancel).to be_truthy
-        expect(@offer.status).to eq('cancelled')
-      end
+    it 'withdraw' do
+      expect(@offer.withdraw).to be_truthy
+      expect(@offer.status).to eq('withdrawn')
+      expect(@offer.withdraw).to be_truthy
+      # Negative tests
+      expect(@offer.cancel).to be_falsey
+      expect(@offer.decline).to be_falsey
+      expect(@offer.unsuccessful).to be_falsey
     end
 
-    describe 'unsuccessful' do
-      it 'status unsuccessful' do
-        expect(@offer.unsuccessful).to be_truthy
-        expect(@offer.status).to eq('unsuccessful')
-      end
+    it 'unsuccessful' do
+      expect(@offer.unsuccessful).to be_truthy
+      expect(@offer.status).to eq('unsuccessful')
+      expect(@offer.unsuccessful).to be_truthy
+      # Negative tests
+      expect(@offer.cancel).to be_falsey
+      expect(@offer.decline).to be_falsey
+      expect(@offer.withdraw).to be_falsey
+    end
+
+    it 'cancel' do
+      expect(@offer.cancel).to be_truthy
+      expect(@offer.status).to eq('cancelled')
+      expect(@offer.cancel).to be_truthy
+      # Negative tests
+      expect(@offer.decline).to be_falsey
+      expect(@offer.unsuccessful).to be_falsey
+      expect(@offer.withdraw).to be_falsey
     end
   end
 end
