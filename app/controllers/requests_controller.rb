@@ -89,7 +89,7 @@ class RequestsController < ApplicationController
   def destroy
     if @request.cancel
       @request.create_activity :close, owner: selected_user
-      redirect_to swaps_path
+      redirect_to my_requests_swaps_path, notice: 'Your Swap Request was cancelled.'
     end
   end
 
