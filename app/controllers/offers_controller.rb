@@ -26,7 +26,7 @@ class OffersController < ApplicationController
   def confirm_accept
     @offer = Offer.find(params[:id])
 
-    if @offer.request.status == 'open' && @offer.status == 'pending'
+    if @offer.request.open? && @offer.pending?
       @after_swap_request_patrol = @offer.request.roster.swap_meets_requirements(@offer.request.user, @offer.user)
       @before_swap_request_patrol = @offer.request.roster.qualifications
       @required_request_patrol = @offer.request.roster.patrol.requirements
@@ -54,7 +54,7 @@ class OffersController < ApplicationController
   # should only by accessable be either requestor or admin
   def accept
     @offer = Offer.find(params[:id])
-    if @offer.request.status == 'open' && @offer.status == 'pending' && (@offer.roster.blank? || @offer.roster.start > DateTime.now)
+    if @offer.request.open? && @offer.pending? && (@offer.roster.blank? || @offer.roster.start > DateTime.now)
       @request = @offer.request
       trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
 
@@ -147,9 +147,7 @@ class OffersController < ApplicationController
 
           # Close requests if they match accepted offer.
           @offer.corresponding_requests.map do |corresponding_request|
-            corresponding_request.close # closes off any offers for each request (code 3)
-            corresponding_request.status = 'cancelled'
-            if corresponding_request.save
+            if corresponding_request.cancel
               # SwapseaMailer.offer_cancelled(other_offer).deliver
             else
               raise 'Error accepting offer. (Code 3)'

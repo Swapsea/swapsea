@@ -18,15 +18,50 @@ class Offer < ApplicationRecord
     self.status = :pending
   end
 
+  def accepted?
+    status == 'accepted'
+  end
+
+  def cancelled?
+    status == 'cancelled'
+  end
+
+  def declined?
+    status == 'declined'
+  end
+
+  def pending?
+    status == 'pending' && roster.start > DateTime.now
+  end
+
+  def unsuccessful?
+    status == 'unsuccessful'
+  end
+
+  def withdrawn?
+    status == 'withdrawn'
+  end
+
   # Returns array of offers for the same rostered patrol.
   def requests
     Offer.where(roster:)
   end
 
-  def decline(remark)
-    self.status = :declined
-    self.decline_remark = remark
-    save
+  def decline(remark = nil)
+    case status
+    when 'declined'
+      # Already declined
+      true
+    when 'pending'
+      self.status = :declined
+      self.decline_remark = remark
+      save
+    else
+      message = "Cannot decline offer '#{id}' with status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      false
+    end
   end
 
   def withdraw
@@ -46,13 +81,35 @@ class Offer < ApplicationRecord
   end
 
   def cancel
-    self.status = :cancelled
-    save
+    case status
+    when 'cancelled'
+      # Already cancelled
+      true
+    when 'pending'
+      self.status = :cancelled
+      save
+    else
+      message = "Cannot cancel offer '#{id}' with status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      false
+    end
   end
 
   def unsuccessful
-    self.status = :unsuccessful
-    save
+    case status
+    when 'unsuccessful'
+      # Already unsuccessful
+      true
+    when 'pending'
+      self.status = :unsuccessful
+      save
+    else
+      message = "Cannot set status of offer '#{id}' to unsuccessful with status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      false
+    end
   end
 
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.
