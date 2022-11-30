@@ -2,9 +2,8 @@
 
 FactoryBot.define do
   factory :roster do
-    patrol.name { 'Patrol 1' }
-    start { '2018-10-07 19:53:09' }
-    finish { '2018-10-07 19:53:09' }
+    start { 7.days.from_now }
+    finish { 8.days.from_now }
     bbm { 1 }
     irbd { 2 }
     irbc { 2 }
@@ -13,5 +12,7 @@ FactoryBot.define do
     firstaid { 2 }
     bronze { 2 }
     src { 2 }
+
+    association :patrol
   end
 end

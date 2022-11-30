@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 require 'capybara'
+require 'capybara-screenshot/rspec'
 
 describe 'e2e Happy Path - Admin' do
   before do

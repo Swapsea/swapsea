@@ -46,7 +46,6 @@ end
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
   gem 'bullet'
-  gem 'capybara-screenshot'
   gem 'listen'
   gem 'pre-commit', require: false
   gem 'rails_real_favicon'
@@ -64,6 +63,7 @@ end
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
