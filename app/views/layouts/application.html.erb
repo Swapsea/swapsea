@@ -10,6 +10,7 @@
 		<%= stylesheet_link_tag "application", :media => "all" %>
 		<%= render 'application/favicon' %>
 		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
 	</head>
 	<body>
 		<%= yield %>
