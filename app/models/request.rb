@@ -24,6 +24,10 @@ class Request < ApplicationRecord
     status == 'open'
   end
 
+  def successful?
+    status == 'successful'
+  end
+
   def offer_already_exists?(_roster, _user)
     offers.with_pending_status.present?
   end
@@ -40,6 +44,23 @@ class Request < ApplicationRecord
     else
       false
     end
+  end
+
+  def succeeded
+      # Check valid status
+      case status
+      when 'successful'
+        # Already successful
+        true
+      when 'open'
+        self.status = :successful
+        save
+      else
+        message = "Request '#{id}' cannot be successful from status '#{status}'."
+        Rails.logger.warn message
+        EventLog.create!(subject: 'Warning', desc: message)
+        false
+      end
   end
 
   def accepted_offer

@@ -32,14 +32,20 @@ RSpec.describe Request, type: :model do
   end
 
   describe 'instance methods' do
-    describe 'cancel' do
-      it 'status cancelled' do
-        expect(@request.cancel).to be_truthy
-        expect(@request.status).to eq('cancelled')
-        expect(@request.cancel).to be_truthy
-        # Negative tests
-        expect(@request).not_to be_open
-      end
+    it 'cancel' do
+      expect(@request.cancel).to be_truthy
+      expect(@request.status).to eq('cancelled')
+      expect(@request.cancel).to be_truthy
+      # Negative tests
+      expect(@request).not_to be_open
+    end
+
+    it 'succeeded' do
+      expect(@request.succeeded).to be_truthy
+      expect(@request.status).to eq('successful')
+      expect(@request.succeeded).to be_truthy
+      # Negative tests
+      expect(@request).not_to be_open
     end
   end
 end
