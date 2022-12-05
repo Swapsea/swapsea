@@ -139,15 +139,9 @@ class Offer < ApplicationRecord
 
         # Save this offer
         save!
-        # saved already in request.succeeded() above
-        # request.save!
-
-        request.roster.awards_count
-        roster.awards_count
 
         #
         # REFACTOR THESE IN TO METHODS
-        #
         #
         # Close same offer made to other requests.
         same_offer_for_other_requests.map do |other_offer|
@@ -193,8 +187,12 @@ class Offer < ApplicationRecord
       message = "Accepting Offer '#{id}': RecordNotSaved."
       Rails.logger.error message
       EventLog.create!(subject: 'Error', desc: message)
-      false
+      return false
     end
+
+    # Update counts
+    request.roster.update_award_counts
+    roster.update_award_counts
   end
 
   def decline(remark = nil)
