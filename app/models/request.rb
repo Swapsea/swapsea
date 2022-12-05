@@ -47,20 +47,20 @@ class Request < ApplicationRecord
   end
 
   def succeeded
-      # Check valid status
-      case status
-      when 'successful'
-        # Already successful
-        true
-      when 'open'
-        self.status = :successful
-        save
-      else
-        message = "Request '#{id}' cannot be successful from status '#{status}'."
-        Rails.logger.warn message
-        EventLog.create!(subject: 'Warning', desc: message)
-        false
-      end
+    # Check valid status
+    case status
+    when 'successful'
+      # Already successful
+      true
+    when 'open'
+      self.status = :successful
+      save
+    else
+      message = "Request '#{id}' cannot be successful from status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      false
+    end
   end
 
   def accepted_offer

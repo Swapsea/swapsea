@@ -83,6 +83,7 @@ RSpec.describe Offer, type: :model do
       expect(@offer.decline_remark).to be_nil
       expect(@offer.decline(nil)).to be_truthy
       # Negative tests
+      expect(@offer.accept).to be_falsey
       expect(@offer.cancel).to be_falsey
       expect(@offer.unsuccessful).to be_falsey
       expect(@offer.withdraw).to be_falsey
@@ -93,6 +94,11 @@ RSpec.describe Offer, type: :model do
       @offer.decline(remark)
       expect(@offer.status).to eq('declined')
       expect(@offer.decline_remark).to eq(remark)
+      # Negative tests
+      expect(@offer.accept).to be_falsey
+      expect(@offer.cancel).to be_falsey
+      expect(@offer.unsuccessful).to be_falsey
+      expect(@offer.withdraw).to be_falsey
     end
 
     it 'withdraw' do
@@ -100,6 +106,7 @@ RSpec.describe Offer, type: :model do
       expect(@offer.status).to eq('withdrawn')
       expect(@offer.withdraw).to be_truthy
       # Negative tests
+      expect(@offer.accept).to be_falsey
       expect(@offer.cancel).to be_falsey
       expect(@offer.decline).to be_falsey
       expect(@offer.unsuccessful).to be_falsey
@@ -110,6 +117,7 @@ RSpec.describe Offer, type: :model do
       expect(@offer.status).to eq('unsuccessful')
       expect(@offer.unsuccessful).to be_truthy
       # Negative tests
+      expect(@offer.accept).to be_falsey
       expect(@offer.cancel).to be_falsey
       expect(@offer.decline).to be_falsey
       expect(@offer.withdraw).to be_falsey
@@ -120,9 +128,27 @@ RSpec.describe Offer, type: :model do
       expect(@offer.status).to eq('cancelled')
       expect(@offer.cancel).to be_truthy
       # Negative tests
+      expect(@offer.accept).to be_falsey
       expect(@offer.decline).to be_falsey
       expect(@offer.unsuccessful).to be_falsey
       expect(@offer.withdraw).to be_falsey
+    end
+
+    it 'accept (1)' do
+      # Case: Request has no other offers. Offerer made no requests.
+      expect(@offer.accept).to be_truthy
+      expect(@offer.status).to eq('accepted')
+      expect(@offer.accept).to be_truthy
+      # Negative tests
+      expect(@offer.cancel).to be_falsey
+      expect(@offer.decline).to be_falsey
+      expect(@offer.unsuccessful).to be_falsey
+      expect(@offer.withdraw).to be_falsey
+    end
+
+    it 'accept past offer' do
+      offer_past = create(:offer, :past_dated_roster)
+      expect(offer_past.accept).to be_falsey
     end
   end
 end
