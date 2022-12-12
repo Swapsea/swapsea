@@ -7,12 +7,12 @@ RSpec.describe 'leads/index', type: :view do
     assign(:leads, [
              Lead.create!(
                name: 'Name',
-               email: 'test1@gmail.com',
+               email: 'test3@gmail.com',
                organisation: 'Organisation'
              ),
              Lead.create!(
                name: 'Name',
-               email: 'test2@gmail.com',
+               email: 'test4@gmail.com',
                organisation: 'Organisation'
              )
            ])
@@ -21,8 +21,8 @@ RSpec.describe 'leads/index', type: :view do
   it 'renders a list of leads' do
     render
     assert_select 'tr>td', text: 'Name'.to_s, count: 2
-    assert_select 'tr>td', text: 'test1@gmail.com'.to_s, count: 1
-    assert_select 'tr>td', text: 'test2@gmail.com'.to_s, count: 1
+    assert_select 'tr>td', text: 'test3@gmail.com'.to_s, count: 1
+    assert_select 'tr>td', text: 'test4@gmail.com'.to_s, count: 1
     assert_select 'tr>td', text: 'Organisation'.to_s, count: 2
   end
 end

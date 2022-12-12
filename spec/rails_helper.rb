@@ -47,7 +47,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   Capybara.default_driver = :selenium_chrome # :selenium_chrome and :selenium_chrome_headless are also registered
   Capybara.current_driver = :selenium_chrome
@@ -59,16 +59,30 @@ RSpec.configure do |config|
   # Capybara.run_server = false
   # Capybara.app_host = "http://localhost:3000"
 
-  # config.before(:suite) do
-  #   DatabaseCleaner[:active_record].strategy = :transaction
-  #   DatabaseCleaner.clean_with(:truncation)
+  config.before(:suite) do
+    DatabaseCleaner[:active_record].strategy = :truncation
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  # config.before(:each, type: :feature) do
+  #   # :rack_test driver's Rack app under test shares database connection
+  #   # with the specs, so continue to use transaction strategy for speed.
+  #   driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+
+  #   unless driver_shares_db_connection_with_specs
+  #     # Driver is probably for an external browser with an app
+  #     # under test that does *not* share a database connection with the
+  #     # specs, so use truncation strategy.
+  #     DatabaseCleaner.strategy = :truncation
+  #     # DatabaseCleaner.strategy = [:truncation, except: %w[clubs]]
+  #   end
   # end
 
   # config.before(:each) do
   #   DatabaseCleaner.start
   # end
 
-  # config.after(:each) do
+  # config.append_after do
   #   DatabaseCleaner.clean
   # end
   # You can uncomment this line to turn off ActiveRecord support entirely.
