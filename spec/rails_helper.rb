@@ -16,6 +16,9 @@ require 'webmock/rspec'
 # Don't write activity when running tests
 PublicActivity.enabled = false
 
+# Faker to generate Australian numbers
+Faker::Config.locale = 'en-AU'
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
