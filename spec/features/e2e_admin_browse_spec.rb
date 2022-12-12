@@ -26,9 +26,11 @@ describe 'e2e Happy Path - Admin' do
     visit '/admin'
 
     visit '/clubs/admin'
+    wait_for_ajax
     expect(page).to have_text('CLUBS')
 
     visit '/users/admin'
+    wait_for_ajax
     expect(page).to have_text('MEMBERS')
 
     # page.save_and_open_screenshot
