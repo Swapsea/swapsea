@@ -182,7 +182,8 @@ RSpec.describe Offer, type: :model do
       expect(@offer.accept).to be_truthy
     end
 
-    it 'accept cleans up offers for same request'
-    it 'accept cancels request for same offer'
+    it 'accept cleans up other_offers_for_the_same_request'
+    it 'accept closes corresponding_requests'
+    it 'accept closes offers_that_match_request'
   end
 end
