@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+
 RSpec.describe Offer, type: :model do
+  before(:all) do
+    @club = create(:club_with_patrols)
+    @requestor = create(:member, club: @club, patrol: @club.patrols.first)
+    @offerer = create(:member, club: @club, patrol: @club.patrols.second)
+  end
+
   before do
-    @offer = create(:offer)
+    @request = create(:request, user: @requestor, roster: @requestor.patrol.rosters.first)
+    @offer = create(:offer, user: @offerer, request: @request, roster: @offerer.patrol.rosters.first)
   end
 
   describe '#Atributes' do
@@ -51,7 +59,8 @@ RSpec.describe Offer, type: :model do
       end
 
       it 'false for pending in past' do
-        offer_past = create(:offer, :past_dated_roster)
+        past_roster = create(:past_roster, patrol: @offerer.patrol)
+        offer_past = create(:offer, user: @offerer, request: @request, roster: past_roster)
         expect(offer_past).not_to be_pending
       end
 
@@ -76,7 +85,7 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  describe 'instance methods' do
+  describe 'instance method' do
     it 'decline without remark' do
       @offer.decline(nil)
       expect(@offer.status).to eq('declined')
@@ -134,8 +143,8 @@ RSpec.describe Offer, type: :model do
       expect(@offer.withdraw).to be_falsey
     end
 
-    it 'accept (1)' do
-      # Case: Request has no other offers. Offerer made no requests.
+    it 'accept the only (acceptable) offer' do
+      # Case: Request has no other offers. Offerer made no other offers.
       expect(@offer.accept).to be_truthy
       expect(@offer.status).to eq('accepted')
       expect(@offer.accept).to be_truthy
@@ -146,9 +155,34 @@ RSpec.describe Offer, type: :model do
       expect(@offer.withdraw).to be_falsey
     end
 
-    it 'accept past offer' do
-      offer_past = create(:offer, :past_dated_roster)
+    it 'cannot accept past offer' do
+      past_roster = create(:past_roster, patrol: @offerer.patrol)
+      offer_past = create(:offer, user: @offerer, request: @request, roster: past_roster)
       expect(offer_past.accept).to be_falsey
     end
+
+    it 'accept withdraws same_offer_for_other_requests' do
+      # Two other requestors/requests
+      requestor2 = create(:member_user, club: @club, patrol: @club.patrols.first)
+      requestor3 = create(:member_user, club: @club, patrol: @club.patrols.first)
+
+      request2 = create(:request, user: @requestor, roster: @requestor.patrol.rosters.first)
+      request3 = create(:request, user: @requestor, roster: @requestor.patrol.rosters.first)
+
+      same_offer_to_different_request_1 = create(:offer, user: @offer.user, request: request2, roster: @offer.roster)
+      same_offer_to_different_request_2 = create(:offer, user: @offer.user, request: request3, roster: @offer.roster)
+
+      expect(same_offer_to_different_request_1).to be_pending
+      expect(same_offer_to_different_request_2).to be_pending
+
+      expect(@offer.accept).to be_truthy
+      expect(@offer.same_offer_for_other_requests.count).to be_zero
+      # expect(same_offer_to_different_request_1.reload).to be_withdrawn
+      # expect(same_offer_to_different_request_2.reload).to be_withdrawn
+      expect(@offer.accept).to be_truthy
+    end
+
+    it 'accept cleans up offers for same request'
+    it 'accept cancels request for same offer'
   end
 end

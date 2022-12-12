@@ -54,7 +54,7 @@ class Offer < ApplicationRecord
       # Already accepted
       return true
     when 'cancelled', 'declined', 'unsuccessful', 'withdrawn'
-      message = "Offer '#{id}' cannot be accepted from status '#{status}'."
+      message = "Error: Offer '#{id}' cannot be accepted from status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       return false
@@ -62,14 +62,14 @@ class Offer < ApplicationRecord
 
     # Acceptable Offer?
     unless request.open?
-      message = "Accepting Offer '#{id}': Request not open."
+      message = "Error Accepting Offer: '#{id}': Request not open."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       return false
     end
 
     unless roster.start > DateTime.now
-      message = "Accepting Offer '#{id}': Offer in the past cannot be accepted."
+      message = "Error Accepting Offer: '#{id}': Offer in the past cannot be accepted."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       return false
@@ -126,7 +126,7 @@ class Offer < ApplicationRecord
     begin
       transaction do
         unless request.succeeded
-          message = "Accepting Offer '#{id}': Unable to mark request as successful."
+          message = "Error Accepting Offer: '#{id}': Unable to mark request as successful."
           Rails.logger.warn message
           EventLog.create!(subject: 'Warning', desc: message)
           Raise ActiveRecord::RecordNotSaved
@@ -145,9 +145,10 @@ class Offer < ApplicationRecord
         #
         # Close same offer made to other requests.
         same_offer_for_other_requests.map do |other_offer|
+          Rails.logger.debug { "same_offer_for_other_requests: Withdrawing other_offer '#{other_offer.id}'" }
           next if other_offer.withdraw
 
-          message = "Accepting Offer '#{id}': Offer '#{other_offer.id}' for other requests cannot be withdrawn."
+          message = "Error Accepting Offer: '#{id}': Offer '#{other_offer.id}' for other requests cannot be withdrawn."
           Rails.logger.warn message
           EventLog.create!(subject: 'Warning', desc: message)
           Raise ActiveRecord::RecordNotSaved
@@ -155,9 +156,10 @@ class Offer < ApplicationRecord
 
         # swap status of unsuccessful offers.
         other_offers_for_the_same_request.map do |other_offer|
+          Rails.logger.debug { "other_offers_for_the_same_request: unsuccessful other_offer '#{other_offer.id}'" }
           next if other_offer.unsuccessful
 
-          message = "Accepting Offer '#{id}': Offer '#{other_offer.id}' cannot be marked unsuccessful."
+          message = "Error Accepting Offer: '#{id}': Offer '#{other_offer.id}' cannot be marked unsuccessful."
           Rails.logger.warn message
           EventLog.create!(subject: 'Warning', desc: message)
           Raise ActiveRecord::RecordNotSaved
@@ -165,9 +167,10 @@ class Offer < ApplicationRecord
 
         # Close requests if they match accepted offer.
         corresponding_requests.map do |corresponding_request|
+          Rails.logger.debug { "corresponding_requests: cancelled corresponding_request '#{corresponding_request.id}'" }
           next if corresponding_request.cancel
 
-          message = "Accepting Offer '#{id}': Request '#{corresponding_request.id}' cannot be cancelled."
+          message = "Error Accepting Offer: '#{id}': Request '#{corresponding_request.id}' cannot be cancelled."
           Rails.logger.warn message
           EventLog.create!(subject: 'Warning', desc: message)
           Raise ActiveRecord::RecordNotSaved
@@ -175,16 +178,17 @@ class Offer < ApplicationRecord
 
         # Close offers that match successful Request
         request.offers_that_match_request.map do |corresponding_offer|
+          Rails.logger.debug { "offers_that_match_request: Withdrawing corresponding_offer '#{corresponding_offer.id}'" }
           next if corresponding_offer.withdraw
 
-          message = "Accepting Offer '#{id}': Offer '#{corresponding_offer.id}' cannot be withdrawn."
+          message = "Error Accepting Offer: '#{id}': Offer '#{corresponding_offer.id}' cannot be withdrawn."
           Rails.logger.warn message
           EventLog.create!(subject: 'Warning', desc: message)
           Raise ActiveRecord::RecordNotSaved
         end
       end
     rescue ActiveRecord::RecordNotSaved
-      message = "Accepting Offer '#{id}': RecordNotSaved."
+      message = "Error Accepting Offer: '#{id}': RecordNotSaved."
       Rails.logger.error message
       EventLog.create!(subject: 'Error', desc: message)
       return false
@@ -205,7 +209,7 @@ class Offer < ApplicationRecord
       self.decline_remark = remark
       save
     else
-      message = "Cannot decline offer '#{id}' with status '#{status}'."
+      message = "Error: Cannot decline offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -221,7 +225,7 @@ class Offer < ApplicationRecord
       self.status = :withdrawn
       save
     else
-      message = "Cannot withdraw offer '#{id}' with status '#{status}'."
+      message = "Error: Cannot withdraw offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -237,7 +241,7 @@ class Offer < ApplicationRecord
       self.status = :cancelled
       save
     else
-      message = "Cannot cancel offer '#{id}' with status '#{status}'."
+      message = "Error: Cannot cancel offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -253,7 +257,7 @@ class Offer < ApplicationRecord
       self.status = :unsuccessful
       save
     else
-      message = "Cannot set status of offer '#{id}' to unsuccessful with status '#{status}'."
+      message = "Error: Cannot set status of offer '#{id}' to unsuccessful with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
