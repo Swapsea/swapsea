@@ -6,7 +6,8 @@ require 'capybara-screenshot/rspec'
 
 describe 'e2e Happy Path - Admin' do
   before do
-    @user = create(:admin)
+    @club = create(:club_with_patrols)
+    @user = create(:admin, club: @club, patrol: @club.patrols.first)
     Capybara.page.current_window.resize_to(1200, 800)
   end
 
