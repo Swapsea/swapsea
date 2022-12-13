@@ -166,8 +166,8 @@ RSpec.describe Offer, type: :model do
       requestor2 = create(:member_user, club: @club, patrol: @club.patrols.first)
       requestor3 = create(:member_user, club: @club, patrol: @club.patrols.first)
 
-      request2 = create(:request, user: @requestor, roster: @requestor.patrol.rosters.first)
-      request3 = create(:request, user: @requestor, roster: @requestor.patrol.rosters.first)
+      request2 = create(:request, user: @requestor2, roster: @requestor2.patrol.rosters.first)
+      request3 = create(:request, user: @requestor3, roster: @requestor2.patrol.rosters.first)
 
       same_offer_to_different_request_1 = create(:offer, user: @offer.user, request: request2, roster: @offer.roster)
       same_offer_to_different_request_2 = create(:offer, user: @offer.user, request: request3, roster: @offer.roster)
@@ -182,7 +182,30 @@ RSpec.describe Offer, type: :model do
       expect(@offer.accept).to be_truthy
     end
 
-    it 'accept cleans up other_offers_for_the_same_request'
+    it 'accept cleans up other_offers_for_the_same_request' do
+      offerer2 = create(:member, club: @club, patrol: @club.patrols.second)
+      offerer3 = create(:member, club: @club, patrol: @club.patrols.third)
+
+      other_offers_for_the_same_request2 = create(:offer, user: offerer2, request: @request, roster: offerer2.patrol.rosters.first)
+      other_offers_for_the_same_request22 = create(:offer, user: offerer2, request: @request, roster: offerer2.patrol.rosters.second)
+
+      other_offers_for_the_same_request3 = create(:offer, user: offerer3, request: @request, roster: offerer3.patrol.rosters.first)
+      other_offers_for_the_same_request33 = create(:offer, user: offerer3, request: @request, roster: offerer3.patrol.rosters.second)
+
+      expect(other_offers_for_the_same_request2).to be_pending
+      expect(other_offers_for_the_same_request22).to be_pending
+      expect(other_offers_for_the_same_request3).to be_pending
+      expect(other_offers_for_the_same_request33).to be_pending
+
+      expect(@offer.accept).to be_truthy
+      expect(@offer.other_offers_for_the_same_request.count).to be_zero
+      # expect(other_offers_for_the_same_request2.reload).to be_unsuccessful
+      # expect(other_offers_for_the_same_request22.reload).to be_unsuccessful
+      # expect(other_offers_for_the_same_request3.reload).to be_unsuccessful
+      # expect(other_offers_for_the_same_request33.reload).to be_unsuccessful
+      expect(@offer.accept).to be_truthy
+    end
+
     it 'accept closes corresponding_requests'
     it 'accept closes offers_that_match_request'
   end
