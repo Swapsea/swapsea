@@ -163,11 +163,11 @@ RSpec.describe Offer, type: :model do
 
     it 'accept withdraws same_offer_for_other_requests' do
       # Two other requestors/requests
-      requestor2 = create(:member_user, club: @club, patrol: @club.patrols.first)
-      requestor3 = create(:member_user, club: @club, patrol: @club.patrols.first)
+      requestor2 = create(:member, club: @club, patrol: @club.patrols.first)
+      requestor3 = create(:member, club: @club, patrol: @club.patrols.first)
 
       request2 = create(:request, user: requestor2, roster: requestor2.patrol.rosters.first)
-      request3 = create(:request, user: requestor3, roster: requestor2.patrol.rosters.first)
+      request3 = create(:request, user: requestor3, roster: requestor3.patrol.rosters.first)
 
       same_offer_to_different_request_1 = create(:offer, user: @offer.user, request: request2, roster: @offer.roster)
       same_offer_to_different_request_2 = create(:offer, user: @offer.user, request: request3, roster: @offer.roster)
@@ -216,6 +216,21 @@ RSpec.describe Offer, type: :model do
       expect(@offer.accept).to be_truthy
     end
 
-    it 'accept closes offers_that_match_request'
+    it 'accept withdraws offers_that_match_request' do
+      requestor2 = create(:member, club: @club, patrol: @club.patrols.second)
+      requestor3 = create(:member, club: @club, patrol: @club.patrols.third)
+
+      request2 = create(:request, user: requestor2, roster: requestor2.patrol.rosters.first)
+      request3 = create(:request, user: requestor3, roster: requestor3.patrol.rosters.first)
+
+      # requestor's offers for their request
+      requestor_corresponding_offer2 = create(:offer, user: @requestor, request: request2, roster: @offer.roster)
+      requestor_corresponding_offer3 = create(:offer, user: @requestor, request: request3, roster: @offer.roster)
+
+      expect(@offer.accept).to be_truthy
+      expect(@offer.request.offers_that_match_request.count).to be_zero
+      # expect(same_offer_to_different_request_2.reload).to be_withdrawn
+      expect(@offer.accept).to be_truthy
+    end
   end
 end
