@@ -23,11 +23,14 @@ RSpec.describe Request, type: :model do
   end
 
   describe 'status' do
-    describe 'open?' do
-      it 'true for open' do
-        @request.status = 'open'
-        expect(@request).to be_open
-      end
+    it 'true for open' do
+      @request.status = 'open'
+      expect(@request).to be_open
+    end
+
+    it 'true for cancelled' do
+      @request.status = 'cancelled'
+      expect(@request).to be_cancelled
     end
   end
 

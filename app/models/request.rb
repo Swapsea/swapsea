@@ -20,6 +20,10 @@ class Request < ApplicationRecord
     self.status = :open
   end
 
+  def cancelled?
+    status == 'cancelled'
+  end
+
   def open?
     status == 'open'
   end
