@@ -166,8 +166,8 @@ RSpec.describe Offer, type: :model do
       requestor2 = create(:member_user, club: @club, patrol: @club.patrols.first)
       requestor3 = create(:member_user, club: @club, patrol: @club.patrols.first)
 
-      request2 = create(:request, user: @requestor2, roster: @requestor2.patrol.rosters.first)
-      request3 = create(:request, user: @requestor3, roster: @requestor2.patrol.rosters.first)
+      request2 = create(:request, user: requestor2, roster: requestor2.patrol.rosters.first)
+      request3 = create(:request, user: requestor3, roster: requestor2.patrol.rosters.first)
 
       same_offer_to_different_request_1 = create(:offer, user: @offer.user, request: request2, roster: @offer.roster)
       same_offer_to_different_request_2 = create(:offer, user: @offer.user, request: request3, roster: @offer.roster)
@@ -206,7 +206,16 @@ RSpec.describe Offer, type: :model do
       expect(@offer.accept).to be_truthy
     end
 
-    it 'accept closes corresponding_requests'
+    it 'accept closes corresponding_requests' do
+      # Request matching accepted offer
+      offer_corresponding_request = create(:request, user: @offerer, roster: @offer.roster)
+
+      expect(@offer.accept).to be_truthy
+      expect(@offer.corresponding_requests.count).to be_zero
+      # expect(offer_corresponding_request.reload).to be_cancelled
+      expect(@offer.accept).to be_truthy
+    end
+
     it 'accept closes offers_that_match_request'
   end
 end
