@@ -6,7 +6,8 @@ require 'capybara-screenshot/rspec'
 
 describe 'e2e Happy Path - Admin' do
   before do
-    @user = create(:admin)
+    @club = create(:club_with_patrols)
+    @user = create(:admin, club: @club, patrol: @club.patrols.first)
     Capybara.page.current_window.resize_to(1200, 800)
   end
 
@@ -25,9 +26,11 @@ describe 'e2e Happy Path - Admin' do
     visit '/admin'
 
     visit '/clubs/admin'
+    wait_for_ajax
     expect(page).to have_text('CLUBS')
 
     visit '/users/admin'
+    wait_for_ajax
     expect(page).to have_text('MEMBERS')
 
     # page.save_and_open_screenshot

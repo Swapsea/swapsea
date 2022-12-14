@@ -54,126 +54,18 @@ class OffersController < ApplicationController
   # should only by accessable be either requestor or admin
   def accept
     @offer = Offer.find(params[:id])
-    if @offer.request.open? && @offer.pending? && (@offer.roster.blank? || @offer.roster.start > DateTime.now)
-      @request = @offer.request
-      trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
 
-      # Remove requestor from old roster
-      @swap_requestor_off = Swap.new
-      @requestor_uniq_id = Swap.where(user_id: @request.user.id, roster_id: @request.roster.id).first
-      @requestor_uniq_id = if @requestor_uniq_id.present?
-                             @requestor_uniq_id.uniq_id
-                           else
-                             Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
-                           end
-      @swap_requestor_off.trans_id = trans_id
-      @swap_requestor_off.uniq_id = @requestor_uniq_id
-      @swap_requestor_off.roster_id = @request.roster.id
-      @swap_requestor_off.user_id = @request.user.id
-      @swap_requestor_off.on_off_patrol = false
-      # @swap_requestor_off.save
+    if @offer.accept
+      SwapseaMailer.offer_successful(@offer).deliver
+      SwapseaMailer.request_successful(@request).deliver
 
-      # Remove offerer from their old roster (if applicable)
-      if @offer.roster.present?
-        @swap_offerer_off = Swap.new
-        @offerer_uniq_id = Swap.where(user_id: @offer.user.id, roster_id: @offer.roster.id).first
-        @offerer_uniq_id = if @offerer_uniq_id.present?
-                             @offerer_uniq_id.uniq_id
-                           else
-                             Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
-                           end
-        @swap_offerer_off.trans_id = trans_id
-        @swap_offerer_off.uniq_id = @offerer_uniq_id
-        @swap_offerer_off.roster_id = @offer.roster.id
-        @swap_offerer_off.user_id = @offer.user.id
-        @swap_offerer_off.on_off_patrol = false
-        # @swap_offerer_off.save
-      else
-        @offerer_uniq_id = nil
-      end
+      create_activity :confirm, owner: selected_user
 
-      # Add requestor to new roster
-      @swap_requestor_on = Swap.new
-      @swap_requestor_on.trans_id = trans_id
-      @swap_requestor_on.uniq_id = @offerer_uniq_id
-      @swap_requestor_on.roster_id = @offer.roster&.id
-      @swap_requestor_on.user_id = @request.user.id
-      @swap_requestor_on.on_off_patrol = true
-      # @swap_requestor_on.save
-
-      # Add offerer to new roster
-      @swap_offerer_on = Swap.new
-      @swap_offerer_on.trans_id = trans_id
-      @swap_offerer_on.uniq_id = @requestor_uniq_id
-      @swap_offerer_on.roster_id = @request.roster.id
-      @swap_offerer_on.user_id = @offer.user.id
-      @swap_offerer_on.on_off_patrol = true
-      # @swap_offerer_on.save
-
-      @offer.status = 'accepted'
-      @request.status = 'successful'
-
-      # @request.roster.awards_count
-      # @offer.roster.awards_count
-
-      begin
-        ActiveRecord::Base.transaction do
-          @swap_requestor_off.save!
-          @swap_offerer_off.save! if @offer.roster.present?
-          @swap_requestor_on.save!
-          @swap_offerer_on.save!
-          @offer.save!
-          @request.save!
-          @request.roster.awards_count
-          @offer.roster.awards_count if @offer.roster.present?
-
-          @offer.create_activity :confirm, owner: selected_user
-
-          # Close same offer made to other requests.
-          @offer.same_offer_for_other_requests.map do |other_offer|
-            unless other_offer.withdraw
-              raise 'Error accepting offer. (Code 1)'
-              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 1)'
-            end
-          end
-
-          # swap status of unsuccessful offers.
-          @offer.other_offers_for_the_same_request.map do |other_offer|
-            unless other_offer.unsuccessful
-              raise 'Error accepting offer. (Code 2)'
-              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 2)'
-            end
-          end
-
-          # Close requests if they match accepted offer.
-          @offer.corresponding_requests.map do |corresponding_request|
-            if corresponding_request.cancel
-              # SwapseaMailer.offer_cancelled(other_offer).deliver
-            else
-              raise 'Error accepting offer. (Code 3)'
-              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 3)'
-            end
-          end
-
-          # Close offers that match successful Request
-          @request.offers_that_match_request.map do |corresponding_offer|
-            unless corresponding_offer.withdraw
-              raise 'Error accepting offer. (Code 4)'
-              redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 4)'
-            end
-          end
-        end
-
-        SwapseaMailer.offer_successful(@offer).deliver
-        SwapseaMailer.request_successful(@request).deliver
-        redirect_to request_path(@offer.request),
-                    notice: 'Offer accepted! The swap is confirmed and you will both receive a confirmation email.'
-      rescue ActiveRecord::RecordNotSaved
-        redirect_to request_path(@offer.request), alert: 'There was an error when accepting the offer. (Code 5)'
-      end
+      redirect_to request_path(@offer.request),
+                  notice: 'Offer accepted! The swap is confirmed and you will both receive a confirmation email.'
     else
       redirect_to request_path(@offer.request),
-                  alert: 'Sorry, this request is no longer open or the offer is not current.'
+                  alert: 'Sorry, there was a problem accepting that offer. Please try again.'
     end
   end
 

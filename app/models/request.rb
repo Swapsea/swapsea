@@ -20,20 +20,30 @@ class Request < ApplicationRecord
     self.status = :open
   end
 
-  def accepted_offer
-    offers.where(status: 'accepted').first if offers.where(status: 'accepted').present?
+  def cancelled?
+    status == 'cancelled'
+  end
+
   def open?
     status == 'open'
   end
 
-  def offers_with_status(status)
-    Offer.where('request_id = ? AND status = ?', id, status)
+  def successful?
+    status == 'successful'
+  end
+
+  def accepted_offer
+    offers.where(status: 'accepted').first if offers.where(status: 'accepted').present?
+  end
+
   def offer_already_exists?(_roster, _user)
     offers.with_pending_status.present?
   end
 
   def unsuccessful_offers(successful_offer)
     Offer.where('request_id = ? AND status = ? AND id != ?', id, 'pending', successful_offer)
+  end
+
   # Cancel request and any pending offers.
   def cancel
     self.status = :cancelled
@@ -44,6 +54,23 @@ class Request < ApplicationRecord
         end
       end
     else
+      false
+    end
+  end
+
+  def succeeded
+    # Check valid status
+    case status
+    when 'successful'
+      # Already successful
+      true
+    when 'open'
+      self.status = :successful
+      save
+    else
+      message = "Request '#{id}' cannot be successful from status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
       false
     end
   end
