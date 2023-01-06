@@ -3,13 +3,14 @@
 require 'faker'
 FactoryBot.define do
   factory :user do
+    id { Faker::Number.number(digits: 8) }
     email { Faker::Internet.email }
     password { 'swapsea' }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
-    gender { 'male' }
+    mobile_phone { Faker::PhoneNumber.cell_phone_with_country_code }
 
-    association :club
+    club { Club.first || association(:club) }
   end
 
   factory :member_user, parent: :user, aliases: [:member] do

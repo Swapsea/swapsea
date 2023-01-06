@@ -3,21 +3,8 @@
 require 'faker'
 FactoryBot.define do
   factory :offer do
-    comment { 'MyString' }
-    mobile { 'MyString' }
-    email { Faker::Internet.email }
-
-    association :request
-    association :user
-
-    future_dated_roster # Default future dated
-
-    trait :future_dated_roster do
-      association :roster, start: 7.days.from_now, finish: 8.days.from_now
-    end
-
-    trait :past_dated_roster do
-      association :roster, start: 8.days.ago, finish: 7.days.ago
-    end
+    comment { Faker::Lorem.sentence(word_count: 3) }
+    mobile { user ? user.mobile_phone : Faker::PhoneNumber.cell_phone_with_country_code }
+    email { user ? user.email : Faker::Internet.email }
   end
 end

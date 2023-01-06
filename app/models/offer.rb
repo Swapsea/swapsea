@@ -47,6 +47,158 @@ class Offer < ApplicationRecord
     Offer.where(roster:)
   end
 
+  def accept
+    # Check valid status
+    case status
+    when 'accepted'
+      # Already accepted
+      return true
+    when 'cancelled', 'declined', 'unsuccessful', 'withdrawn'
+      message = "Error: Offer '#{id}' cannot be accepted from status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      return false
+    end
+
+    # Acceptable Offer?
+    unless request.open?
+      message = "Error Accepting Offer: '#{id}': Request not open."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      return false
+    end
+
+    unless roster.start > DateTime.now
+      message = "Error Accepting Offer: '#{id}': Offer in the past cannot be accepted."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      return false
+    end
+
+    trans_id = Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
+
+    # Remove requestor from old roster
+    @swap_requestor_off = Swap.new
+    @requestor_uniq_id = Swap.where(user_id: request.user.id, roster_id: request.roster.id).first
+    @requestor_uniq_id = if @requestor_uniq_id.present?
+                           @requestor_uniq_id.uniq_id
+                         else
+                           Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
+                         end
+    @swap_requestor_off.trans_id = trans_id
+    @swap_requestor_off.uniq_id = @requestor_uniq_id
+    @swap_requestor_off.roster_id = request.roster.id
+    @swap_requestor_off.user_id = request.user.id
+    @swap_requestor_off.on_off_patrol = false
+
+    # Remove offerer from old roster
+    @swap_offerer_off = Swap.new
+    @offerer_uniq_id = Swap.where(user_id: user.id, roster_id: roster.id).first
+    @offerer_uniq_id = if @offerer_uniq_id.present?
+                         @offerer_uniq_id.uniq_id
+                       else
+                         Digest::MD5.hexdigest(('a'..'z').to_a.sample(16).join).first(10)
+                       end
+    @swap_offerer_off.trans_id = trans_id
+    @swap_offerer_off.uniq_id = @offerer_uniq_id
+    @swap_offerer_off.roster_id = roster.id
+    @swap_offerer_off.user_id = user.id
+    @swap_offerer_off.on_off_patrol = false
+
+    # Add requestor to new roster
+    @swap_requestor_on = Swap.new
+    @swap_requestor_on.trans_id = trans_id
+    @swap_requestor_on.uniq_id = @offerer_uniq_id
+    @swap_requestor_on.roster_id = roster.id
+    @swap_requestor_on.user_id = request.user.id
+    @swap_requestor_on.on_off_patrol = true
+
+    # Add offerer to new roster
+    @swap_offerer_on = Swap.new
+    @swap_offerer_on.trans_id = trans_id
+    @swap_offerer_on.uniq_id = @requestor_uniq_id
+    @swap_offerer_on.roster_id = request.roster.id
+    @swap_offerer_on.user_id = user.id
+    @swap_offerer_on.on_off_patrol = true
+
+    self.status = :accepted
+
+    begin
+      transaction do
+        unless request.succeeded
+          message = "Error Accepting Offer: '#{id}': Unable to mark request as successful."
+          Rails.logger.warn message
+          EventLog.create!(subject: 'Warning', desc: message)
+          Raise ActiveRecord::RecordNotSaved
+        end
+
+        @swap_requestor_off.save!
+        @swap_offerer_off.save!
+        @swap_requestor_on.save!
+        @swap_offerer_on.save!
+
+        # Save this offer
+        save!
+
+        #
+        # REFACTOR THESE IN TO METHODS
+        #
+        # Close same offer made to other requests.
+        same_offer_for_other_requests.map do |other_offer|
+          Rails.logger.debug { "same_offer_for_other_requests: Withdrawing other_offer '#{other_offer.id}'" }
+          next if other_offer.withdraw
+
+          message = "Error Accepting Offer: '#{id}': Offer '#{other_offer.id}' for other requests cannot be withdrawn."
+          Rails.logger.warn message
+          EventLog.create!(subject: 'Warning', desc: message)
+          Raise ActiveRecord::RecordNotSaved
+        end
+
+        # swap status of unsuccessful offers.
+        other_offers_for_the_same_request.map do |other_offer|
+          Rails.logger.debug { "other_offers_for_the_same_request: unsuccessful other_offer '#{other_offer.id}'" }
+          next if other_offer.unsuccessful
+
+          message = "Error Accepting Offer: '#{id}': Offer '#{other_offer.id}' cannot be marked unsuccessful."
+          Rails.logger.warn message
+          EventLog.create!(subject: 'Warning', desc: message)
+          Raise ActiveRecord::RecordNotSaved
+        end
+
+        # Close requests if they match accepted offer.
+        corresponding_requests.map do |corresponding_request|
+          Rails.logger.debug { "corresponding_requests: cancelled corresponding_request '#{corresponding_request.id}'" }
+          next if corresponding_request.cancel
+
+          message = "Error Accepting Offer: '#{id}': Request '#{corresponding_request.id}' cannot be cancelled."
+          Rails.logger.warn message
+          EventLog.create!(subject: 'Warning', desc: message)
+          Raise ActiveRecord::RecordNotSaved
+        end
+
+        # Close offers that match successful Request
+        request.offers_that_match_request.map do |corresponding_offer|
+          Rails.logger.debug { "offers_that_match_request: Withdrawing corresponding_offer '#{corresponding_offer.id}'" }
+          next if corresponding_offer.withdraw
+
+          message = "Error Accepting Offer: '#{id}': Offer '#{corresponding_offer.id}' cannot be withdrawn."
+          Rails.logger.warn message
+          EventLog.create!(subject: 'Warning', desc: message)
+          Raise ActiveRecord::RecordNotSaved
+        end
+      end
+    rescue ActiveRecord::RecordNotSaved
+      message = "Error Accepting Offer: '#{id}': RecordNotSaved."
+      Rails.logger.error message
+      EventLog.create!(subject: 'Error', desc: message)
+      return false
+    end
+
+    # Update counts
+    request.roster.update_award_counts
+    roster.update_award_counts
+  end
+
   def decline(remark = nil)
     case status
     when 'declined'
@@ -57,7 +209,7 @@ class Offer < ApplicationRecord
       self.decline_remark = remark
       save
     else
-      message = "Cannot decline offer '#{id}' with status '#{status}'."
+      message = "Error: Cannot decline offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -73,7 +225,7 @@ class Offer < ApplicationRecord
       self.status = :withdrawn
       save
     else
-      message = "Cannot withdraw offer '#{id}' with status '#{status}'."
+      message = "Error: Cannot withdraw offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -89,7 +241,7 @@ class Offer < ApplicationRecord
       self.status = :cancelled
       save
     else
-      message = "Cannot cancel offer '#{id}' with status '#{status}'."
+      message = "Error: Cannot cancel offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -105,7 +257,7 @@ class Offer < ApplicationRecord
       self.status = :unsuccessful
       save
     else
-      message = "Cannot set status of offer '#{id}' to unsuccessful with status '#{status}'."
+      message = "Error: Cannot set status of offer '#{id}' to unsuccessful with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
