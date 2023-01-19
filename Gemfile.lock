@@ -139,7 +139,7 @@ GEM
     faraday-net_http (3.0.0)
     ffi (1.15.5)
     formatador (1.1.0)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     guard (2.18.0)
       formatador (>= 0.2.4)
@@ -186,7 +186,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.16.3)
+    minitest (5.17.0)
     multi_json (1.15.0)
     nenv (0.3.0)
     net-imap (0.3.1)
@@ -426,7 +426,7 @@ GEM
     wkhtmltopdf-heroku (2.12.6.1.pre.jammy)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   arm64-darwin-21
