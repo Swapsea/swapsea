@@ -53,9 +53,9 @@ class OffersController < ApplicationController
 
     if @offer.accept
       SwapseaMailer.offer_successful(@offer).deliver
-      SwapseaMailer.request_successful(@request).deliver
+      SwapseaMailer.request_successful(@offer.request).deliver
 
-      create_activity :confirm, owner: selected_user
+      @offer.create_activity :confirm, owner: selected_user
 
       redirect_to request_path(@offer.request),
                   notice: 'Offer accepted! The swap is confirmed and you will both receive a confirmation email.'
@@ -109,7 +109,7 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   # DELETE /offers/1.json
   def destroy
-    if @offer.cancel
+    if @offer.withdraw
       @offer.create_activity :destroy, owner: selected_user
       # SwapseaMailer.offer_cancelled(@offer).deliver
       redirect_to @offer.request, notice: 'Offer was successfully withdrawn.'
