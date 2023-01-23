@@ -15,7 +15,7 @@ class SwapsController < ApplicationController
   def my_offers
     # All offers for future swap requests
     @swaps = Offer.with_offered_by(selected_user)
-                  .where(status: %i[pending accepted declined withdrawn deleted cancelled unsuccessful])
+                  .where(status: %i[pending accepted declined withdrawn cancelled unsuccessful])
                   .where('rosters.finish > ?', DateTime.now)
                   .order('rosters.start desc')
   end

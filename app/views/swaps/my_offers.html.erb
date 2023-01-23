@@ -40,23 +40,23 @@
                 <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
                 <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
               </div>
-              <% if offer.status == 'pending' %>
+              <% if offer.pending? %>
               <%= link_to offer.request, :class => 'offer offer-view col-xs-2' do %>
               View
               <% end %>
-              <% elsif offer.status == 'accepted' %>
+              <% elsif offer.accepted? %>
               <%= link_to offer.request, :class => 'offer offer-accepted col-xs-2' do %>
               Accepted
               <% end %>
-              <% elsif offer.status == 'unsuccessful' || offer.status == 'declined' %>
+              <% elsif offer.unsuccessful? || offer.declined? %>
               <%= link_to offer.request, :class => 'offer offer-not-accepted col-xs-2' do %>
               <%= offer.status.capitalize! %>
               <% end %>
-              <% elsif offer.status == 'withdrawn' %>
+              <% elsif offer.withdrawn? %>
               <%= link_to offer.request, :class => 'offer offer-disabled col-xs-2' do %>
               <%= offer.status.capitalize! %>
               <% end %>
-              <% elsif offer.status == 'deleted' || offer.status == 'cancelled' %>
+              <% elsif offer.cancelled? %>
               <div class='offer offer-not-accepted-no-link col-xs-2'>
                 Request Cancelled
               </div>
