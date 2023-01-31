@@ -15,7 +15,7 @@ class Offer < ApplicationRecord
   after_initialize :set_defaults
 
   def set_defaults
-    self.status = :pending
+    self.status = :pending unless status
   end
 
   def accepted?
@@ -143,7 +143,7 @@ class Offer < ApplicationRecord
         #
         # REFACTOR THESE IN TO METHODS
         #
-        # Close same offer made to other requests.
+        # 1) Withdraw same offer made to other requests.
         same_offer_for_other_requests.map do |other_offer|
           Rails.logger.debug { "same_offer_for_other_requests: Withdrawing other_offer '#{other_offer.id}'" }
           next if other_offer.withdraw
@@ -154,7 +154,7 @@ class Offer < ApplicationRecord
           Raise ActiveRecord::RecordNotSaved
         end
 
-        # swap status of unsuccessful offers.
+        # 2) Unsuccessful offers.
         other_offers_for_the_same_request.map do |other_offer|
           Rails.logger.debug { "other_offers_for_the_same_request: unsuccessful other_offer '#{other_offer.id}'" }
           next if other_offer.unsuccessful
@@ -165,7 +165,7 @@ class Offer < ApplicationRecord
           Raise ActiveRecord::RecordNotSaved
         end
 
-        # Close requests if they match accepted offer.
+        # 3) Cancel requests for accepted offer.
         corresponding_requests.map do |corresponding_request|
           Rails.logger.debug { "corresponding_requests: cancelled corresponding_request '#{corresponding_request.id}'" }
           next if corresponding_request.cancel
@@ -176,7 +176,7 @@ class Offer < ApplicationRecord
           Raise ActiveRecord::RecordNotSaved
         end
 
-        # Close offers that match successful Request
+        # 4) Withdraw offers that match successful Request
         request.offers_that_match_request.map do |corresponding_offer|
           Rails.logger.debug { "offers_that_match_request: Withdrawing corresponding_offer '#{corresponding_offer.id}'" }
           next if corresponding_offer.withdraw
