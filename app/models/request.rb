@@ -32,8 +32,8 @@ class Request < ApplicationRecord
     status == 'successful'
   end
 
-  def offer_already_exists?(_roster, _user)
-    offers.with_pending_status.present?
+  def offer_already_exists?(roster, user)
+    offers.with_pending_status.where(roster:, user:).present?
   end
 
   # Cancel request and any pending offers.
