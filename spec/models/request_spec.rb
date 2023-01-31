@@ -50,5 +50,15 @@ RSpec.describe Request, type: :model do
       # Negative tests
       expect(@request).not_to be_open
     end
+
+    it 'detects existing offer' do
+      @user = create(:user)
+      @roster = create(:roster)
+
+      expect(@request).not_to be_offer_already_exists(@roster, @user)
+      # create offer
+      @offer = create(:offer, user: @user, request: @request, roster: @roster)
+      expect(@request).to be_offer_already_exists(@roster, @user)
+    end
   end
 end
