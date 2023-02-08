@@ -17,7 +17,7 @@ class Request < ApplicationRecord
   after_initialize :set_defaults
 
   def set_defaults
-    self.status = :open
+    self.status = :open unless status
   end
 
   def cancelled?
@@ -36,8 +36,8 @@ class Request < ApplicationRecord
     offers.where(status: 'accepted').first if offers.where(status: 'accepted').present?
   end
 
-  def offer_already_exists?(_roster, _user)
-    offers.with_pending_status.present?
+  def offer_already_exists?(roster, user)
+    offers.with_pending_status.where(roster:, user:).present?
   end
 
   def unsuccessful_offers(successful_offer)
