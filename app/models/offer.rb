@@ -31,7 +31,7 @@ class Offer < ApplicationRecord
   end
 
   def pending?
-    status == 'pending' && roster.start > DateTime.now
+    status == 'pending' && offered_roster_valid?
   end
 
   def unsuccessful?
@@ -40,6 +40,11 @@ class Offer < ApplicationRecord
 
   def withdrawn?
     status == 'withdrawn'
+  end
+
+  def offered_roster_valid?
+    # No roster for substitute, or future roster
+    !roster || roster.start > DateTime.now
   end
 
   # Returns array of offers for the same rostered patrol.
@@ -68,7 +73,7 @@ class Offer < ApplicationRecord
       return false
     end
 
-    unless roster.start > DateTime.now
+    unless offered_roster_valid?
       message = "Error Accepting Offer: '#{id}': Offer in the past cannot be accepted."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
@@ -196,7 +201,7 @@ class Offer < ApplicationRecord
 
     # Update counts
     request.roster.update_award_counts
-    roster.update_award_counts unless roster
+    roster&.update_award_counts
   end
 
   def decline(remark = nil)

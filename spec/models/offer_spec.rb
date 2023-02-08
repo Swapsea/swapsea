@@ -83,6 +83,20 @@ RSpec.describe Offer, type: :model do
         expect(@offer).to be_withdrawn
       end
     end
+    
+    describe 'offered_roster_valid?' do
+      it 'true for future roster' do
+        expect(@offer).to be_offered_roster_valid
+      end
+      it 'true for no roster (sub only)' do
+        @offer.roster = nil
+        expect(@offer).to be_offered_roster_valid
+      end
+      it 'false for past roster' do
+        @offer.roster = create(:past_roster, patrol: @offerer.patrol)
+        expect(@offer).not_to be_offered_roster_valid
+      end
+    end
   end
 
   describe 'instance method' do
