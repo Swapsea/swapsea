@@ -19,7 +19,7 @@
 					<div class="roster"><%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %></div>
           <div class="patrol"><%= offer.roster.patrol.name %></div>
 					<% else %>
-          <div class="patrol">GOOD SAMARITAN (no swap needed)</div>
+          <div class="patrol">SUBSTITUTE ONLY (no swap needed)</div>
 					<% end %>
             <div class="member"><%= offer.user.name %></div>
             <div class="comment"><%= offer.comment %></div>

@@ -9,7 +9,7 @@ New offer
 <%= @offer.roster.patrol.name %>
 <%= @offer.roster.start.strftime("%A %d %B %Y") %>, <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
 <% else %>
-GOOD SAMARITAN (no swap needed)
+SUBSTITUTE ONLY (no swap needed)
 <% end %>
 From: <%= @offer.user.name %>
 Comment: <%= @offer.comment %>
@@ -26,7 +26,7 @@ Current offers
 <%= offer.roster.patrol.name %>
 <%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
 <% else %>
-GOOD SAMARITAN (no swap needed)
+SUBSTITUTE ONLY (no swap needed)
 <% end %>
 From: <%= offer.user.name %>
 Comment: <%= @offer.comment %>
