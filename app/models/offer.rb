@@ -93,7 +93,7 @@ class Offer < ApplicationRecord
 
     # Remove offerer from old roster
     @swap_offerer_off = Swap.new
-    @offerer_uniq_id = Swap.where(user_id: user.id, roster_id: roster.id).first
+    @offerer_uniq_id = Swap.where(user_id: user.id, roster_id: roster&.id).first
     @offerer_uniq_id = if @offerer_uniq_id.present?
                          @offerer_uniq_id.uniq_id
                        else
@@ -101,7 +101,7 @@ class Offer < ApplicationRecord
                        end
     @swap_offerer_off.trans_id = trans_id
     @swap_offerer_off.uniq_id = @offerer_uniq_id
-    @swap_offerer_off.roster_id = roster.id
+    @swap_offerer_off.roster_id = roster&.id
     @swap_offerer_off.user_id = user.id
     @swap_offerer_off.on_off_patrol = false
 
@@ -109,7 +109,7 @@ class Offer < ApplicationRecord
     @swap_requestor_on = Swap.new
     @swap_requestor_on.trans_id = trans_id
     @swap_requestor_on.uniq_id = @offerer_uniq_id
-    @swap_requestor_on.roster_id = roster.id
+    @swap_requestor_on.roster_id = roster&.id
     @swap_requestor_on.user_id = request.user.id
     @swap_requestor_on.on_off_patrol = true
 
@@ -196,7 +196,7 @@ class Offer < ApplicationRecord
 
     # Update counts
     request.roster.update_award_counts
-    roster.update_award_counts
+    roster.update_award_counts unless roster
   end
 
   def decline(remark = nil)
@@ -267,7 +267,7 @@ class Offer < ApplicationRecord
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.
   def same_offer_for_other_requests
     if roster.present?
-      Offer.with_pending_status.with_offered_by(user.id).where.not(id:).where(roster_id: roster.id)
+      Offer.with_pending_status.with_offered_by(user.id).where.not(id:).where(roster_id: roster&.id)
     else
       []
     end
