@@ -4,11 +4,15 @@ Congratulations, your swap is now confirmed!
 
 Your new patrol
 ---------------
+<% if @offer.roster.present? %>
 <%= @offer.roster.patrol.name %>
 <%= @offer.roster.start.strftime("%A %d %B %Y") %>
 <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
 
 You are now a sub for <%= @offer.user.name %>
+<% else %>
+SUBSTITUTE ONLY - you accepted an offer that didn't require a swap.
+<% end %>
 
 Your old patrol
 ---------------
