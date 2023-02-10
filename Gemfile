@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '3.1.2'
+ruby '3.1.3'
 
 gem 'activerecord', '>= 6.1.7'
 gem 'activerecord-import'
@@ -19,7 +19,7 @@ gem 'net-pop', require: false # Added with Rails 6 for Heroku
 gem 'net-smtp', require: false
 gem 'pg'
 gem 'pg_search'
-gem 'psych', '< 4' # Stop-gap for bad psych. https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
+gem 'psych'
 gem 'public_activity'
 gem 'puma'
 gem 'rails', '~> 6.1.7'
