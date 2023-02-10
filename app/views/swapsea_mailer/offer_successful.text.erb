@@ -1,39 +1,39 @@
 G'day <%= @user.first_name %>,
 
-  Congratulations, your offer was accepted!
+Congratulations, your offer was accepted!
 
-  Your new patrol
-  ---------------
-  <%= @request.roster.patrol.name %>
-  <%= @request.roster.start.strftime("%A %d %B %Y") %>
-  <%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
+Your new patrol
+---------------
+<%= @request.roster.patrol.name %>
+<%= @request.roster.start.strftime("%A %d %B %Y") %>
+<%= @request.roster.start.strftime("%H:%M") %> - <%= @request.roster.finish.strftime("%H:%M") %>
 
-  You are now a sub for <%= @request.user.name %>.
+You are now a sub for <%= @request.user.name %>.
 
-  Your old patrol
-  ---------------
-  <%= @offer.roster.patrol.name %>
-  <%= @offer.roster.start.strftime("%A %d %B %Y") %>
-  <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
+Your old patrol
+---------------
+<%= @offer.roster.patrol.name %>
+<%= @offer.roster.start.strftime("%A %d %B %Y") %>
+<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
 
-  <%= @request.user.name %> is now a sub for you.
+<%= @request.user.name %> is now a sub for you.
 
-  <% if @request.email.present? || @request.mobile.present? %>
-  Need to get in contact?
-  -----------------------
-  You can contact <%= @request.user.name %> via the details below.
-  <%= @request.email %>
-  <%= @request.mobile %>
-  <% end %>
+<% if @request.email.present? || @request.mobile.present? %>
+Need to get in contact?
+-----------------------
+You can contact <%= @request.user.name %> via the details below.
+<%= @request.email %>
+<%= @request.mobile %>
+<% end %>
 
-  Can't make your new patrol?
-  ---------------------------
-  You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it again. You cannot cancel a swap once it has been confirmed (but you can swap back).
+Can't make your new patrol?
+---------------------------
+You are now responsible for turning up to your new patrol. If you can't make it, you will need to swap it again. You cannot cancel a swap once it has been confirmed (but you can swap back).
 
 
-  See your updated roster at Swapsea at <%= dashboard_url %>
+See your updated roster at Swapsea at <%= dashboard_url %>
 
-  Have a great weekend!
+Have a great weekend!
 
-  Much Love,
-  Swapsea
+Much Love,
+Swapsea

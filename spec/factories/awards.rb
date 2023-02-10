@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :award do
-    sequence(:award_number, 1000, &:to_s)
+    award_number { Faker::Number.number(digits: 8) }
   end
 end

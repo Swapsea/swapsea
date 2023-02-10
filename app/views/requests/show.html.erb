@@ -32,7 +32,7 @@
 					<%= @request.status.capitalize %>
 				</div>
 			</div>
-			<% if @request.status == 'open' %>
+			<% if @request.open? %>
 			<hr/>
 			<div class="row">
 				<div class="col-xs-4 col-sm-2 hidden-xs"><strong>Member Awards</strong></div>
@@ -80,7 +80,7 @@
 			</div>
 			<% end
 
-			if selected_user == @request.user && @request.status == 'open' %>
+			if selected_user == @request.user && @request.open? %>
 			<hr/>
 			<div class="row">
 				<label class="col-xs-4 col-sm-2 hidden-xs"><strong>Nudge me?</strong></label>
@@ -95,7 +95,7 @@
 			</div>
 			<% end
 
-			if selected_user == @request.user && @request.status == 'open'
+			if selected_user == @request.user && @request.open?
 				%>
 			<div class="buttons">
 				<%= link_to 'Cancel Request', confirm_cancel_request_path(@request), :class => "btn btn-danger" %>
@@ -106,7 +106,7 @@
 	</div><!--/.panel-body -->
 </div><!--/.panel -->
 
-<% if @request.status == 'open' %>
+<% if @request.open? %>
 <% if @request.user != selected_user %>
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -210,7 +210,7 @@
 	</div><!--/.panel-body -->
 </div><!--/.panel-->
 
-<% else %>
+<% elsif @request.successful? %>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>Accepted Offer</h2>

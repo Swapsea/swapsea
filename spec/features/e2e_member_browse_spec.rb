@@ -2,10 +2,12 @@
 
 require 'rails_helper'
 require 'capybara'
+require 'capybara-screenshot/rspec'
 
 describe 'e2e Happy Path - User' do
   before do
-    @user = create(:member)
+    @club = create(:club_with_patrols)
+    @user = create(:member, club: @club, patrol: @club.patrols.first)
     Capybara.page.current_window.resize_to(1024, 768)
   end
 

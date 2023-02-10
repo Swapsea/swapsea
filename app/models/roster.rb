@@ -165,7 +165,7 @@ class Roster < ApplicationRecord
     awards.flatten
   end
 
-  def awards_count
+  def update_award_counts
     self.bronze = awards.count { |n| n.award_name == 'Bronze Medallion' }
     self.bbm = awards.count { |n| n.award_name == 'Silver Medallion Beach Management' }
     self.artc = awards.count do |n|

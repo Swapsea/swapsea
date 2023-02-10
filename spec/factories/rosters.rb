@@ -2,9 +2,8 @@
 
 FactoryBot.define do
   factory :roster do
-    patrol.name { 'Patrol 1' }
-    start { '2018-10-07 19:53:09' }
-    finish { '2018-10-07 19:53:09' }
+    sequence(:start) { |n| n.days.from_now }
+    finish { start + 3.hours }
     bbm { 1 }
     irbd { 2 }
     irbc { 2 }
@@ -13,5 +12,12 @@ FactoryBot.define do
     firstaid { 2 }
     bronze { 2 }
     src { 2 }
+
+    association :patrol
+  end
+
+  factory :past_roster, parent: :roster do
+    sequence(:start) { |n| n.days.ago }
+    finish { start + 3.hours }
   end
 end

@@ -14,37 +14,65 @@ class Request < ApplicationRecord
   scope :with_open_status, -> { joins(:roster).where(status: 'open').where('finish > ?', DateTime.now) }
   attr_readonly :nudge_email_opt_out_date
 
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.status = :open unless status
+  end
+
+  def cancelled?
+    status == 'cancelled'
+  end
+
+  def open?
+    status == 'open'
+  end
+
+  def successful?
+    status == 'successful'
+  end
+
   def offer_already_exists?(roster, user)
-    offers.where(user:, roster:, status: 'pending').present?
+    offers.with_pending_status.where(roster:, user:).present?
+  end
+
+  # Cancel request and any pending offers.
+  def cancel
+    self.status = :cancelled
+    if save
+      offers.with_pending_status.each do |pending_offer|
+        if pending_offer.cancel
+          # SwapseaMailer.request_cancelled(offer).deliver
+        end
+      end
+    else
+      false
+    end
+  end
+
+  def succeeded
+    # Check valid status
+    case status
+    when 'successful'
+      # Already successful
+      true
+    when 'open'
+      self.status = :successful
+      save
+    else
+      message = "Request '#{id}' cannot be successful from status '#{status}'."
+      Rails.logger.warn message
+      EventLog.create!(subject: 'Warning', desc: message)
+      false
+    end
   end
 
   def accepted_offer
     offers.where(status: 'accepted').first if offers.where(status: 'accepted').present?
   end
 
-  def offers_with_status(status)
-    Offer.where('request_id = ? AND status = ?', id, status)
-  end
-
   def unsuccessful_offers(successful_offer)
     Offer.where('request_id = ? AND status = ? AND id != ?', id, 'pending', successful_offer)
-  end
-
-  def corresponding_offers
-    Offer.where('roster_id = ? AND user_id = ? AND status = ?', roster_id, user_id, 'pending')
-  end
-
-  def close
-    # closes offers for this request
-    offers = offers_with_status('pending')
-    offers.each do |o|
-      o.status = 'removed'
-      if o.save
-        SwapseaMailer.request_closed(o).deliver
-      else
-        raise 'Error closing offer. (Code 3)'
-      end
-    end
   end
 
   def offers_that_match_request

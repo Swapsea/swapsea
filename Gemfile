@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '3.1.2'
+ruby '3.1.3'
 
 gem 'activerecord', '>= 6.1.7'
 gem 'activerecord-import'
@@ -19,7 +19,7 @@ gem 'net-pop', require: false # Added with Rails 6 for Heroku
 gem 'net-smtp', require: false
 gem 'pg'
 gem 'pg_search'
-gem 'psych', '< 4' # Stop-gap for bad psych. https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
+gem 'psych'
 gem 'public_activity'
 gem 'puma'
 gem 'rails', '~> 6.1.7'
@@ -46,7 +46,6 @@ end
 group :development do
   gem 'binding_of_caller' # REPL, local/instance variable inspection
   gem 'bullet'
-  gem 'capybara-screenshot'
   gem 'listen'
   gem 'pre-commit', require: false
   gem 'rails_real_favicon'
@@ -64,6 +63,7 @@ end
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
