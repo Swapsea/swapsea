@@ -1,7 +1,6 @@
 <div class="member-list">
 	<%
-		order = ["Patrol Captain", "Patrol Vice Captain", "Vice Captain", "IRB Driver", "IRB Crew", "ART Operator", "ART Member", "First Aid Officer", "First Aid Member", "Bronze Member", "Member", "SRC Member", "SRC"]
-		users = ru.sort_by { |user| [order.index(user.default_position), user.name] }
+		users = ru.sort_by { |n| [n.position_order, n.name] }
 		users.each do |u| %>
 		<%= render partial: 'report_member', locals: {r: r, u: u} %>
 	<% end %>
