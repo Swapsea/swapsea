@@ -202,6 +202,7 @@ class Offer < ApplicationRecord
     # Update counts
     request.roster.update_award_counts
     roster&.update_award_counts
+    true
   end
 
   def decline(remark = nil)
