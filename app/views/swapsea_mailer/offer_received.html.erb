@@ -12,7 +12,7 @@
         </p>
         <p>
           <strong>Current offers</strong><br/>
-          <% @request.offers.where(:status => 'pending').order(id: :desc).each do |offer| %>
+          <% @request.offers.with_pending_status.order(id: :desc).each do |offer| %>
           <div class="offer<%= ' offer-new' if offer.id == @offer.id %>">
           <%= raw('<strong>NEW</strong><br/>') if offer.id == @offer.id %>
           <% if offer.roster.present? %>
