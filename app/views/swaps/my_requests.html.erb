@@ -14,11 +14,11 @@
   <div class="col-sm-12">
     <div class="requests">
 
-<% if @swaps.present? %>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2><%= content_for(:title) %></h2>
   </div>
+  <% if @swaps.present? %>
   <div class="panel-body">
     <% @swaps.each do |request| %>
     <div class="swap-request">
@@ -48,16 +48,11 @@
     </div><!--/.swap-request -->
     <% end %>
   </div><!--/.panel-body -->
-</div><!--/.panel -->
-<% else %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h2>My Requests</h2>
-  </div>
+  <% else %>
   <div class="panel-info">
-    <p>You currently have no requests.</p>
+    <p>You currently have no open requests.</p>
   </div>
-</div>
 <% end %>
+</div><!--/.panel -->
 </div>
 </div>
