@@ -31,12 +31,6 @@ h2 {
     .date {}
 }
 
-.created-at {
-    font-size: 0.6em;
-    font-weight: 200;
-    text-align: right;
-}
-
 .logo {
     float: right;
 }
@@ -55,7 +49,6 @@ th.center {
 
     th {
         border: 1px solid black;
-        border-collapse: collapse;
         font-weight: 800;
         padding: 2px 4px;
         text-align: left;
@@ -67,6 +60,24 @@ th.center {
         border: 1px solid black;
         padding: 2px 4px;
         font-size: 16px;
+    }
+
+    .noborder {
+        border: 0px;
+    }
+
+    .signature {
+        width: 15%;
+    }
+
+    .sigblock {
+        font-size: 0.8em;
+    }
+
+    .created-at {
+        font-size: 0.7em;
+        font-weight: 200;
+        text-align: right;
     }
 
     .position {
