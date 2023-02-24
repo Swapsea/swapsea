@@ -38,12 +38,14 @@ class RostersController < ApplicationController
     @open_requests_ary = Request.with_roster(params[:id]).with_open_status.order(:created_at).to_ary
   end
 
-  def patrol_report
-    @roster = Roster.find_by(secret: params[:token])
+  def sign_on_report
+    @roster = Roster.with_secret(params[:token])
     if @roster.present?
+      pdf_name = "Swapsea_SignOn_#{@roster.start.strftime('%Y-%m-%d')}_#{@roster.patrol.short_name}"
+      @beach_name = @roster.patrol.club.short_name
       respond_to do |format|
         format.pdf do
-          render pdf: @roster.patrol.name.to_s,
+          render pdf: pdf_name,
                  layout: 'pdf.html.erb',
                  show_as_html: params[:html].present?
         end

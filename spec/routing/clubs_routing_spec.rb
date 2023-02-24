@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ClubsController, type: :routing do
+RSpec.describe ClubsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/clubs').to route_to('clubs#index')

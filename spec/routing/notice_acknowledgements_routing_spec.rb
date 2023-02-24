@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe NoticeAcknowledgementsController, type: :routing do
+RSpec.describe NoticeAcknowledgementsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/notice_acknowledgements').to route_to('notice_acknowledgements#index')

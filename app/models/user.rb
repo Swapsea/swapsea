@@ -67,6 +67,11 @@ class User < ApplicationRecord
     self[:default_position] || 'Member'
   end
 
+  def position_order
+    order = ['Patrol Captain', 'Patrol Vice Captain', 'Vice Captain', 'Patrol Application Captain', 'IRB Driver', 'IRB Crew', 'ART Operator', 'ART Member', 'First Aid Officer', 'First Aid Member', 'Bronze Member', 'Member', 'SRC Member', 'SRC']
+    order.index default_position
+  end
+
   def has_position?(position)
     if patrol_member.present? && patrol_member.default_position.present?
       patrol_member.default_position.parameterize.underscore.to_sym == position

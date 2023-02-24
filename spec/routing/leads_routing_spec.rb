@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe LeadsController, type: :routing do
+RSpec.describe LeadsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/leads').to route_to('leads#index')

@@ -140,7 +140,7 @@ class SwapseaMailer < ApplicationMailer
   end
 
   # Email a link to PDF of next roster
-  def patrol_report(user, next_roster)
+  def sign_on_report(user, next_roster)
     @user = user
     @roster = next_roster
     @subject = "#{next_roster.patrol.short_name.presence || next_roster.patrol.name} - #{next_roster.start.strftime('%a %d %b %y %H:%M')}-#{next_roster.finish.strftime('%H:%M')}"

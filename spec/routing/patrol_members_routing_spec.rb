@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PatrolMembersController, type: :routing do
+RSpec.describe PatrolMembersController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/patrol_members').to route_to('patrol_members#index')

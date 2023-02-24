@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class EmailsControllerTest < ActionController::TestCase
+class EmailsControllerTest < ActionDispatch::IntegrationTest
   test 'that welcome sends' do
     u = User.find_by(email: 'mark@swapsea.com.au')
     email = SwapseaMailer.welcome_email(u)

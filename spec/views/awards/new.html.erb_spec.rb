@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'awards/new', type: :view do
+RSpec.describe 'awards/new' do
   before do
     assign(:award, Award.new(
                      award_number: 'AwardNumber',

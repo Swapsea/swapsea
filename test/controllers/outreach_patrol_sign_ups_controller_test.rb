@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class OutreachPatrolSignUpsControllerTest < ActionController::TestCase
+class OutreachPatrolSignUpsControllerTest < ActionDispatch::IntegrationTest
   before do
     @outreach_patrol_sign_up = outreach_patrol_sign_ups(:one)
   end

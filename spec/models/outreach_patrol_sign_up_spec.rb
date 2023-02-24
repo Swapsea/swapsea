@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe OutreachPatrolSignUp, type: :model do
+RSpec.describe OutreachPatrolSignUp do
   before do
     @outreach_patrol_sign_up = create(:outreach_patrol_sign_up)
   end

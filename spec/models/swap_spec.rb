@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Swap, type: :model do
+RSpec.describe Swap do
   before do
     @swap = create(:swap)
   end

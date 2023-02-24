@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Role, type: :model do
+RSpec.describe Role do
   before do
     @role = create(:role)
   end
