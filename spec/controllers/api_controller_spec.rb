@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiController, type: :controller do
+RSpec.describe ApiController do
   login_user
 
   # describe "GET #import_members" do

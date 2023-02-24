@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'event_logs/index', type: :view do
+RSpec.describe 'event_logs/index' do
   before do
     assign(:event_logs, [
              EventLog.create!(

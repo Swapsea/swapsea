@@ -48,7 +48,7 @@ class Ability
       can [:read], Request do |request|
         request.user.club_id == user.club_id
       end
-      can %i[update destroy confirm_cancel], Request, user: user
+      can(%i[update destroy confirm_cancel], Request, user:)
       cannot [:update], Request do |request|
         request.offers.where(status: 'accepted').present?
       end
@@ -57,7 +57,7 @@ class Ability
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
         offer.user.club_id == user.club_id
       end
-      can %i[update destroy confirm_withdraw], Offer, user: user
+      can(%i[update destroy confirm_withdraw], Offer, user:)
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
@@ -102,7 +102,7 @@ class Ability
       can [:read], Request do |request|
         request.user.club_id == user.club_id
       end
-      can %i[update destroy confirm_cancel], Request, user: user
+      can(%i[update destroy confirm_cancel], Request, user:)
       cannot [:update], Request do |request|
         request.offers.where(status: 'accepted').present?
       end
@@ -111,7 +111,7 @@ class Ability
       can [:read, :confirm_accept, :confirm_decline], Offer do |offer|
         offer.user.club_id == user.club_id
       end
-      can %i[update destroy confirm_withdraw], Offer, user: user
+      can(%i[update destroy confirm_withdraw], Offer, user:)
       can [:accept, :decline], Offer do |offer|
         offer.request.user == user
       end
@@ -122,10 +122,10 @@ class Ability
       can [:read], ProficiencySignup do |prof_signup|
         prof_signup.user.club_id == user.club_id
       end
-      can :destroy, ProficiencySignup, user: user
+      can(:destroy, ProficiencySignup, user:)
       can %i[read index], OutreachPatrol
       can %i[read create], OutreachPatrolSignUp
-      can :destroy, OutreachPatrolSignUp, user: user
+      can(:destroy, OutreachPatrolSignUp, user:)
       can [:read, :ics], User do |u|
         u.club_id == user.club_id
       end

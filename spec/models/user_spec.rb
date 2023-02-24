@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   describe 'factories' do
     it 'has a valid default factory' do
       expect(create(:user)).to be_valid
@@ -114,7 +114,7 @@ RSpec.describe User, type: :model do
 
     it 'No Patrol' do
       @unassigned = create(:member, club: @club, patrol: nil)
-      expect(@unassigned.patrol_member).to eq(nil)
+      expect(@unassigned.patrol_member).to be_nil
     end
 
     it 'No Position' do
@@ -129,7 +129,7 @@ RSpec.describe User, type: :model do
 
     it 'Patrol Captain' do
       @member = create(:member, club: @club, patrol: @patrol1, position: 'Patrol Captain')
-      expect(@member.has_position?(:patrol_captain)).to be_truthy
+      expect(@member).to have_position(:patrol_captain)
     end
   end
 end

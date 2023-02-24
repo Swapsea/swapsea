@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'awards/edit', type: :view do
+RSpec.describe 'awards/edit' do
   before do
     @award = create(:award)
   end

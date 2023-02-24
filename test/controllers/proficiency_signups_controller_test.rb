@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ProficiencySignupsControllerTest < ActionController::TestCase
+class ProficiencySignupsControllerTest < ActionDispatch::IntegrationTest
   before do
     @proficiency_signup = proficiency_signups(:one)
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe StagingUser, type: :model do
+RSpec.describe StagingUser do
   before do
     @staging_user = create(:staging_user)
   end

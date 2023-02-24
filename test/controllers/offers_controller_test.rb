@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class OffersControllerTest < ActionController::TestCase
+class OffersControllerTest < ActionDispatch::IntegrationTest
   before do
     @offer = offers(:one)
   end

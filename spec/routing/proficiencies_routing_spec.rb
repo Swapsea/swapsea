@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ProficienciesController, type: :routing do
+RSpec.describe ProficienciesController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/proficiencies').to route_to('proficiencies#index')
