@@ -9,6 +9,8 @@ class Roster < ApplicationRecord
   scope :with_club, ->(club_id) { joins(:patrol).where(patrols: { club_id: }).includes(:patrol) }
   scope :with_secret, ->(secret) { joins(:patrol, patrol: :users).find_by(secret:) }
 
+  after_initialize :generate_secret
+
   include PgSearch::Model
   pg_search_scope :search, against: %i[patrol_name organisation],
                            using: { tsearch: { dictionary: 'english' } }
@@ -34,7 +36,7 @@ class Roster < ApplicationRecord
   end
 
   def generate_secret
-    self.secret = Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join)
+    self.secret = Digest::SHA256.hexdigest(('a'..'z').to_a.sample(10).join) unless secret
   end
 
   def swap_meets_requirements(req, sub)
@@ -271,7 +273,6 @@ class Roster < ApplicationRecord
       formatted_date = "#{year}-#{month}-#{day}"
       roster.start = Time.zone.parse("#{formatted_date} #{row['Patrol Roster Start Time']}:00").utc.iso8601
       roster.finish = Time.zone.parse("#{formatted_date} #{row['Patrol Roster Finish Time']}:00").utc.iso8601
-      roster.generate_secret
       roster.save!
     end
   end

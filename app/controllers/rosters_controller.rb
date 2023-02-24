@@ -41,7 +41,7 @@ class RostersController < ApplicationController
   def sign_on_report
     @roster = Roster.with_secret(params[:token])
     if @roster.present?
-      pdf_name = "Swapsea_SignOn_#{@roster.start.strftime('%Y-%m-%d')}_#{@roster.patrol.short_name.to_s}"
+      pdf_name = "Swapsea_SignOn_#{@roster.start.strftime('%Y-%m-%d')}_#{@roster.patrol.short_name}"
       @beach_name = @roster.patrol.club.short_name
       respond_to do |format|
         format.pdf do

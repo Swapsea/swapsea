@@ -5,10 +5,12 @@ require 'capybara'
 require 'capybara-screenshot/rspec'
 
 describe 'e2e Happy Path - Admin' do
+  before(:all) do
+    Capybara.page.current_window.resize_to(1200, 800)
+  end
+
   before do
     @club = create(:club_with_patrols)
-    @user = create(:admin, club: @club, patrol: @club.patrols.first)
-    Capybara.page.current_window.resize_to(1200, 800)
   end
 
   it 'visit home page' do
@@ -17,10 +19,9 @@ describe 'e2e Happy Path - Admin' do
   end
 
   it 'signs admin in and clicks around', js: true do
-    visit '/users/sign_in'
-    fill_in 'user[email]', with: @user.email
-    fill_in 'user[password]', with: 'swapsea'
-    click_button 'Login'
+    @admin = create(:admin, club: @club, patrol: @club.patrols.first)
+    authenticate_user(@admin)
+
     expect(page).to have_text('NOTICE BOARD')
 
     visit '/admin'
