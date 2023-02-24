@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe SwapsController, type: :controller do
+RSpec.describe SwapsController do
   include Devise::Test::ControllerHelpers
   login_user
   render_views

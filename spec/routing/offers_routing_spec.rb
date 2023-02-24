@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe OffersController, type: :routing do
+RSpec.describe OffersController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/offers').to route_to('offers#index')

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'leads/index', type: :view do
+RSpec.describe 'leads/index' do
   before do
     assign(:leads, [
              Lead.create!(

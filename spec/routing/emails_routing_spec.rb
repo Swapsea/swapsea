@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EmailsController, type: :routing do
+RSpec.describe EmailsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/emails').to route_to('emails#index')

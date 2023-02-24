@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ProficiencySignupsController, type: :controller do
+RSpec.describe ProficiencySignupsController do
   include Devise::Test::ControllerHelpers
   login_user
   render_views
@@ -31,7 +31,7 @@ RSpec.describe ProficiencySignupsController, type: :controller do
   describe 'GET #show' do
     it 'returns a success response' do
       proficiency_signup = create(:proficiency_signup)
-      proficiency_signup = create :proficiency_signup
+      proficiency_signup = create(:proficiency_signup)
       get :show, params: { id: proficiency_signup.to_param }
       expect(response).to be_successful
     end

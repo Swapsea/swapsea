@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ActivitiesController, type: :controller do
+RSpec.describe ActivitiesController do
   login_user
   describe 'GET #index' do
     it 'returns http success' do

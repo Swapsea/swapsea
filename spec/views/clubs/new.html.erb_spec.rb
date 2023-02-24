@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'clubs/new', type: :view do
+RSpec.describe 'clubs/new' do
   before do
     assign(:club, Club.new(
                     name: 'Name',

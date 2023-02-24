@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class LeadsControllerTest < ActionController::TestCase
+class LeadsControllerTest < ActionDispatch::IntegrationTest
   before do
     @lead = leads(:one)
   end

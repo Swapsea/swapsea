@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Club, type: :model do
+RSpec.describe Club do
   before do
     @club = create(:club)
   end

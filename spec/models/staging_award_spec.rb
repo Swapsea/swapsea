@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe StagingAward, type: :model do
+RSpec.describe StagingAward do
   before do
     @staging_award = create(:staging_award)
   end

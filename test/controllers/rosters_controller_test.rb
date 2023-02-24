@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class RostersControllerTest < ActionController::TestCase
+class RostersControllerTest < ActionDispatch::IntegrationTest
   before do
     @roster = rosters(:one)
   end

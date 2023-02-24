@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'activities/index', type: :view do
+RSpec.describe 'activities/index' do
   before do
     assign(:activities, [
              PublicActivity::Activity.create!(

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe LeadsController, type: :controller do
+RSpec.describe LeadsController do
   include Devise::Test::ControllerHelpers
   login_user
   render_views
@@ -31,7 +31,7 @@ RSpec.describe LeadsController, type: :controller do
   describe 'GET #show' do
     it 'returns a success response' do
       lead = create(:lead)
-      lead = create :lead
+      lead = create(:lead)
       get :show, params: { id: lead.to_param }
       expect(response).to be_successful
     end
@@ -55,14 +55,14 @@ RSpec.describe LeadsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Lead' do
-        lead_attrs = attributes_for :lead
+        lead_attrs = attributes_for(:lead)
         expect do
           post :create, params: { lead: lead_attrs }
         end.to change(Lead, :count).by(1)
       end
 
       it 'redirects to the created lead' do
-        lead_attrs = attributes_for :lead
+        lead_attrs = attributes_for(:lead)
         post :create, params: { lead: lead_attrs }
         expect(response).to redirect_to(thanks_path)
       end

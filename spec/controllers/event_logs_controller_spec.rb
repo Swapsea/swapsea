@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe EventLogsController, type: :controller do
+RSpec.describe EventLogsController do
   include Devise::Test::ControllerHelpers
   login_user
   render_views
@@ -64,7 +64,7 @@ RSpec.describe EventLogsController, type: :controller do
   describe 'GET #show' do
     it 'returns a success response' do
       event_log = create(:event_log)
-      event_log = create :event_log
+      event_log = create(:event_log)
       get :show, params: { id: event_log.to_param }
       expect(response).to be_successful
     end
@@ -88,14 +88,14 @@ RSpec.describe EventLogsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new EventLog' do
-        event_log_attrs = attributes_for :event_log
+        event_log_attrs = attributes_for(:event_log)
         expect do
           post :create, params: { event_log: event_log_attrs }
         end.to change(EventLog, :count).by(1)
       end
 
       it 'redirects to the created event_log' do
-        event_log_attrs = attributes_for :event_log
+        event_log_attrs = attributes_for(:event_log)
         post :create, params: { event_log: event_log_attrs }
         expect(response).to redirect_to(EventLog.last)
       end

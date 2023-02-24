@@ -127,7 +127,11 @@ Swapsea::Application.routes.draw do
     end
   end
 
-  get 'patrol-report/:token', to: 'rosters#patrol_report', as: 'patrol_report', defaults: { format: 'pdf' }
+  resources :reports do
+    collection do
+      get 'sign-on/:token', to: 'rosters#sign_on_report', as: 'sign_on', defaults: { format: 'pdf' }
+    end
+  end
 
   devise_scope :user do
     get 'login', to: 'users/sessions#new', as: 'login'
