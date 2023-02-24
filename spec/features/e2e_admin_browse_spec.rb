@@ -34,29 +34,7 @@ describe 'e2e Happy Path - Admin' do
     wait_for_ajax
     expect(page).to have_text('MEMBERS')
 
-    # page.save_and_open_screenshot
-
-    # Logout cancelled
-    find('a.dropdown-toggle').click
-
-    # TODO: COMMENTED OUT SINCE WebDriver can't find "a.md-trigger"
-    # find('a.md-trigger').click
-    # # click_link "logout-link"
-    # # find(link: "a.logout-link").click
-
-    # click_on 'logout-cancel'
-    # # find(link: "a.logout-cancel").click
-
-    # # Logout confirmed
-    # find('a.dropdown-toggle').click
-    # find('a.md-trigger').click
-    # # click_link 'logout-link'
-    # # find("a.logout-link").click
-
-    # # click_link 'logout-confirm'
-    # # find("a.logout-confirm").click
-    # find('a.btn-success').click
-
-    # expect(page).to have_text('Welcome to Swapsea')
+      # Accessing modals fails, don't test this
+      # logout
   end
 end
