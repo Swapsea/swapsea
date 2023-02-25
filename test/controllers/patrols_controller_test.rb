@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class PatrolsControllerTest < ActionController::TestCase
+class PatrolsControllerTest < ActionDispatch::IntegrationTest
   before do
     @patrol = patrols(:one)
   end

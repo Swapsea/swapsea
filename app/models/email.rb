@@ -154,7 +154,7 @@ class Email < ApplicationRecord
     end
   end
 
-  def self.patrol_reports(organisation = nil)
+  def self.sign_on_report(organisation = nil)
     reports_sent = 0
     emails_sent = 0
     sms_sent = 0
@@ -173,11 +173,11 @@ class Email < ApplicationRecord
     rosters.map do |roster|
       # Collect PC and VC Emails
       roster.patrol.patrol_captains&.each do |pc|
-        SwapseaMailer.patrol_report(pc, roster).deliver
+        SwapseaMailer.sign_on_report(pc, roster).deliver
         reports_sent += 1
       end
       roster.patrol.vice_captains&.each do |vc|
-        SwapseaMailer.patrol_report(vc, roster).deliver
+        SwapseaMailer.sign_on_report(vc, roster).deliver
         reports_sent += 1
       end
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Email, type: :model do
+RSpec.describe Email do
   before do
     @email = create(:email)
   end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'notice_acknowledgements/new', type: :view do
+RSpec.describe 'notice_acknowledgements/new' do
   before do
     assign(:notice_acknowledgement, NoticeAcknowledgement.new(
                                       notice_id: '1',

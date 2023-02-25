@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe OutreachPatrolsController, type: :routing do
+RSpec.describe OutreachPatrolsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/outreach_patrols').to route_to('outreach_patrols#index')

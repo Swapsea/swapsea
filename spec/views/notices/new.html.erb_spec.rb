@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'notices/new', type: :view do
+RSpec.describe 'notices/new' do
   before do
     @notice = assign(:notice, create(:notice))
   end

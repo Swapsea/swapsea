@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Notice, type: :model do
+RSpec.describe Notice do
   before do
     @notice = create(:notice)
   end

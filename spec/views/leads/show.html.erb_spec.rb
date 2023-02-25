@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'leads/show', type: :view do
+RSpec.describe 'leads/show' do
   before do
     @lead = assign(:lead, create(:lead))
   end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'notice_acknowledgements/index', type: :view do
+RSpec.describe 'notice_acknowledgements/index' do
   before do
     assign(:notice_acknowledgements, [
              NoticeAcknowledgement.create!(

@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ClubsControllerTest < ActionController::TestCase
+class ClubsControllerTest < ActionDispatch::IntegrationTest
   before do
     @club = clubs(:one)
   end

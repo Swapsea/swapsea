@@ -4,13 +4,7 @@ require 'rails_helper'
 require 'capybara'
 require 'capybara-screenshot/rspec'
 
-describe 'e2e Happy Path - User' do
-  before do
-    @club = create(:club_with_patrols)
-    @user = create(:member, club: @club, patrol: @club.patrols.first)
-    Capybara.page.current_window.resize_to(1024, 768)
-  end
-
+describe 'e2e Happy Path - Anonymous User' do
   it 'visit public pages' do
     visit '/'
     expect(page).to have_text('Welcome to Swapsea')
@@ -27,64 +21,85 @@ describe 'e2e Happy Path - User' do
     visit '/terms-of-use'
     expect(page).to have_text('Terms of Use')
   end
+end
 
-  it 'signs users in and clicks around', js: true do
-    visit '/users/sign_in'
-    fill_in 'user[email]', with: @user.email
-    fill_in 'user[password]', with: 'swapsea'
-    click_button 'Login'
-    expect(page).to have_text('NOTICE BOARD')
+describe 'e2e Happy Path' do
+  before do
+    Capybara.page.current_window.resize_to(1200, 800)
+    @club = create(:club_with_patrols)
+    @patrol1 = @club.patrols.first
+  end
 
-    visit '/dashboard'
-    expect(page).to have_text('NOTICE BOARD')
+  describe 'Member' do
+    it 'signs users in and clicks around', js: true do
+      @member = create(:member, club: @club, patrol: @patrol1)
+      authenticate_user(@member)
 
-    visit '/swaps'
-    expect(page).to have_text('SWAP REQUESTS')
+      visit '/dashboard'
+      expect(page).not_to have_text('Privacy Notice')
+      expect(page).to have_text('NOTICE BOARD')
 
-    visit '/swaps/confirmed'
-    expect(page).to have_text('CONFIRMED SWAPS')
+      visit '/swaps'
+      expect(page).to have_text('SWAP REQUESTS')
 
-    visit '/swaps/my-requests'
-    expect(page).to have_text('MY REQUESTS')
+      visit '/swaps/confirmed'
+      expect(page).to have_text('CONFIRMED SWAPS')
 
-    visit '/swaps/my-offers'
-    expect(page).to have_text('MY OFFERS')
+      visit '/swaps/my-requests'
+      expect(page).to have_text('MY REQUESTS')
 
-    visit '/patrols'
-    expect(page).to have_text('Patrols')
+      visit '/swaps/my-offers'
+      expect(page).to have_text('MY OFFERS')
 
-    visit '/rosters'
-    expect(page).to have_text('Rosters')
+      visit '/patrols'
+      expect(page).to have_text('Patrols')
 
-    visit '/proficiencies'
-    expect(page).to have_text('Skills Maintenance')
+      visit '/rosters'
+      expect(page).to have_text('Rosters')
 
-    visit '/outreach_patrols'
-    expect(page).to have_text('Extra Patrols')
+      visit '/proficiencies'
+      expect(page).to have_text('Skills Maintenance')
 
-    # page.save_and_open_screenshot
+      visit '/outreach_patrols'
+      expect(page).to have_text('Extra Patrols')
 
-    # Logout cancelled
-    find('a.dropdown-toggle').click
+      # Accessing modals fails, don't test this
+      # logout
+    end
+  end
 
-    # TODO: COMMENTED OUT SINCE WebDriver can't find "a.md-trigger"
-    # find('a.md-trigger').click
-    # # click_link "logout-link"
-    # # find(link: "a.logout-link").click
+  describe 'Patrol Captain' do
+    before do
+      @captain = create(:member, club: @club, patrol: @patrol1, position: 'Patrol Captain')
+    end
 
-    # click_on 'logout-cancel'
-    # # find(link: "a.logout-cancel").click
+    it 'views Sign-on Sheet' do
+      authenticate_user(@captain)
 
-    # # Logout confirmed
-    # find('a.dropdown-toggle').click
-    # find('a.md-trigger').click
-    # # click_link 'logout-link'
-    # # find("a.logout-link").click
+      visit '/dashboard'
+      expect(page).to have_text('Privacy Notice')
 
-    # # click_link 'logout-confirm'
-    # # find("a.logout-confirm").click
-    # find('a.btn-success').click
+      visit '/rosters'
 
-    # expect(page).to have_text('Welcome to Swapsea')
+      click_on('View', match: :first)
+      expect(page).to have_text('Final Roster')
+
+      new_window = window_opened_by { click_on 'Sign-on Sheet' }
+      within_window new_window do
+        expect(page).to have_text('Rostered')
+      end
+      new_window.close
+
+      # Fails to run on TravisCI. May run better on buildKite.
+      # new_window = window_opened_by { click_on 'Sign-on Sheet (PDF)' }
+      # within_window new_window do
+      #   # PDF generation time
+      #   sleep(inspection_time=10)
+      #   page.save_screenshot
+      # end
+
+      # Accessing modals fails, don't test this
+      # logout
+    end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Roster, type: :model do
+RSpec.describe Roster do
   before do
     @roster = create(:roster)
   end

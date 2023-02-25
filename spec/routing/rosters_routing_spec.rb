@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe RostersController, type: :routing do
+RSpec.describe RostersController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/rosters').to route_to('rosters#index')

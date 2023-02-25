@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'notices/index', type: :view do
+RSpec.describe 'notices/index' do
   before do
     assign(:notices, [
              Notice.create!(

@@ -1,0 +1,73 @@
+<div id="report">
+  <table class="table">
+    <tr>
+      <td class="noborder">
+        <div class="patrol">
+          <h1>
+            <%= @roster.patrol.club.name %>
+          </h1>
+          <h2>
+            <%= @roster.patrol.name %>
+          </h2>
+        </div>
+        <!--/.patrol -->
+      </td>
+      <td class="noborder">
+        <div class="details">
+          <div class="date">
+            <%= @roster.start.strftime("%A, %-d %B %Y") %>
+          </div>
+          <div class="time">
+            <%= @roster.start.strftime("%H:%M") %> - <%= @roster.finish.strftime("%H:%M") %>
+          </div>
+        </div>
+      </td>
+      <td class="noborder">
+        <%= image_tag wicked_pdf_asset_base64('alternate-logo.png'), height: "50" , alt: "Swapsea" , class: "logo" %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table class="table">
+          <tr>
+            <td class="noborder sigblock">Patrol Captain:</td>
+            <td class="noborder signature">&nbsp;</td>
+            <td class="noborder sigblock">Signature:</td>
+            <td class="noborder signature">&nbsp;</td>
+            <td class="noborder sigblock">Beach: <b><%= @beach_name%></b></td>
+            <td class="noborder sigblock">Patrol Type: <b>Rostered</b></td>
+            <td class="noborder created-at">Created: <%= Time.zone.now.strftime("%-H:%M, %d-%b-%Y") %></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+
+  <div class="members">
+    <div class="patrol-report">
+      <table class="table">
+        <tr>
+          <th class="position">Position</th>
+          <th class="member">Rostered</th>
+          <th class="sub">Substitute</th>
+          <th class="sign center">Signature</th>
+          <th class="start center">Start Time</th>
+          <th class="finish center">Finish Time</th>
+          <th class="total center">Total Time</th>
+        </tr>
+        <%= render partial: 'report_membership' , locals: {r: @roster, ru: @roster.patrol_members } %>
+          <% 10.times do |n| %>
+            <tr class="">
+              <td>&nbsp;</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <% end %>
+      </table>
+    </div>
+  </div>
