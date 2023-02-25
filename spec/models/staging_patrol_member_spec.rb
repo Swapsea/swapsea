@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe StagingPatrolMember, type: :model do
+RSpec.describe StagingPatrolMember do
   before do
     @staging_patrol_member = create(:staging_patrol_member)
   end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'proficiency_signups/index', type: :view do
+RSpec.describe 'proficiency_signups/index' do
   before do
     assign(:proficiency_signups, [
              ProficiencySignup.create!(

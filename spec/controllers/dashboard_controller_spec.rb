@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DashboardController, type: :controller do
+RSpec.describe DashboardController do
   include Devise::Test::ControllerHelpers
   login_user
   render_views

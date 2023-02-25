@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Lead, type: :model do
+RSpec.describe Lead do
   before do
     @lead = create(:lead)
   end

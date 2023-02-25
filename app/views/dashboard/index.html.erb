@@ -1,25 +1,19 @@
 <% content_for(:title){ "Dashboard" } %>
 
-<% if Rails.env == 'staging' %>
+<% if Rails.env != 'production' %>
 <div class="alert alert-warning">
-  This is the staging environment for Swapsea. It is only for testing purposes. No swaps or proficiency signups will be permanent.
-</div>
-<% elsif Rails.env == 'development' %>
-<div class="alert alert-warning">
-  This is the development environment for Swapsea. It is for development purposes. No swaps or proficiency signups will be permanent.
+  This is a non-production environment for Swapsea. It is only for testing purposes. No swaps or proficiency signups will be permanent.
 </div>
 <% end %>
 
 <h1 class="hidden">Dashboard</h1>
 <div class="row">
   <div class="col-sm-6 col-xs-12">
-
-
     <% if (selected_user.has_role? :admin) || (selected_user.has_role? :manager) || (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) %>
 
     <div class="alert alert-info">
       <b>Privacy Notice</b><br/>
-      <p>As a Patrol Captain/Vice Captain, you have special access on Swapsea to your patroller's personal details. Please respect the privacy of their information.</p>
+      <p>As a Patrol Captain/Vice Captain, you have special access on Swapsea to members' personal details. Please respect the privacy of their information.</p>
     </div>
     <% end %>
 

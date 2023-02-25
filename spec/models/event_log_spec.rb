@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe EventLog, type: :model do
+RSpec.describe EventLog do
   before do
     @event_log = create(:event_log)
   end

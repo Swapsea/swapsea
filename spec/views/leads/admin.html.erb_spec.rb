@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'leads/admin', type: :view do
+RSpec.describe 'leads/admin' do
   before do
     assign(:leads, [
              Lead.create!(

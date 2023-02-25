@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ProficienciesControllerTest < ActionController::TestCase
+class ProficienciesControllerTest < ActionDispatch::IntegrationTest
   before do
     @proficiency = proficiencies(:one)
   end

@@ -8,10 +8,10 @@
       <% if (selected_user.has_position? :patrol_captain) || (selected_user.has_position? :vice_captain) ||
         (current_user.has_role? :admin) %>
         <li class="col-xs-4">
-          <%= link_to "Sign-on Sheet", patrol_report_path(@roster.secret, html: :true), target: :blank %>
+          <%= link_to "Sign-on Sheet", sign_on_reports_path(@roster.secret, html: :true), target: :blank %>
         </li>
         <li class="col-xs-4">
-          <%= link_to "Sign-on Sheet (PDF)", patrol_report_path(@roster.secret), target: :blank %>
+          <%= link_to "Sign-on Sheet (PDF)", sign_on_reports_path(@roster.secret), target: :blank %>
         </li>
         <% end %>
     </ul>

@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class NoticesControllerTest < ActionController::TestCase
+class NoticesControllerTest < ActionDispatch::IntegrationTest
   before do
     @notice = notices(:one)
   end

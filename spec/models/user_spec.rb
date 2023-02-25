@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   describe 'factories' do
     it 'has a valid default factory' do
       expect(create(:user)).to be_valid
@@ -46,13 +46,13 @@ RSpec.describe User, type: :model do
       subject { user.default_position }
 
       context 'when there is no default_position on the user' do
-        let(:user) { create(:user, default_position: nil) }
+        let(:user) { create(:member) }
 
-        it { is_expected.to eq('Member') }
+        it { is_expected.to eq('') }
       end
 
       context 'when there is a default_position on the user' do
-        let(:user) { create(:user, default_position: 'blah') }
+        let(:user) { create(:member, position: 'blah') }
 
         it { is_expected.to eq('blah') }
       end
@@ -82,20 +82,16 @@ RSpec.describe User, type: :model do
     end
 
     describe 'has_patrol?' do
-      subject { user.has_patrol? }
+      subject { member.has_patrol? }
 
-      let(:user) { create(:user) }
+      let(:member) { create(:member, patrol: nil) }
 
-      context 'when the user does not have an associated patrol through patrol members' do
+      context 'when the member does not have an associated patrol through patrol members' do
         it { is_expected.to be(false) }
       end
 
-      context 'when the user has an associated patrol through patrol members' do
-        let(:patrol) { create(:patrol) }
-
-        before do
-          create(:patrol_member, user:, patrol:)
-        end
+      context 'when the member has an associated patrol through patrol members' do
+        let(:member) { create(:member) }
 
         it { is_expected.to be(true) }
       end
@@ -107,6 +103,33 @@ RSpec.describe User, type: :model do
       let(:user) { create(:user) }
 
       it { is_expected.to eq("#{user.first_name} #{user.last_name}") }
+    end
+  end
+
+  describe 'relationships' do
+    before do
+      @club = create(:club_with_patrols)
+      @patrol1 = @club.patrols.first
+    end
+
+    it 'No Patrol' do
+      @unassigned = create(:member, club: @club, patrol: nil)
+      expect(@unassigned.patrol_member).to be_nil
+    end
+
+    it 'No Position' do
+      @unassigned = create(:member, club: @club, patrol: @patrol1)
+      expect(@unassigned.patrol_member.default_position).to eq('')
+    end
+
+    it 'Bronze Member' do
+      @member = create(:member, club: @club, patrol: @patrol1, position: 'Bronze Member')
+      expect(@member.patrol_member.default_position).to eq('Bronze Member')
+    end
+
+    it 'Patrol Captain' do
+      @member = create(:member, club: @club, patrol: @patrol1, position: 'Patrol Captain')
+      expect(@member).to have_position(:patrol_captain)
     end
   end
 end

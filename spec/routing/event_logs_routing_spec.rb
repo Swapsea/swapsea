@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EventLogsController, type: :routing do
+RSpec.describe EventLogsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/event_logs').to route_to('event_logs#index')

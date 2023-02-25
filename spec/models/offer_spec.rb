@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Offer, type: :model do
+RSpec.describe Offer do
   before(:all) do
     @club = create(:club_with_patrols)
     @requestor = create(:member, club: @club, patrol: @club.patrols.first)

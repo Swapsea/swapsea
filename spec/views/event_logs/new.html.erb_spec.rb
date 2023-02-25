@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'event_logs/new', type: :view do
+RSpec.describe 'event_logs/new' do
   before do
     assign(:event_log, EventLog.new(
                          subject: 'MyString',

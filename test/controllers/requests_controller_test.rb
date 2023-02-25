@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class RequestsControllerTest < ActionController::TestCase
+class RequestsControllerTest < ActionDispatch::IntegrationTest
   before do
     @request = requests(:one)
   end

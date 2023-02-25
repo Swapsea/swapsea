@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Proficiency, type: :model do
+RSpec.describe Proficiency do
   before do
     @proficiency = create(:proficiency)
   end

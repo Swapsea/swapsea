@@ -3,7 +3,7 @@
 require 'faker'
 require 'rails_helper'
 
-RSpec.describe 'leads/new', type: :view do
+RSpec.describe 'leads/new' do
   before do
     assign(:lead, Lead.new(
                     name: 'Name',

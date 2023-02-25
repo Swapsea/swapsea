@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'proficiency_signups/new', type: :view do
+RSpec.describe 'proficiency_signups/new' do
   before do
     assign(:proficiency_signup, ProficiencySignup.new(
                                   proficiency_id: '1',

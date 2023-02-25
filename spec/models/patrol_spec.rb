@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe Patrol, type: :model do
+RSpec.describe Patrol do
   before do
     @patrol = create(:patrol)
   end
