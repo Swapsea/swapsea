@@ -123,7 +123,7 @@
 								<% @rosters_available.each do |r| %>
 									<option value="<%= r.id %>">
 									<% if r.id == nil %>
-									SUBSTITUTE ONLY (no swap needed)
+									SUBSTITUTE ONLY (no patrol swap needed)
 									<% else %>
 									<%= r.start.strftime("%a %d %b") %> <%= r.start.strftime("%H:%M") %> - <%= r.finish.strftime("%H:%M") %> (<%= r.patrol.name %>)
 									<% end %>
@@ -174,7 +174,7 @@
 									<%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %><br/>
 									<%= offer.roster.patrol.name %>
 									<% else %>
-									SUBSTITUTE ONLY (no swap needed)
+									SUBSTITUTE ONLY (no patrol swap needed)
 									<% end %>
 									<br/>
 									<strong><%= offer.user.name %></strong>
@@ -232,7 +232,7 @@
 			<%= @request.accepted_offer.roster.start.strftime("%H:%M") %> - <%= @request.accepted_offer.roster.finish.strftime("%H:%M") %><br/>
 			<%= @request.accepted_offer.roster.patrol.name %>
 		<% else %>
-		SUBSTITUTE ONLY (no swap needed)
+		SUBSTITUTE ONLY (no patrol swap needed)
 		<% end %>
 			<br/>
 			<%= @request.accepted_offer.user.name %><br/>
