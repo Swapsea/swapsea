@@ -9,12 +9,12 @@ module CapybaraHelpers
 
     click_button 'Login'
   end
-  
+
   def logout
     # TODO: WebDriver can't find "a.md-trigger"
     # find('a.md-trigger').click
     # click_link "logout-link"
-    find(link: "a.logout-link").click
+    find(link: 'a.logout-link').click
 
     # Logout cancelled
     click_on 'logout-cancel'
