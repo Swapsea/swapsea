@@ -34,7 +34,7 @@ describe 'e2e Happy Path - Admin' do
     wait_for_ajax
     expect(page).to have_text('MEMBERS')
 
-      # Accessing modals fails, don't test this
-      # logout
+    # Accessing modals fails, don't test this
+    # logout
   end
 end
