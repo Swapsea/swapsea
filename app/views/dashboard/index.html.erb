@@ -114,88 +114,11 @@
     </div><!--/.noticeboard -->
     <% end %>
 
-    <div class="swap-feed">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2>Swap Feed</h2>
-        </div>
-        <div class="panel-body">
-          <% @confirmed_offers.each do |offer| %>
-          <div class="swap">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="created-at"><%= time_ago_in_words(offer.updated_at) %> ago</div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="request col-xs-5">
-                <s class="name"><%= offer.request.user.name %></s> <strong class="name"><%= offer.user.name %></strong><br/>
-                <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
-                <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %>
-              </div>
-              <div class="col-xs-2">
-                <div class="arrows"><i class="fa fa-arrows-h fa-2x"></i></div>
-              </div>
-              <div class="col-xs-5">
-                <s class="name"><%= offer.user.name %></s> <strong class="name"><%= offer.request.user.name %></strong><br/>
-                <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
-                <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
-              </div>
-            </div><!--/.row -->
-          </div><!--/.swap -->
-          <% end %>
-        </div><!--/.panel-body -->
-        <% if @confirmed_offers.empty? %>
-        <div class="panel-info">
-          <h3>No Swaps yet!</h3>
-          <p>
-            Be the first to confirm a swap and see your name up in the big lights right here.
-          </p>
-        </div>
-        <% end %>
-      </div><!--/.panel -->
-
-    </div><!--/.swaps -->
-
+    <%= render partial: 'swap_feed' %>  
 
     <div class="divider-25"></div>
 
-    <div class="statistics">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2>Statistics</h2>
-        </div>
-
-        <div class="panel-body">
-          <div class="stats">
-            <div class="stat">
-              <span class="number confirmed-swaps"><%= Request.with_club(selected_user.club_id).with_successful_status.count %></span>
-              <span class="title">Confirmed Swaps</span>
-            </div>
-            <div class="stat">
-              <span class="number offers-pending"><%= Offer.with_club(selected_user.club_id).with_pending_status.count %></span>
-              <span class="title">Offers Pending</span>
-            </div>
-            <div class="stat">
-              <span class="number requests-open"><%= Request.with_club(selected_user.club_id).with_open_status.count %></span>
-              <span class="title">Requests Open</span>
-            </div>
-            <% if ( selected_user.club.show_skills_maintenance ) %>
-            <div class="stat">
-              <span class="number proficiency-signups"><%= ProficiencySignup.with_club(selected_user.club_id).all.count %></span>
-              <span class="title">Skills Maintenance Signups</span>
-            </div>
-            <% end %>
-            <div class="stat">
-              <span class="number proficiency-signups"><%= User.with_club(selected_user.club_id).sum(:sign_in_count) %></span>
-              <span class="title">Member Logins</span>
-            </div>
-          </div>
-          <div class="clear"></div>
-        </div>
-
-      </div>
-    </div>
+    <%= render partial: 'statistics' %>      
 
   </div>
 </div><!--/.row -->

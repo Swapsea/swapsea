@@ -48,48 +48,7 @@
 
 
       <!-- START OF SIDEBAR MENU -->
-      <div class="left side-menu">
-        <div class="header sidebar rows">
-          <a href="<%= dashboard_path %>">
-            <div class="navbar-logo"></div>
-          </a>
-        </div>
-        <div class="body rows scroll-y">
-          <div class="sidebar-inner slimscroller">
-            <div id="sidebar-menu">
-              <ul>
-                <li><%= link_to raw('<i class="fa fa-dashboard"></i> Dashboard'), dashboard_path %></li>
-                <% if (selected_user.club.show_swaps) %>
-                  <li><%= link_to raw(' <i class="fa fa-random"></i> Swaps'), swaps_path %></li>
-                <% end %>
-                <% if (selected_user.club.show_rosters) %>
-                  <li><%= link_to raw('<i class="fa fa-list"></i> Rosters'), rosters_path %></li>
-                <% end %>
-                <% if (selected_user.club.show_patrols) %>
-                  <li>
-                    <% if selected_user.patrol.present? %>
-                      <%= link_to raw('<i class="fa fa-flag"></i> Patrols'), (patrol_path selected_user.patrol) %>
-                    <% else %>
-                      <%= link_to raw('<i class="fa fa-flag"></i> Patrols'), patrols_path %>
-                    <% end %>
-                  </li>
-                <% end %>
-                <% if (selected_user.club.show_skills_maintenance) %>
-                  <li><%= link_to raw('<i class="fa fa-list"></i> Skills Maintenance'), proficiencies_path %></li>
-                <% end %>
-                <% if (selected_user.club.show_outreach) %>
-                  <li><%= link_to raw('<i class="fa fa-list"></i> Extra Patrols'), outreach_patrols_path %></li>
-                <% end %>
-                <% if (selected_user.has_role? :admin) %>
-                  <li><%= link_to raw('<i class="fa fa-cog"></i> Admin'), admin_path %></li>
-                <% end %>
-              </ul>
-              <div class="clear"></div>
-            </div>
-          </div> <!-- End of class: sidebar-inner -->
-        </div> <!-- End of class: body rows -->
-
-      </div><!--/.left side-menu -->
+      <%= render 'layouts/sidebar' %>
       <!-- END OF SIDEBAR MENU -->
 
 
@@ -116,9 +75,7 @@
               </ul>
 
               <% if selected_user.has_patrol? && selected_user.next_roster.present? %>
-                <ul class="nav navbar-nav visible-md visible-lg">
-                  <p class="navbar-text"><strong>Next Patrol:</strong> <%= link_to selected_user.next_roster.start.strftime("%H:%M %A %e %B %Y"), patrol_roster_path(selected_user.next_roster) %></p>
-                </ul>
+              <%= render 'layouts/next_patrol' %>
               <% end %>
 
               <ul class="nav navbar-center visible-sm visible-xs">
