@@ -35,7 +35,7 @@ Swapsea::Application.configure do
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   config.cache_store = if ENV['REDIS_URL']
-                         [:redis_store, ENV['REDIS_URL']]
+                         [:redis_cache_store, { url: ENV.fetch('REDIS_URL', nil) }]
                        else
                          :null_store
                        end
