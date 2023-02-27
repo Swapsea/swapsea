@@ -103,16 +103,7 @@
 
   <div class="col-sm-6 col-xs-12">
 
-    <% if ((selected_user.club.lat) && (selected_user.club.lon)) %>
-    <div class="weather">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" style="margin-bottom:5px;" width="100%" src="https://forecast.io/embed/#lat=<%= selected_user.club.lat  %>&lon=<%= selected_user.club.lon %>&name=<%= selected_user.club.short_name.html_safe %>&units=ca&color=#03b4f1"></iframe>
-          <div class="clear"></div>
-        </div>
-      </div>
-    </div><!--/.noticeboard -->
-    <% end %>
+    <%= render partial: 'weather' %> 
 
     <%= render partial: 'swap_feed' %>  
 
