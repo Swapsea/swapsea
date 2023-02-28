@@ -79,8 +79,8 @@ Swapsea::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = if ENV['REDIS_URL']
-                         [:redis_cache_store, { url: ENV.fetch('REDIS_URL', nil) }]
+  config.cache_store = if ENV['REDIS_TLS_URL']
+                         [:redis_cache_store, { url: ENV.fetch('REDIS_TLS_URL', nil) }]
                        else
                          :null_store
                        end
