@@ -61,6 +61,11 @@ class OffersController < ApplicationController
 
       @offer.create_activity :confirm, owner: selected_user
 
+      # Clear (most of) the affected caches
+      Rails.cache.delete('next_patrol/selected_user' => selected_user.id)
+      Rails.cache.delete('statistics/organisation' => selected_user.club_id)
+      Rails.cache.delete('swap_feed' => selected_user.club_id)
+
       redirect_to request_path(@offer.request),
                   notice: 'Offer accepted! The swap is confirmed and you will both receive a confirmation email.'
     else

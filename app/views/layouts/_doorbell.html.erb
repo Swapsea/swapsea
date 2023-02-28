@@ -1,4 +1,4 @@
-<% cache [ "doorbell/current_user", current_user ], expires_in: 20.minutes do %>
+<% cache [ "doorbell/current_user", current_user.id ], expires_in: 20.minutes do %>
 <!-- Doorbell -->
 <script type="text/javascript">
     window.doorbellOptions = {
