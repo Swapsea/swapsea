@@ -31,6 +31,9 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
+    # Everyone
+    can %i[index privacy_policy terms_of_use thanks contact_us setup faq], :home
+
     if user.has_role? :admin
       can :manage, :all
     # Manager
@@ -80,7 +83,6 @@ class Ability
       can [:read, :ics], User do |u|
         u.club_id == user.club_id
       end
-      can %i[index privacy_policy terms_of_use thanks contact_us], :home
       cannot :index, User
       can [:index], :dashboard
       can %i[index set], :selected_user
@@ -129,17 +131,14 @@ class Ability
       can [:read, :ics], User do |u|
         u.club_id == user.club_id
       end
-      can %i[index privacy_policy terms_of_use thanks contact_us], :home
       cannot :index, User
       can [:index], :dashboard
       can %i[index set], :selected_user
     else
-      can :sign_on_report, Roster
       can :create, Lead
-      can %i[read ics], User
+      can :sign_on_report, Roster
+      can %i[activate read ics], User
       cannot %i[index show], User
-      can :activate, User
-      can %i[index privacy_policy terms_of_use thanks contact_us setup faq], :home
     end
   end
 end

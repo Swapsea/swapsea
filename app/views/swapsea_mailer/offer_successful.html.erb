@@ -13,10 +13,14 @@
         </p>
         <p>
           <strong>Your old patrol</strong><br/>
+          <% if @offer.roster.present? %>
           <%= @offer.roster.patrol.name %><br/>
           <%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
           <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
           <em><%= @request.user.name %> is now a sub for you.</em>
+          <% else %>
+          SUBSTITUTE ONLY - you didn't offer a patrol to swap.
+          <% end %>
         </p>
 
         <% if @request.email.present? || @request.mobile.present? %>

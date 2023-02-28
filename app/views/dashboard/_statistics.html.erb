@@ -1,48 +1,47 @@
-<% cache [ "dashboard/statistics/organisation", selected_user_organisation_code ], expires_in: 20.minutes do %>
-  <div class="hidden">
-    <%= 20.minutes.from_now.utc %>
-  </div>
-  <div class="swap-feed">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2>Statistics</h2>
-      </div>
-      <div class="panel-body">
-        <div class="stats">
-          <div class="stat">
-            <span class="number confirmed-swaps">
-              <%= Request.with_club(selected_user.club_id).with_successful_status.count %>
-            </span>
-            <span class="title">Confirmed Swaps</span>
-          </div>
-          <div class="stat">
-            <span class="number offers-pending">
-              <%= Offer.with_club(selected_user.club_id).with_pending_status.count %>
-            </span>
-            <span class="title">Offers Pending</span>
-          </div>
-          <div class="stat">
-            <span class="number requests-open">
-              <%= Request.with_club(selected_user.club_id).with_open_status.count %>
-            </span>
-            <span class="title">Requests Open</span>
-          </div>
-          <% if (selected_user.club.show_skills_maintenance) %>
-            <div class="stat">
-              <span class="number proficiency-signups">
-              <%= ProficiencySignup.with_club(selected_user.club_id).all.count %>
-              </span>
-              <span class="title">Skills Maintenance Signups</span>
-            </div>
-          <% end %>
+<% cache [ "statistics/organisation", selected_user_organisation_code ], expires_in: 60.minutes do %>
+  <div class="statistics">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>Statistics</h2>
+    </div>
+
+    <div class="panel-body">
+      <div class="stats">
+        <div class="stat">
+          <span class="number confirmed-swaps">
+            <%= Request.with_club(selected_user.club_id).with_successful_status.count %>
+          </span>
+          <span class="title">Confirmed Swaps</span>
+        </div>
+        <div class="stat">
+          <span class="number offers-pending">
+            <%= Offer.with_club(selected_user.club_id).with_pending_status.count %>
+          </span>
+          <span class="title">Offers Pending</span>
+        </div>
+        <div class="stat">
+          <span class="number requests-open">
+            <%= Request.with_club(selected_user.club_id).with_open_status.count %>
+          </span>
+          <span class="title">Requests Open</span>
+        </div>
+        <% if ( selected_user.club.show_skills_maintenance ) %>
           <div class="stat">
             <span class="number proficiency-signups">
-              <%= User.with_club(selected_user.club_id).sum(:sign_in_count) %>
+              <%= ProficiencySignup.with_club(selected_user.club_id).all.count %>
             </span>
-            <span class="title">Member Logins</span>
+            <span class="title">Skills Maintenance Signups</span>
           </div>
-        </div>
+          <% end %>
+            <div class="stat">
+              <span class="number proficiency-signups">
+                <%= User.with_club(selected_user.club_id).sum(:sign_in_count) %>
+              </span>
+              <span class="title">Member Logins</span>
+            </div>
       </div>
+      <div class="clear"></div>
     </div>
   </div>
+</div>
 <% end %>

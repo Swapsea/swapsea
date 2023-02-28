@@ -16,7 +16,7 @@ You can switch anytime from the top right hand menu and switch back by pressing 
 		<tbody>
 		<% @switch_users.each do |user| %>
 			<tr>
-				<td><%= user.name %> <i></i></td>
+				<td><%= user.name %></td>
 				<td class="hidden-xs"><%= user.club.name %></td>
 				<td><%= truncate user.patrol.name, :length => 15 %></td>
 				<td><%= if (user != selected_user) then link_to 'Switch', selected_user_path(:uid => user.id, :referrer => @referrer), :method => :post, :class => "btn btn-success btn-sm pull-right" end %></td>

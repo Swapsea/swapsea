@@ -17,9 +17,13 @@
 			<label class="col-xs-4 col-sm-4 hidden-xs">Are you sure you want to <strong>accept</strong> this offer?</label>
 			<div class="col-xs-8 col-sm-8">
 				<div class="visible-xs"><strong><strong>Accept</strong> this offer?</strong></div>
+				<% if @offer.roster.present? %>
 				<%= @offer.roster.start.strftime("%A %d %B %Y") %><br/>
 				<%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %><br/>
 				<%= @offer.roster.patrol.name %>
+				<% else %>
+				SUBSTITUTE ONLY
+				<% end %>
 			</div>
 		</div>
 		<hr />
@@ -43,14 +47,14 @@
 		<% end %>
 
 		<% if @after_swap_offer_patrol[:result] %>
-
+			<% if @offer.roster.present? %>
 			<div class="alert alert-success">
 				<p><strong><%= @offer.roster.patrol.name %> - <%= @offer.roster.start.strftime('%a %d %b %Y') %> will meet minimum requirements.</strong></p>
 			</div><!--/.alert -->
 			<div class="table-success">
 				<%= render 'offer_requirements_table' %>
 			</div>
-
+			<% end %>
 		<% else %>
 
 			<div class="alert alert-danger">

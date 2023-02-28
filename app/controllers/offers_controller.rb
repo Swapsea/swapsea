@@ -30,9 +30,13 @@ class OffersController < ApplicationController
       @after_swap_request_patrol = @offer.request.roster.swap_meets_requirements(@offer.request.user, @offer.user)
       @before_swap_request_patrol = @offer.request.roster.qualifications
       @required_request_patrol = @offer.request.roster.patrol.requirements
-      @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
-      @before_swap_offer_patrol = @offer.roster.qualifications
-      @required_offer_patrol = @offer.roster.patrol.requirements
+      if @offer.roster.present?
+        @after_swap_offer_patrol = @offer.roster.swap_meets_requirements(@offer.user, @offer.request.user)
+        @before_swap_offer_patrol = @offer.roster.qualifications
+        @required_offer_patrol = @offer.roster.patrol.requirements
+      else
+        @after_swap_offer_patrol = { result: true }
+      end
     else
       redirect_to swaps_path, alert: 'This request or offer no longer exists.'
     end
@@ -57,6 +61,11 @@ class OffersController < ApplicationController
 
       @offer.create_activity :confirm, owner: selected_user
 
+      # Clear (most of) the affected caches
+      Rails.cache.delete('next_patrol/selected_user' => selected_user.id)
+      Rails.cache.delete('statistics/organisation' => selected_user.club_id)
+      Rails.cache.delete('swap_feed' => selected_user.club_id)
+
       redirect_to request_path(@offer.request),
                   notice: 'Offer accepted! The swap is confirmed and you will both receive a confirmation email.'
     else
@@ -75,7 +84,7 @@ class OffersController < ApplicationController
       SwapseaMailer.offer_declined(@offer, offer_params[:decline_remark]).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was declined.'
     else
-      redirect_to request_path(@offer.request), notice: 'Error trying to decline offer.'
+      redirect_to request_path(@offer.request), alert: 'Error trying to decline offer.'
     end
   end
 
@@ -91,7 +100,7 @@ class OffersController < ApplicationController
       SwapseaMailer.offer_received(@offer).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.'
     else
-      redirect_to request_path(@offer.request), notice: 'Error whilst creating offer.'
+      redirect_to request_path(@offer.request), alert: 'Error creating offer.'
     end
   end
 
@@ -114,7 +123,7 @@ class OffersController < ApplicationController
       # SwapseaMailer.offer_cancelled(@offer).deliver
       redirect_to @offer.request, notice: 'Offer was successfully withdrawn.'
     else
-      redirect_to @offer.request, notice: 'Error whilst withdrawing offer.'
+      redirect_to @offer.request, alert: 'Error whilst withdrawing offer.'
     end
   end
 

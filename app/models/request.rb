@@ -32,8 +32,16 @@ class Request < ApplicationRecord
     status == 'successful'
   end
 
+  def accepted_offer
+    offers.where(status: 'accepted').first if offers.where(status: 'accepted').present?
+  end
+
   def offer_already_exists?(roster, user)
     offers.with_pending_status.where(roster:, user:).present?
+  end
+
+  def unsuccessful_offers(successful_offer)
+    Offer.where('request_id = ? AND status = ? AND id != ?', id, 'pending', successful_offer)
   end
 
   # Cancel request and any pending offers.
@@ -76,7 +84,11 @@ class Request < ApplicationRecord
   end
 
   def offers_that_match_request
-    Offer.where('roster_id = ? AND user_id =? AND status = ?', roster_id, user_id, 'pending')
+    if roster_id?
+      Offer.with_pending_status.with_offered_by(user_id).where(roster_id:)
+    else
+      []
+    end
   end
 
   def self.nudge_email_opt_out=(opt_out)

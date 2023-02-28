@@ -13,12 +13,11 @@
 
   <div class="col-sm-12">
     <div class="requests">
-
-      <% if @swaps.present? %>
       <div class="panel panel-default">
         <div class="panel-heading">
         <h2><%= content_for(:title) %></h2>
         </div>
+        <% if @swaps.present? %>
         <div class="panel-body">
           <div class="swap-requests">
             <% @swaps.each do |offer| %>
@@ -26,9 +25,14 @@
             <div class="swap-request">
               <div class="details col-xs-4">
                 <strong><%= offer.user.name %></strong>
+                <% if (offer.roster) %>
                 (<%= offer.roster.patrol.short_name.present? ? offer.roster.patrol.short_name : offer.roster.patrol.name %>)<br/>
                 <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
                 <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %><br/>
+                <% else %>
+                <br/>
+                <i>Sub without swap</i><br/>
+                <% end %>
                 <span class="created-at">Updated <%= time_ago_in_words(offer.created_at) %> ago</span>
               </div>
               <div class="details col-xs-2">
@@ -38,7 +42,7 @@
                 <strong><%= offer.request.user.name %></strong>
                 (<%= offer.request.roster.patrol.short_name.present? ? offer.request.roster.patrol.short_name : offer.request.roster.patrol.name %>)<br/>
                 <%= offer.request.roster.start.strftime("%a, %d %b %y") %><br/>
-                <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+                <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %>
               </div>
               <% if offer.pending? %>
               <%= link_to offer.request, :class => 'offer offer-view col-xs-2' do %>
@@ -69,16 +73,11 @@
             <% end %>
           </div><!--/.swap-requests -->
         </div><!--/.panel-body -->
-      </div><!--/.panel -->
-      <% else %>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2>My Offers</h2>
-        </div>
+        <% else %>
         <div class="panel-info">
           <p>You have not made any offers yet.</p>
         </div>
-      </div><!--/.panel -->
       <% end %>
-    </div>
+      </div><!--/.panel -->
+    </div><!--/.requests -->
   </div>

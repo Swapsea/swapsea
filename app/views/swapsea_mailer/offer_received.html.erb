@@ -12,11 +12,15 @@
         </p>
         <p>
           <strong>Current offers</strong><br/>
-          <% @request.offers.where(:status => 'pending').order(id: :desc).each do |offer| %>
+          <% @request.offers.with_pending_status.order(id: :desc).each do |offer| %>
           <div class="offer<%= ' offer-new' if offer.id == @offer.id %>">
           <%= raw('<strong>NEW</strong><br/>') if offer.id == @offer.id %>
-            <div class="roster"><%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %></div>
-            <div class="patrol"><%= offer.roster.patrol.name %></div>
+          <% if offer.roster.present? %>
+					<div class="roster"><%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %></div>
+          <div class="patrol"><%= offer.roster.patrol.name %></div>
+					<% else %>
+          <div class="patrol">SUBSTITUTE ONLY (no swap needed)</div>
+					<% end %>
             <div class="member"><%= offer.user.name %></div>
             <div class="comment"><%= offer.comment %></div>
           </div>

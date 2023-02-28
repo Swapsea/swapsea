@@ -31,13 +31,21 @@
                   <span class="created-at">Updated <%= time_ago_in_words(offer.updated_at) %> ago</span>
                 </div>
                 <div class="details col-xs-2">
+                <% if (offer.roster) %>
                   <div class="arrows"><i class="fa fa-arrows-h fa-2x"></i></div>
+                <% else %>
+                  <div class="arrows"><i class="fa fa-life-ring fa-2x"></i></div>
+                <% end %>
                 </div>
                 <div class=" details col-xs-5">
+                <% if (offer.roster) %>
                   <span class="name"><s><%= offer.user.name %></s></span> <span class="name"><strong><%= offer.request.user.name %></strong></span><br/>
                   <%= offer.roster.patrol.short_name ? offer.roster.patrol.short_name : offer.roster.patrol.name %><br/>
                   <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
                   <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+                <% else %>
+                  <i>Sub without swap</i>
+                <% end %>
                 </div>
 
               </div><!--/.swap-request -->
