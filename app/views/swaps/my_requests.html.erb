@@ -1,4 +1,4 @@
-<% content_for(:title){ "My Swap Requests" } %>
+<% content_for(:title){ "My Requests" } %>
 <div class="row">
     <div class="col-sm-12">
       <ul class="nav nav-pills nav-justified" role="tablist">
@@ -14,11 +14,11 @@
   <div class="col-sm-12">
     <div class="requests">
 
-<% if @swaps.present? %>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2><%= content_for(:title) %></h2>
   </div>
+  <% if @swaps.present? %>
   <div class="panel-body">
     <% @swaps.each do |request| %>
     <div class="swap-request">
@@ -40,7 +40,7 @@
         <% end %>
       </div>
       <div class="details col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <em><%= pluralize(request.offers.where(:status => 'pending').count, "Offer", "Offers") %></em>
+        <em><%= pluralize(request.offers.with_pending_status.count, "Offer", "Offers") %></em>
       </div>
       <%= link_to request, :class => 'offer offer-view col-xs-2 col-sm-2 col-md-2 col-lg-2' do %>
       View
@@ -48,16 +48,11 @@
     </div><!--/.swap-request -->
     <% end %>
   </div><!--/.panel-body -->
-</div><!--/.panel -->
-<% else %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h2>My Requests</h2>
-  </div>
+  <% else %>
   <div class="panel-info">
-    <p>You currently have no requests.</p>
+    <p>You currently have no open requests.</p>
   </div>
-</div>
 <% end %>
+</div><!--/.panel -->
 </div>
 </div>

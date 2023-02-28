@@ -62,7 +62,9 @@
             <p>If you should be, please contact your Club Administration officer to ensure 'Surfguard' and Swapsea is updated.</p>
           </div>
 
-          <% elsif selected_user.custom_roster.empty? %>
+          <% end
+          
+          if selected_user.custom_roster.empty? %>
 
           <div class="info-panel">
             <h3>No Patrols?</h3>

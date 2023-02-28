@@ -42,39 +42,66 @@
   </div>
 </div> <!-- End Jumbotron -->
 
-
-<div id="faq">
-  <div class="container">
-    <!-- Signup panel area -->
-    <div class="row">
-      <div class="col-sm-12">
-          <div class="asset">
-        <ol>
-          <li><strong>How does it work?</strong>:<br/>
-          It takes two people to make a <i>swap</i> in Swapsea. The requestor advertises the patrol they need a swap for. Someone else makes an <i>offer</i> in exchange for another rostered patrol. If suitable, the requestor then confirms the offer and the deal is on. Each party is notified by email and receives a reminder ahead of their new patrol.</li>
-          <li><strong>Why does it work?</strong>:<br/>
-          Swapsea works because the Club honours a Swapsea swap as a handshake deal. Patrollers cannot go back on their word. Also, by having a reciprocal swap, two people are committed to the change and patrols remain fully manned.</li>
-          <li><strong>Why use Swapsea?</strong>:<br/>
-          Fewer no-shows means adequately resourced patrols, happier members and safer beaches. </li>
-          </li>
-          <li><strong>Where is the data coming from?</strong>:<br/>Each Club is responsible for keeping Swapsea up to date using "Custom reports" from the SLSA Surfguard system. Detailed instructions are provided to Clubs.
-          </li>
-          <li><strong>Where is Swapsea hosted?</strong>:<br/>Swapsea is hosted on Heroku which is owned by SalesForce. The data centre is in the United States of America.
-          </li>
-          <li><strong>What about Privacy?</strong>:<br/>Swapsea abides by the same Australian Privacy Principles as SLSA and takes privacy extremely seriously. We are professional developers who have our own personal data on this system too, and take all necessary precautions to keep that data secure and private. See our <%= link_to 'Terms of Use', terms_of_use_path() %>.</li>
-          <li><strong>Do other clubs use Swapsea?</strong>:<br/>Yes. Swapsea launched in 2012/13 and has evolved to support clubs in multiple states with special requirements.
-          </li>
-          <li><strong>How much does it cost?</strong>:<br/>Larger Clubs pay for Swapsea per season to cover hosting and support. Swapsea is free^ for smaller clubs. ^Conditions apply.
-          </li>
-          <li><strong>Who developed Swapsea?</strong>:<br/>Swapsea launched in 2013 when some guys from North Bondi Surf Club couldn't believe nobody had done this before. Since then Swapsea has facilitated thousands of swaps between hunreds of members.</li>
-          <li><strong>Why is Swapsea better?</strong><br/>
-          Many Clubs use Facebook or Google Sheets for posting Swaps which just doesn't work, and probably isn't great for privacy of personal data. <br/>
-          Also, the SLSA Substitutes system permits cancelling a swap which Swapsea does not (just swap back if you want!).<br/>
-          Finally, Swapsea is <%= link_to 'Open Source on GitHub', 'https://github.com/Swapsea/swapsea/' %> so you can make it just the way you want it!</li>
-          <li><strong>Why Swapsea?</strong><br/>Who doesn't want <%= link_to 'swapsies','https://en.wiktionary.org/wiki/swapsies' %> by the sea?</li>
-        </ol>
-          </div>
-      </div>
-    </div> <!-- End signup panel area -->
-  </div> <!-- container -->
-</div> <!-- End signup area -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <ol class="faq">
+        <li class="faq-question">How does it work?</li>
+        <li class="faq-answer">
+          It takes two people to make a <i>swap</i> in Swapsea. The requestor advertises the patrol they need a swap
+          for. Someone else makes an <i>offer</i> to be a Substitute, usually in exchange for another rostered
+          patrol.<br />
+          If suitable, the requestor then confirms the offer and the deal is on. Both members are notified by email and
+          the substitute receives a reminder ahead of their new patrol.</br>
+          Of course, members can just be a substitute without requiring a swap. Everyone still receives email
+          confirmation, and a reminder before the new rostered patrol.</li>
+        <li class="faq-question">Why is Swapsea better?</li>
+        <li class="faq-answer">
+          Many Clubs use home-grown systems for posting swaps, like Facebook or Google Sheets or worse. These just don't
+          work and may not keep member's personal data private. <br />
+          Also, Swapsea swaps can't be cancelled (just swap back if you need!), and there are email reminders for
+          upcoming patrols as well as nudge emails to encourage successful swaps.<br />
+          Finally, Swapsea is <%= link_to 'Open Source on GitHub' , 'https://github.com/Swapsea/swapsea/' %> so you can
+            review the code yourself, and contribute to make it even better!</li>
+        <li class="faq-question">Why does it work?</li>
+        <li class="faq-answer">
+          Swapsea works because the Club honours a Swapsea swap as a handshake deal. Patrollers cannot go back on their
+          word. Also, by having a reciprocal swap, two people are committed to the change and patrols remain fully
+          manned.</li>
+        <li class="faq-question">Why use Swapsea?</li>
+        <li class="faq-answer">
+          Fewer no-shows means adequately resourced patrols, happier members and safer beaches.</li>
+        <li class="faq-question">Where is the data coming from?</li>
+        <li class="faq-answer">
+          Each Club is responsible for keeping Swapsea up to date using "Custom reports" from the SLSA Surfguard system.
+          Detailed instructions are provided <%= link_to('on the setup page',setup_path) %>.</li>
+        <li class="faq-question">Where is Swapsea hosted?</li>
+        <li class="faq-answer">
+          Swapsea is hosted on Heroku which is owned by SalesForce. The data centre is in the United States of America.
+        </li>
+        <li class="faq-question">What about Privacy?</li>
+        <li class="faq-answer">
+          Swapsea abides by the same Australian Privacy Principles as SLSA and takes privacy extremely seriously. We are
+          professional developers who have our own personal data on this system too, and take all necessary precautions
+          to keep that data secure and private. See our <%= link_to 'Terms of Use' , terms_of_use_path() %>.</li>
+        <li class="faq-question">Do other clubs use Swapsea?</li>
+        <li class="faq-answer">
+          Yes. Swapsea launched in 2012/13 and has evolved to support clubs in multiple states with special
+          requirements.</li>
+        <li class="faq-question">How much does it cost?</li>
+        <li class="faq-answer">Larger Clubs pay for Swapsea per season to cover hosting and support. Swapsea is free^
+          for smaller clubs. ^Conditions apply.</li>
+        <li class="faq-question">Who developed Swapsea?</li>
+        <li class="faq-answer">
+          Swapsea launched in 2013 when some guys from North Bondi Surf Club couldn't believe nobody had done this
+          before. Since then Swapsea has facilitated thousands of swaps between hunreds of members.</li>
+        <li class="faq-question">Why Swapsea?</li>
+        <li class="faq-answer">
+          Who doesn't want <%= link_to 'swapsies' ,'https://en.wiktionary.org/wiki/swapsies' %> by the sea?</li>
+          <li class="faq-question">How do we get Started?</li>
+            <li class="faq-answer">
+            Authorised Club representatives should follow instructions <%= link_to('on the setup page',setup_path) %>.</li>
+      </ol>
+    </div>
+  </div>
+</div> <!-- container -->

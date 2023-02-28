@@ -19,12 +19,20 @@
             <%= offer.request.roster.start.strftime("%H:%M") %> - <%= offer.request.roster.finish.strftime("%H:%M") %>
           </div>
           <div class="col-xs-2">
-            <div class="arrows"><i class="fa fa-arrows-h fa-2x"></i></div>
+          <% if (offer.roster) %>
+          <div class="arrows"><i class="fa fa-arrows-h fa-2x"></i></div>
+          <% else %>
+            <div class="arrows"><i class="fa fa-life-ring fa-2x"></i></div>
+          <% end %>
           </div>
           <div class="col-xs-5">
+          <% if (offer.roster) %>
             <s class="name"><%= offer.user.name %></s> <strong class="name"><%= offer.request.user.name %></strong><br/>
             <%= offer.roster.start.strftime("%a, %d %b %y") %><br/>
             <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+            <% else %>
+            <i>Sub without swap</i>
+            <% end %>
           </div>
         </div><!--/.row -->
       </div><!--/.swap -->

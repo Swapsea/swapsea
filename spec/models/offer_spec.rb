@@ -7,20 +7,24 @@ RSpec.describe Offer do
     @club = create(:club_with_patrols)
     @requestor = create(:member, club: @club, patrol: @club.patrols.first)
     @offerer = create(:member, club: @club, patrol: @club.patrols.second)
+    @offerer_no_patrol = create(:member, club: @club, patrol: nil)
   end
 
   before do
     @request = create(:request, user: @requestor, roster: @requestor.patrol.rosters.first)
     @offer = create(:offer, user: @offerer, request: @request, roster: @offerer.patrol.rosters.first)
+    @offer_sub = create(:offer, user: @offerer_no_patrol, request: @request, roster: nil)
   end
 
   describe '#Atributes' do
     it 'is valid with valid attributes' do
       expect(@offer).to be_valid
+      expect(@offer_sub).to be_valid
     end
 
     it 'has default status pending' do
       expect(@offer).to have_attributes(status: 'pending')
+      expect(@offer_sub).to have_attributes(status: 'pending')
     end
   end
 
@@ -83,6 +87,21 @@ RSpec.describe Offer do
         expect(@offer).to be_withdrawn
       end
     end
+
+    describe 'offered_roster_valid?' do
+      it 'true for future roster' do
+        expect(@offer).to be_offered_roster_valid
+      end
+
+      it 'true for no roster (sub only)' do
+        expect(@offer_sub).to be_offered_roster_valid
+      end
+
+      it 'false for past roster' do
+        @offer.roster = create(:past_roster, patrol: @offerer.patrol)
+        expect(@offer).not_to be_offered_roster_valid
+      end
+    end
   end
 
   describe 'instance method' do
@@ -96,6 +115,16 @@ RSpec.describe Offer do
       expect(@offer.cancel).to be_falsey
       expect(@offer.unsuccessful).to be_falsey
       expect(@offer.withdraw).to be_falsey
+      # Sub only
+      @offer_sub.decline(nil)
+      expect(@offer_sub.status).to eq('declined')
+      expect(@offer_sub.decline_remark).to be_nil
+      expect(@offer_sub.decline(nil)).to be_truthy
+      # Negative tests
+      expect(@offer_sub.accept).to be_falsey
+      expect(@offer_sub.cancel).to be_falsey
+      expect(@offer_sub.unsuccessful).to be_falsey
+      expect(@offer_sub.withdraw).to be_falsey
     end
 
     it 'decline with remark' do
@@ -119,6 +148,15 @@ RSpec.describe Offer do
       expect(@offer.cancel).to be_falsey
       expect(@offer.decline).to be_falsey
       expect(@offer.unsuccessful).to be_falsey
+      # Sub only
+      expect(@offer_sub.withdraw).to be_truthy
+      expect(@offer_sub.status).to eq('withdrawn')
+      expect(@offer_sub.withdraw).to be_truthy
+      # Negative tests
+      expect(@offer_sub.accept).to be_falsey
+      expect(@offer_sub.cancel).to be_falsey
+      expect(@offer_sub.decline).to be_falsey
+      expect(@offer_sub.unsuccessful).to be_falsey
     end
 
     it 'unsuccessful' do
@@ -141,9 +179,18 @@ RSpec.describe Offer do
       expect(@offer.decline).to be_falsey
       expect(@offer.unsuccessful).to be_falsey
       expect(@offer.withdraw).to be_falsey
+      # Sub only
+      expect(@offer_sub.cancel).to be_truthy
+      expect(@offer_sub.status).to eq('cancelled')
+      expect(@offer_sub.cancel).to be_truthy
+      # Negative tests
+      expect(@offer_sub.accept).to be_falsey
+      expect(@offer_sub.decline).to be_falsey
+      expect(@offer_sub.unsuccessful).to be_falsey
+      expect(@offer_sub.withdraw).to be_falsey
     end
 
-    it 'accept the only (acceptable) offer' do
+    it 'accept the only (acceptable) offer for a Swap' do
       # Case: Request has no other offers. Offerer made no other offers.
       expect(@offer.accept).to be_truthy
       expect(@offer.status).to eq('accepted')
@@ -153,6 +200,18 @@ RSpec.describe Offer do
       expect(@offer.decline).to be_falsey
       expect(@offer.unsuccessful).to be_falsey
       expect(@offer.withdraw).to be_falsey
+    end
+
+    it 'accept the only (acceptable) offer for a Sub' do
+      # Case: Request has no other offers. Sub made no other offers.
+      expect(@offer_sub.accept).to be_truthy
+      expect(@offer_sub.status).to eq('accepted')
+      expect(@offer_sub.accept).to be_truthy
+      # Negative tests
+      expect(@offer_sub.cancel).to be_falsey
+      expect(@offer_sub.decline).to be_falsey
+      expect(@offer_sub.unsuccessful).to be_falsey
+      expect(@offer_sub.withdraw).to be_falsey
     end
 
     it 'cannot accept past offer' do

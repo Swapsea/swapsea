@@ -5,8 +5,12 @@ View it now at <%= request_url(@request) %>.
 
 New offer
 ---------
+<% if @offer.roster.present? %>
 <%= @offer.roster.patrol.name %>
 <%= @offer.roster.start.strftime("%A %d %B %Y") %>, <%= @offer.roster.start.strftime("%H:%M") %> - <%= @offer.roster.finish.strftime("%H:%M") %>
+<% else %>
+SUBSTITUTE ONLY (no swap needed)
+<% end %>
 From: <%= @offer.user.name %>
 Comment: <%= @offer.comment %>
 
@@ -17,9 +21,13 @@ Your swap request
 
 Current offers
 --------------
-<% @request.offers.where(:status => 'pending').each do |offer| %>
+<% @request.offers.with_pending_status.each do |offer| %>
+<% if offer.roster.present? %>
 <%= offer.roster.patrol.name %>
 <%= offer.roster.start.strftime("%A %d %B %Y") %>, <%= offer.roster.start.strftime("%H:%M") %> - <%= offer.roster.finish.strftime("%H:%M") %>
+<% else %>
+SUBSTITUTE ONLY (no swap needed)
+<% end %>
 From: <%= offer.user.name %>
 Comment: <%= @offer.comment %>
 

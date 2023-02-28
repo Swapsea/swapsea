@@ -86,8 +86,11 @@ class User < ApplicationRecord
 
   def offers_available_for(request)
     offers = []
-
     rosters = custom_roster - request.user.custom_roster
+    # Add a nil roster for SUBSTITUTE ONLY
+    nil_roster = Roster.new
+    nil_roster.start = DateTime.tomorrow # Anything in the future
+    rosters.append(nil_roster)
     rosters.each do |roster|
       if !request.offer_already_exists?(roster,
                                         self) && (DateTime.now <= roster.start) && !request.roster.user_rostered_on(self)
