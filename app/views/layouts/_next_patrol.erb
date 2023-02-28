@@ -1,0 +1,5 @@
+<% cache [ "next_patrol/selected_user", selected_user ], expires_in: 5.minutes do %>
+<ul class="nav navbar-nav visible-md visible-lg">
+    <p class="navbar-text"><strong>Next Patrol:</strong> <%= link_to selected_user.next_roster.start.strftime("%H:%M %A %e %B %Y"), patrol_roster_path(selected_user.next_roster) %></p>
+</ul>
+<% end %>
