@@ -75,12 +75,14 @@
               </ul>
 
               <% if selected_user.has_patrol? && selected_user.next_roster.present? %>
-              <%= render 'layouts/next_patrol' %>
-              <% end %>
-
-              <ul class="nav navbar-center visible-sm visible-xs">
-                <div id="swapsea-nav-logo" class="navbar-logo-blk"></div>
+              <ul class="nav navbar-nav">
+                  <p class="navbar-text text-center"><strong>Next Patrol:</strong> <%= render 'layouts/next_patrol_link' %></p>
               </ul>
+              <% else %>
+              <ul class="nav navbar-center visible-sm visible-xs">
+                <%= link_to raw('<div id="swapsea-nav-logo" class="navbar-logo-blk"></div>'), dashboard_path %>
+              </ul>
+              <% end %>
 
               <ul class="nav extra-navbar navbar-nav navbar-right hidden-xs">
 

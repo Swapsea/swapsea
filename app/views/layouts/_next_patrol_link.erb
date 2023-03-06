@@ -1,0 +1,3 @@
+<% cache [ "next_patrol/selected_user", selected_user.id ], expires_in: 20.minutes do %>
+<%= link_to selected_user.next_roster.start.strftime("%H:%M %A %e %B"), patrol_roster_path(selected_user.next_roster) %>
+<% end %>
