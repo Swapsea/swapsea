@@ -36,7 +36,7 @@ describe 'e2e Happy Path' do
       authenticate_user(@member)
 
       visit '/dashboard'
-      expect(page).not_to have_text('Privacy Notice')
+      expect(page).not_to have_text('Privacy Reminder')
       expect(page).to have_text('NOTICE BOARD')
 
       visit '/swaps'
@@ -77,7 +77,7 @@ describe 'e2e Happy Path' do
       authenticate_user(@captain)
 
       visit '/dashboard'
-      expect(page).to have_text('Privacy Notice')
+      expect(page).to have_text('Privacy Reminder')
 
       visit '/rosters'
 
