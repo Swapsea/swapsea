@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
   def show
     @offer = Offer.new
     @offers = @request.offers.with_pending_status.left_joins(roster: :patrol).includes(:user, :roster, roster: :patrol).order(:start)
-    @rosters_available = selected_user.offers_available_for(@request).sort_by(&:start)
+    @rosters_available = selected_user.offers_available_for(@request)
     @awards = @request.user.awards.map(&:award_name)
   end
 
