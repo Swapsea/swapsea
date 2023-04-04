@@ -55,10 +55,7 @@ class Offer < ApplicationRecord
   def accept
     # Check valid status
     case status
-    when 'accepted'
-      # Already accepted
-      return true
-    when 'cancelled', 'declined', 'unsuccessful', 'withdrawn'
+    when 'cancelled', 'declined', 'unsuccessful', 'withdrawn', 'accepted'
       message = "Error: Offer '#{id}' cannot be accepted from status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
