@@ -61,14 +61,11 @@ class Request < ApplicationRecord
   def succeeded
     # Check valid status
     case status
-    when 'successful'
-      # Already successful
-      true
     when 'open'
       self.status = :successful
       save
     else
-      message = "Request '#{id}' cannot be successful from status '#{status}'."
+      message = "Request '#{id}' cannot be marked successful from status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
