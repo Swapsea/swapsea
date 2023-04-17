@@ -194,7 +194,8 @@ RSpec.describe Offer do
       # Case: Request has no other offers. Offerer made no other offers.
       expect(@offer.accept).to be_truthy
       expect(@offer.status).to eq('accepted')
-      expect(@offer.accept).to be_truthy
+      # Can't mark accepted again
+      expect(@offer.accept).to be_falsey
       # Negative tests
       expect(@offer.cancel).to be_falsey
       expect(@offer.decline).to be_falsey
@@ -206,7 +207,8 @@ RSpec.describe Offer do
       # Case: Request has no other offers. Sub made no other offers.
       expect(@offer_sub.accept).to be_truthy
       expect(@offer_sub.status).to eq('accepted')
-      expect(@offer_sub.accept).to be_truthy
+      # Can't mark accepted again
+      expect(@offer_sub.accept).to be_falsey
       # Negative tests
       expect(@offer_sub.cancel).to be_falsey
       expect(@offer_sub.decline).to be_falsey
@@ -238,7 +240,6 @@ RSpec.describe Offer do
       expect(@offer.same_offer_for_other_requests.count).to be_zero
       # expect(same_offer_to_different_request_1.reload).to be_withdrawn
       # expect(same_offer_to_different_request_2.reload).to be_withdrawn
-      expect(@offer.accept).to be_truthy
     end
 
     it 'accept cleans up other_offers_for_the_same_request' do
@@ -262,7 +263,6 @@ RSpec.describe Offer do
       # expect(other_offers_for_the_same_request22.reload).to be_unsuccessful
       # expect(other_offers_for_the_same_request3.reload).to be_unsuccessful
       # expect(other_offers_for_the_same_request33.reload).to be_unsuccessful
-      expect(@offer.accept).to be_truthy
     end
 
     it 'accept closes corresponding_requests' do
@@ -272,7 +272,6 @@ RSpec.describe Offer do
       expect(@offer.accept).to be_truthy
       expect(@offer.corresponding_requests.count).to be_zero
       # expect(offer_corresponding_request.reload).to be_cancelled
-      expect(@offer.accept).to be_truthy
     end
 
     it 'accept withdraws offers_that_match_request' do
@@ -289,7 +288,6 @@ RSpec.describe Offer do
       expect(@offer.accept).to be_truthy
       expect(@offer.request.offers_that_match_request.count).to be_zero
       # expect(same_offer_to_different_request_2.reload).to be_withdrawn
-      expect(@offer.accept).to be_truthy
     end
   end
 end
