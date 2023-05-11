@@ -191,6 +191,33 @@ class Email < ApplicationRecord
     end
   end
 
+  # Season Summary
+  def self.season_summary(organisation = nil)
+    clubs = if organisation
+              # Look up club id
+              Club.with_reminder_emails_enabled.where(name: organisation)
+            else
+              Club.with_reminder_emails_enabled
+            end
+
+    clubs.map do |club|
+      emails_sent = 0
+      # Club Stats
+      # % Members Active (Logged in / Total)
+      # % Successful Requests (Confirmed / Total)
+
+      club.users.each do |user|
+        # Only send email for users that logged in more than once
+        if user.sign_in_count > 1
+          season_summary_user(club, user)
+          emails_sent += 1
+        end
+      end
+
+      "Sent #{emails_sent} season summary emails for #{club.name}."
+    end
+  end
+
   ###############################################################################
   # => To refactor
   ###############################################################################
@@ -204,5 +231,16 @@ class Email < ApplicationRecord
         Rails.logger.warn "Skipped sending not yet proficient email because #{user.organisation} is_active=#{user.club.is_active}"
       end
     end
+  end
+
+  def self.season_summary_user(club, user)
+    # User stats
+    num_logins = user.sign_in_count
+    num_requests_success = Request.with_club(club).with_successful_status.where(user:).count
+    num_offers_accepted = Offer.with_club(club).with_accepted_status.where(user:).count
+
+    SwapseaMailer.season_summary(user, num_logins, num_requests_success, num_offers_accepted).deliver
+  rescue Exception => e
+    Rails.logger.error "Error sending season summary email: #{e}"
   end
 end
