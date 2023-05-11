@@ -1,0 +1,33 @@
+        <p>
+          G'day <%= @user.first_name %>,
+        </p>
+        <p>
+          Thank you for using Swapsea as a patrolling member of <b><%= @user.club.name %></b>.<br />
+          <br />
+          Your stats this season:
+          <ul>
+          <li><b><%= @num_logins %></b> logins</li>
+          <li><b><%= @num_requests_success %></b> successful swaps</li>
+          <li><b><%= @num_offers_accepted %></b> accepted offers</li>
+          </ul>
+          <i>See <%= link_to 'SLSA Members Area', 'https://members.sls.com.au/' %> for your final season hours.</i>
+        </p>
+        <p>
+        <h2>DID YOU LIKE SWAPSEA?</h2>
+        </p>
+        <p>
+          <b>Please reply</b> and tell us how you'd make Swapsea better, or just to say thanks (we're volunteers
+          too!). Or just <%= link_to 'like us on Facebook', 'https://facebook.com/swapsea' %>.
+        </p>
+        <p>
+        <h2>WHAT NEXT?</h2>
+        </p>
+        <p>
+            Swapsea securely deletes all your personal data at the end of each season, which will happen soon. If you're patrolling next season, you'll need to activate again.<br />
+            Please contact your Club for questions about your membership, hours etc.<br />
+        </p>
+        <p>Thanks again and enjoy the cooler months.</p>
+        <p>
+          Cheers,<br />
+          Swapsea
+        </p>
