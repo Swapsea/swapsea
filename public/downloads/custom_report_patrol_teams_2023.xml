@@ -52,7 +52,7 @@
     <HighLevelCategory_SelectedValue />
     <MembershipType_SelectedValue />
     <ArchivedInAllOrgs_SelectedValue />
-    <Status_SelectedValue />
+    <Status_SelectedValue>Active</Status_SelectedValue>
     <AgeCategory_SelectedValue />
     <Competitor_SelectedValue />
     <PatrolHourExemption_SelectedValue />
@@ -179,7 +179,8 @@
     <sendEmailAddressUser>help@swapsea.com.au</sendEmailAddressUser>
     <maxEmailRecipients>0</maxEmailRecipients>
     <_qf_default>report:submit</_qf_default>
-    <reportTitle>swapsea_rosters</reportTitle>
+    <reportTitle>swapsea_patrols</reportTitle>
+    <selectMemberGeneralDetails_MemberID>1</selectMemberGeneralDetails_MemberID>
     <sortOrder_MemberID />
     <columnHeader_MemberID />
     <MemberID />
@@ -472,11 +473,13 @@
     <sortOrder_ArchivedInAllOrgs />
     <columnHeader_ArchivedInAllOrgs />
     <ArchivedInAllOrgs>-1</ArchivedInAllOrgs>
+    <selectMembershipsDetails_Status>1</selectMembershipsDetails_Status>
     <sortOrder_Status />
     <columnHeader_Status />
     <Statuss>
-        <Status isMulti="1">-1</Status>
+        <Status isMulti="1">A</Status>
     </Statuss>
+    <selectMembershipsDetails_RegSeason>1</selectMembershipsDetails_RegSeason>
     <sortOrder_RegSeason />
     <columnHeader_RegSeason />
     <RegSeason>2022</RegSeason>
@@ -1002,35 +1005,34 @@
     <sortOrder_ServiceCourse />
     <columnHeader_ServiceCourse />
     <ServiceCourse>-1</ServiceCourse>
+    <selectPatrolTeams>1</selectPatrolTeams>
+    <selectPatrolTeams_PatrolTeam>1</selectPatrolTeams_PatrolTeam>
     <sortOrder_PatrolTeam />
     <columnHeader_PatrolTeam />
     <PatrolTeams>
         <PatrolTeam isMulti="1">-1</PatrolTeam>
     </PatrolTeams>
+    <selectPatrolTeams_PatrolTeamPosition>1</selectPatrolTeams_PatrolTeamPosition>
     <sortOrder_PatrolTeamPosition />
     <columnHeader_PatrolTeamPosition />
     <PatrolTeamPositions>
         <PatrolTeamPosition isMulti="1">-1</PatrolTeamPosition>
     </PatrolTeamPositions>
-    <selectPatrolRosters_RosteredPatrolTeam>1</selectPatrolRosters_RosteredPatrolTeam>
     <sortOrder_RosteredPatrolTeam />
     <columnHeader_RosteredPatrolTeam />
     <RosteredPatrolTeams>
         <RosteredPatrolTeam isMulti="1">-1</RosteredPatrolTeam>
     </RosteredPatrolTeams>
-    <selectPatrolRosters_PatrolRosterDate>1</selectPatrolRosters_PatrolRosterDate>
     <sortOrder_PatrolRosterDate />
     <columnHeader_PatrolRosterDate />
-    <PatrolRosterDate_From>01/07/2022</PatrolRosterDate_From>
-    <PatrolRosterDate_To>30/06/2023</PatrolRosterDate_To>
-    <selectPatrolRosters_PatrolRosterStartTime>1</selectPatrolRosters_PatrolRosterStartTime>
+    <PatrolRosterDate_From />
+    <PatrolRosterDate_To />
     <sortOrder_PatrolRosterStartTime />
     <columnHeader_PatrolRosterStartTime />
     <PatrolRosterStartTime_FromH>-1</PatrolRosterStartTime_FromH>
     <PatrolRosterStartTime_Fromi>-1</PatrolRosterStartTime_Fromi>
     <PatrolRosterStartTime_ToH>-1</PatrolRosterStartTime_ToH>
     <PatrolRosterStartTime_Toi>-1</PatrolRosterStartTime_Toi>
-    <selectPatrolRosters_PatrolRosterFinishTime>1</selectPatrolRosters_PatrolRosterFinishTime>
     <sortOrder_PatrolRosterFinishTime />
     <columnHeader_PatrolRosterFinishTime />
     <PatrolRosterFinishTime_FromH>-1</PatrolRosterFinishTime_FromH>
@@ -1408,12 +1410,12 @@
     <NoteDetails />
     <sendEmail>1</sendEmail>
     <sendEmailAddress>help@swapsea.com.au</sendEmailAddress>
-    <recurringTypeID>1</recurringTypeID>
-    <recurringInterval />
-    <scheduledRunTime_Date />
+    <recurringTypeID>4</recurringTypeID>
+    <recurringInterval>1</recurringInterval>
+    <scheduledRunTime_Date>1/7/2023</scheduledRunTime_Date>
     <scheduledRunTime_Times>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
     </scheduledRunTime_Times>
-    <customReportName>swapsea_rosters_2022</customReportName>
+    <customReportName>swapsea_patrol_teams_2023</customReportName>
 </report>

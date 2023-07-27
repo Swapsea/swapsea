@@ -15,6 +15,6 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
     # Test the body of the sent email contains what we expect it to
     assert_equal ['Swapsea <help@swapsea.com.au>'], email.from
     assert_equal ['mark@swapsea.com.au'], email.to
-    assert_equal 'Activate your Swapsea account for 2022/23', email.subject
+    assert_equal 'Activate your Swapsea account for 2023/24', email.subject
   end
 end

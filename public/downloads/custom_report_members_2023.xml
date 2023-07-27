@@ -1428,10 +1428,10 @@
     <sendEmailAddress>help@swapsea.com.au</sendEmailAddress>
     <recurringTypeID>4</recurringTypeID>
     <recurringInterval>1</recurringInterval>
-    <scheduledRunTime_Date>1/7/2022</scheduledRunTime_Date>
+    <scheduledRunTime_Date>1/7/2023</scheduledRunTime_Date>
     <scheduledRunTime_Times>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
     </scheduledRunTime_Times>
-    <customReportName>swapsea_members_2022</customReportName>
+    <customReportName>swapsea_members_2023</customReportName>
 </report>
