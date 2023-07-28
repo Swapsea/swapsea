@@ -32,9 +32,9 @@
     <!-- Intro -->
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
-        <h1>Welcome to Swapsea</h1>
+        <h1>Patrol Swaps Made Easy</h1>
         <p class="heading">
-          Swapsea is a superior, award-winning patrol swap system for Surf Life Saving Clubs, evolved over seven seasons and over 1,000 swaps.
+          Swapsea is an award-winning patrol swap system for Surf Life Saving Clubs, evolved over ten seasons and thousands of swaps.
       </div>
     </div> <!-- End intro -->
 
@@ -58,22 +58,22 @@
       <div class="col-sm-4">
         <div class="asset">
           <span class="fa fa-comment asset-ico-a"></span>
-          <h3>Weekly Reminders</h3>
+          <h3>Patrol Reminders</h3>
           <p>Everyone is busy and sometimes we need a gentle reminder. Swapsea automatically reminds members about their upcoming patrol commitments.</p>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="asset">
           <span class="fa fa-exchange asset-ico-b"></span>
-          <h3>Swap Patrols</h3>
-          <p>Can't do your next patrol? We've all been there! No worries, just swap it. Once confirmed, neither side can cancel. </p>
+          <h3>Swaps &amp; Subs</h3>
+          <p>Can't do your next patrol? We've all been there! No worries, swap with someone else or just get a sub. </p>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="asset">
           <span class="fa fa-file-text asset-ico-c"></span>
-          <h3>Amazing Reports</h3>
-          <p>Better information means better decisions. Swapsea has a rich set of reports with all the important stuff that patrol captains and surf club officials love.</p>
+          <h3>Superior Reports</h3>
+          <p>Better information means better decisions. Swapsea has a rich set of reports with all the important stuff that patrol captains and Club administrators love.</p>
         </div>
       </div>
     </div> <!-- End assets -->
@@ -86,32 +86,56 @@
     <div class="row section-header" style="cellpadding:30">
       <div class="col-sm-10 col-sm-offset-1">
         <h2>Clubs Love Swapsea!</h2>
-        <p class="sub-heading-text">Want Swapsea for your club? <%= link_to 'See the Setup Guide', setup_path %>.
-        </p>
       </div>
     </div> <!-- End section header -->
     <div class="row">
-      <div class="col-sm-4" style="padding-bottom: 15px">
+      <div class="col-sm-3" style="padding-bottom: 15px">
           <%= link_to image_tag("club_2.png", class: "img-responsive center-block", width:"150px", alt: "North Bondi SLSC"), login_path  %>
       </div>
-      <div class="col-sm-4" style="padding-bottom: 15px">
+      <div class="col-sm-3" style="padding-bottom: 15px">
           <%= link_to image_tag("club_3.png", class: "img-responsive center-block", width:"150px", alt: "Bronte SLSC"), login_path  %>
       </div>
-      <div class="col-sm-4" style="padding-bottom: 15px">
+      <div class="col-sm-3" style="padding-bottom: 15px">
+      <%= link_to image_tag("club_7.png", class: "img-responsive center-block", width:"150px", alt: "Mona Vale SLSC"), login_path  %>
+      </div>
+      <div class="col-sm-3" style="padding-bottom: 15px">
           <%= link_to image_tag("club_8.png", class: "img-responsive center-block", width:"150px", alt: "Wanda SLSC"), login_path  %>
       </div>
-
     </div>
     <div class="row">
       <div class="col-sm-4" style="padding-bottom: 15px">
           <%= link_to image_tag("club_6.png", class: "img-responsive center-block", width:"150px", alt: "Whale Beach SLSC"), login_path  %>
       </div>
       <div class="col-sm-4" style="padding-bottom: 15px">
-          &nbsp;</div>
+        <%= link_to image_tag("club_11.png", class: "img-responsive center-block", width:"150px", alt: "North Steyne SLSC"), login_path  %>
+      </div>
       <div class="col-sm-4" style="padding-bottom: 15px">
-          <%= link_to image_tag("club_4.png", class: "img-responsive center-block", width:"150px", alt: "Northcliffe SLSC"), login_path  %>
+          <%= link_to image_tag("club_10.png", class: "img-responsive center-block", width:"150px", alt: "Avalon SLSC"), login_path  %>
       </div>
     </div>
+    <div class="row section-header" style="cellpadding:30">
+    <!-- Signup area (main call-to-action) -->
+    <div id="signup">
+      <div class="container">
+        <!-- Section header -->
+        <div class="row section-header">
+          <div class="col-sm-10 col-sm-offset-1">
+            <h2>Want Swapsea at Your Club?</h2>
+            <p class="sub-heading-text"><%= link_to 'See the Setup Guide', setup_path %>.
+    
+          </div>
+        </div> <!-- End section header -->
+        <!-- Signup panel area -->
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+              <div class="text-center">
+              <%= link_to 'Setup Guide', setup_path, :class => 'btn btn-success btn-lg' %>
+              </div>
+          </div>
+        </div> <!-- End signup panel area -->
+      </div> <!-- container -->
+    </div> <!-- End signup area -->
+    </div> <!-- End section header -->
   </div>
 </div>
 
@@ -122,50 +146,49 @@
     <!-- Section header -->
     <div class="row section-header">
       <div class="col-sm-10 col-sm-offset-1">
-        <h2>Features</h2>
-        <p class="sub-heading-text">Swapsea is built by clubbies, for clubbies.</p>
+        <h2>Swapsea is built by clubbies, for clubbies.</h2>
       </div>
     </div> <!-- End section header -->
 
     <!-- First row of features -->
     <div class="row">
       <div class="col-sm-6">
-        <h3><i class="fa fa-exchange"></i>Patrol Swaps</h3>
+        <h3><i class="fa fa-exchange"></i>Swaps &amp; Subtitutes</h3>
         <p>
-          <strong>Make Swap Requests &amp; Offers</strong><br/>
+          <strong>2-Way Swaps &amp; 1-Way Subs</strong><br/>
           Swapsea makes it easier for your club members to manage their patrol commitments, reduce the number of no-shows and ensure that substitutes are accountable. Patrol Captains can manage their people better and with greater confidence by knowing who is going to be on the beach in advance, as well who is qualified to do what.
         </p>
         <p> <strong>Patrol Team Minimum Requirements</strong><br/>
           Swapsea automatically makes sure each Patrol meets the minimum requirements to be on duty. As long as both patrols in the swap would still meet the minimum requirements, anyone is free to swap with anyone else. This means that swaps are not limited to both people having the same qualifications - how about that!</p>
       </div>
       <div class="col-sm-6">
-        <h3><i class="fa fa-check-square-o"></i>Skills Maintenance</h3>
-        <p>
-          <strong>Skills Maintenance</strong><br/>
-          Ensuring <em>everyone</em> is current with the latest knowledge and techniques is a critical task yet logisitical challenge. Swapsea makes signing up to Skills Maintenance sessions super simple, ensuring sessions aren't over-crowded for an optimal instructor-to-student ratio and focussed learning environment.
-        </p>
+      <h3><i class="fa fa-envelope"></i>Reminders</h3>
+      <p>
+        <strong>Patrol Reminders</strong><br/>
+        We all get distracted from time to time, and forget we have a patrol on the weekend. Not anymore! Swapsea reminds all patrollers rostered on for the coming weekend, by email or SMS (optional).
+      </p>
+      <p>
+        <strong>Skills Maintenance Reminders</strong><br/>
+        Motivating and ensuring every patroller attends a Skills Maintenance session can be a daunting task. Swapsea regularly reminds those who haven't signed up yet - to sign up. And Swapsea reminds them again the week they need to attend.
+      </p>
       </div>
     </div> <!-- End first row of features -->
 
     <!-- Second row of features -->
     <div class="row">
       <div class="col-sm-6">
-        <h3><i class="fa fa-file-text"></i>Awesome Reports</h3>
+        <h3><i class="fa fa-file-text"></i>Superior Reports</h3>
         <p>
           <strong>Sign-On Sheets</strong><br/>
           Swapsea helps club members manage their patrol commitments, so it's only natural to help Patrol Captains out too by providing up-to-date patrol sign-on sheets that are dynamically generated and account for all swaps in-and-out. PCs and VCs also have contact details of their patrollers, including the substitutes.
         </p>
       </div>
       <div class="col-sm-6">
-        <h3><i class="fa fa-envelope"></i>Reminders</h3>
-        <p>
-          <strong>Weekly Patrol Reminders</strong><br/>
-          We all get distracted from time to time, and forget we have a patrol on the weekend. Not anymore! Swapsea will automatically send a reminder email to all patrollers rostered on for the coming weekend.
-        </p>
-        <p>
-          <strong>Skills Maintenance Reminders</strong><br/>
-          Motivating and ensuring every patroller attends a Skills Maintenance session can be a daunting task. Swapsea regularly reminds those who haven't signed up yet - to sign up. And Swapsea reminds them again the week they need to attend.
-        </p>
+      <h3><i class="fa fa-check-square-o"></i>Skills Maintenance</h3>
+      <p>
+        <strong>Skills Maintenance</strong><br/>
+        Ensuring <em>everyone</em> is current with the latest knowledge and techniques is a critical task yet logisitical challenge. Swapsea makes signing up to Skills Maintenance sessions super simple, ensuring sessions aren't over-crowded for an optimal instructor-to-student ratio and focussed learning environment.
+      </p>
       </div>
     </div> <!-- End second row of benefits -->
 
@@ -195,7 +218,7 @@
     <div class="row section-header">
       <div class="col-sm-10 col-sm-offset-1">
         <h2>Pricing</h2>
-        <p class="sub-heading-text">Swapsea is not for-profit, covering costs only.</p>
+        <p class="sub-heading-text">Swapsea is run by volunteers and is not for-profit.</p>
       </div>
     </div> <!-- End section header -->
     <div class="row pricing-charts">
@@ -204,9 +227,9 @@
           <div class="quantity">
             <span class="dollar">$</span>
             <span class="price">FREE</span>
-            <span class="period">/season</span>
+            <span class="period">/patroller</span>
           </div>
-          <div class="plan-name"> Smaller clubs (< 200 patrollers)</div>
+          <div class="plan-name">< 100 patrollers</div>
           <div class="specs">
             <div class="spec">
               Patrol Swaps
@@ -215,16 +238,16 @@
               Skills Maintenance Sign ups
             </div>
             <div class="spec">
-              Weekly Reminders
+              Patrol Reminder Emails
+            </div>
+            <div class="spec">
+              Open Swap Nudge Emails
             </div>
             <div class="spec">
               Calendar Sync
             </div>
             <div class="spec">
               Automatic import from Surfguard
-            </div>
-            <div class="condition">
-              * SMS costs not included
             </div>
           </div>
         </div>
@@ -233,10 +256,10 @@
         <div class="pricing-chart">
           <div class="quantity">
             <span class="dollar">$</span>
-            <span class="price">300</span>
-            <span class="period">/season</span>
+            <span class="price">1</span>
+            <span class="period">/patroller</span>
           </div>
-          <div class="plan-name">200+ patrollers</div>
+          <div class="plan-name">100+ patrollers</div>
           <div class="specs">
             <div class="spec">
               Everything in FREE, plus
@@ -248,10 +271,12 @@
               End of Season reports
             </div>
             <div class="spec">
-              Feature Requests
+              Reminders via SMS (optional)
             </div>
             <div class="condition">
-              *GST not applicable
+              Patroller is a current award holder, registered for the season at season end. Maximum price $300 per Club.<br/>
+              <%= link_to 'SMS costs $0.0515 per message', 'https://www.twilio.com/en-us/sms/pricing/au'  %>.<br/>
+              GST not applicable.
             </div>
           </div>
         </div>
@@ -267,7 +292,7 @@
     <div class="row section-header">
       <div class="col-sm-10 col-sm-offset-1">
         <h2>Ready for Swapsea?</h2>
-        <p class="sub-heading-text">Want Swapsea for your club? <%= link_to 'See the Setup Guide', setup_path %>.
+        <p class="sub-heading-text">Want Swapsea at your club? <%= link_to 'See the Setup Guide', setup_path %>.
 
       </div>
     </div> <!-- End section header -->
