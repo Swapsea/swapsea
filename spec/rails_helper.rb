@@ -44,7 +44,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{Rails.root}/spec/fixtures"
+  config.fixture_path = "#{Rails.root.join('spec/fixtures')}"
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -55,6 +55,11 @@ RSpec.configure do |config|
   Capybara.default_driver = :selenium_chrome # :selenium_chrome and :selenium_chrome_headless are also registered
   Capybara.current_driver = :selenium_chrome
   Capybara.javascript_driver = :selenium_chrome
+  
+  # Hacky workaround until Capybara & Chrome are in sync
+  warn("FIXME: Chromedriver hardcoded")
+  Webdrivers::Chromedriver.required_version = "114.0.5735.90"
+  
   Capybara.default_max_wait_time = 3 # Seconds
   Capybara.server = :puma
   Capybara.test_id = 'data-test-id'

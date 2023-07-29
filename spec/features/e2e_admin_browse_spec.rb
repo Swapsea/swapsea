@@ -15,7 +15,7 @@ describe 'e2e Happy Path - Admin' do
 
   it 'visit home page' do
     visit '/'
-    expect(page).to have_text('Welcome to Swapsea')
+    expect(page).to have_text('Patrol Swaps Made Easy')
   end
 
   it 'signs admin in and clicks around', js: true do
