@@ -24,6 +24,10 @@ class HomeController < ApplicationController
     render layout: 'blank'
   end
 
+  def registration
+    render layout: 'blank'
+  end
+
   def thanks
     render layout: 'basic'
   end

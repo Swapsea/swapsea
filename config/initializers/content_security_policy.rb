@@ -6,7 +6,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.font_src    :self, :https, :data
   policy.img_src     :self, :https, :data
   policy.object_src  :none
-  policy.script_src  :self, :unsafe_inline, 'https://forecast.io', 'https://www.googletagmanager.com', 'https://embed.doorbell.io', 'https://js-agent.newrelic.com'
+  policy.script_src  :self, :unsafe_inline, 'https://forecast.io', 'https://www.googletagmanager.com', 'https://www.google.com', 'https://www.gstatic.com', 'https://embed.doorbell.io', 'https://js-agent.newrelic.com', 'https://js.hsforms.net'
   policy.style_src   :self, :unsafe_inline, 'https://embed.doorbell.io', 'https://fonts.googleapis.com'
 end
 
