@@ -30,7 +30,7 @@ module CapybaraHelpers
     # # find("a.logout-confirm").click
     # find('a.btn-success').click
 
-    # expect(page).to have_text('Welcome to Swapsea')
+    # expect(page).to have_text('Patrol Swaps Made Easy')
   end
 end
 

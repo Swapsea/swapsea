@@ -87,10 +87,10 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
-    if @request.cancel
-      @request.create_activity :close, owner: selected_user
-      redirect_to my_requests_swaps_path, notice: 'Your Swap Request was cancelled.'
-    end
+    return unless @request.cancel
+
+    @request.create_activity :close, owner: selected_user
+    redirect_to my_requests_swaps_path, notice: 'Your Swap Request was cancelled.'
   end
 
   private

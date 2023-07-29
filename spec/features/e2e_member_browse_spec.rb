@@ -7,7 +7,7 @@ require 'capybara-screenshot/rspec'
 describe 'e2e Happy Path - Anonymous User' do
   it 'visit public pages' do
     visit '/'
-    expect(page).to have_text('Welcome to Swapsea')
+    expect(page).to have_text('Patrol Swaps Made Easy')
 
     visit '/faq'
     expect(page).to have_text('Frequently Asked Questions')

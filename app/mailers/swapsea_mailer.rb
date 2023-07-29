@@ -134,7 +134,7 @@ class SwapseaMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    @subject = 'Activate your Swapsea account for 2022/23'
+    @subject = 'Activate your Swapsea account for 2023/24'
     mail subject: @subject,
          to: email_address_with_name(@user.email, @user.name)
   end
@@ -144,8 +144,8 @@ class SwapseaMailer < ApplicationMailer
     @num_logins = num_logins
     @num_requests_success = num_requests_success
     @num_offers_accepted = num_offers_accepted
-    @subject = 'Season Summary 2022/23'
-    mail subject: "Season Summary 2022/23 - #{@user.club.short_name} ##{@user.id}",
+    @subject = 'Season Summary 2023/24'
+    mail subject: "Season Summary 2023/24 - #{@user.club.short_name} ##{@user.id}",
          to: email_address_with_name(@user.email, @user.name),
          reply_to: email_address_with_name('feedback-6873-bK7yMGSOfxnWFdjZH2LyOyJwYY20WLel@feedback.doorbell.io', 'Swapsea Feedback')
   end

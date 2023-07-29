@@ -32,7 +32,7 @@ class Award < ApplicationRecord
       # award.save!
 
       award = [
-        row['Award Number'].gsub(/'/, ''),
+        row['Award Number'].delete("'"),
         row['Award Name'],
         row['Member ID'],
         row['Award Date'],

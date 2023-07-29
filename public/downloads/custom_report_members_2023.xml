@@ -50,9 +50,9 @@
     <Branch_hidden />
     <Club_hidden />
     <HighLevelCategory_SelectedValue />
-    <MembershipType_SelectedValue />
+    <MembershipType_SelectedValue>Probationary, Cadet Member (13-15 years), Active (15-18 yrs), Active (18yrs and over), Award Member, Reserve Active, Long Service, Associate, Life Member, General</MembershipType_SelectedValue>
     <ArchivedInAllOrgs_SelectedValue />
-    <Status_SelectedValue />
+    <Status_SelectedValue>Active</Status_SelectedValue>
     <AgeCategory_SelectedValue />
     <Competitor_SelectedValue />
     <PatrolHourExemption_SelectedValue />
@@ -179,32 +179,38 @@
     <sendEmailAddressUser>help@swapsea.com.au</sendEmailAddressUser>
     <maxEmailRecipients>0</maxEmailRecipients>
     <_qf_default>report:submit</_qf_default>
-    <reportTitle>swapsea_rosters</reportTitle>
+    <reportTitle>swapsea_members</reportTitle>
+    <selectMemberGeneralDetails_MemberID>1</selectMemberGeneralDetails_MemberID>
     <sortOrder_MemberID />
     <columnHeader_MemberID />
     <MemberID />
     <sortOrder_MemberTitle />
     <columnHeader_MemberTitle />
     <MemberTitle>-1</MemberTitle>
+    <selectMemberGeneralDetails_FirstName>1</selectMemberGeneralDetails_FirstName>
     <sortOrder_FirstName />
     <columnHeader_FirstName />
     <FirstName />
     <sortOrder_MiddleName />
     <columnHeader_MiddleName />
     <MiddleName />
+    <selectMemberGeneralDetails_Surname>1</selectMemberGeneralDetails_Surname>
     <sortOrder_Surname />
     <columnHeader_Surname />
     <Surname_From />
     <Surname_To />
+    <selectMemberGeneralDetails_PreferredName>1</selectMemberGeneralDetails_PreferredName>
     <sortOrder_PreferredName />
     <columnHeader_PreferredName />
     <PreferredName />
     <sortOrder_PostNominal />
     <columnHeader_PostNominal />
     <PostNominal />
+    <selectMemberGeneralDetails_Gender>1</selectMemberGeneralDetails_Gender>
     <sortOrder_Gender />
     <columnHeader_Gender />
     <Gender>All</Gender>
+    <selectMemberGeneralDetails_DOB>1</selectMemberGeneralDetails_DOB>
     <sortOrder_DOB />
     <columnHeader_DOB />
     <DOB_From />
@@ -279,6 +285,7 @@
     <sortOrder_PostalReturnedMail />
     <columnHeader_PostalReturnedMail />
     <PostalReturnedMail>-1</PostalReturnedMail>
+    <selectPhoneNumberDetails_HomePhone>1</selectPhoneNumberDetails_HomePhone>
     <sortOrder_HomePhone />
     <columnHeader_HomePhone />
     <HomePhone />
@@ -294,6 +301,7 @@
     <sortOrder_AlternatePhone />
     <columnHeader_AlternatePhone />
     <AlternatePhone />
+    <selectPhoneNumberDetails_MobilePhone>1</selectPhoneNumberDetails_MobilePhone>
     <sortOrder_MobilePhone />
     <columnHeader_MobilePhone />
     <MobilePhone />
@@ -305,6 +313,7 @@
     <sortOrder_HasPreferredContactNo />
     <columnHeader_HasPreferredContactNo />
     <HasPreferredContactNo>-1</HasPreferredContactNo>
+    <selectEmailAddressDetails_EmailAddress1>1</selectEmailAddressDetails_EmailAddress1>
     <sortOrder_EmailAddress1 />
     <columnHeader_EmailAddress1 />
     <EmailAddress1 />
@@ -456,11 +465,22 @@
     <HighLevelCategorys>
         <HighLevelCategory isMulti="1">-1</HighLevelCategory>
     </HighLevelCategorys>
+    <selectMembershipsDetails_MembershipType>1</selectMembershipsDetails_MembershipType>
     <sortOrder_MembershipType />
     <columnHeader_MembershipType />
     <MembershipTypes>
-        <MembershipType isMulti="1">-1</MembershipType>
+        <MembershipType isMulti="1">17</MembershipType>
+        <MembershipType isMulti="1">1</MembershipType>
+        <MembershipType isMulti="1">24</MembershipType>
+        <MembershipType isMulti="1">3</MembershipType>
+        <MembershipType isMulti="1">5</MembershipType>
+        <MembershipType isMulti="1">18</MembershipType>
+        <MembershipType isMulti="1">8</MembershipType>
+        <MembershipType isMulti="1">4</MembershipType>
+        <MembershipType isMulti="1">7</MembershipType>
+        <MembershipType isMulti="1">20</MembershipType>
     </MembershipTypes>
+    <selectMembershipsDetails_DateJoined>1</selectMembershipsDetails_DateJoined>
     <sortOrder_DateJoined />
     <columnHeader_DateJoined />
     <DateJoined_From />
@@ -472,11 +492,13 @@
     <sortOrder_ArchivedInAllOrgs />
     <columnHeader_ArchivedInAllOrgs />
     <ArchivedInAllOrgs>-1</ArchivedInAllOrgs>
+    <selectMembershipsDetails_Status>1</selectMembershipsDetails_Status>
     <sortOrder_Status />
     <columnHeader_Status />
     <Statuss>
-        <Status isMulti="1">-1</Status>
+        <Status isMulti="1">A</Status>
     </Statuss>
+    <selectMembershipsDetails_RegSeason>1</selectMembershipsDetails_RegSeason>
     <sortOrder_RegSeason />
     <columnHeader_RegSeason />
     <RegSeason>2022</RegSeason>
@@ -1012,25 +1034,21 @@
     <PatrolTeamPositions>
         <PatrolTeamPosition isMulti="1">-1</PatrolTeamPosition>
     </PatrolTeamPositions>
-    <selectPatrolRosters_RosteredPatrolTeam>1</selectPatrolRosters_RosteredPatrolTeam>
     <sortOrder_RosteredPatrolTeam />
     <columnHeader_RosteredPatrolTeam />
     <RosteredPatrolTeams>
         <RosteredPatrolTeam isMulti="1">-1</RosteredPatrolTeam>
     </RosteredPatrolTeams>
-    <selectPatrolRosters_PatrolRosterDate>1</selectPatrolRosters_PatrolRosterDate>
     <sortOrder_PatrolRosterDate />
     <columnHeader_PatrolRosterDate />
-    <PatrolRosterDate_From>01/07/2022</PatrolRosterDate_From>
-    <PatrolRosterDate_To>30/06/2023</PatrolRosterDate_To>
-    <selectPatrolRosters_PatrolRosterStartTime>1</selectPatrolRosters_PatrolRosterStartTime>
+    <PatrolRosterDate_From />
+    <PatrolRosterDate_To />
     <sortOrder_PatrolRosterStartTime />
     <columnHeader_PatrolRosterStartTime />
     <PatrolRosterStartTime_FromH>-1</PatrolRosterStartTime_FromH>
     <PatrolRosterStartTime_Fromi>-1</PatrolRosterStartTime_Fromi>
     <PatrolRosterStartTime_ToH>-1</PatrolRosterStartTime_ToH>
     <PatrolRosterStartTime_Toi>-1</PatrolRosterStartTime_Toi>
-    <selectPatrolRosters_PatrolRosterFinishTime>1</selectPatrolRosters_PatrolRosterFinishTime>
     <sortOrder_PatrolRosterFinishTime />
     <columnHeader_PatrolRosterFinishTime />
     <PatrolRosterFinishTime_FromH>-1</PatrolRosterFinishTime_FromH>
@@ -1408,12 +1426,12 @@
     <NoteDetails />
     <sendEmail>1</sendEmail>
     <sendEmailAddress>help@swapsea.com.au</sendEmailAddress>
-    <recurringTypeID>1</recurringTypeID>
-    <recurringInterval />
-    <scheduledRunTime_Date />
+    <recurringTypeID>4</recurringTypeID>
+    <recurringInterval>1</recurringInterval>
+    <scheduledRunTime_Date>5/7/2023</scheduledRunTime_Date>
     <scheduledRunTime_Times>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
         <scheduledRunTime_Time isMulti="1">0</scheduledRunTime_Time>
     </scheduledRunTime_Times>
-    <customReportName>swapsea_rosters_2022</customReportName>
+    <customReportName>swapsea_members_2023</customReportName>
 </report>
