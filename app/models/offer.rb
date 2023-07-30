@@ -8,7 +8,7 @@ class Offer < ApplicationRecord
   belongs_to :roster
 
   scope :with_club, ->(club_id) { joins(:request, :user).left_joins(:roster).where(users: { club_id: }).includes(:request, :user, :roster) }
-  scope :with_offered_by, ->(user_id) { joins(:request, :user).left_joins(:roster, roster: :patrol).includes(:request, :user, :roster, request: :user, request: :roster, request: { roster: :patrol }, roster: :patrol).where(user_id:) }
+  scope :with_offered_by, ->(user_id) { joins(:request, :user).left_joins(:roster, roster: :patrol).includes(:request, :user, :roster, request: [:user, :roster, { roster: :patrol }], roster: :patrol).where(user_id:) }
   scope :with_pending_status, -> { left_joins(:roster).where(status: :pending).where('rosters.finish > ? OR rosters.finish IS NULL', DateTime.now) }
   scope :with_accepted_status, -> { joins(:request, :user).left_joins(:roster).where(status: 'accepted') }
 

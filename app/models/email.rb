@@ -53,7 +53,7 @@ class Email < ApplicationRecord
             end
           end
         end
-      rescue Exception => e
+      rescue StandardError => e
         Rails.logger.warn "Skipped sending patrol roster email to user #{user.id}: #{e}"
       end
     end
@@ -82,7 +82,7 @@ class Email < ApplicationRecord
         else
           Rails.logger.warn "Skipped sending skills maintenance email because #{user.club.name} is_active=#{user.club.is_active} and enable_reminders_email=#{user.club.enable_reminders_email} and show_skills_maintenance=#{user.club.show_skills_maintenance}"
         end
-      rescue Exception => e
+      rescue StandardError => e
         Rails.logger.warn "Skipped sending skills maintenance email because to user #{user.id}: #{e}"
       end
     end
@@ -120,7 +120,7 @@ class Email < ApplicationRecord
           SwapseaMailer.request_nudge_offers(open_request, other_request_dates).deliver
           emails_sent += 1
         end
-      rescue Exception => e
+      rescue StandardError => e
         Rails.logger.error "Error sending request nudge email: #{e}"
       end
 
@@ -240,7 +240,7 @@ class Email < ApplicationRecord
     num_offers_accepted = Offer.with_club(club).with_accepted_status.where(user:).count
 
     SwapseaMailer.season_summary(user, num_logins, num_requests_success, num_offers_accepted).deliver
-  rescue Exception => e
+  rescue StandardError => e
     Rails.logger.error "Error sending season summary email: #{e}"
   end
 end

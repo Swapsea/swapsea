@@ -1,0 +1,66 @@
+<% content_for(:title){ "Club Registration" } %>
+
+<!-- Navbar -->
+<div class="navbar navbar-default navbar-fixed-top landing">
+  <div class="container page-scroll">
+    <a class="main-logo navbar-left" href="/#home"><h1>Swapsea</h1></a>
+    <p class="navbar-text navbar-right">
+      <% if ENV['ALLOW_LOGIN'] == 'true' %>
+        <% if user_signed_in? %>
+          <%= link_to dashboard_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+          <span class="hidden-xs">
+            <%= link_to 'Dashboard', dashboard_path, :class => "btn btn-default" %>
+          </span>
+        <% else %>
+          <%= link_to login_path, :class => "btn btn-default btn-lg visible-xs" do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+            <span class="hidden-xs">
+              <%= link_to 'Login', login_path, :class => "btn btn-default" %>
+            </span>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div> <!-- End navbar -->
+
+
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="row">
+      <div class="col-sm-12">
+        <h1><%= content_for(:title) %></h1>
+      </div>
+    </div> <!-- End intro -->
+
+  </div>
+</div> <!-- End Jumbotron -->
+
+<div class="container">
+		<div class="col-sm-6 col-sm-offset-3">
+
+			<div class="panel panel-info">
+				<div class="panel-heading">
+          <h3 class="panel-title">Club Administrator Use Only</h3></div>
+				<div class="panel-body">Members please login at <%= link_to 'Member Login', login_path %>.</div>
+      </div>
+
+      <p>Use this form to register Swapsea for your Club for the first time.</p>
+
+			<script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/embed/v2.js"></script>
+			<script>
+			hbspt.forms.create({
+			region: "na1",
+			portalId: "22433851",
+			formId: "eaef9c17-0f8c-4a3d-bcf8-adeaa25cf0b9"
+			});
+			</script>
+	    </div>
+    </div>
+</div>

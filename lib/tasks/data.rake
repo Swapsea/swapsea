@@ -22,12 +22,12 @@ namespace :swapsea do
         EventLog.create!(subject: 'Transfer', desc: 'Patrol Member import failed.')
       end
 
-      NumJuniors = User.juniors.length
+      num_juniors = User.juniors.length
       if NumJuniors.positive?
-        EventLog.create!(subject: 'Transfer', desc: "Removing #{NumJuniors} junior members...")
+        EventLog.create!(subject: 'Transfer', desc: "Removing #{num_juniors} junior members...")
         User.where(id: User.juniors.select(:id)).delete_all
-        NumJuniors = User.juniors.length
-        EventLog.create!(subject: 'Transfer', desc: "There are #{NumJuniors} junior members remaining.")
+        num_juniors = User.juniors.length
+        EventLog.create!(subject: 'Transfer', desc: "There are #{num_juniors} junior members remaining.")
       else
         EventLog.create!(subject: 'Transfer', desc: 'No junior members found to remove.')
       end

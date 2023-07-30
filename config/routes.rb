@@ -154,6 +154,7 @@ Swapsea::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
   get 'thanks', to: 'home#thanks'
+  get 'registration', to: 'home#registration'
   get 'setup', to: 'home#setup', as: 'setup'
   get 'contact-us', to: 'home#contact_us', as: 'contact_us'
   get 'faq', to: 'home#faq', as: 'faq'

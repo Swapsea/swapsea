@@ -32,7 +32,7 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
     # Everyone
-    can %i[index privacy_policy terms_of_use thanks contact_us setup faq], :home
+    can %i[index privacy_policy terms_of_use registration thanks contact_us setup faq], :home
 
     if user.has_role? :admin
       can :manage, :all
