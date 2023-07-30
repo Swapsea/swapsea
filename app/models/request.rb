@@ -32,16 +32,8 @@ class Request < ApplicationRecord
     status == 'successful'
   end
 
-  def accepted_offer
-    offers.where(status: 'accepted').first if offers.where(status: 'accepted').present?
-  end
-
   def offer_already_exists?(roster, user)
     offers.with_pending_status.where(roster:, user:).present?
-  end
-
-  def unsuccessful_offers(successful_offer)
-    Offer.where('request_id = ? AND status = ? AND id != ?', id, 'pending', successful_offer)
   end
 
   # Cancel request and any pending offers.

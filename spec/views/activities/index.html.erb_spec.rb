@@ -20,6 +20,8 @@ RSpec.describe 'activities/index' do
            ])
   end
 
-  it 'renders a list of activities' do
-  end
+  # it 'renders a list of activities' do
+  #   # This model not used.
+  #   skip
+  # end
 end

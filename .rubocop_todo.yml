@@ -6,49 +6,12 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: Include, EnforcedStyle, NonImplicitAssociationMethodNames.
-# Include: spec/factories.rb, spec/factories/**/*.rb, features/support/factories/**/*.rb
-# SupportedStyles: explicit, implicit
-FactoryBot/AssociationStyle:
-  Exclude:
-    - 'spec/factories/rosters.rb'
-
-# Offense count: 1
-# Configuration parameters: AllowedMethods.
-# AllowedMethods: enums
-Lint/ConstantDefinitionInBlock:
-  Exclude:
-    - 'lib/tasks/data.rake'
-
 # Offense count: 2
 # Configuration parameters: IgnoreLiteralBranches, IgnoreConstantBranches.
 Lint/DuplicateBranch:
   Exclude:
     - 'app/models/award.rb'
     - 'app/models/staging_award.rb'
-
-# Offense count: 2
-Lint/DuplicateHashKey:
-  Exclude:
-    - 'app/models/offer.rb'
-
-# Offense count: 2
-Lint/DuplicateMethods:
-  Exclude:
-    - 'app/models/request.rb'
-
-# Offense count: 1
-# Configuration parameters: AllowComments, AllowEmptyLambdas.
-Lint/EmptyBlock:
-  Exclude:
-    - 'spec/views/activities/index.html.erb_spec.rb'
-
-# Offense count: 4
-Lint/RescueException:
-  Exclude:
-    - 'app/models/email.rb'
 
 # Offense count: 1
 # Configuration parameters: AllowKeywordBlockArguments.
