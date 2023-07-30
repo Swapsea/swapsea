@@ -46,7 +46,7 @@ class RostersController < ApplicationController
       respond_to do |format|
         format.pdf do
           render pdf: pdf_name,
-                 layout: 'pdf.html.erb',
+                 layout: 'pdf',
                  show_as_html: params[:html].present?
         end
       end

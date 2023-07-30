@@ -49,13 +49,13 @@
 <div class="row">
 	<div class="col-sm-6 col-sm-offset-3">
 		<div class="terms-of-use">
-			<p>Follow this guide to get your Club setup on Swapsea.
-			This is done each Season even if your Club used Swapsea before as there are changes from year to year.</p>
+			<p>This guide is for Club Administrators to get setup on Swapsea.
+			Setup is done each Season even if your Club used Swapsea before as there are changes from year to year.</p>
 			<p>This guide is divided into sections:</p>
 			<ul>
 			<li><b>Registration</b> - every Club, every season.</li>
 			<li><b>Pre Season</b> - Surfguard reports, information for PCs, VCs and patrolling members.</li>
-			<li><b>Mid Season</b> - Support</li>
+			<li><b>During the Season</b> - Operations and Support</li>
 			<li><b>End of Season</b> - Stopping Surfguard reports and obtaining usage.</li>
 			</ul>
 			<p>If you have questions, please contact <%= mail_to "help@swapsea.com.au", "help@swapsea.com.au" %>.</p>
@@ -65,7 +65,7 @@
 			<h2>Registration</h2>
 
 			<p><b>New to Swapsea?</b> Please complete the Club Registration form and await further instructions.</p>
-			<%= link_to 'Club Registration', 'https://goo.gl/forms/XpcUJyVIGBdns9v23', :class => 'btn btn-success btn-lg' %>
+			<%= link_to 'Club Registration', registration_path, :class => 'btn btn-success btn-lg' %>
 			</p>
 
 			<p><br/><b>Returning Clubs</b> please email <%= mail_to "help@swapsea.com.au", "help@swapsea.com.au", subject: "Club Registration" %> and let us know:</p>
@@ -110,19 +110,37 @@
 					<li><b>Create Template</b>: Untick.</li>
 				</ol>
 				<%= image_tag('surfguard-custom-3.png', width: "90%") %>
-				<div class="panel-warning">
-					<div class="panel-heading">PRIVACY NOTE</div>
+				<div class="panel panel-warning">
+					<div class="panel-heading"><h3 class="panel-title">Privacy Notice</h3></div>
 					<div class="panel-body">To maintain the privacy and security of member information, please do not email the reports to
 					Swapsea yourself. Just let Surfguard send the reports directly and we'll let you know when it's arrived.</div>
 				</div>
 			</ol>
 
 			<hr/>
-			<h2>Mid-Season</h2>
-			<p>We encourage you to send members regular reminders about Swapsea. For example:
+			<h2>During the Season</h2>
+			<p><b>Monday mornings</b>: Offer Nudge emails are sent prompting members with an open request to make an offer.</p>
+			
+			<p><b>Wednesday mornings</b>: Swapsea refreshes from Surfguard using the custom reports scheduled above.</p>
 
-			<b>Need a Swap? <%= link_to 'Swap it on Swapsea','https://www.swapsea.com.au' %></b>.</p>
-			<p>Also, if the number of Open Swaps is higher than the number of Swap Offers, remind patrollers that they must make an Offer to get a swap. Nobody will get a Swap if nobody makes an Offer. </p>
+			<p><b>Thursday mornings</b>: Reminder emails are sent to all members with a Patrol or Skills Maintenance session in the next seven (7) days. Usage of Swapsea peaks on a Thursday!</p>
+			
+			<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Advertise Swapsea to Members</h3></div>
+					<div class="panel-body">
+					Reminder members about Swapsea around your clubhouse, in your newsletter/socials and PC/VC briefing. For example: <br/>
+					<b>Need a Swap? <%= link_to 'Swap it on Swapsea','https://www.swapsea.com.au' %></b><br />
+					Confirmed swaps on Swapsea still count toward 100% attendance.</p>
+					</div>
+			</div>
+			<p>Tips:</p>
+			<ul>
+			<li>Members may share an email address, often a parent and child. If so, when logging in they will be asked to 'switch to' one member. They can 'switch back' at any time from the top right menu.</li>
+			<li>If the number of Open Swaps is higher than the number of Offers, remind patrollers that they must make an Offer to get a swap. 
+			Nobody will get a Swap if nobody makes an Offer... this is why Swapsea sends nudges.</li>
+			<li>Nominate 'Managers' to manage sign ups for Skills Maintenance and Extra Patrols.</li>
+			</ul>
 			<hr/>
 
 			<h2>End of Season</h2>

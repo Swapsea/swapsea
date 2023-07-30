@@ -13,7 +13,7 @@ FactoryBot.define do
     bronze { 2 }
     src { 2 }
 
-    association :patrol
+    patrol
   end
 
   factory :past_roster, parent: :roster do
