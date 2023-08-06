@@ -77,7 +77,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'shoulda-callback-matchers'
   gem 'shoulda-matchers', '~> 5.0'
-  gem 'webdrivers', '~> 4.0'
   gem 'wkhtmltopdf-binary-edge'
 end
 
