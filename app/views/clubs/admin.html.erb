@@ -3,6 +3,7 @@
 		<h2>Clubs</h2>
 	</div>
 	<div class="panel-body">
+		<p><%= link_to 'New Club', new_club_path, :class => 'btn btn-success' %></p>
 		<div class="table-responsive">
 			<table class="table table-striped datatable">
 				<thead>
@@ -83,8 +84,5 @@
 				</tbody>
 			</table>
 		</div>
-
-		<%= link_to 'New Club' , new_club_path %>
-
 	</div>
 </div>

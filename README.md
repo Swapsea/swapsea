@@ -32,7 +32,7 @@ First, install the required Gems:
 bundle install
 ```
 
-Then create and initialise its database (need to have postgresql installed):
+Then, install postgresql and create and initialise the database:
 
 ```bash
 rake db:setup
@@ -50,7 +50,7 @@ Run just the browser tests with:
 
 ### Pre-commit hooks
 
-We use pre-commit to keep the code base nice and clean. Run manually with:
+We use pre-commit on every commit, to keep the code base nice and clean. Run manually with:
 
 `pre-commit run --all-files`
 
@@ -58,20 +58,20 @@ We use pre-commit to keep the code base nice and clean. Run manually with:
 
 We use Rubocop to keep our Ruby code conventional. Run manually with:
 
-`rubocop --require rubocop-rails --require rubocop-rspec`
+`rubocop`
 
 ## Creating Demo Club Data
 
-To create a demo club called 'Swapsea SLSC', use:
+To create a demo club, use:
 
 ```bash
-rake demo_club:populate['Swapsea SLSC']
+rake demo_club:populate['Swapsea Demo SLSC']
 ```
 
-To destroy 'Swapsea SLSC' club and all associated data, use:
+To destroy the demo club and all associated data, use:
 
 ```bash
-rake demo_club:destroy['Swapsea SLSC']
+rake demo_club:destroy['Swapsea Demo SLSC']
 ```
 
 ## Run All Tests
@@ -94,5 +94,3 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 The GNU General Public License is at [LICENSE](LICENSE).
-
-Contact us at help@swapsea.com.au

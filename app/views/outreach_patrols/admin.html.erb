@@ -1,9 +1,12 @@
-<div class="box-info">
-  <h2>Extra Patrols</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Extra Patrols</h2>
+  </div>
+  <div class="panel-body">
+  <p><%= link_to 'New Extra Patrol', new_outreach_patrol_path, :class => 'btn btn-success' %></p>
 
-  <%= link_to 'New Extra Patrol', new_outreach_patrol_path %><br/>
-
-  <table class="table">
+  <div class="table-responsive">
+  <table class="table table-striped datatable">
     <thead>
       <tr>
         <th>Club</th>
@@ -28,6 +31,8 @@
           <td><%= link_to 'Delete', outreach_patrol, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+      </table>
+    </div>
+  </div>
+<div>

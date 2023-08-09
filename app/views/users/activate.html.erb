@@ -9,7 +9,7 @@
             <div class="panel-body">
                 <h3>Get ready for the 2023/24 season!</h3>
                 <p>Enter your email address below to receive an activation link via email.<br/>
-                <b>Note:</b> Your email must <u>exactly</u> match that in <a href="https://members.sls.com.au/" target="_new">Members Area</a>
+                <b>Note:</b> Your email must <u>exactly</u> match that in <a href="https://members.sls.com.au/" target="_new">Members Area</a>.
                 </p>
                 <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
                 <%= f.error_notification %>
@@ -17,12 +17,11 @@
                         <%= f.input :email, :required => true, :placeholder =>  'Email', label: false, input_html: { class: 'form-control text-input',  value: @email }, :autofocus => true %>
                     </div>
                     <div class="buttons">
-                        <%= f.button :submit, 'Activate Access', :class => 'btn btn-success btn-block' %>
+                        <%= f.button :submit, 'Send Activation Email', :class => 'btn btn-success btn-block' %>
                     </div>
                 <% end %>
                 <div class="links">
-                    <%= link_to 'Login', login_path %><br/>
-                    <%= link_to 'Forgot your password?', new_user_password_path %><br/>
+                    <%= link_to 'Back to Login', login_path %><br/>
                 </div>
             </div>
 

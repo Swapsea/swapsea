@@ -3,8 +3,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :start %>
-    <%= f.input :finish %>
+    <%= f.input :start, :minute_step => 15 %>
+    <%= f.input :finish, :minute_step => 15 %>
   </div>
   <br/>
   <div class="form-actions">
