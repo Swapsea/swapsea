@@ -7,16 +7,14 @@
     <div class="panel-body">
       <% @notices.each do |notice| %>
         <div class="notice">
-          <h3>
-            <%= notice.title %>
-          </h3>
+          <h3><%= notice.title %></h3>
           <p>
             <%= notice.desc.html_safe %>
           </p>
           <p>
             <%= link_to notice.link_desc, notice.link %>
           </p>
-        </div>
+        </div><!--/.notice -->
       <% end %>
       <% if @notices.empty? %>
         <div class="notice">
@@ -28,5 +26,5 @@
       <% end %>
     </div>
   </div>
-</div>
-< % end %>
+</div><!--/.noticeboard -->
+<% end %>
