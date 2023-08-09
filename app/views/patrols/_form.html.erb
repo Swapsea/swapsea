@@ -2,7 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-group">
-    <%= f.association :club, label_method: :name, value_method: :id, include_blank: false %>
+  <% if selected_user.has_role?(:admin)  %>
+    <%= f.association :club, collection: Club.with_active.order(:name), label_method: :name, value_method: :id, include_blank: false %>
+  <% end %>
     <%= f.input :name %>
     <%= f.input :short_name %>
     <%= f.label :need_bbm %>
