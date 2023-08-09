@@ -6,8 +6,8 @@
             <div class="panel-heading">
         	   <h2><%= content_for(:title) %></h2>
             </div>
-            <div class="panel-body"><p>
-                <strong>First time this season?</strong> <%= link_to 'Click here to activate your account first', activate_path %>.</p>
+            <div class="panel-body">
+                <%= render partial: 'active_clubs' %> 
                 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
                     <%= f.error_notification %>
     			    <div class="form-group login-input">
@@ -21,8 +21,8 @@
                         <%= f.button :submit, 'Login', :class => 'btn btn-success btn-block' %>
                     </div>
     			<% end %>
-                <p><strong>Can't login?</strong> <%= link_to 'Reset your password', new_user_password_path %>.<br/>
-                    <strong>Still having trouble?</strong> Contact your Patrol Captain, or click <b>Ask Swapsea</b> below.
+                <p><strong>Can't login?</strong> <%= link_to 'Activate your account (once per season)', activate_path %> or <%= link_to 'Reset your password', new_user_password_path %>.<br/>
+                    <strong>Still having trouble?</strong> Click <b>Ask Swapsea</b> below.
                 </p>
             </div>
         </div>

@@ -3,9 +3,9 @@
 
   <div class="form-group">
     <% if selected_user.has_role?(:admin)  %>
-      <%= f.association :club, label_method: :name, value_method: :id, include_blank: false %>
-      <%= f.input :system_wide, label: 'All Clubs' %>
-    <% end %>
+      <%= f.association :club, collection: Club.with_active.order(:name), label_method: :name, value_method: :id, include_blank: false %>
+      <%= f.input :system_wide, label: 'All Clubs', boolean_style: :inline %>
+    <% end %><br/>
     <%= f.input :title %>
     <%= f.input :desc %>
     <%= f.input :link %>
@@ -13,9 +13,9 @@
     <%= f.input :image %>
     <%= f.input :video %>
     <%= f.input :user_id %>
+    <%= f.input :visible, boolean_style: :inline %>
     <%= f.input :visible_from %>
     <%= f.input :visible_to %>
-    <%= f.input :visible %>
   </div>
 
   <div class="form-group">

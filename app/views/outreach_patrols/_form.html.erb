@@ -2,12 +2,12 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <% if selected_user.has_role?(:admin)  %>
-      <%= f.association :club, label_method: :name, value_method: :id, include_blank: false %>
-    <% end %>
+  <% if selected_user.has_role?(:admin)  %>
+    <%= f.association :club, collection: Club.with_active.order(:name), label_method: :name, value_method: :id, include_blank: false %>
+  <% end %>
     <%= f.input :location %><br/>
-    <%= f.input :start %><br/>
-    <%= f.input :finish %><br/>
+    <%= f.input :start, :minute_step => 15 %><br/>
+    <%= f.input :finish, :minute_step => 15 %><br/>
   </div>
 
   <div class="form-actions">
