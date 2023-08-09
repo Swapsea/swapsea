@@ -13,6 +13,7 @@ class Offer < ApplicationRecord
   scope :with_accepted_status, -> { joins(:request, :user).left_joins(:roster).where(status: 'accepted') }
 
   after_initialize :set_defaults
+  before_save :abort_if_pending_offer_limit
 
   def set_defaults
     self.status = :pending unless status
@@ -267,6 +268,13 @@ class Offer < ApplicationRecord
     end
   end
 
+  # Check pending offer limit wouldn't be exceeded
+  def abort_if_pending_offer_limit
+    if self.request&.num_pending_offers >= 3
+      throw :abort     
+    end
+  end
+  
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.
   def same_offer_for_other_requests
     if roster.present?

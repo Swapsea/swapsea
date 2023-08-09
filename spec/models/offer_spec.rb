@@ -15,6 +15,13 @@ RSpec.describe Offer do
     @offer = create(:offer, user: @offerer, request: @request, roster: @offerer.patrol.rosters.first)
     @offer_sub = create(:offer, user: @offerer_no_patrol, request: @request, roster: nil)
   end
+  
+  # after do
+  #   # Clean up
+  #   @request.destroy
+  #   @offer.destroy
+  #   @offer_sub.destroy
+  # end
 
   describe '#Atributes' do
     it 'is valid with valid attributes' do
@@ -66,6 +73,8 @@ RSpec.describe Offer do
         past_roster = create(:past_roster, patrol: @offerer.patrol)
         offer_past = create(:offer, user: @offerer, request: @request, roster: past_roster)
         expect(offer_past).not_to be_pending
+        # Clean up
+        offer_past.destroy
       end
 
       it 'false for not pending in future' do
@@ -220,6 +229,8 @@ RSpec.describe Offer do
       past_roster = create(:past_roster, patrol: @offerer.patrol)
       offer_past = create(:offer, user: @offerer, request: @request, roster: past_roster)
       expect(offer_past.accept).to be_falsey
+      # Clean up
+      offer_past.destroy
     end
 
     it 'accept withdraws same_offer_for_other_requests' do
@@ -240,6 +251,9 @@ RSpec.describe Offer do
       expect(@offer.same_offer_for_other_requests.count).to be_zero
       # expect(same_offer_to_different_request_1.reload).to be_withdrawn
       # expect(same_offer_to_different_request_2.reload).to be_withdrawn
+      # Clean up
+      same_offer_to_different_request_1.destroy
+      same_offer_to_different_request_2.destroy
     end
 
     it 'accept cleans up other_offers_for_the_same_request' do
@@ -247,22 +261,18 @@ RSpec.describe Offer do
       offerer3 = create(:member, club: @club, patrol: @club.patrols.third)
 
       other_offers_for_the_same_request2 = create(:offer, user: offerer2, request: @request, roster: offerer2.patrol.rosters.first)
-      other_offers_for_the_same_request22 = create(:offer, user: offerer2, request: @request, roster: offerer2.patrol.rosters.second)
-
       other_offers_for_the_same_request3 = create(:offer, user: offerer3, request: @request, roster: offerer3.patrol.rosters.first)
-      other_offers_for_the_same_request33 = create(:offer, user: offerer3, request: @request, roster: offerer3.patrol.rosters.second)
 
       expect(other_offers_for_the_same_request2).to be_pending
-      expect(other_offers_for_the_same_request22).to be_pending
       expect(other_offers_for_the_same_request3).to be_pending
-      expect(other_offers_for_the_same_request33).to be_pending
 
       expect(@offer.accept).to be_truthy
       expect(@offer.other_offers_for_the_same_request.count).to be_zero
       # expect(other_offers_for_the_same_request2.reload).to be_unsuccessful
-      # expect(other_offers_for_the_same_request22.reload).to be_unsuccessful
       # expect(other_offers_for_the_same_request3.reload).to be_unsuccessful
-      # expect(other_offers_for_the_same_request33.reload).to be_unsuccessful
+      # Clean up
+      other_offers_for_the_same_request2.destroy
+      other_offers_for_the_same_request3.destroy
     end
 
     it 'accept closes corresponding_requests' do
@@ -288,6 +298,20 @@ RSpec.describe Offer do
       expect(@offer.accept).to be_truthy
       expect(@offer.request.offers_that_match_request.count).to be_zero
       # expect(same_offer_to_different_request_2.reload).to be_withdrawn
+      # Clean up
+      requestor_corresponding_offer2.destroy
+      requestor_corresponding_offer3.destroy
+    end
+    
+    it 'disallow excessive offers per request' do
+      other_offers_for_the_same_request2 = create(:offer, user: @offerer, request: @request, roster: @offerer.patrol.rosters.second)
+      other_offers_for_the_same_request3 = create(:offer, user: @offerer, request: @request, roster: @offerer.patrol.rosters.third)
+      
+      # Attempt creation of excessive offer should fail
+      expect { create(:offer, user: @offerer, request: @request, roster: @offerer.patrol.rosters.fourth ) }.to raise_exception(ActiveRecord::RecordNotSaved)
+      # Clean up
+      other_offers_for_the_same_request2.destroy
+      other_offers_for_the_same_request3.destroy
     end
   end
 end
