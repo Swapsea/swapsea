@@ -17,7 +17,7 @@ FactoryBot.define do
 
     factory :patrol_with_rosters do
       transient do
-        rosters_count { 3 }
+        rosters_count { 4 }
       end
 
       after(:create) do |patrol, evaluator|
