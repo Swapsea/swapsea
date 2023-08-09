@@ -3,10 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'admin/index' do
-  it 'displays all the text' do
+  it 'displays the admin home text' do
     render
 
-    expect(rendered).to match(/Index/)
-    expect(rendered).to match(/Admin index page/)
+    expect(rendered).to match(/Administrator Use Only/)
   end
 end

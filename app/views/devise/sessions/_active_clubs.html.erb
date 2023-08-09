@@ -1,0 +1,13 @@
+<p><b>For members of</b>:</p>
+<%
+@clubs = Club.with_active.sort_by(&:name)
+@clubs.each do |club| 
+  cache(club) do %>
+    <div class="col-sm-12">
+      <%#= image_tag image_path("club_#{club.id}.png"), width: 48 %> 
+      <%= club.name %>
+      </div>
+  <% end 
+    end %>
+
+  <p><strong>First time this season?</strong> <%= link_to 'Click here to activate your account first', activate_path %>.</p>

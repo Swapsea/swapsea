@@ -9,9 +9,9 @@
       <% end %>
     <%= f.input :name %>
     <br/>
-    <%= f.input :start %>
+    <%= f.input :start, :minute_step => 15 %>
     <br/>
-    <%= f.input :finish %>
+    <%= f.input :finish, :minute_step => 15 %>
     <br/>
     <%= f.input :max_signup %>
     <br/>
