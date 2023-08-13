@@ -74,9 +74,9 @@ class Request < ApplicationRecord
 
   # Number of (valid) pending offers
   def num_pending_offers
-    Offer.with_pending_status.count
+    offers.with_pending_status.count
   end
-  
+
   def offers_that_match_request
     if roster_id?
       Offer.with_pending_status.with_offered_by(user_id).where(roster_id:)
