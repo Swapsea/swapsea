@@ -3,13 +3,12 @@
 namespace :demo_club do
   desc 'Create demo club and populate'
   task :populate, [:club_name] => :environment do |_task, args|
-    club_name = args[:club_name] || 'Swapsea SLSC'
+    club_name = args[:club_name] || 'Swapsea Demo SLSC'
 
-    # Create club
-    Club.create(name: club_name, short_name: club_name, show_patrols: true, show_rosters: true, show_swaps: true,
-                show_skills_maintenance: false, show_outreach: false, lat: -33.89051, lon: 151.280002,
-                enable_reminders_email: true, enable_reminders_sms: false)
-    club = Club.find_by(name: club_name)
+    # Create/select club
+    club = Club.where(name: club_name).first_or_create(name: club_name, short_name: club_name, show_patrols: true, show_rosters: true, show_swaps: true,
+                                                       show_skills_maintenance: false, show_outreach: false, lat: -33.89051, lon: 151.280002,
+                                                       enable_reminders_email: true, enable_reminders_sms: false)
 
     puts club.name
 
@@ -216,7 +215,7 @@ namespace :demo_club do
       puts "#{roster.patrol.name}   #{roster.start.strftime('%a %d %b %Y')}   #{roster.start.strftime('%H:%M')} - #{roster.finish.strftime('%H:%M')}"
     end
 
-    Roster.with_club(club).each(&:awards_count)
+    Roster.with_club(club).each(&:update_award_counts)
   end
 
   desc 'Destroy all records related to the demo club and its members.'
