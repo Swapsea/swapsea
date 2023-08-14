@@ -7,6 +7,8 @@ class Request < ApplicationRecord
   belongs_to :user
   has_many :offers
 
+  PENDING_OFFER_LIMIT = 3 # Maximum number of pending (future) offers allowed for a request.
+
   scope :with_club, ->(club_id) { joins(:roster, :user).where(users: { club_id: }).includes(:roster, :user, :offers, roster: [:patrol]) }
   scope :with_roster, ->(roster_id) { joins(:roster, :user).where(roster_id:).includes(:roster, :user, :offers, roster: [:patrol]) }
   scope :with_requested_by, ->(user_id) { where(user_id:) }
@@ -75,6 +77,12 @@ class Request < ApplicationRecord
   # Number of (valid) pending offers
   def num_pending_offers
     offers.with_pending_status.count
+  end
+
+  # Number of (valid) pending offers remaining
+  def num_pending_offers_remaining
+    # limit minus pending, or zero if negative.
+    num_pending_offers >= PENDING_OFFER_LIMIT ? 0 : PENDING_OFFER_LIMIT - num_pending_offers
   end
 
   def offers_that_match_request
