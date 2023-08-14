@@ -113,7 +113,12 @@
 			<h2>Make Offer</h2>
 		</div>
 		<div class="panel-body">
-			<% if !@rosters_available.empty? %>
+			<% if @request.num_pending_offers_remaining == 0 %>
+				<p><b>Sorry, no more offers can be made as the limit has been reached.</b></br>
+				Check back later or ask <%= @request.user.name %> to accept or decline offers below first.</p>
+			<%	elsif @rosters_available.empty? %>
+				<p>You have no patrols to offer.</p>
+			<% else %>
 				<%= form_for @offer, url: offers_path do |f| %>
 					<%= hidden_field_tag(:request_id, @request.id) %>
 					<div class="row">
@@ -147,10 +152,7 @@
 					<div class="form-actions">
 						<%= f.button 'Make Offer', :class => "btn btn-success pull-right", data: { disable_with: "Please wait..." } %>
 					</div>
-
 				<% end %>
-			<% else %>
-				<p> You have no patrols to offer. </p>
 			<% end %>
 		</div><!--/.panel-body -->
 	</div><!--/.panel -->

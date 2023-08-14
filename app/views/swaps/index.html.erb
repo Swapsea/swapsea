@@ -27,12 +27,12 @@
                   <%= request.roster.start.strftime("%a, %d %b %y") %>
                 </strong>
               </div><!--/.datetime -->
-              <div class="details col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div class="details col-xs-5 col-sm-5 col-md-5 col-lg-5">
                 <%= request.roster.start.strftime("%H:%M") %> - <%= request.roster.finish.strftime("%H:%M") %><br/>
                 <%= request.user.first_name %> <%= request.user.last_name %>
                 (<%= request.roster.patrol.short_name ? request.roster.patrol.short_name : request.roster.patrol.name %>) <i><%= request.comment %></i><br/>
               </div>
-              <div class="details col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <div class="details col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <em><%=
                 count = request.offers.with_pending_status.count
                 if count > 0
@@ -40,9 +40,14 @@
                 end
                 %></em>
               </div>
-              <%= link_to request, :class => 'offer offer-view col-xs-2 col-sm-2 col-md-2 col-lg-2' do %>
-              View
-              <% end %>
+              <%= 
+              # View only for requestor's requests, or if no offers remaining
+              if request.num_pending_offers_remaining == 0 || request.user == selected_user
+                link_to 'View', request, :class => 'offer offer-disabled col-xs-2 col-sm-2 col-md-2 col-lg-2' 
+              else
+                link_to 'Make Offer', request, :class => 'offer offer-view col-xs-2 col-sm-2 col-md-2 col-lg-2 active' 
+              end
+                %>
             </div><!--/.swap-request -->
             <% end %>
           </div><!--/.swap-requests -->
