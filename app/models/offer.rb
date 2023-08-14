@@ -7,8 +7,6 @@ class Offer < ApplicationRecord
   belongs_to :user
   belongs_to :roster
 
-  PENDING_OFFER_LIMIT = 3 # Maximum number of pending (future) offers allowed for a request.
-
   scope :with_club, ->(club_id) { joins(:request, :user).left_joins(:roster).where(users: { club_id: }).includes(:request, :user, :roster) }
   scope :with_offered_by, ->(user_id) { joins(:request, :user).left_joins(:roster, roster: :patrol).includes(:request, :user, :roster, request: [:user, :roster, { roster: :patrol }], roster: :patrol).where(user_id:) }
   scope :with_pending_status, -> { left_joins(:roster).where(status: :pending).where('rosters.finish > ? OR rosters.finish IS NULL', DateTime.now) }
@@ -262,9 +260,9 @@ class Offer < ApplicationRecord
 
   # Check pending offer limit wouldn't be exceeded
   def abort_if_pending_offer_limit
-    return unless request.num_pending_offers >= PENDING_OFFER_LIMIT
+    return unless request.num_pending_offers_remaining <= 0
 
-    message = "Offer: '#{id}' has #{request.num_pending_offers} pending offers >= #{PENDING_OFFER_LIMIT} limit. Aborting..."
+    message = "Request: '#{request_id}' has no pending offers remaining. Aborting..."
     Rails.logger.error message
     EventLog.create!(subject: 'Error', desc: message)
     # RecordNotSaved
