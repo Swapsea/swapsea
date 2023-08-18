@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ProficiencySignup < ApplicationRecord
-  include PublicActivity::Common
-
   belongs_to :proficiency
   belongs_to :user
 

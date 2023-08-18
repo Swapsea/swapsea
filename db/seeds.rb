@@ -3,6 +3,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+# Disable globally
+PublicActivity.enabled = false
+
 ActiveRecord::Base.transaction do
   Role.create(name: 'member')
   Role.create(name: 'manager')
@@ -51,3 +54,6 @@ ActiveRecord::Base.transaction do
   user.add_role(:member)
   PatrolMember.create(user:, patrol: p4, default_position: 'SRC')
 end
+
+# re-enable globally
+PublicActivity.enabled = true

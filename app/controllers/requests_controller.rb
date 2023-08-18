@@ -57,7 +57,7 @@ class RequestsController < ApplicationController
 
       respond_to do |format|
         if @request.save
-          @request.create_activity :create, owner: selected_user
+          @request.create_activity :create, owner: selected_user, club_id: selected_user.club_id
           SwapseaMailer.request_created(@request).deliver
           format.html { redirect_to @request, notice: 'Request was successfully created.' }
           format.json { render action: 'show', status: :created, location: @request }
@@ -74,7 +74,7 @@ class RequestsController < ApplicationController
   def update
     respond_to do |format|
       if @request.update(request_params)
-        @request.create_activity :update, owner: selected_user
+        @request.create_activity :update, owner: selected_user, club_id: selected_user.club_id
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
         format.json { head :no_content }
       else
@@ -89,7 +89,7 @@ class RequestsController < ApplicationController
   def destroy
     return unless @request.cancel
 
-    @request.create_activity :close, owner: selected_user
+    @request.create_activity :close, owner: selected_user, club_id: selected_user.club_id
     redirect_to my_requests_swaps_path, notice: 'Your Swap Request was cancelled.'
   end
 
