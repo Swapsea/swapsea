@@ -64,7 +64,8 @@ describe 'e2e Happy Path' do
       expect(page).to have_text('Extra Patrols')
 
       visit "/users/#{@member.id}"
-      expect(page).to have_text('Private')
+      expect(page).to have_text('PRIVATE')
+      expect(page).to have_text('ACTIVITY')
 
       # Accessing modals fails, don't test this
       # logout
