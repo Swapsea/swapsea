@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug { "Access denied on #{exception.action} #{exception.subject.inspect}" }
     if user_signed_in?
