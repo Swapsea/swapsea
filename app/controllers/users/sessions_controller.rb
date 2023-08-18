@@ -11,14 +11,16 @@ module Users
     # end
 
     # POST /resource/sign_in
-    # def create
-    #   super
-    # end
+    def create
+      current_user.create_activity :login, owner: current_user, params: { source_ip: current_user.current_sign_in_ip, user_agent: request&.user_agent }
+      super
+    end
 
     # DELETE /resource/sign_out
-    # def destroy
-    #   super
-    # end
+    def destroy
+      current_user.create_activity :logout, owner: current_user, params: { source_ip: current_user.current_sign_in_ip, user_agent: request&.user_agent }
+      super
+    end
 
     # protected
 
