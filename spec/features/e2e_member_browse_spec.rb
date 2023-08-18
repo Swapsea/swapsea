@@ -63,6 +63,9 @@ describe 'e2e Happy Path' do
       visit '/outreach_patrols'
       expect(page).to have_text('Extra Patrols')
 
+      visit "/users/#{@member.id}"
+      expect(page).to have_text('Private')
+
       # Accessing modals fails, don't test this
       # logout
     end
@@ -71,6 +74,19 @@ describe 'e2e Happy Path' do
   describe 'Patrol Captain' do
     before do
       @captain = create(:member, club: @club, patrol: @patrol1, position: 'Patrol Captain')
+      @member = create(:member, club: @club, patrol: @patrol1)
+    end
+
+    it 'does not see private member activity' do
+      authenticate_user(@captain)
+
+      visit "/users/#{@captain.id}"
+      expect(page).to have_text('PRIVATE')
+      expect(page).to have_text('ACTIVITY')
+
+      visit "/users/#{@member.id}"
+      expect(page).not_to have_text('PRIVATE')
+      expect(page).not_to have_text('ACTIVITY')
     end
 
     it 'views Sign-on Sheet' do

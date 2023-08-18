@@ -1,0 +1,8 @@
+ <% if activity.trackable %>
+ <p>
+ 	<%= activity.owner.first_name if activity.owner %>
+ 	switched to member ID: <b><%= link_to activity.parameters[:to_user], user_path(activity.parameters[:to_user]) %></b>
+	at 
+	 <%= activity.created_at.strftime("%a %d %b %H:%M") %>
+	 (<%= time_ago_in_words(activity.created_at) %> ago)
+ <% end %>
