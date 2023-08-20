@@ -3,18 +3,29 @@
 		<h2><i class="fa fa-user"></i> <%= @user.name %></h2>
 	</div>
 	<div class="panel-body">
-		<p><em>Please note:</em> These details are periodically taken from the SLSA Members Area. To update your details, please <a href="https://members.sls.com.au/" target="_new">log in to Members Area</a>, and any changes should be visible in Swapsea within a week.</p>
+		<p>Member information comes from the SLSA Members Area each week. 
+		<a href="https://members.sls.com.au/" target="_new">Update your details in Members Area</a>.</p>
 		<table class="table">
 			<% if selected_user.id == @user.id %>
+			<tr>
+				<th colspan="2" class="info">PRIVATE (visible only to you)</th>
+			</tr>
 			 <tr>
 				<th>Email</th>
-				<td><b><%= @user.email %></b> (visible only to you)</td>
+				<td><b><%= @user.email %></b></td>
 			</tr>
 			 <tr>
 				<th>Mobile</th>
-				<td><b><%= @user.mobile_phone %></b> (visible only to you)</td>
+				<td><b><%= @user.mobile_phone %></b></td>
 			</tr>
 			<% end %>
+			<tr>
+				<th colspan="2" class="info">PUBLIC</th>
+			</tr>
+			<tr>
+				<th>National Member Id</th>
+				<td><%= @user.id %></td>
+			</tr>
 			<tr>
 				<th>Club</th>
 				<td><%= @user.club.name %></td>
@@ -32,23 +43,33 @@
 				<td><% if @user.patrol.present? %>
 						<%= @user.patrol.name %>
 					<% else %>
-			 			(Not Allocated)
+			 			(No allocations found)
 			 		<% end %>
 			 	</td>
 			 </tr>
-			<tr>
-				<th valign="top">Awards</th>
-				<td>
-				<% if @user.awards.present? %>
-					<% @user.awards.order(:award_name).each do |award| %>
-						<b><%= award.award_name %></b> <i><%= award.originating_organisation %></i><br/>
-					<% end %>
-				<% else %>
-					<p>No awards found.</p>
-				<% end %>
-			</td>
-		</tr>
+			 <tr>
+			 <th valign="top">Awards</th>
+			 <td>
+			 <% if @user.awards.present? %>
+				 <% @user.awards.order(:award_name).each do |award| %>
+					 <b><%= award.award_name %></b> <i><%= award.originating_organisation %></i><br/>
+				 <% end %>
+			 <% else %>
+				 <p>(No awards found)</p>
+			 <% end %>
+			 </td>
+		 </tr>
 		</table>
-
 	</div>
 </div>
+
+<% if @user == selected_user then %>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>Activity</h2>
+	</div>
+	<div class="panel-body">
+	<%= render 'activities' %> 
+	</div>
+</div>
+<% end %>

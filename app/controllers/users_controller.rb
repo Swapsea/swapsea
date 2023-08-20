@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @activities = PublicActivity::Activity.includes(:trackable, :owner).where(owner: @user).limit(20).order('created_at desc')
     render layout: 'dashboard'
   end
 

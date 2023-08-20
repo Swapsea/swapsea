@@ -59,7 +59,7 @@ class OffersController < ApplicationController
       SwapseaMailer.offer_successful(@offer).deliver
       SwapseaMailer.request_successful(@offer.request).deliver
 
-      @offer.create_activity :confirm, owner: selected_user
+      @offer.create_activity :confirm, owner: selected_user, club_id: selected_user.club_id
 
       # Clear (most of) the affected caches
       Rails.cache.delete('next_patrol/selected_user' => selected_user.id)
@@ -80,7 +80,7 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
 
     if @offer.decline(offer_params[:decline_remark])
-      @offer.create_activity :decline, owner: selected_user
+      @offer.create_activity :decline, owner: selected_user, club_id: selected_user.club_id
       SwapseaMailer.offer_declined(@offer, offer_params[:decline_remark]).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was declined.'
     else
@@ -96,7 +96,7 @@ class OffersController < ApplicationController
     @offer.roster_id = params[:roster_id]
     @offer.user_id = selected_user.id
     if @offer.save
-      @offer.create_activity :create, owner: selected_user
+      @offer.create_activity :create, owner: selected_user, club_id: selected_user.club_id
       SwapseaMailer.offer_received(@offer).deliver
       redirect_to request_path(@offer.request), notice: 'Offer was created, and emailed to the requestor.'
     else
@@ -108,7 +108,7 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1.json
   def update
     if @offer.update(offer_params)
-      @offer.create_activity :update, owner: selected_user
+      @offer.create_activity :update, owner: selected_user, club_id: selected_user.club_id
       redirect_to @offer, notice: 'Offer was successfully updated.'
     else
       render action: 'edit'
@@ -119,7 +119,7 @@ class OffersController < ApplicationController
   # DELETE /offers/1.json
   def destroy
     if @offer.withdraw
-      @offer.create_activity :destroy, owner: selected_user
+      @offer.create_activity :destroy, owner: selected_user, club_id: selected_user.club_id
       # SwapseaMailer.offer_cancelled(@offer).deliver
       redirect_to @offer.request, notice: 'Offer was successfully withdrawn.'
     else

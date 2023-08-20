@@ -1,0 +1,8 @@
+ <% if activity.trackable %>
+ <p>
+ 	<%= activity.owner.first_name if activity.owner %>
+ 	logged out at 
+	 <%= activity.created_at.strftime("%a %d %b %H:%M") %>
+	 (<%= time_ago_in_words(activity.created_at) %> ago)
+ </p>
+ <% end %>

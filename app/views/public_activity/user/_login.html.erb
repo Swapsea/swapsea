@@ -1,0 +1,8 @@
+ <% if activity.trackable %>
+ <p>
+ 	<%= activity.owner.first_name if activity.owner %>
+ 	logged in at 
+	 <%= activity.created_at.strftime("%a %d %b %H:%M") %>
+	 (<%= time_ago_in_words(activity.created_at) %> ago) from <%= activity.parameters[:source_ip] %>, using <%= activity.parameters[:user_agent] %>
+ </p>
+ <% end %>
