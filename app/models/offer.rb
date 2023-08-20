@@ -13,6 +13,7 @@ class Offer < ApplicationRecord
   scope :with_accepted_status, -> { joins(:request, :user).left_joins(:roster).where(status: 'accepted') }
 
   after_initialize :set_defaults
+  before_create :abort_if_pending_offer_limit
 
   def set_defaults
     self.status = :pending unless status
@@ -56,7 +57,7 @@ class Offer < ApplicationRecord
     # Check valid status
     case status
     when 'cancelled', 'declined', 'unsuccessful', 'withdrawn', 'accepted'
-      message = "Error: Offer '#{id}' cannot be accepted from status '#{status}'."
+      message = "Offer id #{id} with status '#{status}' cannot be accepted."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       return false
@@ -64,14 +65,14 @@ class Offer < ApplicationRecord
 
     # Acceptable Offer?
     unless request.open?
-      message = "Error Accepting Offer: '#{id}': Request not open."
+      message = "Offer id #{id} cannot be accepted as request not open."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       return false
     end
 
     unless offered_roster_valid?
-      message = "Error Accepting Offer: '#{id}': Offer in the past cannot be accepted."
+      message = "Offer id #{id} in the past cannot be accepted."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       return false
@@ -123,15 +124,11 @@ class Offer < ApplicationRecord
     @swap_offerer_on.user_id = user.id
     @swap_offerer_on.on_off_patrol = true
 
-    self.status = :accepted
-
     begin
       transaction do
         unless request.succeeded
-          message = "Error Accepting Offer: '#{id}': Unable to mark request as successful."
-          Rails.logger.warn message
-          EventLog.create!(subject: 'Warning', desc: message)
-          Raise ActiveRecord::RecordNotSaved
+          message = 'Unable to mark request as successful.'
+          raise message
         end
 
         @swap_requestor_off.save!
@@ -140,6 +137,7 @@ class Offer < ApplicationRecord
         @swap_offerer_on.save!
 
         # Save this offer
+        self.status = :accepted
         save!
 
         #
@@ -150,10 +148,8 @@ class Offer < ApplicationRecord
           Rails.logger.debug { "same_offer_for_other_requests: Withdrawing other_offer '#{other_offer.id}'" }
           next if other_offer.withdraw
 
-          message = "Error Accepting Offer: '#{id}': Offer '#{other_offer.id}' for other requests cannot be withdrawn."
-          Rails.logger.warn message
-          EventLog.create!(subject: 'Warning', desc: message)
-          Raise ActiveRecord::RecordNotSaved
+          message = "Offer '#{other_offer.id}' for other requests cannot be withdrawn."
+          raise message
         end
 
         # 2) Unsuccessful offers.
@@ -161,10 +157,8 @@ class Offer < ApplicationRecord
           Rails.logger.debug { "other_offers_for_the_same_request: unsuccessful other_offer '#{other_offer.id}'" }
           next if other_offer.unsuccessful
 
-          message = "Error Accepting Offer: '#{id}': Offer '#{other_offer.id}' cannot be marked unsuccessful."
-          Rails.logger.warn message
-          EventLog.create!(subject: 'Warning', desc: message)
-          Raise ActiveRecord::RecordNotSaved
+          message = "Offer '#{other_offer.id}' cannot be marked unsuccessful."
+          raise message
         end
 
         # 3) Cancel requests for accepted offer.
@@ -172,10 +166,8 @@ class Offer < ApplicationRecord
           Rails.logger.debug { "corresponding_requests: cancelled corresponding_request '#{corresponding_request.id}'" }
           next if corresponding_request.cancel
 
-          message = "Error Accepting Offer: '#{id}': Request '#{corresponding_request.id}' cannot be cancelled."
-          Rails.logger.warn message
-          EventLog.create!(subject: 'Warning', desc: message)
-          Raise ActiveRecord::RecordNotSaved
+          message = "Request '#{corresponding_request.id}' cannot be cancelled."
+          raise message
         end
 
         # 4) Withdraw offers that match successful Request
@@ -183,14 +175,12 @@ class Offer < ApplicationRecord
           Rails.logger.debug { "offers_that_match_request: Withdrawing corresponding_offer '#{corresponding_offer.id}'" }
           next if corresponding_offer.withdraw
 
-          message = "Error Accepting Offer: '#{id}': Offer '#{corresponding_offer.id}' cannot be withdrawn."
-          Rails.logger.warn message
-          EventLog.create!(subject: 'Warning', desc: message)
-          Raise ActiveRecord::RecordNotSaved
+          message = "Offer '#{corresponding_offer.id}' cannot be withdrawn."
+          raise message
         end
       end
-    rescue ActiveRecord::RecordNotSaved
-      message = "Error Accepting Offer: '#{id}': RecordNotSaved."
+    rescue StandardError => e
+      message = "Error accepting offer id #{id}: #{e.message}"
       Rails.logger.error message
       EventLog.create!(subject: 'Error', desc: message)
       return false
@@ -199,6 +189,7 @@ class Offer < ApplicationRecord
     # Update counts
     request.roster.update_award_counts
     roster&.update_award_counts
+
     true
   end
 
@@ -212,7 +203,7 @@ class Offer < ApplicationRecord
       self.decline_remark = remark
       save
     else
-      message = "Error: Cannot decline offer '#{id}' with status '#{status}'."
+      message = "Cannot decline offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -228,7 +219,7 @@ class Offer < ApplicationRecord
       self.status = :withdrawn
       save
     else
-      message = "Error: Cannot withdraw offer '#{id}' with status '#{status}'."
+      message = "Cannot withdraw offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -244,7 +235,7 @@ class Offer < ApplicationRecord
       self.status = :cancelled
       save
     else
-      message = "Error: Cannot cancel offer '#{id}' with status '#{status}'."
+      message = "Cannot cancel offer '#{id}' with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
@@ -260,11 +251,22 @@ class Offer < ApplicationRecord
       self.status = :unsuccessful
       save
     else
-      message = "Error: Cannot set status of offer '#{id}' to unsuccessful with status '#{status}'."
+      message = "Cannot set status of offer '#{id}' to unsuccessful with status '#{status}'."
       Rails.logger.warn message
       EventLog.create!(subject: 'Warning', desc: message)
       false
     end
+  end
+
+  # Check pending offer limit wouldn't be exceeded
+  def abort_if_pending_offer_limit
+    return unless request.num_pending_offers_remaining <= 0
+
+    message = "Request: '#{request_id}' has no pending offers remaining. Aborting..."
+    Rails.logger.error message
+    EventLog.create!(subject: 'Error', desc: message)
+    # RecordNotSaved
+    throw :abort
   end
 
   # Returns array of offers for the same rostered patrol for the same user, made to other requests.
